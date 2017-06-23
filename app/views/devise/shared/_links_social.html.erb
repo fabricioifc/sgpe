@@ -1,0 +1,30 @@
+<%- if devise_mapping.omniauthable? %>
+<div class="col-sm-12">
+  <hr>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+      <% if provider.to_s == 'facebook' %>
+        <%= link_to omniauth_authorize_path(resource_name, provider), class: 'btn btn-block btn-social btn-facebook' do %>
+          <i class="fa fa-facebook"></i>
+          <%= "Login com #{provider.to_s.titleize}" %>
+        <% end %>
+      <% elsif provider.to_s == 'twitter' %>
+        <%= link_to omniauth_authorize_path(resource_name, provider), class: 'btn btn-block btn-social btn-twitter' do %>
+          <i class="fa fa-twitter"></i>
+          <%= "Login com #{provider.to_s.titleize}" %>
+        <% end %>
+        <% elsif provider.to_s == 'linkedin' %>
+          <%= link_to omniauth_authorize_path(resource_name, provider), class: 'btn btn-block btn-social btn-linkedin' do %>
+            <i class="fa fa-linkedin"></i>
+            <%= "Login com #{provider.to_s.titleize}" %>
+          <% end %>
+        <% elsif provider.to_s == 'google_oauth2' %>
+          <%= link_to omniauth_authorize_path(resource_name, provider), class: 'btn btn-block btn-social btn-google' do %>
+            <i class="fa fa-google-plus"></i>
+            <%= "Login com Google" %>
+          <% end %>
+      <% else %>
+        <%= link_to "Login com #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider) %><br />
+      <% end %>
+  <% end -%>
+<% end -%>
+</div>
