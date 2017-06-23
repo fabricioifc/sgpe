@@ -1,41 +1,81 @@
-<div class="authform">
-  <h3>Edit <%= resource_name.to_s.humanize %></h3>
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f| %>
-    <%= devise_error_messages! %>
-    <div class="form-group">
-      <%= f.label :name %>
-      <%= f.text_field :name, :autofocus => true, class: 'form-control' %>
+<div id="signupbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="panel-title"><%= t ".title", resource: (t "activerecord.models.#{resource_name.to_s}") %></div>
     </div>
-    <div class="form-group">
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-      <% end %>
-    </div>
-    <fieldset>
-      <p>Leave these fields blank if you don't want to change your password.</p>
-      <div class="form-group">
-        <%= f.label :password %>
-        <%= f.password_field :password, :autocomplete => 'off', class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, class: 'form-control' %>
-      </div>
-    </fieldset>
-    <fieldset>
-      <p>You must enter your current password to make changes.</p>
-      <div class="form-group">
-        <%= f.label :current_password %>
-        <%= f.password_field :current_password, class: 'form-control' %>
-      </div>
-    </fieldset>
-    <%= f.submit 'Update', :class => 'button right' %>
-  <% end %>
-</div>
-<div class="authform">
-<h3>Cancel Account</h3>
-<p>Unhappy? We'll be sad to see you go.</p>
-<%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button right' %>
+    <div class="panel-body" >
+        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "form-horizontal empresa" }) do |f| %>
+            <%= devise_error_messages! %>
+
+            <div class="form-group">
+              <%= f.label :name, :class => 'col-md-3 control-label' %>
+              <div class="col-md-9">
+                <%= f.text_field :name, :class => 'form-control', autofocus:true, placeholder:'Nome' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :email, :class => 'col-md-3 control-label' %>
+              <div class="col-md-9">
+                <%= f.email_field :email, :class => 'form-control', placeholder:'E-mail' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :password, :class => 'col-md-3 control-label' %>
+              <div class="col-md-9">
+                <%= f.password_field :password, :class => 'form-control', placeholder:'Senha' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :password_confirmation, :class => 'col-md-3 control-label' %>
+              <div class="col-md-9">
+                <%= f.password_field :password_confirmation, :class => 'form-control', placeholder:'Confirmar Senha' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :current_password, :class => 'col-md-3 control-label' %>
+              <div class="col-md-9">
+                <%= f.password_field :current_password, :class => 'form-control', placeholder:'Senha Atual' %>
+              </div>
+            </div>
+
+            <!-- <div class="form-group">
+              <= f.label :logo, :class => 'col-md-3 control-label' %>
+              <div class="col-md-9">
+                <= f.file_field :logo, :class => 'form-control' %>
+              </div>
+            </div> -->
+
+            <!-- <div><= f.label :admin %><br />
+              <= f.check_box :admin %></div>
+
+            <div><= f.label :perfil_id %><br />
+              <= f.collection_select :perfil_id, Perfil.where(idativo:true), :id, :nmperfil, { :prompt =>true }, { :class => 'form-control' } %>
+            </div> -->
+
+            <!-- <= f.hidden_field :perfil_id %> -->
+
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                  <%= f.submit :class => 'btn btn-primary' do |b| %>
+                    <i class="icon-hand-right"></i> <%= t(".update") %>
+                    <!-- <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button> -->
+                  <% end %>
+                  <!-- <span style="margin-left:8px;">or</span>   -->
+                </div>
+            </div>
+
+          <% end %>
+          <hr>
+          <div class="col-md-12">
+              <!-- <h3><= t(".cancel.title") %></h3> -->
+              <%= t(".cancel.message") %>
+              <em><%= link_to t(".cancel.action"), registration_path(resource_name), :data => { :confirm => t(".cancel.confirm") }, :method => :delete %>.</em>
+              <span class="pull-right"><%= link_to t ".back" %></span>
+          </div>
+     </div>
+  </div>
 </div>
