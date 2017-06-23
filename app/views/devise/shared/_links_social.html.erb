@@ -1,6 +1,4 @@
 <%- if devise_mapping.omniauthable? %>
-<div class="col-sm-12">
-  <hr>
   <%- resource_class.omniauth_providers.each do |provider| %>
       <% if provider.to_s == 'facebook' %>
         <%= link_to omniauth_authorize_path(resource_name, provider), class: 'btn btn-block btn-social btn-facebook' do %>
@@ -27,4 +25,3 @@
       <% end %>
   <% end -%>
 <% end -%>
-</div>
