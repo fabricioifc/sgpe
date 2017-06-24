@@ -57,3 +57,5 @@ end
 
 # Adicionadas depois
 gem 'bootswatch-rails'
+gem 'carrierwave'
+gem 'cloudinary'
