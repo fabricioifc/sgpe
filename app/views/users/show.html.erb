@@ -3,8 +3,13 @@
 <p>Email: <%= @user.email if @user.email %></p>
 
 <%= form_for(@user)  do |f| %>
-  <%= select :roles, @user.roles.map {|role| [role.name,role]}, {}, {:multiple => true, class: "ui fluid  selection dropdown", id: "select-book"} %>
 
+  <div class="input-group">
+    <div class="input-group-btn">
+      <%= f.submit :class => 'btn btn-primary btn-sm' %>
+    </div>
+    <%= f.select(:role_ids, Role.all.collect {|a| [a.name, a.id]}, {}, class: "select2 form-control", :multiple => true) %>
+  </div>
 <% end %>
 
 <hr>

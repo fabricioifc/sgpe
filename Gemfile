@@ -69,4 +69,4 @@ gem 'rails_admin_rollincode', '~> 1.0'
 gem 'cancancan', '~> 1.10'
 # controle de papéis
 gem "rolify"
-gem 'acts-as-taggable-on', '~> 4.0'
+gem "select2-rails"

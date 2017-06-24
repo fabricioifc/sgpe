@@ -1,15 +1,14 @@
-<td><%= user.name %></td>
 <td><%= link_to user.email, user %></td>
 <td>
   <%= form_for(user, class: '') do |f| %>
-    <!-- <= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}, {}, class: 'form-control') %> -->
-    <!-- <= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}, {}, {:multiple => true, class: "ui fluid  selection dropdown", id: "select-book"}) %> -->
-    <%= f.submit 'Change Role', :class => 'btn btn-primary btn-xs btn-group' %>
+  <div class="input-group">
+    <%= f.select(:role_ids, Role.all.collect {|a| [a.name, a.id]}, {}, class: "select2 form-control", :multiple => true) %>
+    <div class="input-group-btn">
+      <%= f.submit :class => 'btn btn-primary btn-sm' %>
+    </div>
+  </div>
   <% end %>
 </td>
 <td>
-  <%= link_to( t('helpers.links.destroy'), user_path(user), :data => { :confirm => "Tem certeza?" }, :method => :delete, :class => 'btn btn-danger') unless user == current_user %>
+  <%= link_to( t('helpers.links.destroy'), user_path(user), :data => { :confirm => "Tem certeza?" }, :method => :delete, :class => 'btn btn-sm btn-danger') unless user == current_user %>
 </td>
-
-
-<%= text_field_tag :role, Role.all %>
