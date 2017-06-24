@@ -58,6 +58,7 @@ GEM
       railties (>= 3.1)
     builder (3.2.3)
     byebug (9.0.6)
+    cancancan (1.12.0)
     capybara (2.14.3)
       addressable
       mime-types (>= 1.16)
@@ -361,6 +362,7 @@ DEPENDENCIES
   bootstrap-sass
   bootswatch-rails
   byebug
+  cancancan (~> 1.10)
   capybara (~> 2.13)
   carrierwave
   cloudinary
