@@ -2,9 +2,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  #Utilizado pela gem cancancan
-  check_authorization
-
   # Redireciona quando o usuário não tiver permissão na página
   # rescue_from CanCan::AccessDenied do |exception|
   #   respond_to do |format|

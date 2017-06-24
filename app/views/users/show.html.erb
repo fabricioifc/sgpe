@@ -2,4 +2,10 @@
 <p>Name: <%= @user.name if @user.name %></p>
 <p>Email: <%= @user.email if @user.email %></p>
 
+<%= form_for(@user)  do |f| %>
+  <%= select :roles, @user.roles.map {|role| [role.name,role]}, {}, {:multiple => true, class: "ui fluid  selection dropdown", id: "select-book"} %>
+
+<% end %>
+
+<hr>
 <%= image_tag @user.avatar.url(:medium) %>

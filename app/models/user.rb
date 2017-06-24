@@ -1,9 +1,16 @@
 class User < ApplicationRecord
-  enum role: [:user, :vip, :admin]
-  after_initialize :set_default_role, :if => :new_record?
+  rolify
+  # enum role: [:user, :vip, :admin]
+  # after_initialize :set_default_role, :if => :new_record?
+  #
+  # def set_default_role
+  #   self.role ||= :user
+  # end
 
-  def set_default_role
-    self.role ||= :user
+  after_create :assign_default_role
+
+  def assign_default_role
+    self.add_role(:user) if self.roles.blank?
   end
 
   # Include default devise modules. Others available are:
@@ -12,4 +19,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   mount_uploader :avatar, PictureUploader
+
 end
