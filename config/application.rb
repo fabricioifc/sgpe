@@ -29,6 +29,9 @@ module Jogosnoif
     config.i18n.default_locale = :'pt-BR'
     config.i18n.available_locales = [:en, :"pt-BR"]
 
+    # Novo tema para o painel de administração que utiliza a gem rails_admin
+    ENV['RAILS_ADMIN_THEME'] = 'rollincode'
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

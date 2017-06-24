@@ -59,3 +59,8 @@ end
 gem 'bootswatch-rails'
 gem 'carrierwave'
 gem 'cloudinary'
+
+# Painel de administração do sistema
+gem 'rails_admin', '~> 1.2'
+gem 'rails_admin-i18n'
+gem 'rails_admin_rollincode', '~> 1.0'
