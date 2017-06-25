@@ -58,6 +58,7 @@ end
 # Adicionadas depois
 gem 'bootswatch-rails'
 gem 'carrierwave'
+# gem 'mini_magick'; #precisa do RMagick instalado
 gem 'cloudinary'
 
 # Painel de administração do sistema

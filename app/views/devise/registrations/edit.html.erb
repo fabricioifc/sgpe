@@ -4,7 +4,7 @@
         <div class="panel-title"><%= t ".title", resource: (t "activerecord.models.#{resource_name.to_s}") %></div>
     </div>
     <div class="panel-body" >
-        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "form-horizontal empresa" }) do |f| %>
+        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { multipart: true, :method => :put, :class => "form-horizontal" }) do |f| %>
             <%= devise_error_messages! %>
 
             <div class="form-group">
@@ -42,10 +42,22 @@
               </div>
             </div>
 
-            <div class="form-group">
-              <%= f.label :avatar, :class => 'col-md-3 control-label' %>
+            <div class="form-group control-group avatar_field">
+
+              <div class="col-md-3 control-label">
+                <%= f.label :avatar, :class => '' %>
+                <a class="btn btn-primary btn-xs btn-remove-image" data-toggle="button" href="#" role="button">
+                  <span class="glyphicon glyphicon-remove"></span>
+                </a>
+              </div>
+
               <div class="col-md-9">
-                <%= f.file_field :avatar, :class => 'form-control' %>
+                <div class="avatar_toggle">
+                  <%= image_tag resource.avatar_url(:thumb), class: 'img-responsive' if resource.avatar.url.present? %>
+                  <%= f.hidden_field :avatar_cache %>
+                  <%= f.file_field :avatar, :class => 'form-control' %>
+                </div>
+                <input style="display: none;" type="checkbox" value="1" name="user[remove_avatar]" id="user_remove_avatar">
               </div>
             </div>
 
