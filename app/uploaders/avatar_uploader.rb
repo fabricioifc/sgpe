@@ -3,26 +3,28 @@ class AvatarUploader < CarrierWave::Uploader::Base
   include Cloudinary::CarrierWave
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
 
   process :convert => 'png'
-  process :tags => ['post_picture']
+  # process :tags => ['post_picture']
 
   # def filename
   #    "original.#{model.logo.file.extension}" if original_filename
   # end
 
+  version :avatar do
+    process :resize_to_fit => [800, 300]
+  end
+
   version :medium do
     process :resize_to_fill => [300, 300]
   end
 
-  version :standard do
-    process :resize_to_fill => [100, 150, :north]
+  version :thumb do
+    process resize_to_fill: [200,200]
   end
 
-  version :thumb do
-    resize_to_fit(50, 50)
-  end
+
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)
