@@ -58,7 +58,6 @@ end
 # Adicionadas depois
 gem 'bootswatch-rails'
 gem 'carrierwave'
-# gem 'carrierwave-crop'
 gem 'cloudinary'
 
 # Painel de administração do sistema
