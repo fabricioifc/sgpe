@@ -11,5 +11,4 @@ class Role < ApplicationRecord
 
   scopify
 
-  
 end

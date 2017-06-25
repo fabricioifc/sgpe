@@ -7,20 +7,19 @@ class Ability
 
     if user.admin?
       can :manage, :all
-    elsif user.has_role? :superadmin
-      can :manage, :all  # can manage (Read, Create, Update, Destroy, ...) everything
-    elsif user.has_role? :forum_admin
-      # can :manage, Forum  # can manage (Read, Create, Update, Destroy, ...) any Forum
-    elsif user.has_role? :store_admin
-      # can :manage, Store do |store|  # Can manage only its own store
-      #   store.try(:user) == user
-      # end
-    elsif user.has_role? :forum_member
+    # elsif user.has_role? :superadmin
+    #   can :manage, :all  # can manage (Read, Create, Update, Destroy, ...) everything
+    # elsif user.has_role? :forum_admin
+    #   # can :manage, Forum  # can manage (Read, Create, Update, Destroy, ...) any Forum
+    # elsif user.has_role? :store_admin
+    #   # can :manage, Store do |store|  # Can manage only its own store
+    #   #   store.try(:user) == user
+    #   # end
+    # elsif user.has_role? :forum_member
 
     else # Users without role
       can :read, All
     end
-
 
 
     # user ||= User.new
