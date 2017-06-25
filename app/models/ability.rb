@@ -23,7 +23,6 @@ class Ability
 
 
 
-
     # user ||= User.new
     # if !user.perfil.nil?
     #   @permissoes = PermissaoTela.where(perfil_id: [user.perfil.id, nil])

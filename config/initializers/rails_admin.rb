@@ -6,7 +6,7 @@ RailsAdmin.config do |config|
   config.authenticate_with do
     warden.authenticate! scope: :user
     # Permite acessar o painel administrativo somente se admin=true
-    redirect_to main_app.root_path unless current_user.admin?
+    redirect_to main_app.root_path, :alert => "Acesso negado." unless current_user.admin?
   end
   config.current_user_method(&:current_user)
 

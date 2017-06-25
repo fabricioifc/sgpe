@@ -1,0 +1,15 @@
+<%- model = Curso %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <%= t('helpers.titles.new', model: model) %>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <%= render 'form', curso: @curso %>
+  </div>
+  <div class="panel-footer">
+    <%= link_to t('helpers.links.back'), cursos_path %>
+  </div>
+</div>

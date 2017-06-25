@@ -6,22 +6,18 @@ pt-BR:
       contum: 'Conta'
     attributes:
       user:
+        new: Usuário
         name: "Nome"
         email: "E-mail"
         password: "Senha"
         password_confirmation: "Confirmar Senha"
         current_password: "Senha Atual"
         remember_me: "Lembre-se de mim"
-      lancamento:
-        created_at: 'Data'
-        descricao: 'Descrição'
-        nudoc: 'Documento'
-        dtvenc: 'Data de Vencimento'
-        dtpagto: 'Data de Pagamento'
-        vlvenc: 'Valor'
-        vlpagto: Vl. Pago
-      contum:
-        descricao: 'Descrição'
+      curso:
+        title: 'Título'
+        description: 'Descrição'
+        idativo: 'Ativo'
+        sigla: 'Sigla'
   date:
     meses: {'01' : 'Janeiro', '02' : 'Fevereiro', '03' : 'Março','04' : 'Abril','05' : 'Maio','06' : 'Junho','07' : 'Julho','08' : 'Agosto','09' : 'Setembro','10' : 'Outubro','11' : 'Novembro','12' : 'Dezembro'}
     meses_abbr: {'01' : 'Jan', '02' : 'Fev', '03' : 'Mar','04' : 'Abr','05' : 'Mai','06' : 'Jun','07' : 'Jul','08' : 'Ago','09' : 'Set','10' : 'Out','11' : 'Nov','12' : 'Dez'}

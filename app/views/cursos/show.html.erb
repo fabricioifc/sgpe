@@ -1,0 +1,27 @@
+<p>
+  <strong>Title:</strong>
+  <%= @curso.title %>
+</p>
+
+<p>
+  <strong>Sigla:</strong>
+  <%= @curso.sigla %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @curso.description %>
+</p>
+
+<p>
+  <strong>Idativo:</strong>
+  <%= @curso.idativo %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @curso.user %>
+</p>
+
+<%= link_to 'Edit', edit_curso_path(@curso) %> |
+<%= link_to 'Back', cursos_path %>

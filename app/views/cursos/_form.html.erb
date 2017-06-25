@@ -1,0 +1,15 @@
+<%= bootstrap_form_for(curso, local:true) do |form| %>
+<!-- <= form_with(model: curso, local: true, class: 'form-horizontal') do |form| %> -->
+  <%= error_messages_for(curso) %>
+
+    <%= form.text_field :title, id: :curso_title, autofocus:true %>
+    <%= form.text_field :sigla, id: :curso_sigla %>
+    <%= form.text_field :description, id: :curso_description %>
+
+    <div class="form-group">
+      <!-- <= form.label :idativo %> -->
+      <%= form.check_box :idativo, id: :curso_idativo %>
+    </div>
+
+    <%= form.submit %>
+<% end %>

@@ -71,3 +71,6 @@ gem 'cancancan', '~> 1.10'
 # controle de papéis
 gem "rolify"
 gem "select2-rails"
+gem 'bootstrap_form'
+# gem 'foundation-rails', '~> 6.0' # required
+# gem 'foundation_rails_helper', '~> 3.0'
