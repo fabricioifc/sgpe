@@ -1,6 +1,7 @@
 class PictureUploader < CarrierWave::Uploader::Base
 
   include Cloudinary::CarrierWave
+  # include CarrierWave::MiniMagick
 
   process :convert => 'png'
   process :tags => ['post_picture']
