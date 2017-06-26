@@ -62,5 +62,5 @@ pt-BR:
   unauthorized:
     default: "Sem permissão para acessar esta página."
     manage:
-      # all: "Não está autorizado para acessar este recurso %{action} %{subject}."
+      all: "Não está autorizado para acessar este recurso [%{action} - %{subject}]."
       user: "Sem permissão para gerenciar outra conta de usuário"

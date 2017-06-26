@@ -16,7 +16,7 @@ development:
   adapter:  postgresql
   host:     localhost
   encoding: unicode
-  database: jogosnoif_development
+  database: pdeif_development
   pool:     5
   username: postgres
   password: postgres
@@ -44,7 +44,7 @@ test:
   adapter:  postgresql
   host:     localhost
   encoding: unicode
-  database: jogosnoif_test
+  database: pdeif_test
   pool:     5
   username: postgres
   password: postgres
@@ -54,7 +54,7 @@ production:
   adapter:  postgresql
   host:     localhost
   encoding: unicode
-  database: jogosnoif_production
+  database: pdeif_production
   pool:     5
   username: postgres
   password: postgres

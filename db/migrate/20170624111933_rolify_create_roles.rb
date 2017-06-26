@@ -1,8 +1,16 @@
 class RolifyCreateRoles < ActiveRecord::Migration[5.1]
   def change
-    create_table(:roles) do |t|
+    # create_table(:roles) do |t|
+    #   t.string :name
+    #   t.references :resource, :polymorphic => true
+    #
+    #   t.timestamps
+    # end
+
+    create_table :roles do |t|
       t.string :name
-      t.references :resource, :polymorphic => true
+      t.string :resource_type
+      t.string :resource_id
 
       t.timestamps
     end

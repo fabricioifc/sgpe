@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  # rolify
+  rolify
 
   has_and_belongs_to_many :perfils, :join_table => :perfil_users
   # enum role: [:user, :vip, :admin]
