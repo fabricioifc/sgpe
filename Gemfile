@@ -74,4 +74,4 @@ gem 'cancancan', '~> 2.0'
 gem "rolify"
 gem "select2-rails"
 gem 'bootstrap_form'
-gem 'bootstrap-generators', '~> 3.3.4'
+# gem 'bootstrap-generators', '~> 3.3.4'
