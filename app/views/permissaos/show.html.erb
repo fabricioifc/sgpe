@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @permissao.name %>
+</p>
+
+<p>
+  <strong>Classe:</strong>
+  <%= @permissao.classe %>
+</p>
+
+<p>
+  <strong>Acao:</strong>
+  <%= @permissao.acao %>
+</p>
+
+<p>
+  <strong>Idativo:</strong>
+  <%= @permissao.idativo %>
+</p>
+
+<%= link_to 'Edit', edit_permissao_path(@permissao) %> |
+<%= link_to 'Back', permissaos_path %>

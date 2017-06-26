@@ -1,4 +1,5 @@
 pt-BR:
+  app_name: 'IFC'
   activerecord:
     models:
       user: "Usuário"
@@ -247,6 +248,9 @@ pt-BR:
       transfer: "Transferir"
       edit: "Editar"
       clone: "Clonar"
+      home: 'Página inicial'
+      users: 'Usuários'
+      admin: 'Administração'
     titles:
       edit: "Editar %{model}"
       save: "Salvar %{model}"
@@ -254,46 +258,8 @@ pt-BR:
       delete: "Excluir %{model}"
       listing: "Listando %{model}"
       welcome: "Bem Vindo(a)"
+      admin: "Administração"
   will_paginate:
     previous_label: "&#8592; Anterior"
     next_label: "Próximo &#8594;"
     page_gap: "&hellip;"
-  app_name: 'Bizo'
-  titles:
-    sessions:
-      new: 'Login'
-    registrations:
-      edit: 'Editar usuário'
-      new: 'Registrar'
-    users:
-      index: 'Inicio'
-      edit: 'Editando'
-    conta_saldo:
-      index: 'Saldos'
-      resumo: 'Resumo'
-    lancamentos:
-      index: 'Lançamentos'
-    lancamento_consulta:
-      index: 'Extrato'
-    empresas:
-      index: 'Empresas'
-    conta:
-      index: 'Contas'
-    categoria:
-      index: 'Categorias'
-      new: 'Nova Categoria'
-      edit: 'Editar Categoria'
-    formas:
-      index: 'Formas'
-    marcas:
-      index: 'Marcas'
-    pessoas:
-      index: 'Pessoas'
-    telas:
-      index: 'Telas'
-    permissaos:
-      index: 'Permissões'
-    perfils:
-      index: 'Perfis'
-    permissao_telas:
-      index: 'Permissões Tela'

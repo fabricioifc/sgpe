@@ -1,0 +1,27 @@
+<%= form_with(model: permissao_tela, local: true) do |form| %>
+  <% if permissao_tela.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(permissao_tela.errors.count, "error") %> prohibited this permissao_tela from being saved:</h2>
+
+      <ul>
+      <% permissao_tela.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :permissao_id %>
+    <%= form.text_field :permissao_id, id: :permissao_tela_permissao_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :perfil_id %>
+    <%= form.text_field :perfil_id, id: :permissao_tela_perfil_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

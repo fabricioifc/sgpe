@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Permissao:</strong>
+  <%= @permissao_tela.permissao %>
+</p>
+
+<p>
+  <strong>Perfil:</strong>
+  <%= @permissao_tela.perfil %>
+</p>
+
+<%= link_to 'Edit', edit_permissao_tela_path(@permissao_tela) %> |
+<%= link_to 'Back', permissao_telas_path %>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :permissao_telas
+  resources :permissaos
   resources :perfils
   resources :cursos
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

@@ -1,5 +1,6 @@
 class PerfilsController < ApplicationController
   before_action :set_perfil, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /perfils
   # GET /perfils.json

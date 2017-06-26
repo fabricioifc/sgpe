@@ -67,7 +67,7 @@ gem 'rails_admin-i18n'
 gem 'rails_admin_rollincode', '~> 1.0'
 
 # controle de permissões
-gem 'cancancan', '~> 1.10'
+gem 'cancancan', '~> 2.0'
 # gem 'pundit'
 # controle de papéis
 gem "rolify"

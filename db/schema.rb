@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170625231424) do
+ActiveRecord::Schema.define(version: 20170626003348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,12 +26,41 @@ ActiveRecord::Schema.define(version: 20170625231424) do
     t.index ["user_id"], name: "index_cursos_on_user_id"
   end
 
+  create_table "perfil_users", id: false, force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "perfil_id"
+    t.index ["perfil_id"], name: "index_perfil_users_on_perfil_id"
+    t.index ["user_id", "perfil_id"], name: "index_perfil_users_on_user_id_and_perfil_id", unique: true
+    t.index ["user_id"], name: "index_perfil_users_on_user_id"
+  end
+
   create_table "perfils", force: :cascade do |t|
     t.string "name"
     t.boolean "idativo", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_perfils_on_name"
+  end
+
+  create_table "permissao_telas", force: :cascade do |t|
+    t.bigint "permissao_id"
+    t.bigint "perfil_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["perfil_id"], name: "index_permissao_telas_on_perfil_id"
+    t.index ["permissao_id"], name: "index_permissao_telas_on_permissao_id"
+  end
+
+  create_table "permissaos", force: :cascade do |t|
+    t.string "name"
+    t.string "classe"
+    t.string "acao"
+    t.boolean "idativo", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["acao"], name: "index_permissaos_on_acao"
+    t.index ["classe"], name: "index_permissaos_on_classe"
+    t.index ["name"], name: "index_permissaos_on_name"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -78,4 +107,8 @@ ActiveRecord::Schema.define(version: 20170625231424) do
   end
 
   add_foreign_key "cursos", "users"
+  add_foreign_key "perfil_users", "perfils"
+  add_foreign_key "perfil_users", "users"
+  add_foreign_key "permissao_telas", "perfils"
+  add_foreign_key "permissao_telas", "permissaos"
 end
