@@ -1,76 +1,82 @@
-<div class="col-md-offset-3 col-md-6 col-sm-8 col-sm-offset-2">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-        <div class="panel-title"><%= t(".title") %></div>
-    </div>
-    <div class="panel-body" >
-        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "form-horizontal" } )  do |f| %>
-            <%= devise_error_messages! %>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "form-horizontal" } )  do |f| %>
+  <%= devise_error_messages! %>
 
-            <div class="form-group">
-              <%= f.label :name, :class => 'col-md-3 control-label' %>
-              <div class="col-md-9">
-                <%= f.text_field :name, :class => 'form-control', autofocus:true, placeholder:'Nome' %>
-              </div>
-            </div>
+  <div class="col-md-offset-1 col-md-6 col-sm-offset-0 col-sm-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+          <div class="panel-title"><%= t(".title") %></div>
+      </div>
+      <div class="panel-body">
 
-            <div class="form-group">
-              <%= f.label :email, :class => 'col-md-3 control-label' %>
-              <div class="col-md-9">
-                <%= f.email_field :email, :class => 'form-control', placeholder:'E-mail' %>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <%= f.label :password, :class => 'col-md-3 control-label' %>
-              <div class="col-md-9">
-                <%= f.password_field :password, :class => 'form-control', placeholder:'Senha' %>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <%= f.label :password_confirmation, :class => 'col-md-3 control-label' %>
-              <div class="col-md-9">
-                <%= f.password_field :password_confirmation, :class => 'form-control', placeholder:'Confirmar Senha' %>
-              </div>
-            </div>
-
-            <!-- <div class="form-group">
-              <= f.label :avatar, :class => 'col-md-3 control-label' %>
-              <div class="col-md-9">
-                <= f.file_field :avatar, :class => 'form-control' %>
-              </div>
-            </div> -->
-
-           <!--  <div class="form-group">
-                <label for="icode" class="col-md-3 control-label">Invitation Code</label>
-                <div class="col-md-9">
-                    <input type="text" class="form-control" name="icode" placeholder="">
-                </div>
-            </div> -->
-
-            <!-- <= f.hidden_field :perfil_id, :value => Perfil.find_or_create_by(:nmperfil => 'Usuário').id %> -->
-
-            <div class="form-group">
-                <div class="col-md-offset-3 col-md-9">
-                  <%= f.submit :class => 'btn btn-primary' do |b| %>
-                    <i class="icon-hand-right"></i> <%= t(".submit") %>
-                    <!-- <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button> -->
-                  <% end %>
-                  <!-- <span style="margin-left:8px;">or</span>   -->
-                </div>
-            </div>
-
-<!--             <div style="border-top: 1px solid #999; padding-top:20px"  class="form-group">
-                <div class="col-md-offset-3 col-md-9">
-                    <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>   Sign Up with Facebook</button>
-                </div>
-            </div> -->
-          <% end %>
-          <hr>
-          <div class="col-md-12">
-              <%= render "devise/shared/links" %>
+        <div class="form-group">
+          <%= f.label :name, :class => 'col-md-3 control-label' %>
+          <div class="col-md-9">
+            <%= f.text_field :name, :class => 'form-control', autofocus:true, placeholder:'Nome' %>
           </div>
-     </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :email, :class => 'col-md-3 control-label' %>
+          <div class="col-md-9">
+            <%= f.email_field :email, :class => 'form-control', placeholder:'E-mail' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password, :class => 'col-md-3 control-label' %>
+          <div class="col-md-9">
+            <%= f.password_field :password, :class => 'form-control', placeholder:'Senha' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation, :class => 'col-md-3 control-label' %>
+          <div class="col-md-9">
+            <%= f.password_field :password_confirmation, :class => 'form-control', placeholder:'Confirmar Senha' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-9">
+              <%= f.submit :class => 'btn btn-primary' do |b| %>
+                <i class="icon-hand-right"></i> <%= t(".submit") %>
+                <!-- <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button> -->
+              <% end %>
+              <!-- <span style="margin-left:8px;">or</span>   -->
+            </div>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
   </div>
-</div>
+
+
+  <div class="col-md-4 col-sm-6">
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <%= f.label :avatar, :class => '' %>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <p>Escolha seu avatar</p>
+        <div class="avatar_toggle">
+          <%= image_tag resource.avatar_url(:avatar), class: 'img-responsive img-thumbnail center-block' if resource.avatar.url.present? %>
+          <%= f.hidden_field :avatar_cache %>
+          <%= f.file_field :avatar, :class => 'form-control' %>
+        </div>
+        <input style="display: none;" type="checkbox" value="1" name="user[remove_avatar]" id="user_remove_avatar">
+      </div>
+      <div class="panel-footer">
+        <a class="btn btn-primary btn-xs btn-remove-image" data-toggle="button" href="#" role="button">
+          <span class="glyphicon glyphicon-remove"></span> Excluir avatar
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+<% end %>
