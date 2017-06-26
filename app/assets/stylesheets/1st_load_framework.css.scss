@@ -85,3 +85,25 @@ section {
   @extend .btn-primary;
   @extend .btn-xs;
 }
+
+// Ajusta a imagem do avatar no componente navbar
+.special-img {
+  position: relative;
+  top: -5px;
+  float: left;
+  left: -5px;
+}
+.profile-image  {
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+// Permite adicionar um divisor vertical no componente navbar
+@media(min-width:768px) {
+  .divider-vertical {
+    margin-top: 5px;
+    height: 50px;
+    border-left: 1px solid #F2F2F2;
+    // border-right: 0.5px solid #FFF;
+  }
+}

@@ -251,6 +251,8 @@ pt-BR:
       home: 'Página inicial'
       users: 'Usuários'
       admin: 'Administração'
+      pages:
+        about: 'Sobre'
     titles:
       edit: "Editar %{model}"
       save: "Salvar %{model}"

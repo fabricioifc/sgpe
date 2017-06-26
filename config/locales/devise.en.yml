@@ -62,3 +62,8 @@ en:
       not_saved:
         one: "1 error prohibited this %{resource} from being saved:"
         other: "%{count} errors prohibited this %{resource} from being saved:"
+  unauthorized:
+    default: "Sem permissão para acessar esta página."
+    manage:
+      # all: "Not authorized to %{action} %{subject}."
+      user: "Not allowed to manage other user accounts."

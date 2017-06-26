@@ -59,3 +59,8 @@ pt-BR:
       not_saved:
         one: "Não foi possível salvar %{resource}: 1 erro"
         other: "Não foi possível salvar %{resource}: %{count} erros."
+  unauthorized:
+    default: "Sem permissão para acessar esta página."
+    manage:
+      # all: "Não está autorizado para acessar este recurso %{action} %{subject}."
+      user: "Sem permissão para gerenciar outra conta de usuário"
