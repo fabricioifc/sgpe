@@ -16,11 +16,11 @@ class Permissao < ApplicationRecord
     end
     field :classe, :enum do
       enum do
-        classes = []
+        models ||= []
           ActiveRecord::Base.connection.tables.each do |v|
-          	classes << v.singularize.camelize
+            models << v.singularize.camelize unless ['ArInternalMetadatum', 'SchemaMigration'].include?(v.singularize.camelize)
           end
-        classes.sort
+        models.sort
       end
     end
     include_all_fields

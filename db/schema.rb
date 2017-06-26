@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170626003348) do
+ActiveRecord::Schema.define(version: 20170626133645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20170626003348) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["perfil_id"], name: "index_permissao_telas_on_perfil_id"
+    t.index ["permissao_id", "perfil_id"], name: "index_permissao_telas_on_permissao_id_and_perfil_id", unique: true
     t.index ["permissao_id"], name: "index_permissao_telas_on_permissao_id"
   end
 
