@@ -6,7 +6,12 @@
             <ul class="list-unstyled">
                 <li><%= t 'app_name' %></li>
             </ul>
+
         </div>
+    </div>
+
+    <div class="row">
+      <%= image_tag current_user.avatar.url(:thumb), class: 'img-rounded img-responsive img-thumbnail center-block' if current_user.avatar.present? %>
     </div>
 
 </div>
