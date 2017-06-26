@@ -1,5 +1,6 @@
 GEM
   remote: https://rubygems.org/
+  remote: https://rails-assets.org/
   specs:
     actioncable (5.1.1)
       actionpack (= 5.1.1)
@@ -40,6 +41,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.1)
       public_suffix (~> 2.0, >= 2.0.2)
+    alertify-rails (0.2.0)
     arel (8.0.0)
     ast (2.3.0)
     autoprefixer-rails (7.1.1.2)
@@ -363,6 +365,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  alertify-rails
   better_errors
   bootstrap-sass
   bootstrap_form
