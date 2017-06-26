@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   rolify
 
+  validates :name, presence:true, length: 0..70
+
   has_and_belongs_to_many :perfils, :join_table => :perfil_users
   # enum role: [:user, :vip, :admin]
   # after_initialize :set_default_role, :if => :new_record?
@@ -12,7 +14,7 @@ class User < ApplicationRecord
   # after_create :assign_default_role
   #
   # def assign_default_role
-  #   self.add_role(:user) if self.roles.blank?
+  #   self.add_role(:usuario) if self.roles.blank?
   # end
 
   # Include default devise modules. Others available are:
