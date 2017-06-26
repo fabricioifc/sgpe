@@ -6,7 +6,7 @@ class CursosController < ApplicationController
   # GET /cursos
   # GET /cursos.json
   def index
-    @cursos = Curso.all
+    @cursos = Curso.order(:id).page params[:page]
   end
 
   # GET /cursos/1

@@ -1,0 +1,28 @@
+<%- model = Curso -%>
+
+<div class='table-responsive'>
+  <table class='table table-striped table-bordered table-hover table-condensed datatable'>
+    <thead>
+      <tr>
+        <th><%= model.human_attribute_name(:title) %></th>
+        <th><%= model.human_attribute_name(:sigla) %></th>
+        <th><%= model.human_attribute_name(:description) %></th>
+        <th><%= model.human_attribute_name(:idativo) %></th>
+        <th colspan="3"><%=t '.actions', :default => t("helpers.actions") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cursos.each do |curso| %>
+        <tr>
+          <td><%= curso.title %></td>
+          <td><%= curso.sigla %></td>
+          <td><%= curso.description %></td>
+          <td><%= curso.idativo %></td>
+          <td><%= link_to 'Show', curso %></td>
+          <td><%= link_to 'Edit', edit_curso_path(curso) %></td>
+          <td><%= link_to 'Destroy', curso, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

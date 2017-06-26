@@ -17,4 +17,15 @@
 //= require select2
 // require select2-full
 //= require dropdown
+//= require bootstrap
 //= require_tree .
+
+$(function() {
+  $(document.body).off('click', 'nav.pagination a');
+  $(document.body).on('click', 'nav.pagination a', function(e) {
+    e.preventDefault();
+    var loadingHTML = "<div class='loading'>Loading...</div>";
+    $("table.datatable").html(loadingHTML).load($(this).attr("href"));
+    return false;
+  });
+});

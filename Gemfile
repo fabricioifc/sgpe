@@ -74,4 +74,6 @@ gem 'cancancan', '~> 2.0'
 gem "rolify"
 gem "select2-rails"
 gem 'bootstrap_form'
-# gem 'bootstrap-generators', '~> 3.3.4'
+# gem 'will_paginate', '~> 3.1', '>= 3.1.6'
+# gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
+gem 'kaminari'
