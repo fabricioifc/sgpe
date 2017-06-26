@@ -4,12 +4,12 @@ module ApplicationHelper
     user_signed_in? && current_user.try(:admin?)
   end
 
-  def avatar_navbar_image
+  def avatar_navbar_image(classe = ['special-img'])
     if user_signed_in?
       if current_user.avatar.present?
-        image_tag current_user.avatar.url(:icon), class: 'img-rounded special-img'
+        image_tag current_user.avatar.url(:icon), class: classe
       else
-        self.gravatar_url(current_user.email, 36, 'special-img')
+        self.gravatar_url(current_user.email, 36, classe)
       end
     end
   end
@@ -28,5 +28,5 @@ module ApplicationHelper
       end
     end
   end
-  
+
 end
