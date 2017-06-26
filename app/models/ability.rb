@@ -18,10 +18,19 @@ class Ability
       #   end
       # end
 
-      @papeis = user.roles
-      @papeis.each do |papel|
-        can papel.resource_id.present? ? papel.resource_id.to_sym : "all".to_sym, papel.resource_type.constantize
+      @perfils = user.perfils
+      @perfils.each do |perfil|
+        if perfil.idativo?
+          PerfilRole.where(perfil: perfil).each do |papel|
+            can papel.role.resource_id.present? ? papel.role.resource_id.to_sym : "all".to_sym, papel.role.resource_type.constantize
+          end
+        end
       end
+
+      # @papeis = user.roles
+      # @papeis.each do |papel|
+      #   can papel.resource_id.present? ? papel.resource_id.to_sym : "all".to_sym, papel.resource_type.constantize
+      # end
     end
 
     # user ||= User.new

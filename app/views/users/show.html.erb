@@ -8,7 +8,7 @@
     <div class="input-group-btn">
       <%= f.submit :class => 'btn btn-primary btn-sm' %>
     </div>
-    <%= f.select(:role_ids, Role.all.collect {|a| [a.name, a.id]}, {}, class: "select2 form-control", :multiple => true) %>
+    <%= f.select(:perfil_ids, Perfil.all.collect {|a| [a.name, a.id]}, {}, class: "select2 form-control", :multiple => true) %>
   </div>
 <% end %>
 

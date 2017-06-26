@@ -1,9 +1,9 @@
 class User < ApplicationRecord
-  rolify
+  # rolify
 
   validates :name, presence:true, length: 0..70
 
-  has_and_belongs_to_many :perfils, :join_table => :perfil_users
+  has_and_belongs_to_many :perfils, :join_table => :users_perfils
   # enum role: [:user, :vip, :admin]
   # after_initialize :set_default_role, :if => :new_record?
   #

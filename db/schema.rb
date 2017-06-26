@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170626133645) do
+ActiveRecord::Schema.define(version: 20170626162812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,12 +26,12 @@ ActiveRecord::Schema.define(version: 20170626133645) do
     t.index ["user_id"], name: "index_cursos_on_user_id"
   end
 
-  create_table "perfil_users", id: false, force: :cascade do |t|
-    t.bigint "user_id"
+  create_table "perfil_roles", force: :cascade do |t|
     t.bigint "perfil_id"
-    t.index ["perfil_id"], name: "index_perfil_users_on_perfil_id"
-    t.index ["user_id", "perfil_id"], name: "index_perfil_users_on_user_id_and_perfil_id", unique: true
-    t.index ["user_id"], name: "index_perfil_users_on_user_id"
+    t.bigint "role_id"
+    t.index ["perfil_id", "role_id"], name: "index_perfil_roles_on_perfil_id_and_role_id", unique: true
+    t.index ["perfil_id"], name: "index_perfil_roles_on_perfil_id"
+    t.index ["role_id"], name: "index_perfil_roles_on_role_id"
   end
 
   create_table "perfils", force: :cascade do |t|
@@ -42,28 +42,6 @@ ActiveRecord::Schema.define(version: 20170626133645) do
     t.index ["name"], name: "index_perfils_on_name"
   end
 
-  create_table "permissao_telas", force: :cascade do |t|
-    t.bigint "permissao_id"
-    t.bigint "perfil_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["perfil_id"], name: "index_permissao_telas_on_perfil_id"
-    t.index ["permissao_id", "perfil_id"], name: "index_permissao_telas_on_permissao_id_and_perfil_id", unique: true
-    t.index ["permissao_id"], name: "index_permissao_telas_on_permissao_id"
-  end
-
-  create_table "permissaos", force: :cascade do |t|
-    t.string "name"
-    t.string "classe"
-    t.string "acao"
-    t.boolean "idativo", default: true
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["acao"], name: "index_permissaos_on_acao"
-    t.index ["classe"], name: "index_permissaos_on_classe"
-    t.index ["name"], name: "index_permissaos_on_name"
-  end
-
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -71,7 +49,6 @@ ActiveRecord::Schema.define(version: 20170626133645) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
-    t.index ["name"], name: "index_roles_on_name"
   end
 
   create_table "users", force: :cascade do |t|
@@ -98,17 +75,17 @@ ActiveRecord::Schema.define(version: 20170626133645) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "users_roles", id: false, force: :cascade do |t|
+  create_table "users_perfils", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "role_id"
-    t.index ["role_id"], name: "index_users_roles_on_role_id"
-    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
-    t.index ["user_id"], name: "index_users_roles_on_user_id"
+    t.bigint "perfil_id"
+    t.index ["perfil_id", "user_id"], name: "index_users_perfils_on_perfil_id_and_user_id", unique: true
+    t.index ["perfil_id"], name: "index_users_perfils_on_perfil_id"
+    t.index ["user_id"], name: "index_users_perfils_on_user_id"
   end
 
   add_foreign_key "cursos", "users"
-  add_foreign_key "perfil_users", "perfils"
-  add_foreign_key "perfil_users", "users"
-  add_foreign_key "permissao_telas", "perfils"
-  add_foreign_key "permissao_telas", "permissaos"
+  add_foreign_key "perfil_roles", "perfils"
+  add_foreign_key "perfil_roles", "roles"
+  add_foreign_key "users_perfils", "perfils"
+  add_foreign_key "users_perfils", "users"
 end

@@ -1,5 +1,6 @@
 class Role < ApplicationRecord
-  has_and_belongs_to_many :users, :join_table => :users_roles
+  # has_and_belongs_to_many :users, :join_table => :users_roles
+  # has_and_belongs_to_many :perfils, :join_table => :users_perfils
 
   # belongs_to :resource,
   #            :polymorphic => true,

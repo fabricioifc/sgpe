@@ -1,0 +1,33 @@
+class CreatePapeisPorUsuario < ActiveRecord::Migration[5.1]
+  def change
+
+    create_table :perfils do |t|
+      t.string :name, index:true
+      t.boolean :idativo, default:true
+
+      t.timestamps
+    end
+
+    create_table :roles do |t|
+      t.string :name
+      t.string :resource_type
+      t.string :resource_id
+
+      t.timestamps
+    end
+
+    create_table(:perfil_roles) do |t|
+      t.references :perfil, foreign_key: true, index:true
+      t.references :role, foreign_key: true, index:true
+    end
+
+    create_table(:users_perfils) do |t|
+      t.references :user, foreign_key: true, index:true
+      t.references :perfil, foreign_key: true, index:true
+    end
+
+    add_index(:roles, [ :name, :resource_type, :resource_id ])
+    add_index(:perfil_roles, [ :perfil_id, :role_id ], unique:true)
+    add_index(:users_perfils, [ :perfil_id, :user_id ], unique:true)
+  end
+end
