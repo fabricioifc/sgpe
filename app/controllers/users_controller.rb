@@ -40,11 +40,11 @@ class UsersController < ApplicationController
   end
 
   def secure_params
-    params.require(:user).permit(:roles, :roles_mask, :role_ids => [])
+    params.require(:user).permit(:perfils, :perfil_ids => [])
   end
 
   def user_params
-    params.require(:user).permit(:roles, :roles_mask, :role_ids => [])
+    params.require(:user).permit(:perfils, :perfil_ids => [])
   end
 
 end
