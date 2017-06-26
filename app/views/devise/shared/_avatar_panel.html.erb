@@ -1,0 +1,20 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <%= f.label :avatar, :class => '' %>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <div class="avatar_toggle">
+      <%= image_tag resource.avatar_url(:avatar), class: 'img-responsive img-thumbnail center-block' if resource.avatar.url.present? %>
+      <%= f.hidden_field :avatar_cache %>
+      <%= f.file_field :avatar, :class => 'form-control' %>
+    </div>
+    <input style="display: none;" type="checkbox" value="1" name="user[remove_avatar]" id="user_remove_avatar">
+  </div>
+  <div class="panel-footer">
+    <a class="btn btn-primary btn-xs btn-remove-image" data-toggle="button" href="#" role="button">
+      <span class="glyphicon glyphicon-remove"></span> Excluir avatar
+    </a>
+  </div>
+</div>

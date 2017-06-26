@@ -11,7 +11,7 @@
     </div>
 
     <div class="row">
-      <%= image_tag current_user.avatar.url(:thumb), class: 'img-rounded img-responsive img-thumbnail center-block' if current_user.avatar.present? %>
+      <%= show_profile_image %>
     </div>
 
 </div>
