@@ -40,8 +40,6 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.1)
       public_suffix (~> 2.0, >= 2.0.2)
-    ajax-datatables-rails (0.4.0)
-      railties (>= 4.0)
     arel (8.0.0)
     ast (2.3.0)
     autoprefixer-rails (7.1.1.2)
@@ -148,11 +146,6 @@ GEM
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
-    jquery-datatables-rails (3.3.0)
-      actionpack (>= 3.1)
-      jquery-rails
-      railties (>= 3.1)
-      sass-rails
     jquery-rails (4.3.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -370,7 +363,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ajax-datatables-rails (~> 0.4.0)
   better_errors
   bootstrap-sass
   bootstrap_form
@@ -392,7 +384,6 @@ DEPENDENCIES
   guard-rspec
   high_voltage
   jbuilder (~> 2.5)
-  jquery-datatables-rails (= 3.3.0)
   jquery-rails
   kaminari
   launchy
