@@ -11,6 +11,18 @@ class PostsController < ApplicationController
     end
   end
 
+  def sortable_columns
+    ["id", "title"]
+  end
+
+  def sort_column
+    sortable_columns.include?(params[:column]) ? params[:column] : "title"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
   # GET /posts/1
   # GET /posts/1.json
   def show

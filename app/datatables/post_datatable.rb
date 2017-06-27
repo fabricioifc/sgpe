@@ -6,23 +6,19 @@ class PostDatatable < ApplicationDatatable
     def data
       posts.map do |post|
         [].tap do |column|
-          column << link_to(post.id, edit_post_path(post))
+          column << post.id
           column << post.title
 
           links = []
-          links << link_to("<span class='glyphicon glyphicon-th-list'></span>".html_safe, post)
-          links << link_to("<span class='glyphicon glyphicon-edit'></span>".html_safe, edit_post_path(post))
-          links << link_to("<span class='glyphicon glyphicon-remove'></span>".html_safe, post, method: :delete, data: { confirm: 'Are you sure?' })
-          column << links.join(" | ")
+          column << link_to("<span class='glyphicon glyphicon-th-list'></span>".html_safe, post)
+          column << link_to("<span class='glyphicon glyphicon-edit'></span>".html_safe, edit_post_path(post))
+          column << link_to("<span class='glyphicon glyphicon-remove'></span>".html_safe, post, method: :delete, data: { confirm: 'Are you sure?' })
+          # column << links.join(" | ")
         end
       end
     end
 
-    def sort_column
-      columns = %w[id title]
-      columns[params[:iSortCol_0].to_i]
-    end
-
+    
     def count
       Post.count
     end
@@ -40,7 +36,7 @@ class PostDatatable < ApplicationDatatable
     def fetch_posts
       search_string = []
       columns.each do |term|
-        search_string << "#{term} like :search"
+        search_string << "lower(#{term}::text) like lower(:search)"
       end
 
       # will_paginate
@@ -48,10 +44,11 @@ class PostDatatable < ApplicationDatatable
       posts = Post.order("#{sort_column} #{sort_direction}")
       posts = posts.page(page).per(per_page)
       posts = posts.where(search_string.join(' or '), search: "%#{params[:search][:value]}%")
+      posts
     end
 
     def columns
       # (title last_name email phone_number)
-      %w(title)
+      %w(id title)
     end
 end
