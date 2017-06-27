@@ -1,0 +1,15 @@
+// Customizando o componente datatables
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  padding: 0;
+}
+
+.pagination > li > a, .pagination > li > span {
+  padding: 5px 15px !important;
+}
+
+table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_desc {
+  background-image: none;
+}

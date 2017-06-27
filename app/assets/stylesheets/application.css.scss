@@ -18,15 +18,3 @@
  *= require_tree .
  *= require_self
  */
-
-
- //Import bootstrap-sprockets
- @import "bootstrap-sprockets";
- // Import cerulean variables
- @import "bootswatch/flatly/variables";
- // Then bootstrap itself
- @import "bootstrap";
- // And finally bootswatch style itself
- @import "bootswatch/flatly/bootswatch";
- // Whatever application styles you have go last
- // @import "base";

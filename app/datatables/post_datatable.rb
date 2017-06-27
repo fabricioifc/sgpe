@@ -6,15 +6,21 @@ class PostDatatable < ApplicationDatatable
     def data
       posts.map do |post|
         [].tap do |column|
+          column << link_to(post.id, edit_post_path(post))
           column << post.title
 
           links = []
-          links << link_to('Show', post)
-          links << link_to('Edit', edit_post_path(post))
-          links << link_to('Destroy', post, method: :delete, data: { confirm: 'Are you sure?' })
-          column << links.join(' | ')
+          links << link_to("<span class='glyphicon glyphicon-th-list'></span>".html_safe, post)
+          links << link_to("<span class='glyphicon glyphicon-edit'></span>".html_safe, edit_post_path(post))
+          links << link_to("<span class='glyphicon glyphicon-remove'></span>".html_safe, post, method: :delete, data: { confirm: 'Are you sure?' })
+          column << links.join(" | ")
         end
       end
+    end
+
+    def sort_column
+      columns = %w[id title]
+      columns[params[:iSortCol_0].to_i]
     end
 
     def count
