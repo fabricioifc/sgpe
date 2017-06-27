@@ -17,7 +17,7 @@
 //= require select2
 // require select2-full
 //= require dropdown
-//= require bootstrap
+// require bootstrap
 //= require datatables
 //= require datatables/dataTables.bootstrap
 //= require_tree .
