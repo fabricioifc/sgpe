@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :posts
   resources :permissao_telas
   resources :permissaos
   resources :perfils

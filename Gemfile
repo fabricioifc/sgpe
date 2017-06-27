@@ -76,4 +76,6 @@ gem "select2-rails"
 gem 'bootstrap_form'
 # gem 'will_paginate', '~> 3.1', '>= 3.1.6'
 # gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
+gem 'rails-assets-jquery', source: 'https://rails-assets.org'
+gem 'rails-assets-datatables', source: 'https://rails-assets.org'
 gem 'kaminari'
