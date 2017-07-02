@@ -18,7 +18,6 @@ class PostDatatable < ApplicationDatatable
       end
     end
 
-    
     def count
       Post.count
     end
