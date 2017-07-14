@@ -1,0 +1,26 @@
+<div class="page-header">
+  <%= link_to disciplines_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_discipline_path(@discipline), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show discipline</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Title:</dt>
+  <dd><%= @discipline.title %></dd>
+
+  <dt>Description:</dt>
+  <dd><%= @discipline.description %></dd>
+
+  <dt>Active:</dt>
+  <dd><%= @discipline.active %></dd>
+
+  <dt>User:</dt>
+  <dd><%= @discipline.user %></dd>
+
+</dl>
