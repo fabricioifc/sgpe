@@ -1,9 +1,15 @@
-<div class="page-header">
-  <%%= link_to <%= index_helper %>_path, class: 'btn btn-default' do %>
-    <span class="glyphicon glyphicon-list-alt"></span>
-    Back
-  <%% end %>
-  <h1>New <%= singular_table_name %></h1>
-</div>
+<%%- model = <%= singular_table_name.capitalize %> %>
 
-<%%= render 'form' %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <%%= t('helpers.titles.new', model: model) %>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <%%= render 'form', <%= singular_table_name %>: @<%= singular_table_name %> %>
+  </div>
+  <div class="panel-footer">
+    <%%= link_to t('helpers.links.back'), <%= plural_table_name %>_path %>
+  </div>
+</div>
