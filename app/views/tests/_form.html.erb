@@ -1,9 +1,0 @@
-<%= bootstrap_form_for(test, local:true, html: { class: "", role: "form" }) do |f| %>
-  <%= error_messages_for(test) %>
-
-
-      <%= f.text_field :title, id: :test_title %>
-      <%= f.text_area :body, id: :test_body %>
-  
-  <%= f.submit class: "btn btn-primary" %>
-<% end %>
