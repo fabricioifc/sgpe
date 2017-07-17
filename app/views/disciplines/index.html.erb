@@ -6,7 +6,7 @@
     </h3>
     <div class="pull-right">
       <%= link_to new_discipline_path do %>
-        <span class="glyphicon glyphicon-plus"></span>
+        <i class="fa fa-plus fa-2" aria-hidden="true"></i>
         <%= t('.new', :default => t("helpers.titles.new", model: model)) %>
       <% end %>
     </div>
@@ -32,7 +32,7 @@
   <div class="panel-footer clearfix">
     <div class="pull-right">
       <%= link_to new_discipline_path do %>
-        <span class="glyphicon glyphicon-plus"></span>
+        <i class="fa fa-plus fa-2" aria-hidden="true"></i>
         <%= t('.new', :default => t("helpers.titles.new", model: model.model_name.human.titleize)) %>
       <% end %>
     </div>

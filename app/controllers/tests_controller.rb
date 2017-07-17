@@ -4,7 +4,7 @@ class TestsController < ApplicationController
   # GET /tests
   # GET /tests.json
   def index
-    @tests = Test.all
+    # @tests = Test.all
     respond_to do |format|
       format.html
       format.json { render json: TestDatatable.new(view_context) }

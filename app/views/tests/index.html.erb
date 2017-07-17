@@ -6,22 +6,19 @@
       <%= t '.title', :default => model.model_name.human.pluralize.titleize %>
     </h3>
     <div class="pull-right">
-      <%= link_to new_test_path do %>
-        <i class='fa fa-file-pdf-o fa-2'></i>
-        <%= t('.new', :default => t("helpers.titles.new", model: model )) %>
-      <% end %>
+
     </div>
   </div>
   <div class="panel-body">
     <div class="table-responsive">
-      <%= content_tag :table, id: "tests_datatable", class: 'table table-striped table-bordered', data: { url: tests_path(format: :json)} do %>
+      <%= content_tag :table, id: "tests_datatable", class: 'table table-striped table-bordered', role: :datatable, data: { url: tests_path(format: :json)} do %>
         <thead>
           <tr>
             <th><%= model.human_attribute_name(:id) %></th>
             <th><%= model.human_attribute_name(:title) %></th>
             <th><%= model.human_attribute_name(:body) %></th>
             <th><%= model.human_attribute_name(:active) %></th>
-            <th><%= t 'helpers.actions' %></th>
+            <th><%= t('helpers.actions') %></th>
           </tr>
         </thead>
         <tbody></tbody>
@@ -29,8 +26,14 @@
     </div>
   </div>
   <div class="panel-footer clearfix">
+    <div class="">
+      <%= link_to new_test_path do %>
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        <%= t('.new', :default => t("helpers.titles.new", model: model )) %>
+      <% end %>
+    </div>
     <div class="pull-right">
-      <%= link_to "<i class='fa fa-file-pdf-o fa-2'></i> Exportar".html_safe, tests_path(format: :pdf), target: '_blank' %>
+
     </div>
   </div>
 </div>

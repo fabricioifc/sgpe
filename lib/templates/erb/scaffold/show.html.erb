@@ -1,10 +1,10 @@
 <div class="page-header">
   <%%= link_to <%= index_helper %>_path, class: 'btn btn-default' do %>
-    <span class="glyphicon glyphicon-list-alt"></span>
+    <i class='fa fa-list fa-2'></i>
     <%%= t('helpers.links.back') %>
   <%% end %>
   <%%= link_to edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-pencil"></span>
+    <i class='fa fa-pencil-square-o fa-2'></i>
     <%%= t('helpers.links.edit') %>
   <%% end %>
   <h1>Show <%= singular_table_name %></h1>

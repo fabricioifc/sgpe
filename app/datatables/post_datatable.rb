@@ -11,8 +11,8 @@ class PostDatatable < ApplicationDatatable
 
           links = []
           column << link_to("<i class='fa fa-list fa-2'></i>".html_safe, post)
-          column << link_to("<span class='glyphicon glyphicon-edit'></span>".html_safe, edit_post_path(post))
-          column << link_to("<span class='glyphicon glyphicon-remove'></span>".html_safe, post, method: :delete, data: { confirm: 'Are you sure?' })
+          column << link_to("<i class='fa fa-pencil-square-o fa-2'></i>".html_safe, edit_post_path(post))
+          column << link_to("<i class='fa fa-trash-o fa-2'></i>".html_safe, post, method: :delete, data: { confirm: 'Are you sure?' })
           # column << links.join(" | ")
         end
       end

@@ -12,11 +12,11 @@
   <div class="panel-footer">
     <!-- <= link_to t('helpers.links.back'), discipline_path %> -->
     <%%= link_to <%= plural_table_name %>_path, class: 'btn btn-sm btn-default' do %>
-      <span class="glyphicon glyphicon-list-alt"></span>
+      <i class='fa fa-list fa-2'></i>
       <%%= t('helpers.links.back') %>
     <%% end %>
     <%%= link_to @<%= singular_table_name %>, class: 'btn btn-sm btn-info' do %>
-      <span class="glyphicon glyphicon-info-sign"></span>
+      <i class="fa fa-info fa-2" aria-hidden="true"></i>
       <%%= t('helpers.links.show') %>
     <%% end %>
   </div>
