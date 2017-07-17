@@ -11,11 +11,7 @@ class CursoDecorator < ApplicationDecorator
   end
 
   def active
-    if component.idativo?
-      h.content_tag(:i, nil, class: 'fa fa-check-square')
-    else
-      h.content_tag :i, nil, class: 'fa fa-check-square'
-    end
+    active_tag component.idativo?, 'fa-2'
   end
 
   # Define presentation-specific methods here. Helpers are accessed through

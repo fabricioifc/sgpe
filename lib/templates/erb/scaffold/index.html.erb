@@ -28,9 +28,9 @@
             <% attributes.each do |attribute| -%>
                 <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
             <% end -%>
-            <td><%%= link_to 'Show', <%= singular_table_name %> %></td>
-            <td><%%= link_to 'Edit', edit_<%= singular_table_name %>_path(<%= singular_table_name %>) %></td>
-            <td><%%= link_to 'Destroy', <%= singular_table_name %>, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%%= <%= singular_table_name.decorate.link_show %> %></td>
+            <td><%%= <%= singular_table_name.decorate.link_edit %> %></td>
+            <td><%%= <%= singular_table_name.decorate.link_destroy %> %></td>
           <%% end %>
         </tbody>
       <%% end %>
@@ -38,10 +38,7 @@
   </div>
   <div class="panel-footer clearfix">
     <div class="pull-right">
-      <%%= link_to new_<%= singular_table_name %>_path do %>
-        <i class="fa fa-plus" aria-hidden="true"></i>
-        <%%= t('.new', :default => t("helpers.titles.new", model: model.model_name.human.titleize)) %>
-      <%% end %>
+      
     </div>
   </div>
 </div>
