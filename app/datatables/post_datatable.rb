@@ -47,7 +47,7 @@ class PostDatatable < ApplicationDatatable
     end
 
     def columns
-      # (title last_name email phone_number)
+      # (title last_name email phone_number)]
       %w(id title)
     end
 end

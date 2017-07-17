@@ -1,6 +1,7 @@
 $(document).on('turbolinks:load', function(){
   $("table[id='disciplines_datatable']").each(function(){
     $(this).DataTable({
+      destroy: true,
       processing: true,
       serverSide: true,
       ajax: $(this).data('url'),

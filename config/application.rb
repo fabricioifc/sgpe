@@ -10,6 +10,7 @@ module PdeIF
   class Application < Rails::Application
 
     config.generators do |g|
+      g.javascript_engine :js
       g.test_framework :rspec,
         fixtures: true,
         view_specs: false,

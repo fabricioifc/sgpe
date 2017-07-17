@@ -1,0 +1,16 @@
+Description:
+    Creates the datatables structure for you.
+
+Example:
+    rails generate datatables init
+
+    This will create:
+        app/services/datatables
+        app/services/datatables/application_datatable.rb
+
+    rails generate datatables users
+
+    This will create:
+        app/services/datatables
+        app/services/datatables/application_datatable.rb
+        app/services/datatables/users_datatable.rb

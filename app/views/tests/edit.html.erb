@@ -1,0 +1,23 @@
+<%- model = Test %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <%= t('helpers.titles.edit', model: 'model') %>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <%= render 'form', test: @test %>
+  </div>
+  <div class="panel-footer">
+    <!-- <= link_to t('helpers.links.back'), discipline_path %> -->
+    <%= link_to tests_path, class: 'btn btn-sm btn-default' do %>
+      <span class="glyphicon glyphicon-list-alt"></span>
+      <%= t('helpers.links.back') %>
+    <% end %>
+    <%= link_to @test, class: 'btn btn-sm btn-info' do %>
+      <span class="glyphicon glyphicon-info-sign"></span>
+      <%= t('helpers.links.show') %>
+    <% end %>
+  </div>
+</div>

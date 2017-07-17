@@ -1,0 +1,23 @@
+<div class="page-header">
+  <%= link_to tests_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    <%= t('helpers.links.back') %>
+  <% end %>
+  <%= link_to edit_test_path(@test), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    <%= t('helpers.links.edit') %>
+  <% end %>
+  <h1>Show test</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Title:</dt>
+  <dd><%= @test.title %></dd>
+
+  <dt>Body:</dt>
+  <dd><%= @test.body %></dd>
+
+  <dt>Active:</dt>
+  <dd><%= @test.active %></dd>
+
+</dl>

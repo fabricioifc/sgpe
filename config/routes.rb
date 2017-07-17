@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tests
   resources :disciplines, path: 'disciplinas'
   resources :posts
   resources :permissao_telas

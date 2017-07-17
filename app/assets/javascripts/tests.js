@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function(){
-  $("table[id='posts_datatable']").each(function(){
+  $("table[id='tests_datatable']").each(function(){
     $(this).DataTable({
       destroy: true,
       processing: true,
@@ -11,16 +11,28 @@ $(document).on('turbolinks:load', function(){
 
       columns: [
         {
+          width: "5%",
+          className: "",
+          searchable: true,
+          orderable: true
+        },
+        {
           width: "10%",
           className: "",
           searchable: true,
           orderable: true
         },
         {
-          width: "75%",
+          width: "60%",
           className: "",
           searchable: true,
           orderable: true
+        },
+        {
+          width: "10%",
+          className: "text-center",
+          searchable: false,
+          orderable: false
         },
         {
           width: "5%",

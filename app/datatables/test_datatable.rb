@@ -1,53 +1,60 @@
 class TestDatatable < ApplicationDatatable
   delegate :edit_test_path, to: :@view
 
-    private
+  private
 
-    def data
-      tests.map do |test|
-        [].tap do |column|
-          column << test.title
-          column << test.body
+  # Loop through memoized collection and build the columns.
+  # If extracting from a view, be sure to add delegates
+  # and to also clean up and inject each column into the column var.
+  # Also, if you have multiple items (links) in a single column, you
+  # will need to create a separate variable and join them accordingly
+  # when pushing to the column array
+  def data
+    tests.map do |test|
+      [].tap do |column|
 
-          links = []
-          column << link_to("<span class='glyphicon glyphicon-th-list'></span>".html_safe, test)
-          column << link_to("<span class='glyphicon glyphicon-edit'></span>".html_safe, edit_test_path(test))
-          column << link_to("<span class='glyphicon glyphicon-remove'></span>".html_safe, test, method: :delete, data: { confirm: 'Tem certeza?' })
-          # column << links.join(" | ")
-        end
+        column << test.id
+        column << test.title
+        column << test.body
+        column << test.active
+
+        column << link_to("<span class='glyphicon glyphicon-th-list'></span>".html_safe, test)
+        column << link_to("<span class='glyphicon glyphicon-edit'></span>".html_safe, edit_test_path(test))
+        column << link_to("<span class='glyphicon glyphicon-remove'></span>".html_safe, test, method: :delete, data: { confirm: 'Tem certeza?' })
       end
     end
+  end
 
-    def count
-      Test.count
+  # Returns the count of records.
+  def count
+    Test.count
+  end
+
+  def total_entries
+    tests.total_count
+    # will_paginate
+    # tests.total_entries
+  end
+
+  def tests
+    @tests ||= fetch_tests
+  end
+
+  def fetch_tests
+    search_string = []
+    columns.each do |term|
+      search_string << "lower(#{term}::text) like lower(:search)"
     end
 
-    def total_entries
-      tests.total_count
-      # will_paginate
-      # tests.total_entries
-    end
+    # will_paginate
+    # tests = Test.page(page).per_page(per_page)
+    tests = Test.order("#{sort_column} #{sort_direction}")
+    tests = tests.page(page).per(per_page)
+    tests = tests.where(search_string.join(' or '), search: "%#{params[:search][:value]}%")
+  end
 
-    def tests
-      @tests ||= fetch_tests
-    end
-
-    def fetch_tests
-      search_string = []
-      columns.each do |term|
-        search_string << "lower(#{term}::text) like lower(:search)"
-      end
-
-      # will_paginate
-      # tests = User.page(page).per_page(per_page)
-      tests = Test.order("#{sort_column} #{sort_direction}")
-      tests = tests.page(page).per(per_page)
-      tests = tests.where(search_string.join(' or '), search: "%#{params[:search][:value]}%")
-      tests
-    end
-
-    def columns
-      # (title last_name email phone_number)
-      %w(title body)
-    end
+  # The columns needs to be the same list of searchable items and IN ORDER that they will appear in Data.
+  def columns
+    %w(id title body active)
+  end
 end
