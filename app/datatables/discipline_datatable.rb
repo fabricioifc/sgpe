@@ -9,13 +9,13 @@ class DisciplineDatatable < ApplicationDatatable
           column << discipline.id
           column << discipline.title
           column << discipline.description
-          column << discipline.active
+          column << discipline.decorate.active
 
           links = []
-          column << link_to("<i class='fa fa-list fa-2'></i>".html_safe, discipline)
-          column << link_to("<i class='fa fa-pencil-square-o fa-2'></i>".html_safe, edit_discipline_path(discipline))
-          column << link_to("<i class='fa fa-trash-o fa-2'></i>".html_safe, discipline, method: :delete, data: { confirm: 'Tem certeza?' })
-          # column << links.join(" | ")
+          links << link_to("<i class='fa fa-list fa-2'></i>".html_safe, discipline)
+          links << link_to("<i class='fa fa-pencil-square-o fa-2'></i>".html_safe, edit_discipline_path(discipline))
+          links << link_to("<i class='fa fa-trash-o fa-2'></i>".html_safe, discipline, method: :delete, data: { confirm: 'Tem certeza?' })
+          column << links.join(" <span style='padding-right: 5px;'></span> ")
         end
       end
     end

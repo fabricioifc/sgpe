@@ -23,32 +23,20 @@ $(document).on('turbolinks:load', function(){
           orderable: true
         },
         {
-          width: "45%",
+          width: "50%",
           className: "",
           searchable: true,
           orderable: true
         },
         {
           width: "10%",
-          className: "",
+          className: "text-center",
           searchable: true,
           orderable: true
         },
         {
-          width: "5%",
-          className: "text-center",
-          searchable: false,
-          orderable: false
-        },
-        {
-          width: "5%",
-          className: "text-center",
-          searchable: false,
-          orderable: false
-        },
-        {
-          width: "5%",
-          className: "text-center",
+          width: "10%",
+          className: "",
           searchable: false,
           orderable: false
         },

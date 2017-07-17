@@ -1,4 +1,4 @@
-class TestDecorator < ApplicationDecorator
+class DisciplineDecorator < ApplicationDecorator
   delegate_all
   attr_reader :component
 
@@ -6,8 +6,11 @@ class TestDecorator < ApplicationDecorator
     @component = component
   end
 
+  def title
+    component.title.capitalize
+  end
+
   def active
     active_tag component.active?, 'fa-2'
   end
-
 end

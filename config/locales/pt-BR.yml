@@ -258,6 +258,10 @@ pt-BR:
       admin: 'Administração'
       pages:
         about: 'Sobre'
+        disciplines: 'Disciplinas'
+        cursos: 'Cursos'
+        tests: 'Testes'
+        posts: 'Posts'
     titles:
       edit: "Editar %{model}"
       save: "Salvar %{model}"
