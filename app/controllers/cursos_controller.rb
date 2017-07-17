@@ -6,7 +6,11 @@ class CursosController < ApplicationController
   # GET /cursos
   # GET /cursos.json
   def index
-    @cursos = Curso.order(:id).page params[:page]
+    # @cursos = Curso.order(:id).page params[:page]
+    respond_to do |format|
+      format.html
+      format.json { render json: CursoDatatable.new(view_context) }
+    end
   end
 
   # GET /cursos/1

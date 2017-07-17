@@ -9,9 +9,9 @@
     <div id="datatable">
       <%= render 'cursos' %>
     </div>
-    <div id="paginator">
-      <%= paginate @cursos, :remote => true %>
-    </div>
+    <!-- <div id="paginator">
+      <= paginate @cursos, :remote => true %>
+    </div> -->
   </div>
   <div class="panel-footer">
     <%= link_to_new model, new_curso_path %>

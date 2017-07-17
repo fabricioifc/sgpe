@@ -11,7 +11,7 @@ class ApplicationDecorator < Draper::Decorator
     if campo
       h.content_tag :i, nil, class: "fa fa-check-square #{klass}"
     else
-      h.content_tag :i, nil, class: "fa fa-check-square #{klass}"
+      h.content_tag :i, nil, class: "fa fa-square-o #{klass}"
     end
   end
 

@@ -34,7 +34,11 @@ module ApplicationHelper
   end
 
   def link_to_new(model, path)
-    link_to t('.new', :default => t("helpers.titles.new", model: model)), path
+    link_to path do
+      text = content_tag :i, nil, class: 'fa fa-plus'
+      text << ' ' << t('.new', :default => t("helpers.titles.new", model: model))
+      text
+    end
   end
 
 end

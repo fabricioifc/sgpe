@@ -6,8 +6,10 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastro <span class="caret"></span></a>
   <ul class="dropdown-menu">
-    <li><%= link_to 'Cursos', cursos_path if can? :read, Curso %></li>
-    <li><%= link_to 'Posts', posts_path if can? :read, Post %></li>
+    <li><%= link_to t('.cursos'), cursos_path if can? :read, Curso %></li>
+    <li><%= link_to t('.posts'), posts_path if can? :read, Post %></li>
+    <li><%= link_to t('.disciplines'), disciplines_path if can? :read, Discipline %></li>
+    <li><%= link_to t('.tests'), tests_path if can? :read, Test %></li>
   </ul>
 </li>
 <% end %>
