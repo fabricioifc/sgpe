@@ -12,7 +12,7 @@ class DisciplineDatatable < ApplicationDatatable
           column << discipline.active
 
           links = []
-          column << link_to("<span class='glyphicon glyphicon-th-list'></span>".html_safe, discipline)
+          column << link_to("<i class='fa fa-list fa-2'></i>".html_safe, discipline)
           column << link_to("<span class='glyphicon glyphicon-edit'></span>".html_safe, edit_discipline_path(discipline))
           column << link_to("<span class='glyphicon glyphicon-remove'></span>".html_safe, discipline, method: :delete, data: { confirm: 'Tem certeza?' })
           # column << links.join(" | ")

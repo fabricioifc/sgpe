@@ -250,6 +250,7 @@ pt-BR:
       show: "Detalhes"
       new: "Novo"
       transfer: "Transferir"
+      export: "Exportar"
       edit: "Editar"
       clone: "Clonar"
       home: 'Página inicial'

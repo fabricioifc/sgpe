@@ -23,7 +23,7 @@ $(document).on('turbolinks:load', function(){
           orderable: true
         },
         {
-          width: "60%",
+          width: "65%",
           className: "",
           searchable: true,
           orderable: true
@@ -35,23 +35,11 @@ $(document).on('turbolinks:load', function(){
           orderable: false
         },
         {
-          width: "5%",
-          className: "text-center",
+          width: "10%",
+          className: "",
           searchable: false,
           orderable: false
-        },
-        {
-          width: "5%",
-          className: "text-center",
-          searchable: false,
-          orderable: false
-        },
-        {
-          width: "5%",
-          className: "text-center",
-          searchable: false,
-          orderable: false
-        },
+        }
       ],
       // order: [[1, 'asc']]
 

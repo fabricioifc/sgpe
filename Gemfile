@@ -84,3 +84,6 @@ gem 'kaminari'
 gem 'record_tag_helper', '~> 1.0'
 gem 'draper', '~> 3.0' #padrão decorator
 gem 'font-awesome-sass', '~> 4.7.0'
+#Gerador de PDF
+gem 'prawn-rails'
+gem 'prawn-table'

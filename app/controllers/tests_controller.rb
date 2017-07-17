@@ -4,16 +4,34 @@ class TestsController < ApplicationController
   # GET /tests
   # GET /tests.json
   def index
-    # @tests = Test.all
+    @tests = Test.all
     respond_to do |format|
       format.html
       format.json { render json: TestDatatable.new(view_context) }
+      format.pdf do
+        pdf = TestsPdf.new(@tests)
+        send_data pdf.render,
+            filename: "tests_#{@tests.count}",
+            type: 'application/pdf',
+            disposition: 'inline'
+      end
     end
   end
 
   # GET /tests/1
   # GET /tests/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.json
+      format.pdf do
+        pdf = TestPdf.new(@test)
+        send_data pdf.render,
+            filename: "test_#{@test.id}",
+            type: 'application/pdf',
+            disposition: 'inline'
+      end
+    end
   end
 
   # GET /tests/new

@@ -19,9 +19,10 @@ class <%= model.camelcase %>Datatable < ApplicationDatatable
         <% end %>
 
         links = []
-        column << link_to("<span class='glyphicon glyphicon-th-list'></span>".html_safe, <%= model.singularize.downcase %>)
-        column << link_to("<span class='glyphicon glyphicon-edit'></span>".html_safe, edit_<%= model.singularize.downcase %>_path(<%= model.singularize.downcase %>))
-        column << link_to("<span class='glyphicon glyphicon-remove'></span>".html_safe, <%= model.singularize.downcase %>, method: :delete, data: { confirm: 'Tem certeza?' })
+        links << link_to("<i class='fa fa-list'></i>".html_safe, <%= model.singularize.downcase %>)
+        links << link_to("<i class='fa fa-pencil-square-o'></i>".html_safe, edit_<%= model.singularize.downcase %>_path(<%= model.singularize.downcase %>))
+        links << link_to("<i class='fa fa-trash-o'></i>".html_safe, <%= model.singularize.downcase %>, method: :delete, data: { confirm: 'Tem certeza?' })
+        column << links.join(" <span style='padding-right: 5px;'></span> ")
       end
     end
   end
