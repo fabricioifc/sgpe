@@ -17,7 +17,7 @@
           <td><%= curso.title %></td>
           <td><%= curso.sigla %></td>
           <td><%= curso.description %></td>
-          <td><%= curso.idativo %></td>
+          <td><%= curso.decorate.active %></td>
           <td><%= link_to 'Show', curso %></td>
           <td><%= link_to 'Edit', edit_curso_path(curso) %></td>
           <td><%= link_to 'Destroy', curso, method: :delete, data: { confirm: 'Tem certeza?' } %></td>

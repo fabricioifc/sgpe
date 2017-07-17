@@ -29,4 +29,12 @@ module ApplicationHelper
     end
   end
 
+  def titulo_painel(model)
+    t '.title', :default => model.model_name.human.pluralize.titleize
+  end
+
+  def link_to_new(model, path)
+    link_to t('.new', :default => t("helpers.titles.new", model: model)), path
+  end
+
 end

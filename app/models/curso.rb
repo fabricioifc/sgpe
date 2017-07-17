@@ -4,11 +4,7 @@ class Curso < ApplicationRecord
 
   validates :title, :sigla, :description, presence:true
 
-  # def self.search(term, page)
-  #   if term
-  #     where('title LIKE ?', "%#{term}%").paginate(page: page).order('id DESC')
-  #   else
-  #     paginate(page: page).order('id DESC')
-  #   end
-  # end
+  def decorate
+    @decorate ||= CursoDecorator.new self
+  end
 end
