@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
+# instalar este pacote na máquina local
+# sudo apt-get install nfs-kernel-server
+
 # instalar nfs para compartilhamento de arquivos
-sudo apt-get install nfs-kernel-server
+sudo apt-get install nfs-common portmap
 
 # install javascript runtime, which is required by gem `uglifier`
 sudo apt-get install -y nodejs nodejs-legacy npm
@@ -9,8 +12,9 @@ sudo apt-get install -y nodejs nodejs-legacy npm
 # install postgresql
 sudo apt-get install -y postgresql postgresql-contrib postgresql-client libpq-dev
 # create superuser using current linux user
-sudo -u postgres createuser -s -e `fabricio`
+sudo -u postgres createuser -s -e 'ubuntu'
 # Alterar a senha
+sudo -u postgres psql -c "alter user ubuntu with password 'postgres';"
 sudo -u postgres psql -c "alter user postgres with password 'postgres';"
 
 # gem install
