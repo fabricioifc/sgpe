@@ -46,3 +46,6 @@ Credits
 
 License
 -------
+Vagrant up your Rails development
+Antes de executar 'vagrant up', é preciso instalar o nfs:
+sudo apt-get install nfs-kernel-server
