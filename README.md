@@ -29,6 +29,8 @@ Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.
 Getting Started
 ---------------
 
+Integrando com o codeship
+
 Documentation and Support
 -------------------------
 
