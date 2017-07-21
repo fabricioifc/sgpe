@@ -29,7 +29,7 @@ Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.
 Getting Started
 ---------------
 
-Integrando com o codeship tentando 
+Integrando com o codeship tentando 2 
 
 Documentation and Support
 -------------------------
