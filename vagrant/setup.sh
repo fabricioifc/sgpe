@@ -7,7 +7,10 @@
 sudo apt-get install nfs-common portmap
 
 # install javascript runtime, which is required by gem `uglifier`
-sudo apt-get install -y nodejs nodejs-legacy npm
+sudo apt-get install -y nodejs nodejs-legacy npm git
+
+git config --global user.name $2
+git config --global user.email $3
 
 # install postgresql
 sudo apt-get install -y postgresql postgresql-contrib postgresql-client libpq-dev

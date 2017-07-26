@@ -7,7 +7,7 @@ $ip_vm = "192.168.33.10"
 Vagrant.configure("2") do |config|
   config.env.enable #necessário para acessar as variáveis de ambiente
   config.vm.box = "ubuntu/trusty64"
-  config.vm.box_version = "20170619.0.0"  
+  config.vm.box_version = "20170619.0.0"
   # config.vm.box = "ubuntu/xenial64"
   # config.vm.box_version = "20170717.0.0"
 
@@ -40,5 +40,6 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 3000, host: 3000
   # current working folder basename
   base_name = `basename $(pwd)`
-  config.vm.provision "shell", privileged: false, path: "vagrant/setup.sh", args: base_name
+  config.vm.provision "shell", privileged: false, path: "vagrant/setup.sh",
+      args: [base_name, "#{ENV['GIT_NAME']}", "#{ENV['GIT_EMAIL']}"]
 end
