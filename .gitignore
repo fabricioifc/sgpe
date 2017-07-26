@@ -22,7 +22,7 @@ db/*.sqlite3
 /tmp/*
 
 # add /config/database.yml if it contains passwords
-# /config/database.yml
+/config/database.yml
 
 # various artifacts
 **.war
@@ -82,3 +82,21 @@ pickle-email-*.html
 
 # tilde files are usually backup files from a text editor
 *~
+
+
+# Vagrant
+.vagrant
+Berksfile.lock
+*~
+*#
+.#*
+\#*#
+.*.sw[a-z]
+*.un~
+/cookbooks
+
+# Bundler
+Gemfile.lock
+bin/*
+.bundle/*
+ubuntu-*.log

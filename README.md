@@ -49,5 +49,10 @@ Credits
 License
 -------
 Vagrant up your Rails development
-Antes de executar 'vagrant up', é preciso instalar o nfs:
+Antes de executar 'vagrant up', é preciso instalar:
 sudo apt-get install nfs-kernel-server
+vagrant plugin install vagrant-vbguest
+# vagrant plugin install vagrant-librarian-chef-nochef
+vagrant plugin install vagrant-env
+
+# After vagrant up
