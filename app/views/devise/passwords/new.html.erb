@@ -8,8 +8,8 @@
         <%= devise_error_messages! %>
 
         <div class="form-group">
-          <%= f.label :email %>
-          <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
+          <%= f.label :login %>
+          <%= f.text_field :login, :autofocus => true, placeholder:true, class: 'form-control' %>
         </div>
 
          <%= f.submit t(".submit"), :class => 'btn btn-primary' %>

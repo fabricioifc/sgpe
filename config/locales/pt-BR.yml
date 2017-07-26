@@ -10,6 +10,8 @@ pt-BR:
         new: Usuário
         name: "Nome"
         email: "E-mail"
+        username: Usuário
+        login: "Usuário or E-mail"
         password: "Senha"
         password_confirmation: "Confirmar Senha"
         current_password: "Senha Atual"
