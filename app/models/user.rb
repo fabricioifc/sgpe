@@ -27,7 +27,7 @@ class User < ApplicationRecord
   attr_accessor :login
 
   validates :name, presence:true, length: 0..150
-  validates :username, presence:true, length: 0..100
+  validates :username, presence:true, length: 0..100, on: :create
   # Permitir apenas numetros, letras, underline e ponto
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
 
