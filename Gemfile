@@ -30,7 +30,7 @@ gem 'devise-i18n'
 gem 'high_voltage'
 gem 'jquery-rails'
 gem 'pg'
-group :development do
+group :development, :test do
   gem 'better_errors'
   gem 'foreman'
   gem 'guard-bundler'
@@ -42,20 +42,19 @@ group :development do
   gem 'rb-inotify', :require=>false
   gem 'spring-commands-rspec'
   gem 'mailcatcher'
-end
-group :development, :test do
+  gem 'shoulda-matchers'
+  gem 'cucumber-rails', require: false
+  gem 'coveralls', require: false
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'pry-rails'
   gem 'pry-rescue'
+  gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'rubocop'
-end
-group :test do
   gem 'database_cleaner'
   gem 'launchy'
 end
-
 
 # Adicionadas depois
 gem 'bootswatch-rails'
