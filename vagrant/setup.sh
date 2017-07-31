@@ -9,8 +9,8 @@ sudo apt-get install nfs-common portmap
 # install javascript runtime, which is required by gem `uglifier`
 sudo apt-get install -y nodejs nodejs-legacy npm git
 
-git config --global user.name $2
-git config --global user.email $3
+# git config --global user.name $2
+# git config --global user.email $3
 
 # install postgresql
 sudo apt-get install -y postgresql postgresql-contrib postgresql-client libpq-dev
@@ -36,4 +36,4 @@ fi
 # all setup in README file could go here
 bundle install
 
-bundle exec rake db:create db:migrate db:seed
+bundle exec rake db:exists && rake db:migrate || rake db:create db:migrate db:seed

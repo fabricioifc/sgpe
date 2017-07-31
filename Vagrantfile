@@ -6,10 +6,10 @@ $ip_vm = "192.168.33.10"
 
 Vagrant.configure("2") do |config|
   config.env.enable #necessário para acessar as variáveis de ambiente
-  config.vm.box = "ubuntu/trusty64"
-  config.vm.box_version = "20170619.0.0"
-  # config.vm.box = "ubuntu/xenial64"
-  # config.vm.box_version = "20170717.0.0"
+#  config.vm.box = "ubuntu/trusty64"
+#  config.vm.box_version = "20170619.0.0"
+   config.vm.box = "ubuntu/xenial64"
+   config.vm.box_version = "20170717.0.0"
 
   config.ssh.forward_agent = true
   config.vm.synced_folder ".", "/vagrant", type: "nfs"
@@ -34,12 +34,12 @@ Vagrant.configure("2") do |config|
 
   # this is required if you wish to use NFS under VirtualBox
   # @see section Prerequisites in https://www.vagrantup.com/docs/synced-folders/nfs.html
-# config.vm.network "private_network", ip: $ip_vm
-  config.vm.network "private_network", type: "dhcp"
+ config.vm.network "private_network", ip: $ip_vm
+#  config.vm.network "private_network", type: "dhcp"
   # make sure that the port Rails uses is forwarded to VM
   config.vm.network "forwarded_port", guest: 3000, host: 3000
   # current working folder basename
   base_name = `basename $(pwd)`
-  config.vm.provision "shell", privileged: false, path: "vagrant/setup.sh",
-      args: [base_name, "#{ENV['GIT_NAME']}", "#{ENV['GIT_EMAIL']}"]
+ config.vm.provision "shell", privileged: false, path: "vagrant/setup.sh",
+     args: [base_name, "#{ENV['GIT_NAME']}", "#{ENV['GIT_EMAIL']}"]
 end
