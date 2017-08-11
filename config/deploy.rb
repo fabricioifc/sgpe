@@ -6,18 +6,19 @@ require 'mina/puma'
 
 set :application_name, 'sgpe'
 set :domain, "200.135.61.15"
-set :deploy_to, "/home/deploy/sgpe"
-set :repository, "https://github.com/fabricioifc/SGPE.git"
+set :deploy_to, "/home/deploy/ensino"
+set :repository, "git@bitbucket.org:fraiburgoifc/planodeensinoifc.git"
 set :branch, "master"
 set :port, '50235'
 
 set :user, "deploy"
-# set :forward_agent, true
+set :forward_agent, true
 
 set :shared_dirs, fetch(:shared_dirs, []).push('log', 'tmp/pids', 'tmp/sockets', 'public/uploads')
 set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/secrets.yml', 'config/puma.rb', 'config/unicorn.rb', '.env')
 
 desc "Deploys the current version to the server."
+
 task :production do
   deploy do
     # set :unicorn_env, 'production'
