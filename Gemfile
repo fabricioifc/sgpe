@@ -92,3 +92,5 @@ gem 'prawn-table'
 
 gem 'mina', require: false
 gem 'mina-puma', require: false#,  github: 'untitledkingdom/mina-puma'
+
+gem 'dotenv-rails'
