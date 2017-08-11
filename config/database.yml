@@ -1,24 +1,22 @@
-
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: 5
-  template: template0
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
   username: postgres
-  password: <%= ENV['POSTGRES_DEV_PASSWORD'] || 'postgres' %>
-  host: <%= ENV['POSTGRES_DEV_HOST'] || 'localhost' %>
+  password: postgres
 
 development:
   <<: *default
-  database: pdeif_development
-  # password: postgres
+  database: sgpe_development
 
 test:
   <<: *default
-  database: pdeif_test
+  database: sgpe_test
 
 production:
   <<: *default
-  database: pdeif_production
-  password: <%= ENV['POSTGRES_PRD_PASSWORD'] || 'postgres' %>
-  host: <%= ENV['POSTGRES_PRD_HOST'] || 'localhost' %>
+  database: <%= ENV['SGPE_DATABASE_NAME'] %>
+  host: <%= ENV['SGPE_DATABASE_HOST'] %>
+  username: <%= ENV['SGPE_DATABASE_USERNAME'] %>
+  password: <%= ENV['SGPE_DATABASE_PASSWORD'] %>

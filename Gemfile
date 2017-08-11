@@ -89,3 +89,6 @@ gem 'font-awesome-sass', '~> 4.7.0'
 #Gerador de PDF
 gem 'prawn-rails'
 gem 'prawn-table'
+
+gem 'mina', require: false
+gem 'mina-puma', require: false#,  github: 'untitledkingdom/mina-puma'
