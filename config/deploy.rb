@@ -6,7 +6,7 @@ require 'mina/puma'
 
 set :application_name, 'sgpe'
 set :domain, "200.135.61.15"
-set :deploy_to, "/home/deploy/ensino"
+set :deploy_to, "/home/deploy/sgpe"
 set :repository, "git@bitbucket.org:fraiburgoifc/planodeensinoifc.git"
 set :branch, "master"
 set :port, '50235'
