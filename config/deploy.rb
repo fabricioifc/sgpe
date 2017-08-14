@@ -19,6 +19,7 @@ task :production do
   set :port, '50235'
   set :deploy_to, '/home/deploy/sgpe_production'
   set :branch, 'master'
+  set :whenever_name, 'production'
 end
 
 # Server Staging

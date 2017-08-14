@@ -107,6 +107,7 @@ namespace :db do
       yield Rails.application.class.parent_name.underscore,
             ActiveRecord::Base.connection_config[:host],
             ActiveRecord::Base.connection_config[:database],
-            ActiveRecord::Base.connection_config[:username]
+            ActiveRecord::Base.connection_config[:username],
+            ActiveRecord::Base.connection_config[:password]
   end
 end
