@@ -3,7 +3,7 @@ require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
 
 set :application_name, 'sgpe'
 set :domain, "200.135.61.15"
-set :deploy_to, "/home/deploy/sgpe"
+set :deploy_to, "/home/deploy/sgpe_production"
 set :repository, "git@bitbucket.org:fraiburgoifc/planodeensinoifc.git"
 set :branch, "master"
 set :port, '50235'
@@ -12,11 +12,10 @@ set :user, "deploy"
 set :forward_agent, true
 set :rails_env, 'production'
 
-app_dir = File.expand_path("../../..", __FILE__)
-set :shared_dirs, fetch(:shared_dirs, []).push("#{app_dir}/log", "#{app_dir}/pids", "#{app_dir}/sockets", "#{app_dir}/public/uploads")
+set :shared_dirs, fetch(:shared_dirs, []).push('log', 'pids', 'sockets', 'public/uploads')
 set :shared_files, fetch(:shared_files, []).push(
-  "#{app_dir}/config/database.yml", "#{app_dir}/config/secrets.yml", "#{app_dir}/config/puma.rb",
-  "#{app_dir}/.env.test", "#{app_dir}/.env.development", "#{app_dir}/.env.staging", "#{app_dir}/.env.production"
+  'config/database.yml', 'config/secrets.yml', 'config/puma.rb',
+  '.env.test', '.env.development', '.env.staging', '.env.production'
 )
 
 desc "Deploys the current version to the server."

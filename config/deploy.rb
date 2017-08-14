@@ -1,8 +1,12 @@
+require 'mina/multistage'
 require 'mina/rails'
 require 'mina/git'
 require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
 # require 'mina/rvm'    # for rvm support. (https://rvm.io)
 require 'mina/puma'
+
+# set :stages, %w(staging production)
+# set :stages_dir, 'config'
 
 set :application_name, 'sgpe'
 set :domain, "200.135.61.15"
@@ -17,54 +21,6 @@ set :shared_files, fetch(:shared_files, []).push(
   'config/database.yml', 'config/secrets.yml', 'config/puma.rb',
   '.env.test', '.env.development', '.env.staging', '.env.production'
 )
-
-desc "Deploys the current version to the server."
-task :production do
-  deploy do
-    set :rails_env, 'production'
-    set :deploy_to, "/home/deploy/sgpe"
-    set :branch,    "master"
-
-    comment "Deploying #{fetch(:application_name)} to #{fetch(:domain)}:#{fetch(:deploy_to)}"
-    invoke :'git:clone'
-    invoke :'deploy:link_shared_paths'
-    # invoke :'rvm:load_env_vars'
-    invoke :'bundle:install'
-    invoke :'rails:db_migrate'
-    command %{#{fetch(:rails)} db:seed}
-    invoke :'rails:assets_precompile'
-    invoke :'deploy:cleanup'
-
-    on :launch do
-      invoke :'puma:phased_restart'
-      # invoke :'unicorn:restart'
-    end
-  end
-end
-
-# Ambiente de QA
-task :staging do
-  deploy do
-    set :rails_env, 'staging'
-    set :deploy_to, "/home/deploy/sgpe_staging"
-    set :branch,    "staging"
-
-    comment "Deploying #{fetch(:application_name)} to #{fetch(:domain)}:#{fetch(:deploy_to)}"
-    invoke :'git:clone'
-    invoke :'deploy:link_shared_paths'
-    # invoke :'rvm:load_env_vars'
-    invoke :'bundle:install'
-    invoke :'rails:db_migrate'
-    command %{#{fetch(:rails)} db:seed}
-    invoke :'rails:assets_precompile'
-    invoke :'deploy:cleanup'
-
-    on :launch do
-      invoke :'puma:phased_restart'
-      # invoke :'unicorn:restart'
-    end
-  end
-end
 
 task :environment do
   invoke :'rbenv:load'
