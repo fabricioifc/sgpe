@@ -5,7 +5,7 @@ threads 1, 6
 # root directory
 environment ENV.fetch("ENVIRONMENT") { 'development' }
 port  ENV.fetch("PORT") { '3000' }
-daemonize ENV.fetch("DAEMONIZE") { 'true' }
+daemonize true if ENV.fetch("DAEMONIZE").eql?('true')
 
 app_dir = File.expand_path("../..", __FILE__)
 # shared directory
