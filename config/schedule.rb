@@ -18,7 +18,7 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-set :environment, :development
+# set :environment, Rails.env
 
 every 1.minute do
   rake "db:sql_dump"
