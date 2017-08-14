@@ -5,26 +5,13 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 ruby '2.4.0'
-gem 'rails', '~> 5.1.3'
+# gem 'rails', '~> 5.1.3'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.2'
+# gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
-
-group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara', '~> 2.13'
-  gem 'selenium-webdriver'
-end
-group :development do
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-end
-
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap-sass'
 gem 'devise'
@@ -32,30 +19,12 @@ gem 'devise-i18n'
 gem 'high_voltage'
 gem 'jquery-rails'
 gem 'pg'
-group :development, :test do
-  gem 'better_errors'
-  gem 'foreman'
-  gem 'guard-bundler'
-  gem 'guard-rails'
-  gem 'guard-rspec'
-  gem 'rails_layout'
-  gem 'rb-fchange', :require=>false
-  gem 'rb-fsevent', :require=>false
-  gem 'rb-inotify', :require=>false
-  gem 'spring-commands-rspec'
-  gem 'mailcatcher'
-  gem 'shoulda-matchers'
-  gem 'cucumber-rails', require: false
-  gem 'coveralls', require: false
-  gem 'factory_girl_rails'
-  gem 'faker'
-  gem 'pry-rails'
-  gem 'pry-rescue'
-  gem 'pry-byebug'
-  gem 'rspec-rails'
-  gem 'rubocop'
-  gem 'database_cleaner'
-  gem 'launchy'
+
+group :development do
+  gem 'web-console', '>= 3.3.0'
+  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 # Adicionadas depois
@@ -63,34 +32,59 @@ gem 'bootswatch-rails'
 gem 'carrierwave'
 gem 'mini_magick'; #precisa do RMagick instalado
 gem 'cloudinary'
-
-# Painel de administração do sistema
-gem 'rails_admin', '~> 1.2'
-gem 'rails_admin-i18n'
-gem 'rails_admin_rollincode', '~> 1.0'
-
-# controle de permissões
-gem 'cancancan', '~> 2.0'
-# gem 'pundit'
-# controle de papéis
-gem "rolify"
+gem 'rails_admin', '~> 1.2' # Painel de administração do sistema
+gem 'rails_admin-i18n' # Painel de administração do sistema
+gem 'rails_admin_rollincode', '~> 1.0' # Painel de administração do sistema
+gem 'cancancan', '~> 2.0'# controle de permissões
+gem "rolify" # controle de papéis
 gem "select2-rails"
 gem 'bootstrap_form'
+gem 'font-awesome-sass', '~> 4.7.0'
 # gem 'bootstrap-generators', '~> 3.3.4'
 # gem 'will_paginate', '~> 3.1', '>= 3.1.6'
 # gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
 gem 'rails-assets-jquery', source: 'https://rails-assets.org'
 gem 'rails-assets-datatables', source: 'https://rails-assets.org'
-gem 'kaminari'
+gem 'kaminari' #paginação
 
-gem 'record_tag_helper', '~> 1.0'
+gem 'record_tag_helper', '~> 1.0' #permite usar content_for_tag
 gem 'draper', '~> 3.0' #padrão decorator
-gem 'font-awesome-sass', '~> 4.7.0'
 #Gerador de PDF
 gem 'prawn-rails'
 gem 'prawn-table'
-
+###############################################################################
+#Deploy application
 gem 'mina', require: false
 gem 'mina-puma', require: false#,  github: 'untitledkingdom/mina-puma'
-
+###############################################################################
 gem 'dotenv-rails'
+
+
+group :development, :test do
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'capybara', '~> 2.13'
+  gem 'selenium-webdriver'
+  gem 'better_errors'
+  gem 'foreman'
+  gem 'pry-rails'
+  # gem 'guard-bundler'
+  # gem 'guard-rails'
+  # gem 'guard-rspec'
+  # gem 'rails_layout'
+  # gem 'rb-fchange', :require=>false
+  # gem 'rb-fsevent', :require=>false
+  # gem 'rb-inotify', :require=>false
+  # gem 'spring-commands-rspec'
+  # gem 'mailcatcher'
+  # gem 'shoulda-matchers'
+  # gem 'cucumber-rails', require: false
+  # gem 'coveralls', require: false
+  # gem 'factory_girl_rails'
+  # gem 'faker'
+  # gem 'pry-rescue'
+  # gem 'pry-byebug'
+  # gem 'rspec-rails'
+  # gem 'rubocop'
+  # gem 'database_cleaner'
+  # gem 'launchy'
+end

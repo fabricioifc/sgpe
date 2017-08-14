@@ -17,8 +17,12 @@ set :forward_agent, true
 set :shared_dirs, fetch(:shared_dirs, []).push('log', 'tmp/pids', 'tmp/sockets', 'public/uploads')
 set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/secrets.yml', 'config/puma.rb', 'config/unicorn.rb', '.env')
 
-desc "Deploys the current version to the server."
+#######PUMA#########
+set :puma_threads,    [2, 8]
+set :puma_workers,    2
+#######PUMA#########
 
+desc "Deploys the current version to the server."
 task :production do
   deploy do
     # set :unicorn_env, 'production'
