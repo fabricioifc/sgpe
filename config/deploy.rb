@@ -14,13 +14,9 @@ set :port, '50235'
 set :user, "deploy"
 set :forward_agent, true
 
-set :shared_dirs, fetch(:shared_dirs, []).push('log', 'tmp/pids', 'tmp/sockets', 'public/uploads')
+set :shared_dirs, fetch(:shared_dirs, []).push('log', 'pids', 'sockets', 'public/uploads')
 set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/secrets.yml', 'config/puma.rb', 'config/unicorn.rb', '.env')
 
-#######PUMA#########
-set :puma_threads,    [2, 8]
-set :puma_workers,    2
-#######PUMA#########
 
 desc "Deploys the current version to the server."
 task :production do
@@ -49,11 +45,6 @@ task :environment do
   # invoke :'rvm:use', 'ruby-2.4.0@default'
 end
 
-# Put any custom commands you need to run at setup
-# All paths in `shared_dirs` and `shared_paths` will be created on their own.
-# task :setup do
-  # command %{rbenv install 2.3.0}
-# end
 task :setup do
   command %[mkdir -p "#{fetch(:shared_path)}/pids"]
   command %[mkdir -p "#{fetch(:shared_path)}/log"]
@@ -62,6 +53,9 @@ task :setup do
   command %[touch "#{fetch(:shared_path)}/config/secrets.yml"]
   command %[touch "#{fetch(:shared_path)}/config/puma.rb"]
   command %[touch "#{fetch(:shared_path)}/config/unicorn.rb"]
-  command %[touch "#{fetch(:shared_path)}/.env"]
+  command %[touch "#{fetch(:shared_path)}/.env.development"]
+  command %[touch "#{fetch(:shared_path)}/.env.test"]
+  command %[touch "#{fetch(:shared_path)}/.env.staging"]
+  command %[touch "#{fetch(:shared_path)}/.env.production"]
   comment "Be sure to edit '#{fetch(:shared_path)}/config/database.yml', 'secrets.yml' and puma.rb."
 end
