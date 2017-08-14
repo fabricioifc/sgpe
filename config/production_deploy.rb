@@ -14,13 +14,13 @@ set :port, '50235'
 set :user, "deploy"
 set :forward_agent, true
 
-set :shared_dirs, fetch(:shared_dirs, []).push('log', 'pids', 'sockets', 'public/uploads')
+set :shared_dirs, fetch(:shared_dirs, []).push('log', 'tmp/pids', 'tmp/sockets', 'public/uploads')
 set :shared_files, fetch(:shared_files, []).push(
   'config/database.yml', 'config/secrets.yml', 'config/puma.rb',
   '.env.test', '.env.development', '.env.staging', '.env.production'
 )
 desc "Deploys the current version to the server."
-task :production do
+task :deploy do
   deploy do
     # set :unicorn_env, 'production'
     set :rails_env, 'production'
@@ -47,9 +47,9 @@ task :environment do
 end
 
 task :setup do
-  command %[mkdir -p "#{fetch(:shared_path)}/pids"]
+  command %[mkdir -p "#{fetch(:shared_path)}/tmp/pids"]
   command %[mkdir -p "#{fetch(:shared_path)}/log"]
-  command %[mkdir -p "#{fetch(:shared_path)}/sockets"]
+  command %[mkdir -p "#{fetch(:shared_path)}/tmp/sockets"]
   command %[touch "#{fetch(:shared_path)}/config/database.yml"]
   command %[touch "#{fetch(:shared_path)}/config/secrets.yml"]
   command %[touch "#{fetch(:shared_path)}/config/puma.rb"]
