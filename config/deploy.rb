@@ -4,7 +4,7 @@ require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
 # require 'mina/rvm'    # for rvm support. (https://rvm.io)
 require 'mina/puma'
 
-set :application_name, 'sgpe'
+set :application_name, 'sgpe_production'
 set :domain, "200.135.61.15"
 set :deploy_to, "/home/deploy/sgpe_production"
 set :repository, "git@bitbucket.org:fraiburgoifc/planodeensinoifc.git"
