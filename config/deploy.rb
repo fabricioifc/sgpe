@@ -88,8 +88,8 @@ task :rollback => :environment do
 
   # Delete existing sym link and create a new symlink pointing to the previous release
   command %[echo -n "-----> Creating new symlink from the previous release: "]
-  command %[ls "#{fetch(:deploy_to)}/releases" -Art | sort | tail -n 2 | head -n 2]
-  command %[ls -Art "#{fetch(:deploy_to)}/releases" | sort | tail -n 2 | head -n 2 | xargs -I active ln -nfs "#{fetch(:deploy_to)}/releases/active" "#{fetch(:deploy_to)}/current"]
+  command %[ls "#{fetch(:deploy_to)}/releases" -Art | sort | tail -n 2 | head -n 1]
+  command %[ls -Art "#{fetch(:deploy_to)}/releases" | sort | tail -n 2 | head -n 1 | xargs -I active ln -nfs "#{fetch(:deploy_to)}/releases/active" "#{fetch(:deploy_to)}/current"]
 
   # Remove latest release folder (active release)
   command %[echo -n "-----> Deleting active release: "]
@@ -98,5 +98,6 @@ task :rollback => :environment do
 
   # command %[echo -n "-----> Creating new restart.txt: "]
   # command "touch #{fetch(:deploy_to)}/shared/tmp/restart.txt"
+
   invoke :'puma:phased_restart'
 end
