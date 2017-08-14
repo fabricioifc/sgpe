@@ -62,7 +62,7 @@ gem 'mina-puma', require: false#,  github: 'untitledkingdom/mina-puma'
 gem 'dotenv-rails'
 ###############################################################################
 #BACKUP DATABASE automatizado
-gem 'pg_backup', '~> 0.0.3'
+# gem 'pg_backup', '~> 0.0.3'
 # gem 'whenever', '~> 0.9.4'
 ###############################################################################
 
