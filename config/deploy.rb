@@ -92,10 +92,11 @@ task :rollback => :environment do
   command %[ls -Art "#{fetch(:deploy_to)}/releases" | sort | tail -n 2 | head -n 1 | xargs -I active ln -nfs "#{fetch(:deploy_to)}/releases/active" "#{fetch(:deploy_to)}/current"]
 
   # Remove latest release folder (active release)
-  # command %[echo -n "-----> Deleting active release: "]
-  # command %[ls "#{fetch(:deploy_to)}/releases" -Art | sort | tail -n 1]
-  # command %[ls "#{fetch(:deploy_to)}/releases" -Art | sort | tail -n 1 | xargs -I active rm -rf "#{fetch(:deploy_to)}/releases/active"]
+  command %[echo -n "-----> Deleting active release: "]
+  command %[ls "#{fetch(:deploy_to)}/releases" -Art | sort | tail -n 1]
+  command %[ls "#{fetch(:deploy_to)}/releases" -Art | sort | tail -n 1 | xargs -I active rm -rf "#{fetch(:deploy_to)}/releases/active"]
 
-  command %[echo -n "-----> Creating new restart.txt: "]
-  command "touch #{fetch(:deploy_to)}/shared/tmp/restart.txt"
+  # command %[echo -n "-----> Creating new restart.txt: "]
+  # command "touch #{fetch(:deploy_to)}/shared/tmp/restart.txt"
+  invoke :'puma:phased_restart'
 end
