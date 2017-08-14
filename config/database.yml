@@ -14,6 +14,13 @@ test:
   <<: *default
   database: sgpe_test
 
+staging:
+  <<: *default
+  database: <%= ENV['SGPE_DATABASE_NAME'] %>
+  host: <%= ENV['SGPE_DATABASE_HOST'] %>
+  username: <%= ENV['SGPE_DATABASE_USERNAME'] %>
+  password: <%= ENV['SGPE_DATABASE_PASSWORD'] %>
+
 production:
   <<: *default
   database: <%= ENV['SGPE_DATABASE_NAME'] %>
