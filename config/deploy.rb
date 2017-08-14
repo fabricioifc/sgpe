@@ -3,6 +3,7 @@ require 'mina/git'
 require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
 # require 'mina/rvm'    # for rvm support. (https://rvm.io)
 require 'mina/puma'
+require 'mina/whenever'
 
 # Ruby Version
 # set :ruby_version, '2.4.0'
@@ -77,10 +78,19 @@ task :deploy => :environment do
 
     on :launch do
       invoke :'puma:phased_restart'
+      invoke :'whenever:update'
     end
   end
 end
 
+# desc "BACKUP"
+task :backup => :environment do
+  command %[echo "-----> Iniciando o DUMP #{fetch(:domain)}!"]
+  # command %{#{fetch(:rails)} db:sql_dump}
+  command %[cd #{fetch(:deploy_to)}/current]
+  # command %[echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p]
+  command %[bundle exec rake db:sql_dump]
+end
 # desc "Rolls back the latest release"
 # task :rollback => :environment do
 #   command %[echo "-----> Rolling back to previous release for #{fetch(:domain)}!"]

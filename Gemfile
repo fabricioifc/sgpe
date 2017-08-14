@@ -58,12 +58,13 @@ gem 'prawn-table', '~> 0.2.2'
 #Deploy application
 gem 'mina', require: false
 gem 'mina-puma', require: false#,  github: 'untitledkingdom/mina-puma'
+gem 'mina-whenever'
 # gem 'mina-multistage', require: false
 gem 'dotenv-rails'
 ###############################################################################
 #BACKUP DATABASE automatizado
 # gem 'pg_backup', '~> 0.0.3'
-# gem 'whenever', '~> 0.9.4'
+gem 'whenever', '~> 0.9.4'
 ###############################################################################
 
 group :development, :test do
