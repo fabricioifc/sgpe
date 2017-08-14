@@ -3,5 +3,5 @@
   .rbenv-vars
   tmp/restart.txt
   tmp/caching-dev.txt
-  .env.*
+  .env.production
 ).each { |path| Spring.watch(path) }
