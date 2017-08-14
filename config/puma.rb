@@ -3,9 +3,9 @@ workers 2
 # Min and Max threads per worker
 threads 1, 6
 # root directory
-environment Rails.application.secrets.environment || 'development'
-port  Rails.application.secrets.port || 3000
-daemonize Rails.application.secrets.daemonize || false # rodar em background
+environment ENV.fetch("ENVIRONMENT") { 'development' }
+port  ENV.fetch("PORT") { '3000' }
+daemonize ENV.fetch("DAEMONIZE") { 'true' }
 
 app_dir = File.expand_path("../..", __FILE__)
 # shared directory
