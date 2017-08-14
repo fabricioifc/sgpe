@@ -19,7 +19,7 @@ set :shared_files, fetch(:shared_files, []).push(
 )
 
 desc "Deploys the current version to the server."
-task :deploy do
+task deploy: :environment do
   comment "Deploying #{fetch(:application_name)} to #{fetch(:domain)}:#{fetch(:deploy_to)}"
   invoke :'git:clone'
   invoke :'deploy:link_shared_paths'
@@ -41,7 +41,7 @@ task :environment do
   # invoke :'rvm:use', 'ruby-2.4.0@default'
 end
 
-task :setup do
+task setup: :environment do
   command %[mkdir -p "#{fetch(:shared_path)}/pids"]
   command %[mkdir -p "#{fetch(:shared_path)}/log"]
   command %[mkdir -p "#{fetch(:shared_path)}/sockets"]
