@@ -18,6 +18,7 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+set :environment, :development
 
 every 1.minute do
   rake "db:sql_dump"

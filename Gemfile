@@ -58,7 +58,7 @@ gem 'prawn-table', '~> 0.2.2'
 #Deploy application
 gem 'mina', require: false
 gem 'mina-puma', require: false#,  github: 'untitledkingdom/mina-puma'
-gem 'mina-whenever'
+gem 'mina-whenever', require: false
 # gem 'mina-multistage', require: false
 gem 'dotenv-rails'
 ###############################################################################
