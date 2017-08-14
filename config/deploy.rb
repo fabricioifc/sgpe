@@ -81,44 +81,20 @@ task :deploy => :environment do
   end
 end
 
-# # Roolback
 # desc "Rolls back the latest release"
 # task :rollback => :environment do
-#   command %[echo "-----> Rolling back to previous release for instance: #{fetch(:domain)}"]
+#   command %[echo "-----> Rolling back to previous release for #{fetch(:domain)}!"]
 #
 #   # Delete existing sym link and create a new symlink pointing to the previous release
 #   command %[echo -n "-----> Creating new symlink from the previous release: "]
-#   command %[ls "#{fetch(:deploy_to)}/releases" -Art | sort | tail -n 2 | head -n 1 && ls -Art "#{fetch(:deploy_to)}/releases" | sort | tail -n 2 | head -n 1 | xargs -I active ln -nfs "#{fetch(:deploy_to)}/releases/active" "#{fetch(:deploy_to)}/current"]
-#   # command %[ls -Art "#{fetch(:deploy_to)}/releases" | sort | tail -n 2 | head -n 1 | xargs -I active ln -nfs "#{fetch(:deploy_to)}/releases/active" "#{fetch(:deploy_to)}/current"]
+#   command %[ls "#{fetch(:deploy_to)}/releases" -Art | sort | tail -n 2 | head -n 1]
+#   command %[ls -Art "#{fetch(:deploy_to)}/releases" | sort | tail -n 2 | head -n 1 | xargs -I active ln -nfs "#{fetch(:deploy_to)}/releases/active" "#{fetch(:deploy_to)}/current"]
 #
 #   # Remove latest release folder (active release)
 #   command %[echo -n "-----> Deleting active release: "]
-#   command %[ls "#{fetch(:deploy_to)}/releases" -Art | sort | tail -n 1 && ls "#{fetch(:deploy_to)}/releases" -Art | sort | tail -n 1 | xargs -I active rm -rf "#{fetch(:deploy_to)}/releases/active"]
-#   # command %[ls "#{fetch(:deploy_to)}/releases" -Art | sort | tail -n 1 | xargs -I active rm -rf "#{fetch(:deploy_to)}/releases/active"]
+#   command %[ls "#{fetch(:deploy_to)}/releases" -Art | sort | tail -n 1]
+#   command %[ls "#{fetch(:deploy_to)}/releases" -Art | sort | tail -n 1 | xargs -I active rm -rf "#{fetch(:deploy_to)}/releases/active"]
 #
-#   # command %[echo -n "-----> Creating new restart.txt: "]
-#   # command "touch #{fetch(:deploy_to)}/shared/tmp/restart.txt"
-#
-#   # on :launch do
-#   #   invoke :'puma:stop'
-#   #   invoke :'puma:start'
-#   # end
+#   # command %[cd #{fetch(:deploy_to)}/current]
+#   # command %[(bundle exec pumactl -p $(cat #{fetch(:deploy_to)}/shared/tmp/pids/puma.pid) stop && bundle exec pumactl start) || bundle exec pumactl start]
 # end
-
-desc "Rolls back the latest release"
-task :rollback => :environment do
-  command %[echo "-----> Rolling back to previous release for #{fetch(:domain)}!"]
-
-  # Delete existing sym link and create a new symlink pointing to the previous release
-  command %[echo -n "-----> Creating new symlink from the previous release: "]
-  command %[ls "#{fetch(:deploy_to)}/releases" -Art | sort | tail -n 2 | head -n 1]
-  command %[ls -Art "#{fetch(:deploy_to)}/releases" | sort | tail -n 2 | head -n 1 | xargs -I active ln -nfs "#{fetch(:deploy_to)}/releases/active" "#{fetch(:deploy_to)}/current"]
-
-  # Remove latest release folder (active release)
-  command %[echo -n "-----> Deleting active release: "]
-  command %[ls "#{fetch(:deploy_to)}/releases" -Art | sort | tail -n 1]
-  command %[ls "#{fetch(:deploy_to)}/releases" -Art | sort | tail -n 1 | xargs -I active rm -rf "#{fetch(:deploy_to)}/releases/active"]
-
-  command %[cd #{fetch(:deploy_to)}/current]
-  command %[(bundle exec pumactl -p $(cat #{fetch(:deploy_to)}/shared/tmp/pids/puma.pid) stop && bundle exec pumactl start) || bundle exec pumactl start]
-end
