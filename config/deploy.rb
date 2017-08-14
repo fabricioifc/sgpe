@@ -17,7 +17,6 @@ set :forward_agent, true
 set :shared_dirs, fetch(:shared_dirs, []).push('log', 'pids', 'sockets', 'public/uploads')
 set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/secrets.yml', 'config/puma.rb', 'config/unicorn.rb', '.env')
 
-
 desc "Deploys the current version to the server."
 task :production do
   deploy do
@@ -52,7 +51,6 @@ task :setup do
   command %[touch "#{fetch(:shared_path)}/config/database.yml"]
   command %[touch "#{fetch(:shared_path)}/config/secrets.yml"]
   command %[touch "#{fetch(:shared_path)}/config/puma.rb"]
-  command %[touch "#{fetch(:shared_path)}/config/unicorn.rb"]
   command %[touch "#{fetch(:shared_path)}/.env.development"]
   command %[touch "#{fetch(:shared_path)}/.env.test"]
   command %[touch "#{fetch(:shared_path)}/.env.staging"]
