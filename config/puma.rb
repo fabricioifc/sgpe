@@ -8,7 +8,7 @@ app_dir = File.expand_path("../..", __FILE__)
 shared_dir = "#{app_dir}/tmp" if ["development", "test"].include? Rails.env
 shared_dir = "#{app_dir}/shared" unless ["development", "test"].include? Rails.env
 # port
-port        ENV.fetch("PORT") { 3000 } if ["development", "test"].include? Rails.env
+port ENV.fetch("PORT") { 3000 } if ["development", "test"].include? Rails.env
 # Ambiente
 environment ENV.fetch("environment") { "production" }
 # Set up socket location
@@ -25,6 +25,7 @@ directory "#{app_dir}" if ["development", "test"].include? Rails.env
 directory "#{app_dir}/current" unless ["development", "test"].include? Rails.env
 # rodar em background
 daemonize true unless ["development", "test"].include? Rails.env
+
 # prune_bundler
 
 # threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }

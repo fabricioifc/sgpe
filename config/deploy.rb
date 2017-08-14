@@ -15,7 +15,10 @@ set :user, "deploy"
 set :forward_agent, true
 
 set :shared_dirs, fetch(:shared_dirs, []).push('log', 'pids', 'sockets', 'public/uploads')
-set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/secrets.yml', 'config/puma.rb', 'config/unicorn.rb', '.env')
+set :shared_files, fetch(:shared_files, []).push(
+  'config/database.yml', 'config/secrets.yml', 'config/puma.rb',
+  '.env.test', '.env.development', '.env.staging', '.env.production'
+)
 
 desc "Deploys the current version to the server."
 task :production do
