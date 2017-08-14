@@ -84,18 +84,18 @@ end
 # Roolback
 desc "Rolls back the latest release"
 task :rollback => :environment do
-  queue! %[echo "-----> Rolling back to previous release for instance: #{domain}"]
+  command %[echo "-----> Rolling back to previous release for instance: #{fetch(:domain)}"]
 
   # Delete existing sym link and create a new symlink pointing to the previous release
-  queue %[echo -n "-----> Creating new symlink from the previous release: "]
-  queue %[ls "#{deploy_to}/releases" -Art | sort | tail -n 2 | head -n 1]
-  queue! %[ls -Art "#{deploy_to}/releases" | sort | tail -n 2 | head -n 1 | xargs -I active ln -nfs "#{deploy_to}/releases/active" "#{deploy_to}/current"]
+  command %[echo -n "-----> Creating new symlink from the previous release: "]
+  command %[ls "#{fetch(:deploy_to)}/releases" -Art | sort | tail -n 2 | head -n 1]
+  command %[ls -Art "#{fetch(:deploy_to)}/releases" | sort | tail -n 2 | head -n 1 | xargs -I active ln -nfs "#{fetch(:deploy_to)}/releases/active" "#{fetch(:deploy_to)}/current"]
 
   # Remove latest release folder (active release)
-  queue %[echo -n "-----> Deleting active release: "]
-  queue %[ls "#{deploy_to}/releases" -Art | sort | tail -n 1]
-  queue! %[ls "#{deploy_to}/releases" -Art | sort | tail -n 1 | xargs -I active rm -rf "#{deploy_to}/releases/active"]
+  command %[echo -n "-----> Deleting active release: "]
+  command %[ls "#{fetch(:deploy_to)}/releases" -Art | sort | tail -n 1]
+  command %[ls "#{fetch(:deploy_to)}/releases" -Art | sort | tail -n 1 | xargs -I active rm -rf "#{fetch(:deploy_to)}/releases/active"]
 
-  queue %[echo -n "-----> Creating new restart.txt: "]
-  queue "touch #{deploy_to}/shared/tmp/restart.txt"
+  command %[echo -n "-----> Creating new restart.txt: "]
+  command "touch #{fetch(:deploy_to)}/shared/tmp/restart.txt"
 end

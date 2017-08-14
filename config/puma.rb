@@ -3,8 +3,9 @@ workers 2
 # Min and Max threads per worker
 threads 1, 6
 # root directory
-environment ENV.fetch("environment") { "production" }
-port ENV.fetch("PORT") { 3000 }
+environment Rails.application.secrets.environment || 'development'
+port  Rails.application.secrets.port || 3000
+daemonize Rails.application.secrets.daemonize || false # rodar em background
 
 app_dir = File.expand_path("../..", __FILE__)
 # shared directory
@@ -18,9 +19,6 @@ state_path "#{shared_dir}/pids/puma.state"
 # state_path "/home/deploy/sgpe/shared/tmp/sockets/puma.state"
 activate_control_app "unix://#{shared_dir}/sockets/pumactl.sock"
 # app directory
-# rodar em background
-
-daemonize ENV.fetch("DAEMONIZE") { "true" }
 
 # prune_bundler
 # threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
