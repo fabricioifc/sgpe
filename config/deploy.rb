@@ -35,7 +35,7 @@ end
 # Fix
 set :term_mode, nil
 set :forward_agent, true
-# set :whenever_name, "#{domain}_#{rails_env}"
+# set :whenever_name, "#{domain}_#{fetch(:rails_env)}"
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
@@ -50,8 +50,8 @@ set :shared_files, fetch(:shared_files, []).push(
 task :environment do
   invoke :'rbenv:load'
   # Necessário para funcionar o comando rake via crontab e whenever
-  command %[echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile]
-  command %[echo 'eval "$(rbenv init -)"' >> ~/.bash_profile]
+  # command %[echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile]
+  # command %[echo 'eval "$(rbenv init -)"' >> ~/.bash_profile]
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
