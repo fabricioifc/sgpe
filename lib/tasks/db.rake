@@ -64,8 +64,8 @@ namespace :db do
           unless cmd.nil?
             Rake::Task["db:drop"].invoke
             Rake::Task["db:create"].invoke
-            Rake::Task["db:migrate"].invoke
             puts cmd
+            Rake::Task["db:migrate"].invoke
             exec cmd
           end
       else
