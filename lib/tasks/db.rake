@@ -1,5 +1,5 @@
 namespace :db do
-  DUMP_FMT = 'c' # 'c', 'p', 't', 'd'
+  DUMP_FMT = 't' # 'c', 'p', 't', 'd'
 
   desc 'Dumps the database to backups'
   task sql_dump: :environment do
