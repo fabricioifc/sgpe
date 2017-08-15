@@ -43,6 +43,7 @@ db/backups/
 /public/cache
 /public/stylesheets/compiled
 /public/system/*
+/public/backups
 /spec/tmp/*
 /cache
 /capybara*
