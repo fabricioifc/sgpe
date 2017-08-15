@@ -42,6 +42,7 @@ namespace :db do
           cmd = nil
           with_config do |app, host, db, user|
               backup_dir = backup_directory
+              puts Dir.glob("#{backup_dir}/*#{args.pat}*")
               files = Dir.glob("#{backup_dir}/*#{args.pat}*")
               case files.size
               when 0
