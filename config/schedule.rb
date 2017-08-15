@@ -20,6 +20,6 @@
 # Learn more: http://github.com/javan/whenever
 env :PATH, ENV['PATH']
 
-every 1.minute do
+every 4.hour do
   rake "db:sql_dump"
 end
