@@ -35,11 +35,11 @@ end
 # Fix
 set :term_mode, nil
 set :forward_agent, true
-# set :whenever_name, "#{domain}_#{rails_env}"
+# set :whenever_name, "#{domain}_#{fetch(:rails_env)}"
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
-set :shared_dirs, fetch(:shared_dirs, []).push('log', 'tmp/pids', 'tmp/sockets', 'public/uploads')
+set :shared_dirs, fetch(:shared_dirs, []).push('log', 'tmp/pids', 'tmp/sockets', 'public/uploads', 'public/backups')
 set :shared_files, fetch(:shared_files, []).push(
   'config/database.yml', 'config/secrets.yml', 'config/puma.rb',
   '.env.test', '.env.development', '.env.staging', '.env.production'
@@ -82,7 +82,10 @@ task :deploy => :environment do
     invoke :'deploy:cleanup'
 
     on :launch do
-      invoke :'puma:phased_restart'
+      # invoke :'puma:phased_restart'
+      # invoke :'puma_restart'
+      invoke :'puma:stop'
+      invoke :'puma:start'
       invoke :'whenever:update'
     end
   end
