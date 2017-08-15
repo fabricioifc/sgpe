@@ -83,7 +83,6 @@ task :deploy => :environment do
 
     on :launch do
       invoke :'puma:phased_restart'
-      command %[crontab -r]
       invoke :'whenever:update'
     end
   end
