@@ -49,6 +49,9 @@ set :shared_files, fetch(:shared_files, []).push(
 # `mina deploy` or `mina rake`.
 task :environment do
   invoke :'rbenv:load'
+  # Necessário para funcionar o comando rake via crontab e whenever
+  command %[echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile]
+  command %[echo 'eval "$(rbenv init -)"' >> ~/.bash_profile]
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
@@ -80,6 +83,7 @@ task :deploy => :environment do
 
     on :launch do
       invoke :'puma:phased_restart'
+      command %[crontab -r]
       invoke :'whenever:update'
     end
   end
