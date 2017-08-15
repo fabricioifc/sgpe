@@ -2,6 +2,6 @@
 env :PATH, ENV['PATH']
 
 # SCHEDULE PARA REALIZAR BACKUP DIÁRIO
-every 2.minute do
+every 30.minute do
   rake "db:sql_dump"
 end
