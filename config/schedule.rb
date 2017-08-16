@@ -5,7 +5,7 @@ env :PATH, ENV['PATH']
 
 if @environment == "production"
 
-  every 1.minute
+  every 1.minute do
     rake "db:sql_dump"
   end
 
