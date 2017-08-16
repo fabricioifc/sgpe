@@ -98,7 +98,8 @@ namespace :db do
   end
 
   def backup_directory(create=false)
-      backup_dir = "#{Rails.root}/db/backups"
+      # backup_dir = "#{Rails.root}/db/backups"
+      backup_dir = "#{ENV['HOME']}/db/backups"
       if create and not Dir.exists?(backup_dir)
         puts "Creating #{backup_dir} .."
         Dir.mkdir(backup_dir)
