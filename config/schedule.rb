@@ -2,6 +2,11 @@
 env :PATH, ENV['PATH']
 
 # SCHEDULE PARA REALIZAR BACKUP DIÁRIO
-every 1.minute, roles: :production_cron do
-  rake "db:sql_dump"
+
+if @environment == "production"
+
+  every 1.minute
+    rake "db:sql_dump"
+  end
+
 end
