@@ -53,7 +53,7 @@ namespace :db do
                 if fmt.nil?
                   puts "No recognized dump file suffix: #{file}"
                 else
-                  cmd = "pg_restore -F #{fmt} -U #{user} -d #{db} -v -c -C #{file}"
+                  cmd = "pg_restore -F #{fmt} -U #{user} -d #{db} -v #{file}"
                   # cmd = "pg_restore -F #{fmt} -U #{user} -d #{db} -v -c -C #{file}"
                 end
               else
@@ -64,10 +64,10 @@ namespace :db do
           end
           unless cmd.nil?
             Rake::Task["db:drop"].invoke
-            Rake::Task["db:migrate"].invoke
-            # Rake::Task["db:create"].invoke
+            Rake::Task["db:create"].invoke
             puts cmd
             exec cmd
+            Rake::Task["db:migrate"].invoke
           end
       else
           puts 'Please pass a pattern to the task'
