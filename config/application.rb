@@ -33,8 +33,15 @@ module PdeIF
     # Novo tema para o painel de administração que utiliza a gem rails_admin
     ENV['RAILS_ADMIN_THEME'] = 'rollincode'
 
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
+    # Configurações para enviar email em todos os ambientes
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      :address              => "smtp.gmail.com",
+      :port                 => 587,
+      :domain               => Rails.application.secrets.domain_name,
+      :user_name            => Rails.application.secrets.email_provider_username,
+      :password             => Rails.application.secrets.email_provider_password,
+      :authentication       => 'plain',
+      :enable_starttls_auto => true  }
   end
 end

@@ -29,7 +29,7 @@ class User < ApplicationRecord
   validates :name, presence:true, length: 0..150
   validates :username, presence:true, length: 0..100, on: :create
   # Permitir apenas numetros, letras, underline e ponto
-  validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
+  validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true, on: :create
 
   protected
 
