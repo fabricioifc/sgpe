@@ -102,7 +102,8 @@ namespace :db do
       backup_dir = "#{ENV['HOME']}/Dropbox/db/backups"
       if create and not Dir.exists?(backup_dir)
         puts "Creating #{backup_dir} .."
-        Dir.mkdir(backup_dir)
+        # Dir.mkdir(backup_dir)
+        FileUtils.mkdir_p(backup_dir)
       end
       backup_dir
   end
