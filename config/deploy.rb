@@ -35,6 +35,7 @@ end
 # Fix
 set :term_mode, nil
 set :forward_agent, true
+set :whenever_roles, "#{fetch(:rails_env)}_cron"
 # set :whenever_name, "#{domain}_#{fetch(:rails_env)}"
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
