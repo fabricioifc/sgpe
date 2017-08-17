@@ -12,6 +12,11 @@ class AvatarUploader < CarrierWave::Uploader::Base
   #    "original.#{model.logo.file.extension}" if original_filename
   # end
 
+  # Local onde será guardado as imagens
+  # def store_dir
+  #   "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  # end
+
   version :avatar do
     process :resize_to_fit => [800, 300]
   end
