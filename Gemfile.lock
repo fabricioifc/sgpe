@@ -169,8 +169,6 @@ GEM
       puma (>= 2.13)
     mina-whenever (1.0.0)
       mina (~> 1.0.0)
-    mina_maintenance (0.0.2)
-      mina
     mini_magick (4.8.0)
     mini_mime (0.1.4)
     mini_portile2 (2.2.0)
@@ -354,7 +352,6 @@ DEPENDENCIES
   mina
   mina-puma
   mina-whenever
-  mina_maintenance
   mini_magick
   pg
   prawn-rails (~> 1.0, >= 1.0.1)
