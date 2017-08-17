@@ -87,6 +87,21 @@ task :deploy => :environment do
     end
   end
 end
+namespace :maintenance do
+  task :on => :environment do
+    command %[echo "-----> Iniciando modo manutenção --#{fetch(:rails_env)}--"]
+    command %[RAILS_ENV=#{fetch(:rails_env)} bundle exec rake maintenance:start]
+    # command %[cd #{fetch(:deploy_to)}/current]
+    # command %[RAILS_ENV=#{fetch(:rails_env)} bundle exec rake maintenance:enable]
+  end
+
+  task :off => :environment do
+    command %[echo "-----> Finalizando modo manutenção --#{fetch(:rails_env)}--"]
+    command %[RAILS_ENV=#{fetch(:rails_env)} bundle exec rake maintenance:end]
+    # command %[cd #{fetch(:deploy_to)}/current]
+    # command %[RAILS_ENV=#{fetch(:rails_env)} bundle exec rake maintenance:disable]
+  end
+end
 
 # desc "BACKUP"
 task :backup => :environment do

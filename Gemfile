@@ -66,6 +66,7 @@ gem 'dotenv-rails'
 # gem 'pg_backup', '~> 0.0.3'
 gem 'whenever', '~> 0.9.4'
 ###############################################################################
+gem 'turnout'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
