@@ -26,10 +26,10 @@ class User < ApplicationRecord
   # Permitir o atributo login, que poderá ser username ou email
   attr_accessor :login
 
-  validates :name, presence:true, length: 0..150
-  validates :username, presence:true, length: 0..100, on: :create
-  # Permitir apenas numetros, letras, underline e ponto
-  validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true, on: :create
+  validates :name, presence:true, length: 5..150
+  validates :username, presence:true, length: 5..100, uniqueness:true#, on: :create
+  # Permitir apenas numetros, letras, underline e ponto. Não permitir apenas números
+  validates_format_of :username, with: /^(?![0-9]*$)[a-zA-Z0-9_.]+$/, :multiline => true#, on: :create
 
   protected
 
