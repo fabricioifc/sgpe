@@ -4,7 +4,6 @@ require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
 # require 'mina/rvm'    # for rvm support. (https://rvm.io)
 require 'mina/puma'
 require 'mina/whenever'
-require 'mina_maintenance/tasks'
 
 # Ruby Version
 # set :ruby_version, '2.4.0'
