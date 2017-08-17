@@ -3,6 +3,4 @@
 # Add new mime types for use in respond_to blocks:
 # Mime::Type.register "text/richtext", :rtf
 # Mime::Type.register "application/pdf", :pdf
-if Mime::Type.lookup_by_extension(:pdf) != 'application/pdf'
-	Mime::Type.register('application/pdf', :pdf)
-end
+Mime::Type.register "application/pdf", :pdf unless Mime::Type.lookup_by_extension(:pdf)
