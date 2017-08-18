@@ -75,7 +75,7 @@ desc "Deploys the current version to the server."
 task :deploy => :environment do
   deploy do
   	invoke :'git:clone'
-    invoke :'sidekiq:quiet'
+    # invoke :'sidekiq:quiet'
   	invoke :'deploy:link_shared_paths'
   	invoke :'bundle:install'
   	invoke :'rails:db_migrate'
@@ -85,11 +85,12 @@ task :deploy => :environment do
 
     on :launch do
       invoke :'puma:phased_restart'
-      invoke :'sidekiq:restart'
+      # invoke :'sidekiq:restart'
       invoke :'whenever:update'
     end
   end
 end
+
 namespace :maintenance do
   task :on => :environment do
     command %[echo "-----> Iniciando modo manutenção --#{fetch(:rails_env)}--"]
