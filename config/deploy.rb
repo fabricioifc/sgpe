@@ -4,6 +4,7 @@ require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
 # require 'mina/rvm'    # for rvm support. (https://rvm.io)
 require 'mina/puma'
 require 'mina/whenever'
+require 'mina_sidekiq/tasks'
 
 # Ruby Version
 # set :ruby_version, '2.4.0'
@@ -74,6 +75,7 @@ desc "Deploys the current version to the server."
 task :deploy => :environment do
   deploy do
   	invoke :'git:clone'
+    invoke :'sidekiq:quiet'
   	invoke :'deploy:link_shared_paths'
   	invoke :'bundle:install'
   	invoke :'rails:db_migrate'
@@ -83,6 +85,7 @@ task :deploy => :environment do
 
     on :launch do
       invoke :'puma:phased_restart'
+      invoke :'sidekiq:restart'
       invoke :'whenever:update'
     end
   end
@@ -102,6 +105,32 @@ namespace :maintenance do
     # command %[RAILS_ENV=#{fetch(:rails_env)} bundle exec rake maintenance:disable]
   end
 end
+
+# namespace :redis do
+#
+#   desc "Install the latest release of Redis"
+#   task :install do
+#     invoke :sudo
+#     command %{echo "-----> Installing Redis..."}
+#     command "sudo add-apt-repository -y ppa:chris-lea/redis-server --yes"
+#     command "sudo apt-get -y update"
+#     command "sudo apt-get -y install redis-server"
+#   end
+#
+#   task(:setup) {  }
+#
+#   %w[start stop restart].each do |command|
+#     desc "#{command} redis"
+#     task command do
+#       invoke :sudo
+#       command %{echo "-----> Trying to #{command} Redis..."}
+#       command "#{sudo} service redis #{command}"
+#     end
+#   end
+#
+# end
+
+
 
 # desc "BACKUP"
 task :backup => :environment do

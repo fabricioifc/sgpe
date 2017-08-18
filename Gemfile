@@ -59,6 +59,7 @@ gem 'prawn-table', '~> 0.2.2'
 gem 'mina', require: false
 gem 'mina-puma', require: false#,  github: 'untitledkingdom/mina-puma'
 gem 'mina-whenever', require: false
+gem 'mina-sidekiq', require: false
 # gem 'mina-multistage', require: false
 gem 'dotenv-rails'
 ###############################################################################
@@ -96,3 +97,10 @@ group :development, :test do
   # gem 'database_cleaner'
   # gem 'launchy'
 end
+# Notificar admin caso ocorra algum erro na aplicação
+gem 'exception_notification'
+gem 'slack-notifier'
+gem 'sidekiq'
+gem "letter_opener"
+gem 'sinatra', '>= 1.3.0', :require => nil
+gem 'redis-rails'

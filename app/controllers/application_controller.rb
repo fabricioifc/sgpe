@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :prepare_exception_notifier
 
   # load_and_authorize_resource unless: :devise_controller?
   before_action do fix_carrega_permissoes end
@@ -25,6 +26,14 @@ class ApplicationController < ActionController::Base
     resource = controller_name.singularize.to_sym
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)
+  end
+
+  private
+
+  def prepare_exception_notifier
+    request.env["exception_notifier.exception_data"] = {
+      :current_user => current_user
+    }
   end
 
 end

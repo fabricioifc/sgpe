@@ -42,6 +42,7 @@ module PdeIF
       :user_name            => Rails.application.secrets.email_provider_username,
       :password             => Rails.application.secrets.email_provider_password,
       :authentication       => 'plain',
-      :enable_starttls_auto => true  }
+      :enable_starttls_auto => true
+    }
   end
 end

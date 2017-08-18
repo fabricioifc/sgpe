@@ -49,6 +49,8 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   # Send email in development mode?
   config.action_mailer.perform_deliveries = true
+  # to deliver to the browser instead of email
+  config.action_mailer.delivery_method = :letter_opener
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
