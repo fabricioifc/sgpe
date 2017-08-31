@@ -133,3 +133,24 @@ section {
 .fa-2 {
   font-size: 1.5em;
 }
+
+footer.page-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 34px;
+  background-color: $brand-primary;
+
+  padding-top: 3px;
+  padding-bottom: 3px;
+  text-align: center;
+}
+
+footer.page-footer .container {
+  margin: 5px auto;
+}
+
+footer.page-footer p {
+  margin: 5px 10px;
+}
