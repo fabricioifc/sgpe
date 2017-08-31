@@ -36,6 +36,19 @@ ActiveRecord::Schema.define(version: 20170831005945) do
     t.index ["user_id"], name: "index_disciplines_on_user_id"
   end
 
+  create_table "errors", id: :serial, force: :cascade do |t|
+    t.text "class_name"
+    t.text "status"
+    t.text "message"
+    t.text "trace"
+    t.text "target"
+    t.text "referrer"
+    t.text "params"
+    t.text "user_agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "perfil_roles", force: :cascade do |t|
     t.bigint "perfil_id"
     t.bigint "role_id"
