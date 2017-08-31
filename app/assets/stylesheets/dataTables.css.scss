@@ -13,3 +13,7 @@ table.dataTable thead .sorting_asc,
 table.dataTable thead .sorting_desc {
   background-image: none;
 }
+
+.pagination>.disabled>span, .pagination>.disabled>span:hover, .pagination>.disabled>span:focus, .pagination>.disabled>a, .pagination>.disabled>a:hover, .pagination>.disabled>a:focus {
+  background-color: #18BC9C;
+}

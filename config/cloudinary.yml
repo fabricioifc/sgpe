@@ -11,6 +11,12 @@ production:
   api_secret: TImZToasGkL0byOXpqQIy6KstSo
   enhance_image_tag: true
   static_image_support: true
+staging:
+  cloud_name: dnyov3ak4
+  api_key: '699184988394877'
+  api_secret: TImZToasGkL0byOXpqQIy6KstSo
+  enhance_image_tag: true
+  static_image_support: true
 test:
   cloud_name: dnyov3ak4
   api_key: '699184988394877'
