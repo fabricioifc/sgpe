@@ -1,6 +1,18 @@
-$(document).on('turbolinks:load', function(){
-  $("table[id='tests_datatable']").each(function(){
-    $(this).DataTable({
+var dataTable = null;
+
+document.addEventListener("turbolinks:before-cache", function() {
+  if (dataTable !== null) {
+    dataTable.destroy();
+    dataTable = null;
+  }
+});
+
+document.addEventListener("turbolinks:load", function() {
+
+  var dataTableId = "table[id='tests_datatable']";
+
+  $(dataTableId).each(function(){
+    dataTable = $(this).DataTable({
       destroy: true,
       processing: true,
       serverSide: true,
@@ -41,7 +53,6 @@ $(document).on('turbolinks:load', function(){
           orderable: false
         }
       ],
-      // order: [[1, 'asc']]
 
     });
   });
