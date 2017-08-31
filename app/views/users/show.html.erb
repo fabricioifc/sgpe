@@ -1,16 +1,67 @@
-<h3>User</h3>
-<p>Name: <%= @user.name if @user.name %></p>
-<p>Email: <%= @user.email if @user.email %></p>
+<%- model_class = User -%>
 
-<%= form_for(@user)  do |f| %>
-
-  <div class="input-group">
-    <div class="input-group-btn">
-      <%= f.submit :class => 'btn btn-primary btn-sm' %>
-    </div>
-    <%= f.select(:perfil_ids, Perfil.all.collect {|a| [a.name, a.id]}, {}, class: "select2 form-control", :multiple => true) %>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Profile</h3>
   </div>
-<% end %>
+  <div class="panel-body">
 
-<hr>
-<%= image_tag @user.avatar.url(:medium) %>
+    <div class="row">
+
+      <div class="col-md-8">
+
+          <% if @user.name %>
+            <p>
+              <strong class="col-md-2"><%= model_class.human_attribute_name(:name) %>: </strong>
+              <span><%= @user.name %></span>
+            </p>
+          <% end %>
+
+          <% if @user.username %>
+            <p>
+              <strong class="col-md-2"><%= model_class.human_attribute_name(:username) %>: </strong>
+              <span><%= @user.username %></span>
+            </p>
+          <% end %>
+
+          <% if @user.name %>
+            <p>
+              <strong class="col-md-2"><%= model_class.human_attribute_name(:email) %>: </strong>
+              <span><%= mail_to @user.email %></span>
+            </p>
+          <% end %>
+
+          <% if @user.bio %>
+            <strong class="col-md-2"><%= model_class.human_attribute_name(:bio) %>: </strong>
+            <div style="max-height: 150px; overflow-y: auto; padding: 5px;" class="border border-primary">
+              <% 10.times do %>
+                <%= @user.bio.html_safe %>
+              <% end %>
+            </div>
+          <% end %>
+
+      </div>
+      <div class="col-md-4">
+        <%= image_tag @user.avatar.url(:thumb), class: 'img-thumbnail border border-primary pull-right' %>
+      </div>
+
+    </div>
+
+  </div>
+  <% if current_user.try(:admin) %>
+    <div class="panel-footer">
+
+      <%= form_for(@user)  do |f| %>
+
+        <p>Perfis</p>
+        <div class="input-group">
+          <%= f.select(:perfil_ids, Perfil.all.collect {|a| [a.name, a.id]}, {},
+            class: "select2 form-control", :multiple => true) %>
+          <div class="input-group-btn">
+            <%= f.submit :class => 'btn btn-primary btn-sm' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
