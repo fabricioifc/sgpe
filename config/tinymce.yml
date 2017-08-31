@@ -1,0 +1,8 @@
+toolbar:
+  - styleselect | bold italic | undo redo | html
+  - image | link
+plugins:
+  - image
+  - link
+language:
+  - pt_BR

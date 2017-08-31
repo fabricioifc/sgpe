@@ -20,6 +20,7 @@
 // require bootstrap
 //= require datatables
 //= require datatables/dataTables.bootstrap
+//= require tinymce
 //= require_tree .
 
 $(function() {

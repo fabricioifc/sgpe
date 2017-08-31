@@ -104,3 +104,5 @@ gem 'sidekiq'
 gem "letter_opener"
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'redis-rails'
+gem 'tinymce-rails' #html editor
+gem 'tinymce-rails-langs'
