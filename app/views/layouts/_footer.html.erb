@@ -1,6 +1,6 @@
-<footer class="page-footer">
-  <p class="text-muted text-uppercase pull-left"><%= ENV['SISTEMA_APELIDO'] %> - <%= ENV['SISTEMA_VERSAO'] %></p>
+<footer class="page-footer <%= ENV['ENVIRONMENT'] == 'staging' ? 'bg-warning' : 'bg-primary' %>">
+  <p class="text-uppercase pull-left"><%= ENV['SISTEMA_APELIDO'] %> - <%= ENV['SISTEMA_VERSAO'] %></p>
   <div class="container">
-    <span class="text-muted text-uppercase">Copyright © 2017 INSTITUTO FEDERAL CATARINENSE - CAMPUS FRAIBURGO</span>
+    <span class="text-uppercase">Copyright © 2017 INSTITUTO FEDERAL CATARINENSE - CAMPUS FRAIBURGO</span>
   </div>
 </footer>
