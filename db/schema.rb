@@ -28,25 +28,12 @@ ActiveRecord::Schema.define(version: 20170831005945) do
 
   create_table "disciplines", force: :cascade do |t|
     t.string "title", limit: 45, null: false
-    t.text "description", null: false
+    t.string "sigla", null: false
     t.boolean "active", default: true
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_disciplines_on_user_id"
-  end
-
-  create_table "errors", id: :serial, force: :cascade do |t|
-    t.text "class_name"
-    t.text "status"
-    t.text "message"
-    t.text "trace"
-    t.text "target"
-    t.text "referrer"
-    t.text "params"
-    t.text "user_agent"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "perfil_roles", force: :cascade do |t|
@@ -58,7 +45,7 @@ ActiveRecord::Schema.define(version: 20170831005945) do
   end
 
   create_table "perfils", force: :cascade do |t|
-    t.string "name"
+    t.string "name", limit: 45, null: false
     t.boolean "idativo", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -72,12 +59,13 @@ ActiveRecord::Schema.define(version: 20170831005945) do
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string "name"
-    t.string "resource_type"
-    t.string "resource_id"
+    t.string "name", limit: 45, null: false
+    t.string "resource_type", limit: 100
+    t.string "resource_id", limit: 100
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
+    t.index ["name"], name: "index_roles_on_name"
   end
 
   create_table "tests", force: :cascade do |t|

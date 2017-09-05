@@ -8,7 +8,7 @@ class DisciplineDatatable < ApplicationDatatable
         [].tap do |column|
           column << discipline.id
           column << discipline.title
-          column << discipline.description
+          column << discipline.sigla
           column << discipline.decorate.active
 
           links = []
@@ -50,6 +50,6 @@ class DisciplineDatatable < ApplicationDatatable
 
     def columns
       # (title last_name email phone_number)
-      %w(id title description active)
+      %w(id title sigla active)
     end
 end

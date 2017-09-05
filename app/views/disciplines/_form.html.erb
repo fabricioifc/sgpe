@@ -3,7 +3,7 @@
   <%= error_messages_for(discipline) %>
 
     <%= form.text_field :title, id: :discipline_title, autofocus:true %>
-    <%= form.text_area :description, id: :discipline_description %>
+    <%= form.text_field :sigla, id: :discipline_sigla %>
     <div class="form-group">
       <%= form.check_box :active, id: :curso_active %>
     </div>

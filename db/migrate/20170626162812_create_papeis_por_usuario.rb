@@ -2,16 +2,16 @@ class CreatePapeisPorUsuario < ActiveRecord::Migration[5.1]
   def change
 
     create_table :perfils do |t|
-      t.string :name, index:true
+      t.string :name, index:true, unique:true, limit:45, null:false
       t.boolean :idativo, default:true
 
       t.timestamps
     end
 
     create_table :roles do |t|
-      t.string :name
-      t.string :resource_type
-      t.string :resource_id
+      t.string :name, index:true, unique:true, limit:45, null:false
+      t.string :resource_type, limit:100
+      t.string :resource_id, limit:100
 
       t.timestamps
     end
