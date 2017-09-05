@@ -1,0 +1,2 @@
+class CourseModality < ApplicationRecord
+end

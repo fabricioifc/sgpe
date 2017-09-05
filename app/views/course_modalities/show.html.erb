@@ -1,0 +1,20 @@
+<div class="page-header">
+  <%= link_to course_modalities_path, class: 'btn btn-default' do %>
+    <i class='fa fa-list fa-2'></i>
+    <%= t('helpers.links.back') %>
+  <% end %>
+  <%= link_to edit_course_modality_path(@course_modality), class: 'btn btn-primary' do %>
+    <i class='fa fa-pencil-square-o fa-2'></i>
+    <%= t('helpers.links.edit') %>
+  <% end %>
+  <h1>Show course_modality</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Sigla:</dt>
+  <dd><%= @course_modality.sigla %></dd>
+
+  <dt>Description:</dt>
+  <dd><%= @course_modality.description %></dd>
+
+</dl>

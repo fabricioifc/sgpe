@@ -1,0 +1,9 @@
+<%= bootstrap_form_for(course_modality, local:true, html: { class: "", role: "form" }) do |f| %>
+  <%= error_messages_for(course_modality) %>
+
+
+      <%= f.text_field :sigla, id: :course_modality_sigla %>
+      <%= f.text_field :description, id: :course_modality_description %>
+  
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

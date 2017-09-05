@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :courses
+  resources :course_modalities
+  resources :course_formats
   resources :tests
   resources :disciplines, path: 'disciplinas'
   resources :posts

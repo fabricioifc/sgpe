@@ -1,0 +1,2 @@
+class CourseFormat < ApplicationRecord
+end
