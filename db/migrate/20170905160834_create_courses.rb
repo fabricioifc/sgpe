@@ -5,8 +5,8 @@ class CreateCourses < ActiveRecord::Migration[5.1]
       t.string :sigla, limit: 5, null:false
       t.boolean :active, default:true
       t.integer :carga_horaria, null:false
-      t.references :CourseModality, foreign_key: true, index:true
-      t.references :CourseFormat, foreign_key: true, index:true
+      t.references :course_modality, foreign_key: true, index:true
+      t.references :course_format, foreign_key: true, index:true
       t.references :user, foreign_key: true, index:true
 
       t.timestamps

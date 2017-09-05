@@ -4,7 +4,11 @@ class CourseFormatsController < ApplicationController
   # GET /course_formats
   # GET /course_formats.json
   def index
-    @course_formats = CourseFormat.all
+    # @course_formats = CourseFormat.all
+    respond_to do |format|
+      format.html
+      format.json { render json: CourseFormatDatatable.new(view_context) }
+    end
   end
 
   # GET /course_formats/1
@@ -28,8 +32,10 @@ class CourseFormatsController < ApplicationController
 
     respond_to do |format|
       if @course_format.save
-        format.html { redirect_to @course_format, notice: 'Course format was successfully created.' }
-        format.json { render :show, status: :created, location: @course_format }
+        format.html { redirect_to course_formats_path, notice: 'Course format was successfully created.' }
+        format.json { render :index, status: :created, location: course_formats_path }
+        # format.html { redirect_to @course_format, notice: 'Course format was successfully created.' }
+        # format.json { render :show, status: :created, location: @course_format }
       else
         format.html { render :new }
         format.json { render json: @course_format.errors, status: :unprocessable_entity }
@@ -42,8 +48,10 @@ class CourseFormatsController < ApplicationController
   def update
     respond_to do |format|
       if @course_format.update(course_format_params)
-        format.html { redirect_to @course_format, notice: 'Course format was successfully updated.' }
-        format.json { render :show, status: :ok, location: @course_format }
+        format.html { redirect_to course_formats_path, notice: 'Course format was successfully created.' }
+        format.json { render :index, status: :created, location: course_formats_path }
+        # format.html { redirect_to @course_format, notice: 'Course format was successfully updated.' }
+        # format.json { render :show, status: :ok, location: @course_format }
       else
         format.html { render :edit }
         format.json { render json: @course_format.errors, status: :unprocessable_entity }

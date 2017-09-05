@@ -1,4 +1,4 @@
-<%- model = Course_modality %>
+<%- model = CourseModality %>
 
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
@@ -14,20 +14,15 @@
       <%= content_tag :table, id: "course_modalities_datatable", class: 'table table-striped table-bordered', role: :datatable, data: { url: course_modalities_path(format: :json)} do %>
         <thead>
           <tr>
-                        <th><%= model.human_attribute_name(:sigla) %></th>
-                        <th><%= model.human_attribute_name(:description) %></th>
-                        <th><%= t('helpers.actions') %></th>
+            <th><%= model.human_attribute_name(:id) %></th>
+            <th><%= model.human_attribute_name(:sigla) %></th>
+            <th><%= model.human_attribute_name(:description) %></th>
+            <th></th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
-        <tbody>
-          <%= content_tag_for(:tr, @course_modalities) do |course_modality| %>
-                            <td><%= course_modality.sigla %></td>
-                            <td><%= course_modality.description %></td>
-                        <td><%= course_modality.decorate.link_show %></td>
-            <td><%= course_modality.decorate.link_edit %></td>
-            <td><%= course_modality.decorate.link_destroy %></td>
-          <% end %>
-        </tbody>
+        <tbody></tbody>
       <% end %>
     </div>
   </div>

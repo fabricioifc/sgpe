@@ -4,7 +4,11 @@ class CourseModalitiesController < ApplicationController
   # GET /course_modalities
   # GET /course_modalities.json
   def index
-    @course_modalities = CourseModality.all
+    # @course_modalities = CourseModality.all
+    respond_to do |format|
+      format.html
+      format.json { render json: CourseModalityDatatable.new(view_context) }
+    end
   end
 
   # GET /course_modalities/1
@@ -28,8 +32,8 @@ class CourseModalitiesController < ApplicationController
 
     respond_to do |format|
       if @course_modality.save
-        format.html { redirect_to @course_modality, notice: 'Course modality was successfully created.' }
-        format.json { render :show, status: :created, location: @course_modality }
+        format.html { redirect_to course_modalities_path, notice: 'Course modality was successfully created.' }
+        format.json { render :index, status: :created, location: @course_modality }
       else
         format.html { render :new }
         format.json { render json: @course_modality.errors, status: :unprocessable_entity }

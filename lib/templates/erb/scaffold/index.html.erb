@@ -1,4 +1,4 @@
-<%%- model = <%= singular_table_name.capitalize %> %>
+<%%- model = <%= singular_table_name.humanize.titleize.gsub!(/\s+/, '') %> %>
 
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
