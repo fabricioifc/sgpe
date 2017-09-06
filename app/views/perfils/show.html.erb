@@ -1,14 +1,20 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <%= link_to perfils_path, class: 'btn btn-default' do %>
+    <i class='fa fa-list fa-2'></i>
+    Back
+  <% end %>
+  <%= link_to edit_perfil_path(@perfil), class: 'btn btn-primary' do %>
+    <i class='fa fa-pencil-square-o fa-2'></i>
+    Edit
+  <% end %>
+  <h1>Show perfil</h1>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @perfil.name %>
-</p>
+<dl class="dl-horizontal">
+  <dt>Name:</dt>
+  <dd><%= @perfil.name %></dd>
 
-<p>
-  <strong>Idativo:</strong>
-  <%= @perfil.idativo %>
-</p>
+  <dt>Ativo:</dt>
+  <dd><%= @perfil.idativo %></dd>
 
-<%= link_to 'Edit', edit_perfil_path(@perfil) %> |
-<%= link_to 'Back', perfils_path %>
+</dl>
