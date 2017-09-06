@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :prepare_exception_notifier
+  around_action :rescue_from_fk_contraint, only: [:destroy]
 
   # load_and_authorize_resource unless: :devise_controller?
   before_action do fix_carrega_permissoes end
@@ -26,6 +27,18 @@ class ApplicationController < ActionController::Base
     resource = controller_name.singularize.to_sym
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)
+  end
+
+  def rescue_from_fk_contraint
+    begin
+      yield
+    rescue ActiveRecord::InvalidForeignKey
+      respond_to do |format|
+        flash[:alert] = 'Não foi possível excluir este ítem. Existem registros vinculados.'
+        format.html { redirect_to url_for(request.path) }
+      end
+      # Flash and render, render API json error... whatever
+    end
   end
 
   private

@@ -1,5 +1,7 @@
 class CourseModalitiesController < ApplicationController
   before_action :set_course_modality, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  load_and_authorize_resource
 
   # GET /course_modalities
   # GET /course_modalities.json
