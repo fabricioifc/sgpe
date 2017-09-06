@@ -11,12 +11,22 @@ class CreateCourseService
     modalidades << [ sigla: 'SEM', description: 'Semi-presencial']
     modalidades << [ sigla: 'DIS', description: 'À Distância']
 
+    ofertas = []
+    ofertas << [description: 'Ano']
+    ofertas << [description: 'Semestre']
+    ofertas << [description: 'Ciclo']
+    ofertas << [description: 'Oferta única (FIC)']
+
     formatos.each do |k, v|
       CourseFormat.find_or_create_by!(k)
     end
 
     modalidades.each do |k, v|
       CourseModality.find_or_create_by!(k)
+    end
+
+    ofertas.each do |k, v|
+      CourseOffer.find_or_create_by!(k)
     end
 
     cursos = []

@@ -1,0 +1,20 @@
+<div class="page-header">
+  <%= link_to course_offers_path, class: 'btn btn-default' do %>
+    <i class='fa fa-list fa-2'></i>
+    <%= t('helpers.links.back') %>
+  <% end %>
+  <%= link_to edit_course_offer_path(@course_offer), class: 'btn btn-primary' do %>
+    <i class='fa fa-pencil-square-o fa-2'></i>
+    <%= t('helpers.links.edit') %>
+  <% end %>
+  <h1>Show course_offer</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Description:</dt>
+  <dd><%= @course_offer.description %></dd>
+
+  <dt>Active:</dt>
+  <dd><%= @course_offer.active %></dd>
+
+</dl>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :course_offers
   resources :courses
   resources :course_modalities
   resources :course_formats

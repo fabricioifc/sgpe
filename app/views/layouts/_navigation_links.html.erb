@@ -8,6 +8,7 @@
   <ul class="dropdown-menu">
     <li><%= link_to t('.course_formats'), course_formats_path if can? :read, CourseFormat %></li>
     <li><%= link_to t('.course_modalities'), course_modalities_path if can? :read, CourseModality %></li>
+    <li><%= link_to t('.course_offers'), course_offers_path if can? :read, CourseOffer %></li>
     <li><%= link_to t('.courses'), courses_path if can? :read, Course %></li>
     <li><%= link_to t('.disciplines'), disciplines_path if can? :read, Discipline %></li>
   </ul>
