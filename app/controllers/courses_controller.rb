@@ -5,6 +5,7 @@ class CoursesController < ApplicationController
 
   before_action :load_modalidades
   before_action :load_formatos
+  before_action :load_ofertas
 
   # GET /courses
   # GET /courses.json
@@ -79,7 +80,7 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :sigla, :active, :carga_horaria, :course_modality_id, :course_format_id, :user_id)
+      params.require(:course).permit(:name, :sigla, :active, :carga_horaria, :course_modality_id, :course_format_id, :course_offer_id, :user_id)
     end
 
     def load_modalidades
@@ -88,5 +89,9 @@ class CoursesController < ApplicationController
 
     def load_formatos
       @formatos = CourseFormat.all
+    end
+
+    def load_ofertas
+      @ofertas = CourseOffer.all
     end
 end

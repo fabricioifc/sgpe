@@ -8,6 +8,7 @@
       <%= f.number_field :carga_horaria, id: :course_carga_horaria %>
       <%= f.select :course_modality_id, @modalidades.collect { |c| [c.description, c.id] }, id: :course_course_modality, prompt: true %>
       <%= f.select :course_format_id, @formatos.collect { |c| [c.name, c.id] }, id: :course_course_format, prompt: true %>
+      <%= f.select :course_offer_id, @ofertas.collect { |c| [c.description, c.id] }, id: :course_course_offer, prompt: true %>
 
   <%= f.submit class: "btn btn-primary" %>
 <% end %>
