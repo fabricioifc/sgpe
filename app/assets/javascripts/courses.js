@@ -30,7 +30,7 @@ document.addEventListener("turbolinks:load", function() {
         },
         {
           width: "15%",
-          className: "text-center",
+          className: "",
           searchable: true,
           orderable: true
         },
@@ -42,7 +42,7 @@ document.addEventListener("turbolinks:load", function() {
         },
         {
           width: "5%",
-          className: "",
+          className: "text-center",
           searchable: false,
           orderable: false
         },

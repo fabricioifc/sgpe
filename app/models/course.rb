@@ -6,6 +6,6 @@ class Course < ApplicationRecord
   validates :sigla, :name, :active, :carga_horaria, :course_modality_id, :course_format_id, presence:true
 
   def decorate
-    @decorate ||= CursoDecorator.new self
+    @decorate ||= CourseDecorator.new self
   end
 end

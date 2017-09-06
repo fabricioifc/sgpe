@@ -16,7 +16,7 @@ class CourseDatatable < ApplicationDatatable
         column << course.id
         column << course.name
         column << course.sigla
-        column << course.active
+        column << course.decorate.active
         column << course.carga_horaria
         column << course.course_modality.description
         column << course.course_format.name

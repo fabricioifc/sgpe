@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20170905160834) do
 
   create_table "disciplines", force: :cascade do |t|
     t.string "title", limit: 45, null: false
-    t.string "sigla", null: false
+    t.text "description", null: false
     t.boolean "active", default: true
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20170905160834) do
   end
 
   create_table "perfils", force: :cascade do |t|
-    t.string "name", limit: 45, null: false
+    t.string "name"
     t.boolean "idativo", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -90,13 +90,12 @@ ActiveRecord::Schema.define(version: 20170905160834) do
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string "name", limit: 45, null: false
-    t.string "resource_type", limit: 100
-    t.string "resource_id", limit: 100
+    t.string "name"
+    t.string "resource_type"
+    t.string "resource_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
-    t.index ["name"], name: "index_roles_on_name"
   end
 
   create_table "tests", force: :cascade do |t|
