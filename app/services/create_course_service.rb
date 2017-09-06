@@ -1,4 +1,4 @@
-class CreateCoursesService
+class CreateCourseService
 
   def call
     formatos = []
