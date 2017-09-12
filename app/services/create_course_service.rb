@@ -36,6 +36,7 @@ class CreateCourseService
       carga_horaria:    3000,
       course_modality:  CourseModality.find_by(sigla: 'PRE'),
       course_format:    CourseFormat.find_by(name: 'Integrado'),
+      course_offer:    CourseOffer.find_by(description: 'Ano'),
       user:             User.where(admin: true).last,
     ]
 
