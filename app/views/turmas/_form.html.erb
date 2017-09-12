@@ -1,0 +1,10 @@
+<%= bootstrap_form_for(turma, local:true, html: { class: "", role: "form" }) do |f| %>
+  <%= error_messages_for(turma) %>
+
+
+    <%= f.text_field :name, id: :turma_name %>
+    <%= f.select :year, (Time.zone.now.year - 50)..(Time.zone.now.year + 2), id: :turma_year, selected: Time.zone.now.year %>
+    <%= f.check_box :active, id: :turma_active %>
+
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

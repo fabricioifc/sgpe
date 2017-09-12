@@ -11,6 +11,7 @@
     <li><%= link_to t('.course_offers'), course_offers_path if can? :read, CourseOffer %></li>
     <li><%= link_to t('.courses'), courses_path if can? :read, Course %></li>
     <li><%= link_to t('.disciplines'), disciplines_path if can? :read, Discipline %></li>
+    <li><%= link_to t('.turmas'), turmas_path if can? :read, Turma %></li>
   </ul>
 </li>
 <% end %>
