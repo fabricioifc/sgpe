@@ -4,6 +4,20 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    respond_to do |format|
+      format.html
+      # format.json { render json: TestDatatable.new(view_context) }
+      format.pdf do
+        35.times do
+          @users += User.all
+        end
+        pdf = UsersPdf.new(@users)
+        send_data pdf.render,
+            filename: "usuários_#{@users.count}",
+            type: 'application/pdf',
+            disposition: 'inline'
+      end
+    end
   end
 
   def show
