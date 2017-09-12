@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912012709) do
+ActiveRecord::Schema.define(version: 20170912163234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,17 @@ ActiveRecord::Schema.define(version: 20170912012709) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_disciplines_on_user_id"
+  end
+
+  create_table "grids", force: :cascade do |t|
+    t.integer "year", null: false
+    t.boolean "active", default: true
+    t.bigint "course_id", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_grids_on_course_id"
+    t.index ["user_id"], name: "index_grids_on_user_id"
   end
 
   create_table "perfil_roles", force: :cascade do |t|
@@ -163,6 +174,8 @@ ActiveRecord::Schema.define(version: 20170912012709) do
   add_foreign_key "courses", "course_offers"
   add_foreign_key "courses", "users"
   add_foreign_key "disciplines", "users"
+  add_foreign_key "grids", "courses"
+  add_foreign_key "grids", "users"
   add_foreign_key "perfil_roles", "perfils"
   add_foreign_key "perfil_roles", "roles"
   add_foreign_key "users_perfils", "perfils"

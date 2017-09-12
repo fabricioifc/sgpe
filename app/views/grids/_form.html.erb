@@ -1,0 +1,9 @@
+<%= bootstrap_form_for(grid, local:true, html: { class: "", role: "form" }) do |f| %>
+  <%= error_messages_for(grid) %>
+
+    <%= f.select :year, (Time.zone.now.year - 50)..(Time.zone.now.year + 2), id: :grid_year, selected: Time.zone.now.year, autofocus:true %>
+    <%= f.select :course_id, @cursos.collect { |c| ["#{c.sigla} - #{c.name}", c.id] }, id: :grid_course, prompt: true %>
+    <%= f.check_box :active, id: :grid_active %>
+
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :grids
   resources :turmas
   resources :course_offers
   resources :courses
