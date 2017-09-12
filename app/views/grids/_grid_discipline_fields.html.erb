@@ -1,0 +1,14 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Detalhes adicionais</h3>
+  </div>
+  <div class="panel-body">
+    <p class="control-group nested-fields">
+      <div class="controls">
+        <%= f.select :year, (Time.zone.now.year - 50)..(Time.zone.now.year + 2), id: :grid_year, selected: Time.zone.now.year %>
+        <%= f.select :discipline, @disciplinas.collect { |c| [c.title, c.id] }, id: :discipline_id, prompt: true %>
+        <!-- <= link_to_remove_association "remove", f %> -->
+      </div>
+    </p>
+  </div>
+</div>

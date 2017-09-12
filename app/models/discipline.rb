@@ -1,5 +1,7 @@
 class Discipline < ApplicationRecord
   belongs_to :user
+  # has_many :grid_disciplines
+  # has_many :grids, :through => :grid_disciplines
 
   validates :title, :sigla, :user, presence:true
 

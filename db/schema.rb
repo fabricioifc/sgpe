@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912163234) do
+ActiveRecord::Schema.define(version: 20170912164752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,20 @@ ActiveRecord::Schema.define(version: 20170912163234) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_disciplines_on_user_id"
+  end
+
+  create_table "grid_disciplines", force: :cascade do |t|
+    t.integer "year", null: false
+    t.text "ementa", null: false
+    t.text "objetivo_geral", null: false
+    t.text "bib_geral", null: false
+    t.text "bib_espec", null: false
+    t.bigint "grid_id"
+    t.bigint "discipline_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["discipline_id"], name: "index_grid_disciplines_on_discipline_id"
+    t.index ["grid_id"], name: "index_grid_disciplines_on_grid_id"
   end
 
   create_table "grids", force: :cascade do |t|
@@ -174,6 +188,8 @@ ActiveRecord::Schema.define(version: 20170912163234) do
   add_foreign_key "courses", "course_offers"
   add_foreign_key "courses", "users"
   add_foreign_key "disciplines", "users"
+  add_foreign_key "grid_disciplines", "disciplines"
+  add_foreign_key "grid_disciplines", "grids"
   add_foreign_key "grids", "courses"
   add_foreign_key "grids", "users"
   add_foreign_key "perfil_roles", "perfils"

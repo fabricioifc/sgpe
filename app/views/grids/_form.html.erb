@@ -5,5 +5,20 @@
     <%= f.select :course_id, @cursos.collect { |c| ["#{c.sigla} - #{c.name}", c.id] }, id: :grid_course, prompt: true %>
     <%= f.check_box :active, id: :grid_active %>
 
+    <hr>
+
+    <%= link_to_add_association 'Adicionar disciplina', f, :grid_disciplines,
+    'data-association-insertion-node' => '#grid_disciplines',
+    'data-association-insertion-method' => 'append',
+    :wrap_object => Proc.new {|grid_discipline| grid_discipline.build; grid_disciplines }
+
+     %>
+
+     <fieldset id="grid_disciplines">
+       <%= f.fields_for :grid_disciplines_attributes do |g| %>
+          <%= render partial: 'grid_discipline_fields', locals: { f: g } %>
+       <% end %>
+     </fieldset>
+
   <%= f.submit class: "btn btn-primary" %>
 <% end %>

@@ -4,6 +4,7 @@ class GridsController < ApplicationController
   load_and_authorize_resource
 
   before_action :load_cursos_ativos
+  before_action :load_disciplinas
 
   # GET /grids
   # GET /grids.json
@@ -23,6 +24,7 @@ class GridsController < ApplicationController
   # GET /grids/new
   def new
     @grid = Grid.new
+    @grid.grid_disciplines.build
   end
 
   # GET /grids/1/edit
@@ -34,6 +36,7 @@ class GridsController < ApplicationController
   def create
     @grid = Grid.new(grid_params)
     @grid.user = current_user
+    binding.pry
 
     respond_to do |format|
       if @grid.save
@@ -78,10 +81,16 @@ class GridsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def grid_params
-      params.require(:grid).permit(:year, :active, :course_id, :user_id)
+      params.require(:grid).permit(:year, :active, :course_id, :user_id,
+        grid_disciplines_attributes: [:year, :ementa, :objetivo_geral, :bib_geral, :bib_espec, :discipline_id]
+      )
     end
 
     def load_cursos_ativos
       @cursos = Course.where(active:true)
+    end
+
+    def load_disciplinas
+      @disciplinas = Discipline.all
     end
 end

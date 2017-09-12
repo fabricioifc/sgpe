@@ -1,0 +1,14 @@
+<%= bootstrap_form_for(grid_discipline, local:true, html: { class: "", role: "form" }) do |f| %>
+  <%= error_messages_for(grid_discipline) %>
+
+
+      <%= f.number_field :year, id: :grid_discipline_year %>
+      <%= f.text_area :ementa, id: :grid_discipline_ementa %>
+      <%= f.text_area :objetivo_geral, id: :grid_discipline_objetivo_geral %>
+      <%= f.text_area :bib_geral, id: :grid_discipline_bib_geral %>
+      <%= f.text_area :bib_espec, id: :grid_discipline_bib_espec %>
+      <%= f.text_field :grid, id: :grid_discipline_grid %>
+      <%= f.text_field :discipline, id: :grid_discipline_discipline %>
+  
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

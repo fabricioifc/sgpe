@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :grids
+  resources :grid_disciplines
+  resources :grids do
+    resources :grid_disciplines
+  end
   resources :turmas
   resources :course_offers
   resources :courses

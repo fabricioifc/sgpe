@@ -21,6 +21,7 @@
 //= require datatables
 //= require datatables/dataTables.bootstrap
 //= require tinymce
+//= require cocoon
 //= require_tree .
 
 $(function() {
