@@ -75,4 +75,9 @@ document.addEventListener("turbolinks:load", function() {
     $(this).closest('.collapse-group').find('.collapse').collapse('hide');
   });
 
+  $('#grid_disciplines').on('cocoon:after-insert', function(e, insertedItem) {
+    var size = $(this).closest('.collapse-group').find('.collapse').length;
+    $(this).closest('.collapse-group').find('.collapse').href("#collapse" + size)
+ });
+
 });
