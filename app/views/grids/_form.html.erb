@@ -8,17 +8,17 @@
     <hr>
 
     <%= link_to_add_association 'Adicionar disciplina', f, :grid_disciplines,
-    'data-association-insertion-node' => '#grid_disciplines',
-    'data-association-insertion-method' => 'append',
-    :wrap_object => Proc.new {|grid_discipline| grid_discipline.build; grid_disciplines }
-
+      'data-association-insertion-node' => '#grid_disciplines',
+      'data-association-insertion-method' => 'append'
      %>
 
-     <fieldset id="grid_disciplines">
-       <%= f.fields_for :grid_disciplines_attributes do |g| %>
-          <%= render partial: 'grid_discipline_fields', locals: { f: g } %>
-       <% end %>
-     </fieldset>
+     <div class="collapse-group">
+       <fieldset id="grid_disciplines">
+         <%= f.fields_for :grid_disciplines do |builder| %>
+            <%= render partial: 'grid_discipline_fields', locals: { f: builder } %>
+         <% end %>
+       </fieldset>
+     </div>
 
   <%= f.submit class: "btn btn-primary" %>
 <% end %>

@@ -6,7 +6,7 @@ class Grid < ApplicationRecord
 
   validates :year, :active, :course, presence:true
 
-  accepts_nested_attributes_for :grid_disciplines
+  accepts_nested_attributes_for :grid_disciplines, allow_destroy: true
 
   def decorate
     @decorate ||= GridDecorator.new self

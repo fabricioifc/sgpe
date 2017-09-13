@@ -167,3 +167,13 @@ footer.page-footer p {
 .border .border-primary {
   border-color: $brand-primary;
 }
+
+.panel-title .trigger:before {
+  content: '\e082';
+  font-family: 'Glyphicons Halflings';
+  vertical-align: text-bottom;
+}
+
+.panel-title .trigger.collapsed:before {
+  content: '\e081';
+}

@@ -65,3 +65,14 @@ document.addEventListener("turbolinks:load", function() {
     });
   });
 });
+
+document.addEventListener("turbolinks:load", function() {
+  $(".open-button").on("click", function() {
+    $(this).closest('.collapse-group').find('.collapse').collapse('show');
+  });
+
+  $(".close-button").on("click", function() {
+    $(this).closest('.collapse-group').find('.collapse').collapse('hide');
+  });
+
+});
