@@ -25,6 +25,7 @@ class GridsController < ApplicationController
   def new
     @grid = Grid.new
     @grid.grid_disciplines.build
+    @grid_discipline = GridDiscipline.new
   end
 
   # GET /grids/1/edit
