@@ -1,10 +1,9 @@
 <%= bootstrap_form_for(grid, local:true, html: { class: "", role: "form" }) do |f| %>
   <%= error_messages_for(grid) %>
 
-    <div class="control-group">
       <div class="row">
         <div class="col-md-3">
-          <%= f.select :year, (Time.zone.now.year - 50)..(Time.zone.now.year + 2), id: :grid_year, selected: Time.zone.now.year, autofocus:true %>
+          <%= f.text_field :year, id: :grid_year, autofocus:true %>
         </div>
         <div class="col-md-6">
           <%= f.select :course_id, @cursos.collect { |c| ["#{c.sigla} - #{c.name}", c.id] }, id: :grid_course, prompt: true %>
@@ -14,52 +13,19 @@
           <%= f.check_box :active, id: :grid_active %>
         </div>
       </div>
-    </div>
 
-    <hr>
+      <%= link_to_add_association 'Adicionar disciplina', f, :grid_disciplines,
+      'data-association-insertion-node' => '#grid_disciplines',
+      'data-association-insertion-method' => 'append'
+      %>
 
-    <div class="row">
-      <div class="col-md-8">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Grade</h3>
-          </div>
-          <div class="panel-body">
-            <%= bootstrap_form_for(@grid_discipline, local:false, remote:true, html: { class: "", role: "form" }) do |f| %>
-              <%= error_messages_for(@grid_discipline) %>
 
-              <div class="control-group">
-                <div class="col-md-6">
-                  <%= f.select :year, (Time.zone.now.year - 50)..(Time.zone.now.year + 2), id: :grid_year, selected: Time.zone.now.year %>
-                </div>
-                <div class="col-md-6">
-                  <%= f.select :discipline_id, @disciplinas.collect { |c| [c.title, c.id] }, id: :discipline_id, prompt: true %>
-
-                </div>
-              </div>
-                <%= f.text_area :ementa, id: :grid_discipline_ementa %>
-                <%= f.text_area :objetivo_geral, id: :grid_discipline_objetivo_geral %>
-                <%= f.text_area :bib_geral, id: :grid_discipline_bib_geral %>
-                <%= f.text_area :bib_espec, id: :grid_discipline_bib_espec %>
-
-              <%= f.submit class: "btn btn-primary" %>
-            <% end %>
-
-          </div>
-        </div>
+      <div class="collapse-group">
+        <fieldset id="grid_disciplines">
+          <%= f.fields_for :grid_disciplines do |builder| %>
+             <%= render partial: 'grid_discipline_fields', locals: { f: builder } %>
+          <% end %>
+        </fieldset>
       </div>
 
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Disciplinas adicionadas a grade</h3>
-          </div>
-          <div class="panel-body">
-            <%= "Quantidade: #{@grid.grid_disciplines.count}"%>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  <%= f.submit class: "btn btn-primary" %>
 <% end %>

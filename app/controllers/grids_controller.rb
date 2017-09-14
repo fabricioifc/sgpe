@@ -23,9 +23,9 @@ class GridsController < ApplicationController
 
   # GET /grids/new
   def new
+    @indice = 1
     @grid = Grid.new
     @grid.grid_disciplines.build
-    @grid_discipline = GridDiscipline.new
   end
 
   # GET /grids/1/edit
@@ -37,7 +37,6 @@ class GridsController < ApplicationController
   def create
     @grid = Grid.new(grid_params)
     @grid.user = current_user
-    binding.pry
 
     respond_to do |format|
       if @grid.save
@@ -83,7 +82,7 @@ class GridsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def grid_params
       params.require(:grid).permit(:year, :active, :course_id, :user_id,
-        grid_disciplines_attributes: [:year, :ementa, :objetivo_geral, :bib_geral, :bib_espec, :discipline_id]
+        grid_disciplines_attributes: [:id, :year, :ementa, :objetivo_geral, :bib_geral, :bib_espec, :discipline_id]
       )
     end
 

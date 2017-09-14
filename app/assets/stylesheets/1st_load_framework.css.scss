@@ -168,12 +168,12 @@ footer.page-footer p {
   border-color: $brand-primary;
 }
 
-.panel-title .trigger:before {
-  content: '\e082';
-  font-family: 'Glyphicons Halflings';
-  vertical-align: text-bottom;
+.panel-heading a:after {
+    font-family:'Glyphicons Halflings';
+    content:"\e114";
+    float: right;
+    color: grey;
 }
-
-.panel-title .trigger.collapsed:before {
-  content: '\e081';
+.panel-heading a.collapsed:after {
+    content:"\e080";
 }
