@@ -1,17 +1,22 @@
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
     <h3 class="panel-title">
-      <a role="button" data-toggle="collapse" href="#collapse" aria-expanded="false" aria-controls="collapse" class="trigger collapsed">
-        Detalhes adicionais
-      </a>
+      <a role="button" data-toggle="collapse" href="#collapse" aria-expanded="false" aria-controls="collapse" class="trigger collapsed"></a>
+      Detalhes da disciplina
     </h3>
   </div>
   <div id="collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
     <div class="panel-body">
       <p class="control-group nested-fields">
         <div class="controls">
-          <%= f.select :year, (Time.zone.now.year - 50)..(Time.zone.now.year + 2), id: :grid_year, selected: Time.zone.now.year %>
-          <%= f.select :discipline_id, @disciplinas.collect { |c| [c.title, c.id] }, id: :discipline_id, prompt: true %>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.select :year, id: :grid_year, prompt:true %>
+            </div>
+            <div class="col-md-6">
+              <%= f.select :discipline_id, @disciplinas.collect { |c| [c.title, c.id] }, id: :discipline_id, prompt: true %>
+            </div>
+          </div>
           <%= f.text_area :ementa, id: :grid_discipline_ementa %>
           <%= f.text_area :objetivo_geral, id: :grid_discipline_objetivo_geral %>
           <%= f.text_area :bib_geral, id: :grid_discipline_bib_geral %>
