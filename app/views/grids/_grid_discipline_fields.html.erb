@@ -1,13 +1,15 @@
-<div class="panel panel-default">
-  <div class="panel-heading clearfix">
-    <h3 class="panel-title">
-      <a role="button" data-toggle="collapse" href="#collapse" aria-expanded="false" aria-controls="collapse" class="trigger collapsed"></a>
-      Detalhes da disciplina
-    </h3>
-  </div>
-  <div id="collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
-    <div class="panel-body">
-      <p class="control-group nested-fields">
+<div class="control-group nested-fields">
+  <div class="panel panel-default">
+    <div class="panel-heading clearfix">
+      <h3 class="panel-title">
+        <%= link_to_remove_association "<i class='fa fa-times text-danger' aria-hidden='true'></i>".html_safe, f %> |
+        <a role="button" data-toggle="collapse" href="#collapse" aria-expanded="false" aria-controls="collapse" class="trigger collapsed">
+          Detalhes da disciplina
+        </a>
+      </h3>
+    </div>
+    <div id="collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
+      <div class="panel-body">
         <div class="controls">
           <div class="row">
             <div class="col-md-6">
@@ -16,12 +18,16 @@
             <div class="col-md-6">
               <%= f.select :discipline_id, @disciplinas.collect { |c| [c.title, c.id] }, id: :discipline_id, prompt: true %>
             </div>
+          </div>
+          <div class="row">
             <div class="col-md-6">
               <%= f.text_area :ementa, id: :grid_discipline_ementa %>
             </div>
             <div class="col-md-6">
               <%= f.text_area :objetivo_geral, id: :grid_discipline_objetivo_geral %>
             </div>
+          </div>
+          <div class="row">
             <div class="col-md-6">
               <%= f.text_area :bib_geral, id: :grid_discipline_bib_geral %>
             </div>
@@ -29,9 +35,8 @@
               <%= f.text_area :bib_espec, id: :grid_discipline_bib_espec %>
             </div>
           </div>
-          <!-- <= link_to_remove_association "remove", f %> -->
         </div>
-      </p>
+      </div>
     </div>
   </div>
 </div>

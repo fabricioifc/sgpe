@@ -168,12 +168,12 @@ footer.page-footer p {
   border-color: $brand-primary;
 }
 
-.panel-heading a:after {
+.panel-heading a[role="button"]:after {
     font-family:'Glyphicons Halflings';
     content:"\e114";
     float: right;
     color: grey;
 }
-.panel-heading a.collapsed:after {
+.panel-heading a[role="button"].collapsed:after {
     content:"\e080";
 }

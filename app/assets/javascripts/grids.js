@@ -67,27 +67,34 @@ document.addEventListener("turbolinks:load", function() {
 });
 
 document.addEventListener("turbolinks:load", function() {
-  $('a[role="button"]').on("click", function() {
-    // $('.panel-collapse.collapse.in').collapse('hide');
-    // $(this).closest('.collapse-group').find('.collapse').collapse('show');
-    $("#grid_disciplines .panel").each(function (k, v) {
-      $(v).find('div.panel-collapse.collapse.in').collapse('hide');
-    });
+
+  $(document).on('click', 'a#expand_all', function(e){
+    $('.panel-collapse.collapse').collapse('show');
+    e.preventDefault();
+  });
+
+  $(document).on('click', 'a#collapse_all', function(e){
+    $('.panel-collapse.collapse.in').collapse('hide');
+    e.preventDefault();
+  });
+
+  $(document).on('click', 'a.trigger', function(){
+    $('.panel-collapse.collapse.in').collapse('hide');
     $(this).find('div.panel-collapse').collapse('show');
   });
 
   $('#grid_disciplines').on('cocoon:after-insert', function(e, insertedItem) {
-    $('.collapse').collapse('hide');
+    $('.panel-collapse.collapse.in').collapse('hide');
     var lastPanel = null;
     $("#grid_disciplines .panel").each(function (k, v) {
       $(v).find('a[role="button"]').attr('href', '#collapse' + k);
       $(v).find('div.panel-collapse').attr('id', 'collapse' + k);
       lastPanel = v;
     });
-    // $(lastPanel).find('div.panel-collapse').collapse('show');
+    $(lastPanel).find('div.panel-collapse').collapse('show');
 
   });
 
- // $('.collapse').collapse('show');
+  $('.panel-collapse.collapse').collapse('show');
 
 });

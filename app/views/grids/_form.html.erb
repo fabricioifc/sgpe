@@ -1,31 +1,52 @@
 <%= bootstrap_form_for(grid, local:true, html: { class: "", role: "form" }) do |f| %>
   <%= error_messages_for(grid) %>
 
-      <div class="row">
-        <div class="col-md-3">
-          <%= f.text_field :year, id: :grid_year, autofocus:true %>
-        </div>
-        <div class="col-md-6">
-          <%= f.select :course_id, @cursos.collect { |c| ["#{c.sigla} - #{c.name}", c.id] }, id: :grid_course, prompt: true %>
-        </div>
-        <div class="col-md-3">
-          <label for="">Situação</label>
-          <%= f.check_box :active, id: :grid_active %>
-        </div>
+    <div class="row">
+      <div class="col-md-3">
+        <%= f.text_field :year, id: :grid_year, autofocus:true %>
       </div>
+      <div class="col-md-6">
+        <%= f.select :course_id, @cursos.collect { |c| ["#{c.sigla} - #{c.name}", c.id] }, id: :grid_course_id, prompt: true %>
+      </div>
+      <div class="col-md-3">
+        <label for="">Situação</label>
+        <%= f.check_box :active, id: :grid_active %>
+      </div>
+    </div>
 
-      <%= link_to_add_association 'Adicionar disciplina', f, :grid_disciplines,
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.submit %>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="well well-sm">
+      <%= link_to_add_association f, :grid_disciplines, class: 'btn btn-xs btn-success',
       'data-association-insertion-node' => '#grid_disciplines',
-      'data-association-insertion-method' => 'append'
-      %>
+      'data-association-insertion-method' => 'append' do %>
+        <i class="fa fa-plus"></i> Adicionar disciplina
+      <% end %>
 
-
-      <div class="collapse-group">
-        <fieldset id="grid_disciplines">
-          <%= f.fields_for :grid_disciplines do |builder| %>
-             <%= render partial: 'grid_discipline_fields', locals: { f: builder } %>
-          <% end %>
-        </fieldset>
+      <div class="pull-right">
+        <%= link_to '#', id: 'expand_all', class: 'btn btn-xs btn-info' do %>
+          <i class="fa fa-arrow-down"></i>
+          Expandir
+        <% end %>
+        <%= link_to '#', id: 'collapse_all', class: 'btn btn-xs btn-info' do %>
+          <i class="fa fa-arrow-up"></i>
+          Contrair
+        <% end %>
       </div>
+    </div>
+
+    <div class="collapse-group">
+      <fieldset id="grid_disciplines">
+        <%= f.fields_for :grid_disciplines do |builder| %>
+           <%= render partial: 'grid_discipline_fields', locals: { f: builder } %>
+        <% end %>
+      </fieldset>
+    </div>
 
 <% end %>
