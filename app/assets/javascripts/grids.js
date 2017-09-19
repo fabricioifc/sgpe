@@ -91,6 +91,7 @@ document.addEventListener("turbolinks:load", function() {
 
 });
 
+// Ajusta os ids dos paineis, evitando ids duplicados dinamicamente
 $.ajustarGridDisciplinasCocoon = function(){
   $('.panel-collapse.collapse.in').collapse('hide');
   var lastPanel = null;
@@ -105,6 +106,7 @@ $.ajustarGridDisciplinasCocoon = function(){
 
 };
 
+// Carrega configurações padrões
 $.init = function() {
   $.ajustarGridDisciplinasCocoon();
   $('.panel-collapse.collapse:last').collapse('show');

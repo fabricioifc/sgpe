@@ -36,6 +36,7 @@ $(function() {
   });
 });
 
+// Função utilizada para adicionar editor HTML em textarea com data-provider = summernote
 $.addSummernote = function(){
   $('[data-provider="summernote"]').each(function() {
     $(this).summernote({
