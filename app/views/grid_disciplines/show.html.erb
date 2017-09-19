@@ -1,35 +1,49 @@
-<div class="page-header">
-  <%= link_to grid_disciplines_path, class: 'btn btn-default' do %>
+<%- model = GridDiscipline %>
+
+<div class="well well-sm">
+  <%= link_to grid_path(@grid_discipline.grid.id), class: 'btn btn-xs btn-default' do %>
     <i class='fa fa-list fa-2'></i>
     <%= t('helpers.links.back') %>
   <% end %>
-  <%= link_to edit_grid_discipline_path(@grid_discipline), class: 'btn btn-primary' do %>
+  <%= link_to edit_grid_path(@grid_discipline.grid.id), class: 'btn btn-xs btn-primary' do %>
     <i class='fa fa-pencil-square-o fa-2'></i>
     <%= t('helpers.links.edit') %>
   <% end %>
-  <h1>Show grid_discipline</h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt>Year:</dt>
-  <dd><%= @grid_discipline.year %></dd>
-
-  <dt>Ementa:</dt>
-  <dd><%= @grid_discipline.ementa %></dd>
-
-  <dt>Objetivo geral:</dt>
-  <dd><%= @grid_discipline.objetivo_geral %></dd>
-
-  <dt>Bib geral:</dt>
-  <dd><%= @grid_discipline.bib_geral %></dd>
-
-  <dt>Bib espec:</dt>
-  <dd><%= @grid_discipline.bib_espec %></dd>
-
-  <dt>Grid:</dt>
-  <dd><%= @grid_discipline.grid %></dd>
-
-  <dt>Discipline:</dt>
-  <dd><%= @grid_discipline.discipline %></dd>
-
-</dl>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <%= "#{@grid_discipline.discipline.sigla} - #{@grid_discipline.discipline.title}" %>
+      <span class="pull-right"><%= @grid_discipline.year %></span>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <div class="list-group">
+      <a href="#" class="list-group-item">
+        <h4 class="list-group-item-heading">
+          <%= model.human_attribute_name(:ementa) %>
+        </h4>
+        <p class="list-group-item-text text-justify"><%= @grid_discipline.ementa.html_safe %></p>
+      </a>
+      <a href="#" class="list-group-item">
+        <h4 class="list-group-item-heading">
+          <%= model.human_attribute_name(:objetivo_geral) %>
+        </h4>
+        <p class="list-group-item-text text-justify"><%= @grid_discipline.objetivo_geral.html_safe %></p>
+      </a>
+      <a href="#" class="list-group-item">
+        <h4 class="list-group-item-heading">
+          <%= model.human_attribute_name(:bib_geral) %>
+        </h4>
+        <p class="list-group-item-text text-justify"><%= @grid_discipline.bib_geral.html_safe %></p>
+      </a>
+      <a href="#" class="list-group-item">
+        <h4 class="list-group-item-heading">
+          <%= model.human_attribute_name(:bib_espec) %>
+        </h4>
+        <p class="list-group-item-text text-justify"><%= @grid_discipline.bib_espec.html_safe %></p>
+      </a>
+    </div>
+  </div>
+</div>

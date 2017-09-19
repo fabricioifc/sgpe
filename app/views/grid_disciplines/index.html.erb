@@ -14,26 +14,26 @@
       <%= content_tag :table, id: "grid_disciplines_datatable", class: 'table table-striped table-bordered', role: :datatable, data: { url: grid_disciplines_path(format: :json)} do %>
         <thead>
           <tr>
-                        <th><%= model.human_attribute_name(:year) %></th>
-                        <th><%= model.human_attribute_name(:ementa) %></th>
-                        <th><%= model.human_attribute_name(:objetivo_geral) %></th>
-                        <th><%= model.human_attribute_name(:bib_geral) %></th>
-                        <th><%= model.human_attribute_name(:bib_espec) %></th>
-                        <th><%= model.human_attribute_name(:grid) %></th>
-                        <th><%= model.human_attribute_name(:discipline) %></th>
-                        <th><%= t('helpers.actions') %></th>
+            <th><%= model.human_attribute_name(:year) %></th>
+            <th><%= model.human_attribute_name(:ementa) %></th>
+            <th><%= model.human_attribute_name(:objetivo_geral) %></th>
+            <th><%= model.human_attribute_name(:bib_geral) %></th>
+            <th><%= model.human_attribute_name(:bib_espec) %></th>
+            <th><%= model.human_attribute_name(:grid) %></th>
+            <th><%= model.human_attribute_name(:discipline) %></th>
+            <th><%= t('helpers.actions') %></th>
           </tr>
         </thead>
         <tbody>
           <%= content_tag_for(:tr, @grid_disciplines) do |grid_discipline| %>
-                            <td><%= grid_discipline.year %></td>
-                            <td><%= grid_discipline.ementa %></td>
-                            <td><%= grid_discipline.objetivo_geral %></td>
-                            <td><%= grid_discipline.bib_geral %></td>
-                            <td><%= grid_discipline.bib_espec %></td>
-                            <td><%= grid_discipline.grid %></td>
-                            <td><%= grid_discipline.discipline %></td>
-                        <td><%= grid_discipline.decorate.link_show %></td>
+            <td><%= grid_discipline.year %></td>
+            <td><%= grid_discipline.ementa %></td>
+            <td><%= grid_discipline.objetivo_geral %></td>
+            <td><%= grid_discipline.bib_geral %></td>
+            <td><%= grid_discipline.bib_espec %></td>
+            <td><%= grid_discipline.grid %></td>
+            <td><%= grid_discipline.discipline %></td>
+            <td><%= grid_discipline.decorate.link_show %></td>
             <td><%= grid_discipline.decorate.link_edit %></td>
             <td><%= grid_discipline.decorate.link_destroy %></td>
           <% end %>

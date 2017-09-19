@@ -19,20 +19,21 @@
               <%= f.select :discipline_id, @disciplinas.collect { |c| [c.title, c.id] }, id: :discipline_id, prompt: true %>
             </div>
           </div>
+          
           <div class="row">
             <div class="col-md-6">
-              <%= f.text_area :ementa, id: :grid_discipline_ementa %>
+              <%= f.text_area :ementa, id: :grid_discipline_ementa, rows: 8 %>
             </div>
             <div class="col-md-6">
-              <%= f.text_area :objetivo_geral, id: :grid_discipline_objetivo_geral %>
+              <%= f.text_area :objetivo_geral, id: :grid_discipline_objetivo_geral, rows: 8 %>
             </div>
           </div>
           <div class="row">
             <div class="col-md-6">
-              <%= f.text_area :bib_geral, id: :grid_discipline_bib_geral %>
+              <%= f.text_area :bib_geral, id: :grid_discipline_bib_geral, rows: 8 %>
             </div>
             <div class="col-md-6">
-              <%= f.text_area :bib_espec, id: :grid_discipline_bib_espec %>
+              <%= f.text_area :bib_espec, id: :grid_discipline_bib_espec, rows: 8 %>
             </div>
           </div>
         </div>

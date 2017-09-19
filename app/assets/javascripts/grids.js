@@ -93,6 +93,30 @@ document.addEventListener("turbolinks:load", function() {
     });
     $(lastPanel).find('div.panel-collapse').collapse('show');
 
+    // $('ul.nav.nav-tabs').each(function(k, v) {
+    //   var id = k;
+    //   $(this).children().each(function(k, v){
+    //     var href = $(v).find('a').attr('href');
+    //     var target = $(v).find('a').data('target');
+    //
+    //     $(v).find('a').attr('href', href + id)
+    //     $(v).find('a').attr('data-target', target + id)
+    //
+    //   });
+    // });
+    //
+    // $('div.tab-content').each(function(k, v) {
+    //   var id = k;
+    //   $(this).children().each(function(k, v){
+    //     var div = $(v).attr('id');
+    //     var textarea = $(v).find('textarea').attr('id');
+    //
+    //     $(v).attr('id', div + id);
+    //     $(v).find('textarea').attr('id', textarea + id);
+    //
+    //   });
+    // });
+
   });
 
   $('.panel-collapse.collapse').collapse('show');

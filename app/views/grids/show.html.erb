@@ -1,23 +1,64 @@
-<div class="page-header">
-  <%= link_to grids_path, class: 'btn btn-default' do %>
-    <i class='fa fa-list fa-2'></i>
-    <%= t('helpers.links.back') %>
-  <% end %>
-  <%= link_to edit_grid_path(@grid), class: 'btn btn-primary' do %>
-    <i class='fa fa-pencil-square-o fa-2'></i>
-    <%= t('helpers.links.edit') %>
-  <% end %>
-  <h1>Show grid</h1>
+<%- model = Grid %>
+<%- modelDiscipline = GridDiscipline %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">#<%= @grid.id %> Detalhes da grade</h3>
+  </div>
+  <div class="panel-body">
+
+    <div class="col-md-5 col-lg-5">
+
+      <div class="well-sm alert alert-success">
+
+        <dl class="dl-horizontal">
+          <dt><%= model.human_attribute_name(:year) %></dt>
+          <dd><%= @grid.year %></dd>
+          <dt><%= model.human_attribute_name(:course) %></dt>
+          <dd><%= @grid.course.name %></dd>
+          <dt><%= model.human_attribute_name(:active) %></dt>
+          <dd><%= @grid.decorate.active %></dd>
+        </dl>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-7 col-lg-7">
+
+      <div class='table-responsive'>
+        <table class='table table-striped table-bordered table-hover table-condensed'>
+          <caption class="well-sm alert-success">Disciplinas da grade</caption>
+          <thead>
+            <tr class="alert-warning">
+              <th><%= modelDiscipline.human_attribute_name(:year) %></th>
+              <th><%= modelDiscipline.human_attribute_name(:discipline) %></th>
+              <th class="text-center"><%= t('helpers.actions') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @grid.grid_disciplines.order(:year).each do |d| %>
+              <tr>
+                <td><%= d.year %></td>
+                <td><%= "#{d.discipline.sigla} - #{d.discipline.title}" %></td>
+                <td class="text-center"><%= d.decorate.link_show %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="panel-footer">
+    <%= link_to grids_path, class: 'btn btn-xs btn-default' do %>
+      <i class='fa fa-list fa-2'></i>
+      <%= t('helpers.links.back') %>
+    <% end %>
+    <%= link_to edit_grid_path(@grid), class: 'btn btn-xs btn-primary' do %>
+      <i class='fa fa-pencil-square-o fa-2'></i>
+      <%= t('helpers.links.edit') %>
+    <% end %>
+  </div>
 </div>
-
-<dl class="dl-horizontal">
-  <dt>Year:</dt>
-  <dd><%= @grid.year %></dd>
-
-  <dt>Active:</dt>
-  <dd><%= @grid.active %></dd>
-
-  <dt>Course:</dt>
-  <dd><%= @grid.course %></dd>
-
-</dl>
