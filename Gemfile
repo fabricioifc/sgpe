@@ -108,3 +108,4 @@ gem 'tinymce-rails' #html editor
 gem 'tinymce-rails-langs'
 
 gem 'cocoon'
+gem 'summernote-rails'

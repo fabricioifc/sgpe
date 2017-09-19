@@ -22,6 +22,7 @@
 //= require datatables/dataTables.bootstrap
 //= require tinymce
 //= require cocoon
+//= require summernote
 //= require_tree .
 
 $(function() {
@@ -31,5 +32,11 @@ $(function() {
     var loadingHTML = "<div class='loading'>Carregando...</div>";
     $("table.datatable").html(loadingHTML).load($(this).attr("href"));
     return false;
+  });
+});
+
+document.addEventListener("turbolinks:load", function() {
+  $('[data-provider="summernote"]').each(function() {
+    $(this).summernote();
   });
 });
