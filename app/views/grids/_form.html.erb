@@ -14,29 +14,21 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-12">
-        <%= f.submit %>
-      </div>
-    </div>
-
-    <hr>
-
     <div class="well well-sm">
       <%= link_to_add_association f, :grid_disciplines, class: 'btn btn-xs btn-success',
       'data-association-insertion-node' => '#grid_disciplines',
       'data-association-insertion-method' => 'append' do %>
-        <i class="fa fa-plus"></i> Adicionar disciplina
+        <i class="fa fa-plus"></i> <%= t 'helpers.titles.add_discipline' %>
       <% end %>
 
       <div class="pull-right">
         <%= link_to '#', id: 'expand_all', class: 'btn btn-xs btn-info' do %>
           <i class="fa fa-arrow-down"></i>
-          Expandir
+          <%= t 'helpers.titles.expand_all' %>
         <% end %>
         <%= link_to '#', id: 'collapse_all', class: 'btn btn-xs btn-info' do %>
           <i class="fa fa-arrow-up"></i>
-          Contrair
+          <%= t 'helpers.titles.collapse_all' %>
         <% end %>
       </div>
     </div>
@@ -47,6 +39,13 @@
            <%= render partial: 'grid_discipline_fields', locals: { f: builder } %>
         <% end %>
       </fieldset>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>
     </div>
 
 <% end %>

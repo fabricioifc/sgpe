@@ -1,6 +1,17 @@
 <%- model = Grid %>
 <%- modelDiscipline = GridDiscipline %>
 
+<div class="well well-sm">
+  <%= link_to grids_path, class: 'btn btn-xs btn-default' do %>
+    <i class='fa fa-list fa-2'></i>
+    <%= t('helpers.links.back') %>
+  <% end %>
+  <%= link_to edit_grid_path(@grid), class: 'btn btn-xs btn-primary' do %>
+    <i class='fa fa-pencil-square-o fa-2'></i>
+    <%= t('helpers.links.edit') %>
+  <% end %>
+</div>
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">#<%= @grid.id %> Detalhes da grade</h3>
@@ -50,15 +61,5 @@
 
     </div>
 
-  </div>
-  <div class="panel-footer">
-    <%= link_to grids_path, class: 'btn btn-xs btn-default' do %>
-      <i class='fa fa-list fa-2'></i>
-      <%= t('helpers.links.back') %>
-    <% end %>
-    <%= link_to edit_grid_path(@grid), class: 'btn btn-xs btn-primary' do %>
-      <i class='fa fa-pencil-square-o fa-2'></i>
-      <%= t('helpers.links.edit') %>
-    <% end %>
   </div>
 </div>

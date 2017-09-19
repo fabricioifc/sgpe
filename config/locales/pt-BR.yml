@@ -2,9 +2,11 @@ pt-BR:
   app_name: 'Plano de Ensino - IF'
   activerecord:
     models:
-      user: "Usuário"
-      curso: "Curso"
-      discipline: "Disciplina"
+      user: Usuário
+      curso: Curso
+      discipline: Disciplina
+      grid: Grade
+      grid_discipline: Disciplina da grade
     attributes:
       user:
         new: Usuário
@@ -27,11 +29,11 @@ pt-BR:
         active: Ativo
       grid:
         year: Ano
-        course: Curso
+        course_id: Curso
         active: Situação
       grid_discipline:
         year: Ano
-        discipline: Disciplina
+        discipline_id: Disciplina
         ementa: Ementa
         objetivo_geral: Objetivo geral
         bib_geral: Bibliografia geral
@@ -275,14 +277,19 @@ pt-BR:
         cursos: 'Cursos'
         tests: 'Testes'
         posts: 'Posts'
+        grids: 'Grades'
     titles:
       edit: "Editar %{model}"
       save: "Salvar %{model}"
       new: "Novo %{model}"
+      newa: "Nova %{model}"
       delete: "Excluir %{model}"
       listing: "Listando %{model}"
       welcome: "Bem Vindo(a)"
       admin: "Administração"
+      add_discipline: Adicionar disciplina
+      expand_all: Expandir
+      collapse_all: Contrair
     page_entries_info:
       more_pages:
         display_entries: Exibindo %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> de um total de <b>%{total}</b>

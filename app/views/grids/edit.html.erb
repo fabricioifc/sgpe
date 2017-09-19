@@ -1,5 +1,17 @@
 <%- model = Grid %>
 
+<div class="well well-sm">
+  <!-- <= link_to t('helpers.links.back'), discipline_path %> -->
+  <%= link_to grids_path, class: 'btn btn-xs btn-default' do %>
+    <i class='fa fa-list fa-2'></i>
+    <%= t('helpers.links.back') %>
+  <% end %>
+  <%= link_to @grid, class: 'btn btn-xs btn-info' do %>
+    <i class="fa fa-info fa-2" aria-hidden="true"></i>
+    <%= t('helpers.links.show') %>
+  <% end %>
+</div>
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">
@@ -8,16 +20,5 @@
   </div>
   <div class="panel-body">
     <%= render 'form', grid: @grid %>
-  </div>
-  <div class="panel-footer">
-    <!-- <= link_to t('helpers.links.back'), discipline_path %> -->
-    <%= link_to grids_path, class: 'btn btn-sm btn-default' do %>
-      <i class='fa fa-list fa-2'></i>
-      <%= t('helpers.links.back') %>
-    <% end %>
-    <%= link_to @grid, class: 'btn btn-sm btn-info' do %>
-      <i class="fa fa-info fa-2" aria-hidden="true"></i>
-      <%= t('helpers.links.show') %>
-    <% end %>
   </div>
 </div>
