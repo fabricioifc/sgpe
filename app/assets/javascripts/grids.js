@@ -101,16 +101,14 @@ $.ajustarGridDisciplinasCocoon = function(){
   });
   $(lastPanel).find('div.panel-collapse').collapse('show');
 
-  $('[data-provider="summernote"]').each(function() {
-    $(this).summernote();
-  });
+  $.addSummernote();
+
 };
 
 $.init = function() {
   $.ajustarGridDisciplinasCocoon();
   $('.panel-collapse.collapse:last').collapse('show');
 };
-
 
 
 // $('ul.nav.nav-tabs').each(function(k, v) {

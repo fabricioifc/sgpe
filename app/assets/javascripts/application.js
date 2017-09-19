@@ -23,6 +23,7 @@
 //= require tinymce
 //= require cocoon
 //= require summernote
+//= require summernote/locales/pt-BR
 //= require_tree .
 
 $(function() {
@@ -35,8 +36,11 @@ $(function() {
   });
 });
 
-document.addEventListener("turbolinks:load", function() {
+$.addSummernote = function(){
   $('[data-provider="summernote"]').each(function() {
-    $(this).summernote();
+    $(this).summernote({
+      lang: 'pt-BR',
+      height: 100
+    });
   });
-});
+};
