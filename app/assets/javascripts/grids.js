@@ -92,7 +92,7 @@ document.addEventListener("turbolinks:load", function() {
 });
 
 // Ajusta os ids dos paineis, evitando ids duplicados dinamicamente
-$.ajustarGridDisciplinasCocoon = function(){
+$.ajustarGridDisciplinasCocoon = function(e){
   $('.panel-collapse.collapse.in').collapse('hide');
   var lastPanel = null;
   $("#grid_disciplines .panel").each(function (k, v) {
@@ -104,6 +104,8 @@ $.ajustarGridDisciplinasCocoon = function(){
 
   $.addSummernote();
 
+  e.preventDefault();
+  return false;
 };
 
 // Carrega configurações padrões
@@ -135,4 +137,19 @@ $.init = function() {
 //     $(v).find('textarea').attr('id', textarea + id);
 //
 //   });
+// });
+
+// $(document).on('blur', 'input.grid_discipline_year', function(e){
+//
+//   var year = $(this).val();
+//   var discipline = $(this).closest('div.nested-fields').find('div.panel-body').find('select').find('option:selected').text();
+//   var span_text = $(this).closest('div.nested-fields').find('h3.panel-title a span.grid_discipline_text');
+//   if (year !== '' && discipline !== '') {
+//       $(span_text).text(discipline + ' (' + year + ')');
+//   } else {
+//     $(span_text).text('');
+//   }
+//
+//   e.preventDefault();
+//   return false;
 // });
