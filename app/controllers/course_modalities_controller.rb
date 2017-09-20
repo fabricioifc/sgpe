@@ -34,7 +34,7 @@ class CourseModalitiesController < ApplicationController
 
     respond_to do |format|
       if @course_modality.save
-        format.html { redirect_to course_modalities_path, notice: 'Course modality was successfully created.' }
+        format.html { redirect_to course_modalities_path, notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :index, status: :created, location: @course_modality }
       else
         format.html { render :new }

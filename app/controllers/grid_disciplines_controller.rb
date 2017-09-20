@@ -28,7 +28,7 @@ class GridDisciplinesController < ApplicationController
 
     respond_to do |format|
       if @grid_discipline.save
-        format.html { redirect_to @grid_discipline, notice: 'Grid discipline was successfully created.' }
+        format.html { redirect_to @grid_discipline, notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :show, status: :created, location: @grid_discipline }
       else
         format.html { render :new }

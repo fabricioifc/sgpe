@@ -34,7 +34,7 @@ class TurmasController < ApplicationController
 
     respond_to do |format|
       if @turma.save
-        format.html { redirect_to @turma, notice: 'Turma was successfully created.' }
+        format.html { redirect_to @turma, notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :show, status: :created, location: @turma }
       else
         format.html { render :new }

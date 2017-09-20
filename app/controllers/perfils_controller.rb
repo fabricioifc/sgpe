@@ -33,7 +33,7 @@ class PerfilsController < ApplicationController
 
     respond_to do |format|
       if @perfil.save
-        format.html { redirect_to perfils_path, notice: 'Perfil was successfully created.' }
+        format.html { redirect_to perfils_path, notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :index, status: :created, location: @perfil }
       else
         format.html { render :new }

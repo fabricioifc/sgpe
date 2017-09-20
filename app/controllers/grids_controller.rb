@@ -23,7 +23,6 @@ class GridsController < ApplicationController
 
   # GET /grids/new
   def new
-    @indice = 1
     @grid = Grid.new
     @grid.grid_disciplines.build
   end
@@ -40,7 +39,7 @@ class GridsController < ApplicationController
 
     respond_to do |format|
       if @grid.save
-        format.html { redirect_to @grid, notice: 'Grid was successfully created.' }
+        format.html { redirect_to @grid, notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :show, status: :created, location: @grid }
       else
         format.html { render :new }

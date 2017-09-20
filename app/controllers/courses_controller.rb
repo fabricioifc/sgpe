@@ -39,7 +39,7 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to courses_path, notice: 'Course was successfully created.' }
+        format.html { redirect_to courses_path, notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :index, status: :created, location: @course }
       else
         format.html { render :new }

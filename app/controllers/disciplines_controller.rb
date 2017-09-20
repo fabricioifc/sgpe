@@ -47,7 +47,7 @@ class DisciplinesController < ApplicationController
 
     respond_to do |format|
       if @discipline.save
-        format.html { redirect_to @discipline, notice: 'Discipline was successfully created.' }
+        format.html { redirect_to @discipline, notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :show, status: :created, location: @discipline }
       else
         format.html { render :new }

@@ -7,6 +7,7 @@ pt-BR:
       discipline: Disciplina
       grid: Grade
       grid_discipline: Disciplina da grade
+      course_format: Formato do curso
     attributes:
       user:
         new: Usuário
@@ -18,6 +19,8 @@ pt-BR:
         password_confirmation: "Confirmar Senha"
         current_password: "Senha Atual"
         remember_me: "Lembre-se de mim"
+      course_format:
+        name: Nome
       curso:
         title: 'Título'
         description: 'Descrição'

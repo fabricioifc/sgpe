@@ -3,6 +3,8 @@ class CourseFormatsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
 
+  responders :flash
+
   # GET /course_formats
   # GET /course_formats.json
   def index
@@ -34,7 +36,7 @@ class CourseFormatsController < ApplicationController
 
     respond_to do |format|
       if @course_format.save
-        format.html { redirect_to course_formats_path, notice: 'Course format was successfully created.' }
+        format.html { redirect_to course_formats_path, notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :index, status: :created, location: course_formats_path }
         # format.html { redirect_to @course_format, notice: 'Course format was successfully created.' }
         # format.json { render :show, status: :created, location: @course_format }
@@ -50,7 +52,7 @@ class CourseFormatsController < ApplicationController
   def update
     respond_to do |format|
       if @course_format.update(course_format_params)
-        format.html { redirect_to course_formats_path, notice: 'Course format was successfully created.' }
+        format.html { redirect_to course_formats_path, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :index, status: :created, location: course_formats_path }
         # format.html { redirect_to @course_format, notice: 'Course format was successfully updated.' }
         # format.json { render :show, status: :ok, location: @course_format }
@@ -66,7 +68,7 @@ class CourseFormatsController < ApplicationController
   def destroy
     @course_format.destroy
     respond_to do |format|
-      format.html { redirect_to course_formats_url, notice: 'Course format was successfully destroyed.' }
+      format.html { redirect_to course_formats_url, notice: t('flash.actions.destroy.notice', resource_name: controller_name.classify.constantize.model_name.human) }
       format.json { head :no_content }
     end
   end

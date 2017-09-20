@@ -423,6 +423,7 @@ DEPENDENCIES
   rails_admin_rollincode (~> 1.0)
   record_tag_helper (~> 1.0)
   redis-rails
+  responders
   rolify
   sass-rails (~> 5.0)
   select2-rails
