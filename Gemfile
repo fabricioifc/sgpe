@@ -109,4 +109,3 @@ gem 'tinymce-rails-langs'
 
 gem 'cocoon'
 gem 'summernote-rails'
-gem "responders" # permite definir respostas padrões nos controllers

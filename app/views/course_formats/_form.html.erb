@@ -2,7 +2,7 @@
   <%= error_messages_for(course_format) %>
 
 
-      <%= f.text_field :name, id: :course_format_name %>
-  
+      <%= f.text_field :name, id: :course_format_name, autofocus:true %>
+
   <%= f.submit class: "btn btn-primary" %>
 <% end %>

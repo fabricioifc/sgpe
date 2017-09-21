@@ -66,7 +66,7 @@ document.addEventListener("turbolinks:load", function() {
   });
 });
 
-document.addEventListener("turbolinks:load", function() {
+document.addEventListener("turbolinks:load", function(event) {
 
   $(document).on('click', 'a#expand_all', function(e){
     $('.panel-collapse.collapse').collapse('show');
@@ -83,16 +83,16 @@ document.addEventListener("turbolinks:load", function() {
     $(this).find('div.panel-collapse').collapse('show');
   });
 
-  $('#grid_disciplines').on('cocoon:after-insert', function(e, insertedItem) {
-    $.ajustarGridDisciplinasCocoon();
+  $('#grid_disciplines').on('cocoon:after-insert', function(event, insertedItem) {
+    $.ajustarGridDisciplinasCocoon(event);
   });
 
-  $.init();
+  $.init(event);
 
 });
 
 // Ajusta os ids dos paineis, evitando ids duplicados dinamicamente
-$.ajustarGridDisciplinasCocoon = function(e){
+$.ajustarGridDisciplinasCocoon = function(event){
   $('.panel-collapse.collapse.in').collapse('hide');
   var lastPanel = null;
   $("#grid_disciplines .panel").each(function (k, v) {
@@ -104,13 +104,13 @@ $.ajustarGridDisciplinasCocoon = function(e){
 
   $.addSummernote();
 
-  e.preventDefault();
+  event.preventDefault();
   return false;
 };
 
 // Carrega configurações padrões
-$.init = function() {
-  $.ajustarGridDisciplinasCocoon();
+$.init = function(event) {
+  $.ajustarGridDisciplinasCocoon(event);
   $('.panel-collapse.collapse:last').collapse('show');
 };
 
