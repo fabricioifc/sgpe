@@ -10,6 +10,11 @@
     <i class='fa fa-pencil-square-o fa-2'></i>
     <%= t('helpers.links.edit') %>
   <% end %>
+
+  <%= link_to grid_path(@grid.id, format: :pdf), method: :get, target: '_blank', class: 'btn btn-xs btn-danger' do %>
+    <i class='fa fa-file-pdf-o fa-2'></i>
+    <%= t('helpers.links.pdf') %>
+  <% end %>
 </div>
 
 <div class="panel panel-default">

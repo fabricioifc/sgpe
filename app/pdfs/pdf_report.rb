@@ -13,16 +13,24 @@ class PdfReport < Prawn::Document
   end
 
   def header(title=nil)
-    image "#{Rails.root}/app/assets/images/logo.png", height: 30, align: :left
-    draw_text "IFC", size: 18, style: :bold, at: [500,710]
-    if title
-      text title, size: 14, style: :bold_italic, align: :center
+    # image "#{Rails.root}/app/assets/images/logo.png", height: 40, align: :left
+    # draw_text "#{page_number} / #{page_count}", size: 9, :at => bounds.top_right
+    # if title
+    #   text title, size: 14, style: :bold_italic, align: :center
+    # end
+    bounding_box [bounds.left, bounds.top], :width  => bounds.width do
+      image "#{Rails.root}/app/assets/images/logo.png", height: 40, align: :left
+      if title
+        text title, size: 13, style: :bold, align: :center
+      end
+      stroke_horizontal_rule
     end
   end
 
   def footer
     creation_date = Time.now.strftime('%d/%m/%Y')
-    draw_text "Data de geração: " + creation_date, size: 8, at: [0,0]
+    draw_text "Data de geração: " + creation_date, size: 9, at: [0,0]
+    draw_text "#{page_number} / #{page_count}", size: 9, :at => [500,0]
 
   end
 

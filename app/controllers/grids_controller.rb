@@ -19,6 +19,17 @@ class GridsController < ApplicationController
   # GET /grids/1
   # GET /grids/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.json
+      format.pdf do
+        pdf = GridPdf.new(@grid)
+        send_data pdf.render,
+            filename: "grid_#{@grid.id}",
+            type: 'application/pdf',
+            disposition: 'inline'
+      end
+    end
   end
 
   # GET /grids/new
