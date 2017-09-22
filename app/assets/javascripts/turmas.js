@@ -30,13 +30,13 @@ document.addEventListener("turbolinks:load", function() {
         },
         {
           width: "10",
-          className: "",
+          className: "text-center",
           searchable: true,
           orderable: true
         },
         {
           width: "10%",
-          className: "",
+          className: "text-center",
           searchable: true,
           orderable: true
         },

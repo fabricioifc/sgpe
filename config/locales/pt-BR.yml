@@ -3,11 +3,13 @@ pt-BR:
   activerecord:
     models:
       user: Usuário
+      turma: Turma
       curso: Curso
       discipline: Disciplina
       grid: Grade
       grid_discipline: Disciplina da grade
-      course_format: Formato do curso
+      course_format: Formato de curso
+      course_modality: Modalidade de curso
     attributes:
       user:
         new: Usuário
@@ -19,6 +21,10 @@ pt-BR:
         password_confirmation: "Confirmar Senha"
         current_password: "Senha Atual"
         remember_me: "Lembre-se de mim"
+      turma:
+        name: Nome
+        year: Ano
+        active: Ativo
       course_format:
         name: Nome
       curso:
@@ -281,6 +287,11 @@ pt-BR:
         tests: 'Testes'
         posts: 'Posts'
         grids: 'Grades'
+        course_modalities: Modalidades de curso
+        course_formats: Formatos de curso
+        course_offers: Ofertas de curso
+        courses: Cursos
+        turmas: Turmas
     titles:
       edit: "Editar %{model}"
       save: "Salvar %{model}"
@@ -308,3 +319,5 @@ pt-BR:
       next: Próximo &rsaquo;
       previous: "&lsaquo; Anterior"
       truncate: "&hellip;"
+  valitates:
+    year: 'Ano inválido'

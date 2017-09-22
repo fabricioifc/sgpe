@@ -15,7 +15,7 @@ class TurmaDatatable < ApplicationDatatable
 
         column << turma.name
         column << turma.year
-        column << turma.active
+        column << turma.decorate.active
 
         links = []
         column << link_to("<i class='fa fa-list fa-2'></i>".html_safe, turma)

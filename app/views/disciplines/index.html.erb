@@ -2,11 +2,11 @@
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
     <h3 class="panel-title pull-left">
-      <%= t '.title', :default => model.model_name.human.pluralize.titleize %>
+      <%= link_to new_discipline_path do %>
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      <% end %>
+      <%= t '.title', :default => model.model_name.human.pluralize %>
     </h3>
-    <div class="pull-right">
-
-    </div>
   </div>
   <div class="panel-body">
     <div class="table-responsive">

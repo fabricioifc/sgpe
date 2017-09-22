@@ -3,11 +3,11 @@
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
     <h3 class="panel-title pull-left">
-      <%= t '.title', :default => model.model_name.human.pluralize.titleize %>
+      <%= link_to new_course_format_path do %>
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      <% end %>
+      <%= t '.title', :default => model.model_name.human.pluralize %>
     </h3>
-    <div class="pull-right">
-
-    </div>
   </div>
   <div class="panel-body">
     <div class="table-responsive">
@@ -29,7 +29,7 @@
     <div class="">
       <%= link_to new_course_format_path do %>
         <i class="fa fa-plus" aria-hidden="true"></i>
-        <%= t('.new', :default => t("helpers.titles.new", model: model )) %>
+        <%= t('.new', :default => t("helpers.titles.new", model: model.model_name.human.titleize )) %>
       <% end %>
     </div>
     <div class="pull-right">
