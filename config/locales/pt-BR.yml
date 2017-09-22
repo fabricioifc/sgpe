@@ -10,6 +10,8 @@ pt-BR:
       grid_discipline: Disciplina da grade
       course_format: Formato de curso
       course_modality: Modalidade de curso
+      course_offer: Oferta de curso
+      course: Curso
     attributes:
       user:
         new: Usuário
@@ -27,11 +29,14 @@ pt-BR:
         active: Ativo
       course_format:
         name: Nome
-      curso:
-        title: 'Título'
-        description: 'Descrição'
-        idativo: 'Ativo'
-        sigla: 'Sigla'
+      course:
+        name: Nome
+        sigla: Sigla
+        active: Ativo
+        course_modality: Modalidade
+        course_format: Formato
+        course_offer: Oferta
+        carga_horaria: CH
       discipline:
         title: Título
         description: Descrição

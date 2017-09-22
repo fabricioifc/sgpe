@@ -30,7 +30,7 @@
     <div class="">
       <%= link_to new_course_offer_path do %>
         <i class="fa fa-plus" aria-hidden="true"></i>
-        <%= t('.new', :default => t("helpers.titles.new", model: model )) %>
+        <%= t('.new', :default => t("helpers.titles.newa", model: model.model_name.human.downcase )) %>
       <% end %>
     </div>
     <div class="pull-right">

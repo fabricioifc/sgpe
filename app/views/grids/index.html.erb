@@ -15,7 +15,7 @@
         <thead>
           <tr>
             <th><%= model.human_attribute_name(:year) %></th>
-            <th><%= model.human_attribute_name(:course) %></th>
+            <th><%= model.human_attribute_name(:course_id) %></th>
             <th><%= model.human_attribute_name(:active) %></th>
             <th></th>
             <th></th>
@@ -30,7 +30,7 @@
     <div class="">
       <%= link_to new_grid_path do %>
         <i class="fa fa-plus" aria-hidden="true"></i>
-        <%= t '.new', :default => t("helpers.titles.newa", model: model.model_name.human.titleize ) %>
+        <%= t '.new', :default => t("helpers.titles.newa", model: model.model_name.human.downcase ) %>
       <% end %>
     </div>
   </div>

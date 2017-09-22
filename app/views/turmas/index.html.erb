@@ -30,7 +30,7 @@
     <div class="">
       <%= link_to new_turma_path do %>
         <i class="fa fa-plus" aria-hidden="true"></i>
-        <%= t('.new', :default => t("helpers.titles.newa", model: model.model_name.human.titleize )) %>
+        <%= t('.new', :default => t("helpers.titles.newa", model: model.model_name.human.downcase )) %>
       <% end %>
     </div>
   </div>

@@ -13,7 +13,6 @@ class CourseDatatable < ApplicationDatatable
     courses.map do |course|
       [].tap do |column|
 
-        column << course.id
         column << course.name
         column << course.sigla
         column << course.decorate.active
@@ -61,6 +60,6 @@ class CourseDatatable < ApplicationDatatable
 
   # The columns needs to be the same list of searchable items and IN ORDER that they will appear in Data.
   def columns
-    %w(id name sigla active carga_horaria course_modality_id course_format_id)
+    %w(name sigla active carga_horaria course_modality_id course_format_id)
   end
 end

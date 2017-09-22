@@ -40,7 +40,7 @@
     <div class="">
       <%%= link_to new_<%= singular_table_name %>_path do %>
         <i class="fa fa-plus" aria-hidden="true"></i>
-        <%%= t('.new', :default => t("helpers.titles.new", model: model.model_name.human )) %>
+        <%%= t('.new', :default => t("helpers.titles.new", model: model.model_name.human.downcase )) %>
       <%% end %>
     </div>
     <div class="pull-right">
