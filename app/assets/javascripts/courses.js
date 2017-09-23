@@ -13,6 +13,7 @@ document.addEventListener("turbolinks:load", function() {
 
   $(dataTableId).each(function(){
     dataTable = $(this).DataTable({
+      responsive: true,
       destroy: true,
       processing: true,
       serverSide: true,
