@@ -327,3 +327,6 @@ pt-BR:
       truncate: "&hellip;"
   valitates:
     year: 'Ano inválido'
+  course_formats:
+    index:
+      title: Formatos de curso

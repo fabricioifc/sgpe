@@ -109,3 +109,4 @@ gem 'tinymce-rails-langs'
 
 gem 'cocoon'
 gem 'summernote-rails'
+gem 'page_title_helper'
