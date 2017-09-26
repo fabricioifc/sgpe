@@ -92,7 +92,7 @@ class GridsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def grid_params
       params.require(:grid).permit(:year, :active, :course_id, :user_id,
-        grid_disciplines_attributes: [:id, :year, :ementa, :objetivo_geral, :bib_geral, :bib_espec, :discipline_id, :_destroy]
+        grid_disciplines_attributes: [:id, :year, :semestre, :carga_horaria, :ementa, :objetivo_geral, :bib_geral, :bib_espec, :discipline_id, :_destroy]
       )
     end
 

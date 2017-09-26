@@ -12,11 +12,17 @@
       <div class="panel-body">
         <div class="controls">
           <div class="row">
-            <div class="col-md-6">
-              <%= f.text_field :year, id: :grid_discipline_year, class: 'grid_discipline_year' %>
-            </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
               <%= f.select :discipline_id, @disciplinas.collect { |c| [c.title, c.id] }, id: :grid_discipline_id, prompt: true %>
+            </div>
+            <div class="col-md-3">
+              <%= f.text_field :year, id: :grid_discipline_year, class: 'grid_discipline_year', placeholder:'1,2,3...' %>
+            </div>
+            <div class="col-md-3">
+              <%= f.text_field :semestre, id: :grid_discipline_semestre, class: 'grid_discipline_semestre', placeholder:'1,2,3...' %>
+            </div>
+            <div class="col-md-3">
+              <%= f.text_field :carga_horaria, id: :grid_discipline_carga_horaria, class: 'grid_discipline_carga_horaria' %>
             </div>
           </div>
 

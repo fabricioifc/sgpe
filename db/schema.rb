@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912164752) do
+ActiveRecord::Schema.define(version: 20170926153813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "clazzs", force: :cascade do |t|
+    t.string "name", limit: 45, null: false
+    t.integer "year", null: false
+    t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "course_formats", force: :cascade do |t|
     t.string "name", limit: 45, null: false
@@ -75,6 +83,8 @@ ActiveRecord::Schema.define(version: 20170912164752) do
     t.bigint "discipline_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "semestre"
+    t.integer "carga_horaria"
     t.index ["discipline_id"], name: "index_grid_disciplines_on_discipline_id"
     t.index ["grid_id"], name: "index_grid_disciplines_on_grid_id"
   end

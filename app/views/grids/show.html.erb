@@ -47,16 +47,20 @@
           <caption class="well-sm alert-success">Disciplinas da grade</caption>
           <thead>
             <tr class="alert-warning">
-              <th><%= modelDiscipline.human_attribute_name(:year) %></th>
               <th><%= modelDiscipline.human_attribute_name(:discipline) %></th>
+              <th><%= modelDiscipline.human_attribute_name(:year) %></th>
+              <th><%= modelDiscipline.human_attribute_name(:semestre) %></th>
+              <th><%= modelDiscipline.human_attribute_name(:carga_horaria) %></th>
               <th class="text-center"><%= t('helpers.actions') %></th>
             </tr>
           </thead>
           <tbody>
             <% @grid.grid_disciplines.order(:year).each do |d| %>
               <tr>
-                <td><%= d.year %></td>
                 <td><%= "#{d.discipline.sigla} - #{d.discipline.title}" %></td>
+                <td><%= d.year %></td>
+                <td><%= d.semestre %></td>
+                <td><%= d.carga_horaria %></td>
                 <td class="text-center"><%= d.decorate.link_show %></td>
               </tr>
             <% end %>

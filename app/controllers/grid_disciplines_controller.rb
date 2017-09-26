@@ -69,6 +69,6 @@ class GridDisciplinesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def grid_discipline_params
-      params.require(:grid_discipline).permit(:year, :ementa, :objetivo_geral, :bib_geral, :bib_espec, :grid_id, :discipline_id)
+      params.require(:grid_discipline).permit(:year, :semestre, :carga_horaria, :ementa, :objetivo_geral, :bib_geral, :bib_espec, :grid_id, :discipline_id)
     end
 end
