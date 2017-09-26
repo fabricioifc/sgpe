@@ -20,7 +20,8 @@ class GridDatatable < ApplicationDatatable
         links = []
         column << link_to("<i class='fa fa-list fa-2'></i>".html_safe, grid)
         column << link_to("<i class='fa fa-pencil-square-o fa-2'></i>".html_safe, edit_grid_path(grid))
-        column << link_to("<i class='fa fa-trash-o fa-2'></i>".html_safe, grid, method: :delete, data: { confirm: 'Tem certeza?' })
+        # column << link_to("<i class='fa fa-trash-o fa-2'></i>".html_safe, grid, method: :delete, data: { confirm: 'Tem certeza?' })
+        column << ''
         # column << links.join(" <span style='padding-right: 5px;'></span> ")
       end
     end

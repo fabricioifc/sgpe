@@ -1,0 +1,15 @@
+<%- model = Offer %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <%= t('helpers.titles.new', model: model) %>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <%= render 'form', offer: @offer %>
+  </div>
+  <div class="panel-footer">
+    <%= link_to t('helpers.links.back'), offers_path %>
+  </div>
+</div>

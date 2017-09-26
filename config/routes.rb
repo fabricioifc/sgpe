@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :offers
   resources :grid_disciplines
   resources :grids do
     resources :grid_disciplines

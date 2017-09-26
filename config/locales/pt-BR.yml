@@ -45,7 +45,7 @@ pt-BR:
       grid:
         year: Ano
         course_id: Curso
-        active: Situação
+        active: Ativo
       grid_discipline:
         year: Ano
         discipline_id: Disciplina
