@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :offers
   resources :grid_disciplines
-  resources :grids do
+  resources :grids, except: [:destroy] do
     resources :grid_disciplines
   end
   resources :turmas

@@ -17,6 +17,13 @@ class Grid < ApplicationRecord
 
   accepts_nested_attributes_for :grid_disciplines, :allow_destroy => true
 
+  amoeba do
+    enable
+    include_association :grid_disciplines
+  end
+
+  default_scope { where(enabled: true) }
+
   def decorate
     @decorate ||= GridDecorator.new self
   end

@@ -63,9 +63,21 @@ class GridsController < ApplicationController
   # PATCH/PUT /grids/1.json
   def update
     respond_to do |format|
+      @grid[:enabled] = false
+
       if @grid.update(grid_params)
-        format.html { redirect_to @grid, notice: 'Grid was successfully updated.' }
-        format.json { render :show, status: :ok, location: @grid }
+        @grid = @grid.amoeba_dup
+        @grid.user = current_user
+        @grid.enabled = true
+        
+        if @grid.save
+
+          format.html { redirect_to @grid, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
+          format.json { render :show, status: :ok, location: @grid }
+        else
+          format.html { render :edit }
+          format.json { render json: @grid.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render :edit }
         format.json { render json: @grid.errors, status: :unprocessable_entity }
@@ -75,13 +87,13 @@ class GridsController < ApplicationController
 
   # DELETE /grids/1
   # DELETE /grids/1.json
-  def destroy
-    @grid.destroy
-    respond_to do |format|
-      format.html { redirect_to grids_url, notice: 'Grid was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  # def destroy
+  #   @grid.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to grids_url, notice: 'Grid was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -91,7 +103,7 @@ class GridsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def grid_params
-      params.require(:grid).permit(:year, :active, :course_id, :user_id,
+      params.require(:grid).permit(:year, :active, :enabled, :course_id, :user_id,
         grid_disciplines_attributes: [:id, :year, :semestre, :carga_horaria, :ementa, :objetivo_geral, :bib_geral, :bib_espec, :discipline_id, :_destroy]
       )
     end

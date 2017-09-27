@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :prepare_exception_notifier
   around_action :rescue_from_fk_contraint, only: [:destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   # load_and_authorize_resource unless: :devise_controller?
   before_action do fix_carrega_permissoes end
@@ -47,6 +48,14 @@ class ApplicationController < ActionController::Base
     request.env["exception_notifier.exception_data"] = {
       :current_user => current_user
     }
+  end
+
+  def record_not_found
+    # render file: "#{Rails.root}/public/404", layout: true, status: :not_found
+    respond_to do |format|
+      flash[:warning] = 'Recurso não encontrado.'
+      format.html { redirect_to send("#{controller_name}_path") }
+    end
   end
 
 end

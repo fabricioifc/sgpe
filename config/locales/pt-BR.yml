@@ -293,6 +293,7 @@ pt-BR:
         tests: 'Testes'
         posts: 'Posts'
         grids: 'Grades'
+        grid_disciplines: 'Disciplinas da grade'
         course_modalities: Modalidades de curso
         course_formats: Formatos de curso
         course_offers: Ofertas de curso

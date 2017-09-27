@@ -110,3 +110,4 @@ gem 'tinymce-rails-langs'
 gem 'cocoon'
 gem 'summernote-rails'
 gem 'page_title_helper'
+gem 'amoeba' # para duplicar registros e seus filhos
