@@ -3,7 +3,7 @@ class Offer < ApplicationRecord
 
   enum offer_types: [:tipo1, :tipo2]
 
-  validates :course_id, presence:true
+  validates :course_id, :type, presence:true
   validates :semestre, presence: { if: -> { year.blank? } }
 
   validates :year, presence: { if: -> { semestre.blank? } },
@@ -13,7 +13,7 @@ class Offer < ApplicationRecord
     numericality: {
       only_integer: true,
       greater_than_or_equal_to: 1900,
-      less_than_or_equal_to: Date.today.year + 50
+      less_than_or_equal_to: Date.today.year + 25
     }
 
   # accepts_nested_attributes_for :grid_disciplines, :allow_destroy => true

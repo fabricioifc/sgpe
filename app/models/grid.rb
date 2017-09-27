@@ -12,7 +12,7 @@ class Grid < ApplicationRecord
     numericality: {
       only_integer: true,
       greater_than_or_equal_to: 1900,
-      less_than_or_equal_to: Date.today.year + 50
+      less_than_or_equal_to: Date.today.year + 25
     }
 
   accepts_nested_attributes_for :grid_disciplines, :allow_destroy => true
