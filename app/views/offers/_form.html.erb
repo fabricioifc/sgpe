@@ -1,11 +1,20 @@
 <%= bootstrap_form_for(offer, local:true, html: { class: "", role: "form" }) do |f| %>
   <%= error_messages_for(offer) %>
 
-
-      <%= f.number_field :year, id: :offer_year %>
-      <%= f.number_field :semestre, id: :offer_semestre %>
-      <%= f.text_field :type, id: :offer_type %>
+  <div class="row">
+    <div class="col-md-3">
+      <%= f.number_field :year, id: :offer_year, autofocus:true, placeholder:true %>
+    </div>
+    <div class="col-md-3">
+      <%= f.number_field :semestre, id: :offer_semestre, placeholder:'1,2,3...' %>
+    </div>
+    <div class="col-md-3">
+      <%= f.select :type, Offer.offer_types.keys, id: :offer_type, prompt: true %>
+    </div>
+    <div class="col-md-3">
       <%= f.select :course_id, @cursos.collect { |c| [c.name, c.id] }, id: :offer_course_id, prompt: true %>
+    </div>
+  </div>
 
   <%= f.submit class: "btn btn-primary" %>
 <% end %>

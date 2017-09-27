@@ -1,6 +1,8 @@
 class Offer < ApplicationRecord
   belongs_to :course
 
+  enum offer_types: [:tipo1, :tipo2]
+
   validates :course_id, presence:true
   validates :semestre, presence: { if: -> { year.blank? } }
 
