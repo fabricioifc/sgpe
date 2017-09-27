@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :offers
+  resources :offers do
+    collection do
+      patch :load_grid
+    end
+  end
   resources :grid_disciplines
   resources :grids, except: [:destroy] do
     resources :grid_disciplines

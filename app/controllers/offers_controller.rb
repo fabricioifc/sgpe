@@ -69,6 +69,13 @@ class OffersController < ApplicationController
     end
   end
 
+  def load_grid
+    @grid = Grid.find(params[:grid])
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_offer
