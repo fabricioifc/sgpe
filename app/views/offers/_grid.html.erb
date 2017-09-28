@@ -1,5 +1,9 @@
-<% 3.times do %>
-  <div class="col-md-4">
-    <%= "Disciplina da grade" %>
-  </div>
+<% if @grid && @grid.grid_disciplines %>
+  <% @grid.grid_disciplines.each do |g| %>
+    <div class="col-md-12">
+      <p><%= "Disciplina: #{g.year}.#{g.semestre} #{g.discipline.title}" %></p>
+    </div>
+  <% end %>
+<% else %>
+  <p>Nenhuma disciplina encontrada</p>
 <% end %>

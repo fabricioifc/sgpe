@@ -70,7 +70,7 @@ class OffersController < ApplicationController
   end
 
   def load_grid
-    @grid = Grid.find(params[:grid])
+    @grid = Grid.find(params[:grid]) unless params[:grid].blank?
     respond_to do |format|
       format.js
     end

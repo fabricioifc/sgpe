@@ -17,21 +17,18 @@
   </div>
 
   <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Ofertar disciplinas da grade</h3>
-    </div>
-    <div class="panel-body">
+    <div class="panel-heading clearfix">
       <div class="row">
-
         <div class="col-md-4">
-          <%= label_tag :grid %>
+          <!-- <span>Ofertar disciplinas da grade</span> -->
+          <!-- <= label_tag :grid %> -->
           <%= select_tag :grid, options_for_select(Grid.all.collect { |c| ["#{c.year} - #{c.course.name}", c.id] }),
             data: { remote: true, url: load_grid_offers_path, method: :patch },
             id: :grid, class: 'form-control', prompt:'Selecione a grade' %>
         </div>
-
       </div>
-
+    </div>
+    <div class="panel-body">
       <div class="row">
         <div id="grid_disciplines_partial">
 
