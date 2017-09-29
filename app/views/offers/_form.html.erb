@@ -22,7 +22,7 @@
         <div class="col-md-4">
           <!-- <span>Ofertar disciplinas da grade</span> -->
           <!-- <= label_tag :grid %> -->
-          <%= select_tag :grid, options_for_select(Grid.all.collect { |c| ["#{c.year} - #{c.course.name}", c.id] }),
+          <%= select_tag :grid, options_for_select(@grades.collect { |c| ["#{c[4]} - #{c[3]} (Ano/semestre: #{c[1]}/#{c[2]})", "#{c[0]}_#{c[1]}_#{c[2]}" ]}),
             data: { remote: true, url: load_grid_offers_path, method: :patch },
             id: :grid, class: 'form-control', prompt:'Selecione a grade' %>
         </div>

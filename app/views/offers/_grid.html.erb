@@ -1,5 +1,9 @@
 <% if @grid && @grid.grid_disciplines %>
+  <% anos = [] %>
+  <% semestres = [] %>
   <% @grid.grid_disciplines.each do |g| %>
+    <% anos << g.year unless g.year.blank? %>
+    <% semestres << g.semestre unless g.semestre.blank? %>
     <div class="col-md-12">
       <p><%= "Disciplina: #{g.year}.#{g.semestre} #{g.discipline.title}" %></p>
     </div>

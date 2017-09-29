@@ -22,6 +22,17 @@ class OffersController < ApplicationController
 
   # GET /offers/new
   def new
+    # @grades = []
+    @grades = Grid.includes(:course).
+      joins(:grid_disciplines => :discipline).
+      pluck('id', 'grid_disciplines.year', 'grid_disciplines.semestre', 'courses.name', 'year').uniq
+    # semestres = Grid.includes(:course).
+    #   joins(:grid_disciplines => :discipline).
+    #   where('grid_disciplines.semestre is not null').
+    #   pluck('id', 'grid_disciplines.semestre', 'courses.name', 'year').uniq
+
+    # @grades << semestres unless semestres.empty?
+
     @offer = Offer.new
   end
 
@@ -70,9 +81,25 @@ class OffersController < ApplicationController
   end
 
   def load_grid
-    @grid = Grid.find(params[:grid]) unless params[:grid].blank?
-    respond_to do |format|
-      format.js
+
+    if !params[:grid].blank?
+      grid_id = params[:grid].split('_')[0]
+      ano = params[:grid].split('_')[1]
+      semestre = params[:grid].split('_')[2]
+
+      @grid = []
+
+      if !ano.nil?
+        @grid = Grid.joins(:grid_disciplines).where('grids.id = ?', grid_id).where(:grid_disciplines => {:year => ano.to_i})
+      elsif !semestre.nil?
+        @grid = Grid.joins(:grid_disciplines => :discipline).
+          where(id: grid_id).
+          where('grid_disciplines.semestre = ?', semestre).uniq
+      end
+
+      respond_to do |format|
+        format.js
+      end
     end
   end
 
