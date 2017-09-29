@@ -2,40 +2,29 @@
   <%= error_messages_for(offer) %>
 
   <div class="row">
-    <div class="col-md-3">
-      <%= f.number_field :year, id: :offer_year, autofocus:true, placeholder:true %>
+    <div class="col-md-4">
+      <%= f.select :type_offer, Offer.offer_types.keys, id: :offer_type, prompt: true, autofocus:true %>
     </div>
-    <div class="col-md-3">
+    <!-- <div class="col-md-4">
+      <= f.select :course_id, @cursos.collect { |c| [c.name, c.id] }, id: :offer_course_id, prompt: true %>
+    </div> -->
+    <div class="col-md-4">
+      <%= f.number_field :year, id: :offer_year, placeholder:true %>
+    </div>
+    <div class="col-md-4">
       <%= f.number_field :semestre, id: :offer_semestre, placeholder:'1,2,3...' %>
     </div>
-    <div class="col-md-3">
-      <%= f.select :type, Offer.offer_types.keys, id: :offer_type, prompt: true %>
-    </div>
-    <div class="col-md-3">
-      <%= f.select :course_id, @cursos.collect { |c| [c.name, c.id] }, id: :offer_course_id, prompt: true %>
+    <div class="col-md-12">
+      <%= f.label :grid_id %>
+      <%= f.select :grid_id, options_for_select(@grades.collect { |c| ["#{c[4]} - #{c[3]} (Ano/semestre: #{c[1]}/#{c[2]})", "#{c[0]}_#{c[1]}_#{c[2]}" ]}),
+        data: { remote: true, url: load_grid_offers_path, method: :patch },
+        id: :offer_grid_id, class: 'form-control', prompt:'Selecione a grade' %>
     </div>
   </div>
 
-  <div class="panel panel-default">
-    <div class="panel-heading clearfix">
-      <div class="row">
-        <div class="col-md-4">
-          <!-- <span>Ofertar disciplinas da grade</span> -->
-          <!-- <= label_tag :grid %> -->
-          <%= select_tag :grid, options_for_select(@grades.collect { |c| ["#{c[4]} - #{c[3]} (Ano/semestre: #{c[1]}/#{c[2]})", "#{c[0]}_#{c[1]}_#{c[2]}" ]}),
-            data: { remote: true, url: load_grid_offers_path, method: :patch },
-            id: :grid, class: 'form-control', prompt:'Selecione a grade' %>
-        </div>
-      </div>
-    </div>
-    <div class="panel-body">
-      <div class="row">
-        <div id="grid_disciplines_partial">
+  <hr>
 
-        </div>
-      </div>
-    </div>
-  </div>
+  <div id="grid_disciplines_partial"></div>
 
   <%= f.submit class: "btn btn-primary" %>
 <% end %>

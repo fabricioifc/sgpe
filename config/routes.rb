@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :offers do
     collection do
       patch :load_grid
+      patch :load_grid_disciplines
     end
   end
   resources :grid_disciplines

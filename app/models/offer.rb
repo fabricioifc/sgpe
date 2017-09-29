@@ -3,7 +3,7 @@ class Offer < ApplicationRecord
 
   enum offer_types: [:tipo1, :tipo2]
 
-  validates :course_id, :type, presence:true
+  validates :type_offer, :grid_id, presence:true
   validates :semestre, presence: { if: -> { year.blank? } }
 
   validates :year, presence: { if: -> { semestre.blank? } },

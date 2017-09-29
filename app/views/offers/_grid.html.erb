@@ -1,9 +1,10 @@
 <% if @grid_disciplines %>
-  <% @grid_disciplines.each do |g| %>
-    <div class="col-md-12">
-      <p><%= "Disciplina: #{g.year}.#{g.semestre} #{g.discipline.title}" %></p>
-    </div>
-  <% end %>
+  <ul class="list-group">
+    <li class="list-group-item list-group-item-success">Disciplinas da grade:</li>
+    <% @grid_disciplines.each do |g| %>
+      <li class="list-group-item"><%= "#{g.year}.#{g.semestre} #{g.discipline.title}" %></li>
+    <% end %>
+  </ul>
 <% else %>
   <p>Nenhuma disciplina encontrada</p>
 <% end %>

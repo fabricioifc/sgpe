@@ -25,6 +25,7 @@ class OffersController < ApplicationController
     # @grades = []
     @grades = Grid.includes(:course).
       joins(:grid_disciplines => :discipline).
+      order('grid_disciplines.year', 'grid_disciplines.semestre').
       pluck('id', 'grid_disciplines.year', 'grid_disciplines.semestre', 'courses.name', 'year').uniq
     # semestres = Grid.includes(:course).
     #   joins(:grid_disciplines => :discipline).
@@ -44,6 +45,8 @@ class OffersController < ApplicationController
   # POST /offers.json
   def create
     @offer = Offer.new(offer_params)
+    binding.pry
+    @offer.course = @offer.grid.course
 
     respond_to do |format|
       if @offer.save
@@ -82,10 +85,10 @@ class OffersController < ApplicationController
 
   def load_grid
 
-    if !params[:grid].blank?
-      grid_id = params[:grid].split('_')[0]
-      ano = params[:grid].split('_')[1]
-      semestre = params[:grid].split('_')[2]
+    if !params[:grid_id].blank?
+      grid_id = params[:grid_id].split('_')[0]
+      ano = params[:grid_id].split('_')[1]
+      semestre = params[:grid_id].split('_')[2]
 
       @grid_disciplines = []
 
@@ -116,7 +119,7 @@ class OffersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def offer_params
-      params.require(:offer).permit(:year, :semestre, :type, :course_id)
+      params.require(:offer).permit(:year, :semestre, :type_offer, :course_id, :grid_id)
     end
 
     def load_cursos

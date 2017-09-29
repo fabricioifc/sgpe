@@ -63,21 +63,21 @@ class GridsController < ApplicationController
   # PATCH/PUT /grids/1.json
   def update
     respond_to do |format|
-      @grid[:enabled] = false
+      # @grid[:enabled] = false
 
       if @grid.update(grid_params)
-        @grid = @grid.amoeba_dup
-        @grid.user = current_user
-        @grid.enabled = true
-        
-        if @grid.save
+        # @grid = @grid.amoeba_dup
+        # @grid.user = current_user
+        # @grid.enabled = true
 
-          format.html { redirect_to @grid, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
-          format.json { render :show, status: :ok, location: @grid }
-        else
+        # if @grid.save
+        #
+        #   format.html { redirect_to @grid, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
+        #   format.json { render :show, status: :ok, location: @grid }
+        # else
           format.html { render :edit }
           format.json { render json: @grid.errors, status: :unprocessable_entity }
-        end
+        # end
       else
         format.html { render :edit }
         format.json { render json: @grid.errors, status: :unprocessable_entity }
