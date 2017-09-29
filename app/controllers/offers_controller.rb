@@ -87,15 +87,20 @@ class OffersController < ApplicationController
       ano = params[:grid].split('_')[1]
       semestre = params[:grid].split('_')[2]
 
-      @grid = []
+      @grid_disciplines = []
 
       if !ano.nil?
-        @grid = Grid.joins(:grid_disciplines).where('grids.id = ?', grid_id).where(:grid_disciplines => {:year => ano.to_i})
+        @grid_anos = GridDiscipline.joins(:grid).where(:year => ano).where(grid_id:grid_id)
+        # @grid = Grid.joins(:grid_disciplines).where('grids.id = ?', grid_id).where(:grid_disciplines => {:year => ano.to_i})
       elsif !semestre.nil?
-        @grid = Grid.joins(:grid_disciplines => :discipline).
-          where(id: grid_id).
-          where('grid_disciplines.semestre = ?', semestre).uniq
+        @grid_semestres = GridDiscipline.joins(:grid).where(:semestre => semestre).where(grid_id:grid_id)
+        # @grid = Grid.joins(:grid_disciplines => :discipline).
+        #   where(id: grid_id).
+        #   where('grid_disciplines.semestre = ?', semestre).uniq
       end
+
+      @grid_disciplines = @grid_disciplines + @grid_anos unless @grid_anos.nil? || @grid_anos.empty?
+      @grid_disciplines = @grid_disciplines + @grid_semestres unless @grid_semestres.nil? || @grid_semestres.empty?
 
       respond_to do |format|
         format.js
