@@ -1,5 +1,6 @@
 class Offer < ApplicationRecord
   belongs_to :course
+  has_many :offer_disciplines
 
   enum offer_types: [:tipo1, :tipo2]
 
@@ -20,5 +21,14 @@ class Offer < ApplicationRecord
 
   def decorate
     @decorate ||= GridDecorator.new self
+  end
+
+  attr_accessor :grid_year, :grid_semestre
+
+  def attributes
+    super.merge(
+      'grid_year' => self.grid_year,
+      'grid_semestre' => self.grid_semestre
+    )
   end
 end

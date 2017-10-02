@@ -1,0 +1,7 @@
+<h1>Escolha ano/semestre da grade</h1>
+
+<p>Grade: <%= @offer.grid_id unless @offer.nil? %></p>
+
+<%= render layout: 'form' do |f| %>
+  <%= f.text_field :year, class: 'form-control' %>
+<% end %>

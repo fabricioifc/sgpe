@@ -1,0 +1,30 @@
+<ol class="breadcrumb">
+  <li>Step 1</li>
+  <li>Step 2</li>
+  <li class='active'>Step 3</li>
+  <li>Step 4</li>
+</ol>
+
+<p>Grade: <%= @offer_wizard.grid_id unless @offer_wizard.nil? %></p>
+<p>Ano: <%= @offer_wizard.grid_year unless @offer_wizard.nil? %></p>
+<p>Semestre: <%= @offer_wizard.grid_semestre unless @offer_wizard.nil? %></p>
+<p><%= "Disciplinas: #{@grid_disciplinas.count}" %></p>
+
+<%= form_for @offer_wizard, as: :offer_wizard, url: validate_step_wizard_path do |f| %>
+  <% if @offer_wizard.errors.any? %>
+    <div class="error_messages">
+      <h2><%= pluralize(@offer_wizard.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+      <% @offer_wizard.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= hidden_field_tag :current_step, 'step3' %>
+
+  <% @grid_disciplinas.each do |g| %>
+    <%= render partial: 'step3_item', locals: { form: f, grid_discipline: g } %>
+  <% end %>
+  <%= f.submit 'Continue' %>
+<% end %>

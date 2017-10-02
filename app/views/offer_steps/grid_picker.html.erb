@@ -1,0 +1,4 @@
+<%= render layout: 'form' do |f| %>
+  <%= f.select :grid_id, options_for_select(@grades.collect { |c| ["#{c[4]} - #{c[3]} (Ano/semestre: #{c[1]}/#{c[2]})", "#{c[0]}" ]}),
+  id: :grid_id, class: 'form-control', prompt:'Selecione a grade' %>
+<% end %>

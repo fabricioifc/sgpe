@@ -5,6 +5,17 @@ Rails.application.routes.draw do
       patch :load_grid_disciplines
     end
   end
+  resources :offer_steps
+
+  resource :wizard do
+     get :step1
+     get :step2
+     get :step3
+     get :step4
+
+     post :validate_step
+   end
+
   resources :grid_disciplines
   resources :grids, except: [:destroy] do
     resources :grid_disciplines

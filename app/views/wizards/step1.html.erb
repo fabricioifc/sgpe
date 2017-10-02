@@ -1,0 +1,25 @@
+<ol class="breadcrumb">
+  <li class='active'>Step 1</li>
+  <li>Step 2</li>
+  <li>Step 3</li>
+  <li>Step 4</li>
+</ol>
+
+<%= form_for @offer_wizard, as: :offer_wizard, url: validate_step_wizard_path do |f| %>
+  <% if @offer_wizard.errors.any? %>
+    <div class="error_messages">
+      <h2><%= pluralize(@offer_wizard.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+      <% @offer_wizard.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= hidden_field_tag :current_step, 'step1' %>
+  <%= f.select :grid_id, options_for_select(@grades.collect { |c| ["#{c[4]} - #{c[3]} (Ano/semestre: #{c[1]}/#{c[2]})", "#{c[0]}" ]}),
+    id: :grid_id, class: 'form-control', prompt:'Selecione a grade' %>
+
+  <%= f.submit 'Continue' %>
+<% end %>
