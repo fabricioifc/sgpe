@@ -35,6 +35,7 @@ class WizardsController < ApplicationController
 
     case params[:action]
     when 'step1'
+      session[:offer_attributes] = nil
       @grades = Grid.includes(:course).
         joins(:grid_disciplines => :discipline).
         order('grid_disciplines.year', 'grid_disciplines.semestre').
@@ -49,12 +50,18 @@ class WizardsController < ApplicationController
         order('grid_disciplines.semestre').
         pluck('grid_disciplines.semestre').uniq
       when 'step3'
+        @teachers = User.where(teacher:true)
         if !@offer_wizard.grid_year.nil?
-          @grid_disciplinas = GridDiscipline.joins(:grid).where('grids.id = ? and grid_disciplines.year = ?', @offer_wizard.grid_id, @offer_wizard.grid_year)
+          @grid_disciplines = GridDiscipline.joins(:grid).where('grids.id = ? and grid_disciplines.year = ?', @offer_wizard.grid_id, @offer_wizard.grid_year)
         else
-          @grid_disciplinas = GridDiscipline.joins(:grid).where('grids.id = ? and grid_disciplines.semestre = ?', @offer_wizard.grid_id, @offer_wizard.grid_semestre)
+          @grid_disciplines = GridDiscipline.joins(:grid).where('grids.id = ? and grid_disciplines.semestre = ?', @offer_wizard.grid_id, @offer_wizard.grid_semestre)
         end
-        @offer_wizard.offer.offer_disciplines.build
+
+        @grid_disciplines.each do |g|
+          @offer_wizard.offer.offer_disciplines << OfferDiscipline.new(grid_discipline: g, user:User.last)
+        end
+      when 'step4'
+        binding.pry
     end
 
   end
@@ -70,7 +77,8 @@ class WizardsController < ApplicationController
   end
 
   def offer_wizard_params
-    params.require(:offer_wizard).permit(:grid_id, :grid_year, :grid_semestre)
+    params.require(:offer_wizard).permit(:grid_id, :grid_year, :grid_semestre,
+      offer_disciplines_attributes: [:id, :grid_discipline_id, :user_id, :active, :offer_id, :_destroy])
   end
 
   class InvalidStep < StandardError; end

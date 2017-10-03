@@ -1,6 +1,6 @@
 module Wizard
   module Offer
-    STEPS = %w(step1 step2 step3).freeze
+    STEPS = %w(step1 step2 step3 step4).freeze
 
     class Base
       include ActiveModel::Model
@@ -14,7 +14,9 @@ module Wizard
       delegate :grid_year, :grid_semestre, to: :offer
 
       def initialize(offer_attributes)
+        binding.pry
         @offer = ::Offer.new(offer_attributes)
+        @offer.offer_disciplines.build
       end
     end
 
@@ -28,14 +30,15 @@ module Wizard
     end
 
     class Step3 < Step2
+      # validates :user_id, presence: true
     #   validates :address_1, presence: true
     #   validates :zip_code, presence: true
     #   validates :city, presence: true
     #   validates :country, presence: true
     end
     #
-    # class Step4 < Step3
+    class Step4 < Step3
     #   validates :phone_number, presence: true
-    # end
+    end
   end
 end

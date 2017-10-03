@@ -1,6 +1,7 @@
 class Offer < ApplicationRecord
   belongs_to :course
   has_many :offer_disciplines
+  accepts_nested_attributes_for :offer_disciplines
 
   enum offer_types: [:tipo1, :tipo2]
 
@@ -28,7 +29,8 @@ class Offer < ApplicationRecord
   def attributes
     super.merge(
       'grid_year' => self.grid_year,
-      'grid_semestre' => self.grid_semestre
+      'grid_semestre' => self.grid_semestre,
+      'offer_disciplines' => self.offer_disciplines.build
     )
   end
 end

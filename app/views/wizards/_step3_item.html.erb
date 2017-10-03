@@ -1,1 +1,9 @@
-<%= form.hidden_field :grid_discipline_id, value: grid_discipline.id %>
+<div class="row">
+  <!-- <= form.hidden_field :grid_discipline_id, value: g.id %> -->
+  <div class="col-md-4">
+    <%= form.text_field :grid_discipline_id %>
+  </div>
+  <div class="col-md-4">
+    <%= form.select :user_id, @teachers.collect { |c| [c.username, c.id] }, id: :user_id, prompt: true %>
+  </div>
+</div>
