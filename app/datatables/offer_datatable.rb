@@ -15,7 +15,7 @@ class OfferDatatable < ApplicationDatatable
 
         column << offer.year
         column << offer.semestre
-        column << offer.type
+        column << offer.type_offer
         column << offer.course.name
 
         links = []
@@ -57,6 +57,6 @@ class OfferDatatable < ApplicationDatatable
 
   # The columns needs to be the same list of searchable items and IN ORDER that they will appear in Data.
   def columns
-    %w(year semestre type course_id)
+    %w(year semestre type_offer course_id)
   end
 end

@@ -3,7 +3,7 @@
 
   <div class="row">
     <div class="col-md-4">
-      <%= f.select :type_offer, Offer.offer_types.keys, id: :offer_type, prompt: true, autofocus:true %>
+      <%= f.select :type_offer, Offer.offer_types.keys, {id: :type_offer, prompt: true, autofocus:true} %>
     </div>
     <!-- <div class="col-md-4">
       <= f.select :course_id, @cursos.collect { |c| [c.name, c.id] }, id: :offer_course_id, prompt: true %>
@@ -16,15 +16,32 @@
     </div>
     <div class="col-md-12">
       <%= f.label :grid_id %>
-      <%= f.select :grid_id, options_for_select(@grades.collect { |c| ["#{c[4]} - #{c[3]} (Ano/semestre: #{c[1]}/#{c[2]})", "#{c[0]}_#{c[1]}_#{c[2]}" ]}),
+      <%= select_tag :grid_id, options_for_select(@grades.collect { |c| ["#{c[4]} - #{c[3]} (Ano/semestre: #{c[1]}/#{c[2]})", "#{c[0]}_#{c[1]}_#{c[2]}" ]}, params[:grid_id]),
         data: { remote: true, url: load_grid_offers_path, method: :patch },
-        id: :offer_grid_id, class: 'form-control', prompt:'Selecione a grade' %>
+        id: :grid_id, class: 'form-control', prompt:'Selecione a grade' %>
     </div>
   </div>
 
-  <hr>
+  <!-- <div class="well well-sm">
+    <= link_to_add_association f, :offer_disciplines, class: 'btn btn-xs btn-success',
+    'data-association-insertion-node' => '#offer_disciplines',
+    'data-association-insertion-method' => 'append' do %>
+      <i class="fa fa-plus"></i> <= t 'helpers.titles.add_discipline' %>
+    < end %>
+  </div>
+
+  <div class="collapse-group">
+    <fieldset id="offer_disciplines">
+      <= f.fields_for :offer_disciplines do |builder| %>
+         <= render partial: 'offer_discipline_fields', locals: { f: builder } %>
+      < end %>
+    </fieldset>
+  </div> -->
+
 
   <div id="grid_disciplines_partial"></div>
+
+  <hr>
 
   <%= f.submit class: "btn btn-primary" %>
 <% end %>

@@ -2,6 +2,7 @@ class Grid < ApplicationRecord
   belongs_to :course
   belongs_to :user
   has_many :grid_disciplines, dependent: :destroy
+  has_many :offers
   # has_many :disciplines, :through => :grid_disciplines
 
   validates :course_id, presence:true

@@ -1,7 +1,7 @@
 class OfferDiscipline < ApplicationRecord
   belongs_to :offer
   belongs_to :grid_discipline
-  belongs_to :user
+  belongs_to :user, optional:true
 
   # Usuários vinculados a disciplina devem ser professores
   # scope :teacher, -> {

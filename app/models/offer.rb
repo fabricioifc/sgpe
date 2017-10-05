@@ -1,6 +1,7 @@
 class Offer < ApplicationRecord
   belongs_to :course
-  has_many :offer_disciplines
+  belongs_to :grid
+  has_many :offer_disciplines, dependent: :destroy
   accepts_nested_attributes_for :offer_disciplines
 
   enum offer_types: [:tipo1, :tipo2]
