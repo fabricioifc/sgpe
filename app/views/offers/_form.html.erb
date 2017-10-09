@@ -17,35 +17,15 @@
         data: { remote: true, url: load_grid_offers_path, method: :patch },
         id: :grid_id, class: 'form-control', prompt:'Selecione a grade' %>
     </div>
-    <div id="grid_disciplines_partial">
-      <% if !offer.offer_disciplines.empty? %>
-        <% first = 0 %>
-        <% por_grupo = 2%>
-        <% ofertas = @offer.offer_disciplines.in_groups_of(por_grupo, false) %>
 
-        <% ofertas.each do |a| %>
-          <div class="col-md-4">
-            <table class='table table-striped table-bordered table-condensed'>
-              <thead>
-                <tr>
-                  <th>Disciplina</th>
-                  <th>Professor</th>
-                </tr>
-              </thead>
-              <tbody>
-                <%= f.fields_for :offer_disciplines, @offer.offer_disciplines[first, por_grupo] do |b| %>
-                  <%= render partial: 'offer_discipline_item', locals: {g: b} %>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-          <% first = first + a.count %>
-        <% end %>
-      <% end %>
+    <hr>
+
+    <div class="col-md-12">
+      <div id="grid_disciplines_partial">
+        <%= render partial: 'grid_disciplines_teacher', locals: {offer: offer, f: f} %>
+      </div>
     </div>
   </div>
-
-  <hr>
 
   <%= f.submit class: "btn btn-primary" %>
 <% end %>

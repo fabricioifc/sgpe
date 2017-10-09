@@ -1,12 +1,26 @@
-<% if @grid_disciplines %>
-  <ul class="list-group">
-    <li class="list-group-item list-group-item-success">Disciplinas da grade:</li>
-    <% @grid_disciplines.each do |g| %>
-      <li class="list-group-item">
-        <%= "#{g.year}.#{g.semestre} #{g.discipline.title}" %>
-      </li>
+<div class="row">
+  <% if @grid_disciplines %>
+    <% grupos = @grid_disciplines.in_groups_of(4, false) %>
+
+    <% grupos.each do |grupo| %>
+      <div class="col-md-3">
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-success">Disciplinas da grade</li>
+          <% grupo.each do |g| %>
+            <li class="list-group-item">
+              <%= "#{g.year}.#{g.semestre} #{g.discipline.title}" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-  </ul>
-<% else %>
-  <p>Nenhuma disciplina encontrada</p>
-<% end %>
+
+  <% else %>
+    <div class="col-md-12">
+      <div class="alert alert-warning" role="alert">
+        Nenhuma disciplina encontrada
+      </div>
+    </div>
+  <% end %>
+
+</div>
