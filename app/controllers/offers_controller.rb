@@ -34,28 +34,37 @@ class OffersController < ApplicationController
       _#{@offer.semestre_base unless @offer.semestre_base.nil?}"
   end
 
+  def teachers
+    binding.pry
+  end
+
   # POST /offers
   # POST /offers.json
   def create
-    carregar_disciplinas_grade
-
     @offer = Offer.new(offer_params)
     @offer.grid_id = params[:grid_id].split('_')[0]
     @offer.year_base = params[:grid_id].split('_')[1]
     @offer.semestre_base = params[:grid_id].split('_')[2]
-    @offer.course = @offer.grid.course
-
-    @offer.offer_disciplines = []
-    @grid_disciplines.each do |g|
-      @offer.offer_disciplines << OfferDiscipline.new(grid_discipline: g, user:nil)
-    end
 
     respond_to do |format|
-      if @offer.save
-        format.html { redirect_to @offer, notice: 'Offer was successfully created.' }
-        format.json { render :show, status: :created, location: @offer }
+      if !@offer.nil? && @offer.valid?
+        if @offer.offer_disciplines.empty?
+          carregar_disciplinas_grade
+          @offer.offer_disciplines = []
+          @grid_disciplines.each do |g|
+            @offer.offer_disciplines << OfferDiscipline.new(grid_discipline: g, user:nil)
+          end
+          format.html { render :new }
+        elsif @offer.save
+          format.html { redirect_to @offer, notice: 'Offer was successfully created.' }
+          format.json { render :show, status: :created, location: @offer }
+        else
+          format.html { render :new }
+          format.json { render json: @offer.errors, status: :unprocessable_entity }
+        end
       else
-        binding.pry
+        carregar_disciplinas_grade
+
         format.html { render :new }
         format.json { render json: @offer.errors, status: :unprocessable_entity }
       end
@@ -65,6 +74,7 @@ class OffersController < ApplicationController
   # PATCH/PUT /offers/1
   # PATCH/PUT /offers/1.json
   def update
+    binding.pry
     respond_to do |format|
       if @offer.update(offer_params)
         format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
@@ -102,7 +112,7 @@ class OffersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def offer_params
-      params.require(:offer).permit(:year, :semestre, :type_offer, :course_id, :grid_id,
+      params.require(:offer).permit(:year, :semestre, :type_offer, :grid_id,
       offer_disciplines_attributes: [:id, :grid_discipline_id, :user_id, :active, :offer_id, :_destroy])
     end
 
@@ -111,7 +121,7 @@ class OffersController < ApplicationController
     end
 
     def load_professores
-      @professores = User.where(teacher:true)
+      @professores = User.where(teacher:true).order(:name)
     end
 
     def carregar_disciplinas_grade
@@ -136,6 +146,12 @@ class OffersController < ApplicationController
 
         @grid_disciplines = @grid_disciplines + @grid_anos unless @grid_anos.nil? || @grid_anos.empty?
         @grid_disciplines = @grid_disciplines + @grid_semestres unless @grid_semestres.nil? || @grid_semestres.empty?
+
+        if !@offer.nil?
+          if @offer.offer_disciplines.empty?
+            @offer.offer_disciplines = []
+          end
+        end
 
       end
 

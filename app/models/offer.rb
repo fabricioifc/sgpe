@@ -1,5 +1,4 @@
 class Offer < ApplicationRecord
-  belongs_to :course
   belongs_to :grid
   has_many :offer_disciplines, dependent: :destroy
   accepts_nested_attributes_for :offer_disciplines

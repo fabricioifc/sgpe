@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   resources :offers do
     collection do
       patch :load_grid
-      patch :load_grid_disciplines
+      # patch :load_grid_disciplines
+      patch :teachers
     end
+    resources :offer_disciplines
   end
   resources :offer_steps
 
