@@ -5,7 +5,7 @@ class OffersController < ApplicationController
 
   before_action :load_cursos
   before_action :load_professores
-  before_action :load_grades#, except: [:show, :create, :index]
+  before_action :load_grades
 
   # GET /offers
   # GET /offers.json
@@ -35,16 +35,18 @@ class OffersController < ApplicationController
   end
 
   def teachers
-    binding.pry
   end
 
   # POST /offers
   # POST /offers.json
   def create
     @offer = Offer.new(offer_params)
-    @offer.grid_id = params[:grid_id].split('_')[0]
-    @offer.year_base = params[:grid_id].split('_')[1]
-    @offer.semestre_base = params[:grid_id].split('_')[2]
+    @offer.grid_id = params[:grid_id]
+    @offer.year_base = params[:grid_year]
+    @offer.semestre_base = params[:grid_semestre]
+
+    @grade_anos = load_grade_anos(params[:grid_id])
+    @grade_semestres = load_grade_semestres(params[:grid_id])
 
     respond_to do |format|
       if !@offer.nil? && @offer.valid?
@@ -63,7 +65,7 @@ class OffersController < ApplicationController
           format.json { render json: @offer.errors, status: :unprocessable_entity }
         end
       else
-        carregar_disciplinas_grade
+        @grid_disciplines = carregar_disciplinas_grade
 
         format.html { render :new }
         format.json { render json: @offer.errors, status: :unprocessable_entity }
@@ -74,7 +76,6 @@ class OffersController < ApplicationController
   # PATCH/PUT /offers/1
   # PATCH/PUT /offers/1.json
   def update
-    binding.pry
     respond_to do |format|
       if @offer.update(offer_params)
         format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
@@ -97,7 +98,14 @@ class OffersController < ApplicationController
   end
 
   def load_grid
-    carregar_disciplinas_grade
+    if !params[:grid_id].nil? && !params[:grid_id].blank?
+      if params[:grid_year].nil? && params[:grid_semestre].nil?
+        @grade_anos = load_grade_anos(params[:grid_id])
+        @grade_semestres = load_grade_semestres(params[:grid_id])
+      else
+        carregar_disciplinas_grade
+      end
+    end
 
     respond_to do |format|
       format.js
@@ -127,9 +135,9 @@ class OffersController < ApplicationController
     def carregar_disciplinas_grade
 
       if !params[:grid_id].blank?
-        grid_id = params[:grid_id].split('_')[0]
-        ano = params[:grid_id].split('_')[1]
-        semestre = params[:grid_id].split('_')[2]
+        grid_id = params[:grid_id]
+        ano = params[:grid_year]
+        semestre = params[:grid_semestre]
 
         @grid = Grid.find(grid_id)
         @grid_disciplines = []
@@ -155,6 +163,8 @@ class OffersController < ApplicationController
 
       end
 
+      @grid_disciplines
+
     end
 
     def load_grades
@@ -162,5 +172,21 @@ class OffersController < ApplicationController
         joins(:grid_disciplines => :discipline).
         order('grid_disciplines.year', 'grid_disciplines.semestre').
         pluck('id', 'grid_disciplines.year', 'grid_disciplines.semestre', 'courses.name', 'year').uniq
+    end
+
+    def load_grade_anos(grid_id)
+      if grid_id
+        Grid.joins(:grid_disciplines => :discipline).
+          where('grids.id = ? and grid_disciplines.year is not null', grid_id).
+          pluck('grid_disciplines.year').uniq
+      end
+    end
+
+    def load_grade_semestres(grid_id)
+      if grid_id
+        Grid.joins(:grid_disciplines => :discipline).
+          where('grids.id = ? and grid_disciplines.semestre is not null', grid_id).
+          pluck('grid_disciplines.semestre').uniq
+      end
     end
 end

@@ -2,30 +2,38 @@
   <%= error_messages_for(offer) %>
 
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
       <%= f.select :type_offer, Offer.offer_types.keys, {id: :type_offer, prompt: true, autofocus:true} %>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
       <%= f.number_field :year, id: :offer_year, placeholder:true %>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
       <%= f.number_field :semestre, id: :offer_semestre, placeholder:'1,2,3...' %>
     </div>
-    <div class="col-md-3">
-      <%= f.label :grid_id %>
-      <%= select_tag :grid_id, options_for_select(@grades.collect { |c| ["#{c[4]} - #{c[3]} (Ano/semestre: #{c[1]}/#{c[2]})", "#{c[0]}_#{c[1]}_#{c[2]}" ]}, params[:grid_id]),
-        data: { remote: true, url: load_grid_offers_path, method: :patch },
-        id: :grid_id, class: 'form-control', prompt:'Selecione a grade' %>
-    </div>
 
-    <hr>
-
-    <div class="col-md-12">
-      <div id="grid_disciplines_partial">
-        <%= render partial: 'grid_disciplines_teacher', locals: {offer: offer, f: f} %>
+    <div class="form-group">
+      <div class="form-group col-md-6">
+        <%= f.label :grid_id %>
+        <%= select_tag :grid_id, options_for_select(@grades.collect { |c| ["#{c[4]} - #{c[3]} (Ano/semestre: #{c[1]}/#{c[2]})", "#{c[0]}" ]}, params[:grid_id]),
+          data: { remote: true, url: load_grid_offers_path, method: :patch },
+          id: :grid_id, class: 'form-control', prompt:'Selecione a grade' %>
+      </div>
+      <div class="form-group col-md-3" id="grid_ano_semestre_partial">
+        <%= render partial: 'grid_ano_semestre', locals: {} %>
       </div>
     </div>
+
+    <div class="form-group col-md-12">
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+
   </div>
 
-  <%= f.submit class: "btn btn-primary" %>
+  <hr>
+
+  <div id="grid_disciplines_partial">
+    <%= render partial: 'grid_disciplines_teacher', locals: {offer: offer, f: f} %>
+  </div>
+
 <% end %>

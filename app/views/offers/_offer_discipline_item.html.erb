@@ -1,7 +1,7 @@
 <tr>
   <%= g.hidden_field :grid_discipline_id %>
-  <td><%= g.object.grid_discipline.discipline.title unless g.object.grid_discipline.nil? %></td>
-  <td><%= g.select :user_id, options_for_select(@professores.collect { |c| [c.name, c.id ]}),
+  <td class="text-middle"><%= g.object.grid_discipline.discipline.title unless g.object.grid_discipline.nil? %></td>
+  <td style="width: 35%;"><%= g.select :user_id, options_for_select(@professores.collect { |c| [c.name, c.id ]}),
         { prompt:true, hide_label:true },
         {class: 'form-control input-sm', wrapper: { style: 'margin-bottom: 0;'} } %></td>
 </tr>
