@@ -1,12 +1,12 @@
 <div class="row">
 
-  <% if !offer.offer_disciplines.empty? %>
+  <% if !@offer.offer_disciplines.empty? %>
     <% first = 0 %>
-    <% por_grupo = 5 %>
+    <% por_grupo = @offer.offer_disciplines.count > 0 ? @offer.offer_disciplines.count / 3 : 1 %>
     <% ofertas = @offer.offer_disciplines.in_groups_of(por_grupo, false) %>
 
     <% ofertas.each do |a| %>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <table class='table table-striped table-bordered table-condensed'>
           <thead>
             <tr>
