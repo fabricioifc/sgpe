@@ -29,62 +29,34 @@ class OffersController < ApplicationController
 
   # GET /offers/1/edit
   def edit
-    params[:grid_id] = "#{@offer.grid_id}
-      _#{@offer.year_base unless @offer.year_base.nil?}
-      _#{@offer.semestre_base unless @offer.semestre_base.nil?}"
-  end
+    params[:grid_id] = @offer.grid_id
+    params[:grid_year] = @offer.year_base
+    params[:grid_semestre] = @offer.semestre_base
 
-  def teachers
+    @grade_anos = load_grade_anos(params[:grid_id])
+    @grade_semestres = load_grade_semestres(params[:grid_id])
   end
 
   # POST /offers
   # POST /offers.json
   def create
     @offer = Offer.new(offer_params)
-    @offer.grid_id = params[:grid_id]
-    @offer.year_base = params[:grid_year]
-    @offer.semestre_base = params[:grid_semestre]
-
-    @grade_anos = load_grade_anos(params[:grid_id])
-    @grade_semestres = load_grade_semestres(params[:grid_id])
-
-    respond_to do |format|
-      if !@offer.nil? && @offer.valid?
-        if @offer.offer_disciplines.empty?
-          carregar_disciplinas_grade
-          @offer.offer_disciplines = []
-          @grid_disciplines.each do |g|
-            @offer.offer_disciplines << OfferDiscipline.new(grid_discipline: g, user:nil)
-          end
-          format.html { render :new }
-        elsif @offer.save
-          format.html { redirect_to @offer, notice: 'Offer was successfully created.' }
-          format.json { render :show, status: :created, location: @offer }
-        else
-          format.html { render :new }
-          format.json { render json: @offer.errors, status: :unprocessable_entity }
-        end
-      else
-        @grid_disciplines = carregar_disciplinas_grade
-
-        format.html { render :new }
-        format.json { render json: @offer.errors, status: :unprocessable_entity }
-      end
-    end
+    salvar_atualizar(true)
   end
 
   # PATCH/PUT /offers/1
   # PATCH/PUT /offers/1.json
   def update
-    respond_to do |format|
-      if @offer.update(offer_params)
-        format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
-        format.json { render :show, status: :ok, location: @offer }
-      else
-        format.html { render :edit }
-        format.json { render json: @offer.errors, status: :unprocessable_entity }
-      end
-    end
+    salvar_atualizar(false)
+    # respond_to do |format|
+    #   if @offer.update(offer_params)
+    #     format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
+    #     format.json { render :show, status: :ok, location: @offer }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @offer.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /offers/1
@@ -139,6 +111,7 @@ class OffersController < ApplicationController
         ano = params[:grid_year]
         semestre = params[:grid_semestre]
 
+
         @grid = Grid.find(grid_id)
         @grid_disciplines = []
 
@@ -175,7 +148,7 @@ class OffersController < ApplicationController
     end
 
     def load_grade_anos(grid_id)
-      if grid_id
+      if !grid_id.nil? && !grid_id.blank?
         Grid.joins(:grid_disciplines => :discipline).
           where('grids.id = ? and grid_disciplines.year is not null', grid_id).
           pluck('grid_disciplines.year').uniq
@@ -183,10 +156,50 @@ class OffersController < ApplicationController
     end
 
     def load_grade_semestres(grid_id)
-      if grid_id
+      if !grid_id.nil? && !grid_id.blank?
         Grid.joins(:grid_disciplines => :discipline).
           where('grids.id = ? and grid_disciplines.semestre is not null', grid_id).
           pluck('grid_disciplines.semestre').uniq
       end
+    end
+
+    def salvar_atualizar(novo = true)
+      @offer.grid_id = params[:grid_id]
+      @offer.year_base = params[:grid_year]
+      @offer.semestre_base = params[:grid_semestre]
+
+      @grade_anos = load_grade_anos(params[:grid_id])
+      @grade_semestres = load_grade_semestres(params[:grid_id])
+
+      respond_to do |format|
+        if !@offer.nil? && @offer.valid?
+          if @offer.offer_disciplines.empty?
+            carregar_disciplinas_grade
+            @offer.offer_disciplines = []
+            @grid_disciplines.each do |g|
+              @offer.offer_disciplines << OfferDiscipline.new(grid_discipline: g, user:nil)
+            end
+            format.html { render :new } if novo
+            format.html { render :edit } unless novo
+          elsif novo && @offer.save
+              format.html { redirect_to @offer, notice: 'Offer was successfully created.' }
+              format.json { render :show, status: :created, location: @offer }
+          elsif !novo && @offer.update(offer_params)
+            format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
+            format.json { render :show, status: :ok, location: @offer }
+          else
+            format.html { render :new } if novo
+            format.html { render :edit } unless novo
+            format.json { render json: @offer.errors, status: :unprocessable_entity }
+          end
+        else
+          @grid_disciplines = carregar_disciplinas_grade
+
+          format.html { render :new } if novo
+          format.html { render :edit } unless novo
+          format.json { render json: @offer.errors, status: :unprocessable_entity }
+        end
+      end
+
     end
 end
