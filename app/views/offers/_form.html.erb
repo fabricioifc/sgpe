@@ -1,9 +1,10 @@
-<%= bootstrap_form_for(@offer, local:true, label_errors: true, inline_errors: true, html: { class: "", role: "form" }) do |f| %>
-  <%= error_messages_for(@offer) %>
+<%= bootstrap_form_for(offer, local:true, label_errors: true, inline_errors: true, html: { class: "", role: "form" }) do |f| %>
+  <%= error_messages_for(offer) %>
+  <%= hidden_field_tag :grid_alterando, false %>
 
   <div class="row">
     <div class="col-md-4">
-      <%= f.select :type_offer, Offer.offer_types.keys, {id: :type_offer, prompt: true, autofocus:true} %>
+      <%= f.select :type_offer, Offer.offer_types.keys, {id: :type_offer, prompt: true}, autofocus:true %>
     </div>
     <div class="col-md-4">
       <%= f.number_field :year, id: :offer_year, placeholder:true %>
@@ -33,7 +34,7 @@
   <hr>
 
   <div id="grid_disciplines_partial">
-    <%= render partial: 'grid_disciplines_teacher', locals: {f: f} %>
+    <%= render partial: 'grid_disciplines_teacher', locals: {f: f, offer: offer} %>
   </div>
 
 <% end %>

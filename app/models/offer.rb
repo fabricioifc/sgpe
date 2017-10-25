@@ -18,6 +18,8 @@ class Offer < ApplicationRecord
       less_than_or_equal_to: Date.today.year + 25
     }
 
+  validates :offer_disciplines, presence:true, on: [:update]
+
   # accepts_nested_attributes_for :grid_disciplines, :allow_destroy => true
 
   def decorate
