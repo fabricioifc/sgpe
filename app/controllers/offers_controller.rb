@@ -141,10 +141,11 @@ class OffersController < ApplicationController
     end
 
     def load_grades
-      @grades = Grid.includes(:course).
-        joins(:grid_disciplines => :discipline).
-        order('grid_disciplines.year', 'grid_disciplines.semestre').
-        pluck('id', 'grid_disciplines.year', 'grid_disciplines.semestre', 'courses.name', 'year').uniq
+      @grades = Grid.includes(:course).where(active:true).order('courses.name, grids.year')
+      # @grades = Grid.includes(:course).
+      #   joins(:grid_disciplines => :discipline).
+      #   order('grid_disciplines.year', 'grid_disciplines.semestre').
+      #   pluck('id', 'grid_disciplines.year', 'grid_disciplines.semestre', 'courses.name', 'year').uniq
     end
 
     def load_grade_anos(grid_id)

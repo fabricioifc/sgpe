@@ -16,9 +16,12 @@
     <div class="form-group">
       <div class="form-group col-md-9">
         <%= f.label :grid_id %>
-        <%= select_tag :grid_id, options_for_select(@grades.collect { |c| ["#{c[4]} - #{c[3]} (Ano/semestre: #{c[1]}/#{c[2]})", "#{c[0]}" ]}, params[:grid_id]),
+        <%= select_tag :grid_id, options_for_select(@grades.collect { |c| ["#{c.course.name} - #{c.year}", c.id ]}, params[:grid_id]),
           data: { remote: true, url: load_grid_offers_path, method: :patch },
           id: :grid_id, class: 'form-control', prompt:'Selecione a grade', required:true %>
+        <!-- <= select_tag :grid_id, options_for_select(@grades.collect { |c| ["#{c[4]} - #{c[3]} (Ano/semestre: #{c[1]}/#{c[2]})", "#{c[0]}" ]}, params[:grid_id]),
+          data: { remote: true, url: load_grid_offers_path, method: :patch },
+          id: :grid_id, class: 'form-control', prompt:'Selecione a grade', required:true %> -->
       </div>
       <div class="form-group col-md-3" id="grid_ano_semestre_partial">
         <%= render partial: 'grid_ano_semestre', locals: {} %>
