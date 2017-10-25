@@ -329,6 +329,7 @@ pt-BR:
         course_offers: Ofertas de curso
         courses: Cursos
         turmas: Turmas
+        offers: Ofertar grades
     titles:
       edit: "Editar %{model}"
       save: "Salvar %{model}"
