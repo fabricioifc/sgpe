@@ -8,22 +8,28 @@ default: &default
 
 development:
   <<: *default
-  database: sgpe_development
+  database: <%= ENV['DEV_SGPE_DATABASE_NAME'] %>
+  host:     <%= ENV['DEV_SGPE_DATABASE_HOST'] %>
+  username: <%= ENV['DEV_SGPE_DATABASE_USERNAME'] %>
+  password: <%= ENV['DEV_SGPE_DATABASE_PASSWORD'] %>
 
 test:
   <<: *default
-  database: sgpe_test
+  database: <%= ENV['TST_SGPE_DATABASE_NAME'] %>
+  host:     <%= ENV['TST_SGPE_DATABASE_HOST'] %>
+  username: <%= ENV['TST_SGPE_DATABASE_USERNAME'] %>
+  password: <%= ENV['TST_SGPE_DATABASE_PASSWORD'] %>
 
 staging:
   <<: *default
-  database: <%= ENV['SGPE_DATABASE_NAME'] %>
-  host: <%= ENV['SGPE_DATABASE_HOST'] %>
-  username: <%= ENV['SGPE_DATABASE_USERNAME'] %>
-  password: <%= ENV['SGPE_DATABASE_PASSWORD'] %>
+  database: <%= ENV['STG_SGPE_DATABASE_NAME'] %>
+  host:     <%= ENV['STG_SGPE_DATABASE_HOST'] %>
+  username: <%= ENV['STG_SGPE_DATABASE_USERNAME'] %>
+  password: <%= ENV['STG_SGPE_DATABASE_PASSWORD'] %>
 
 production:
   <<: *default
-  database: <%= ENV['SGPE_DATABASE_NAME'] %>
-  host: <%= ENV['SGPE_DATABASE_HOST'] %>
-  username: <%= ENV['SGPE_DATABASE_USERNAME'] %>
-  password: <%= ENV['SGPE_DATABASE_PASSWORD'] %>
+  database: <%= ENV['PRD_SGPE_DATABASE_NAME'] %>
+  host:     <%= ENV['PRD_SGPE_DATABASE_HOST'] %>
+  username: <%= ENV['PRD_SGPE_DATABASE_USERNAME'] %>
+  password: <%= ENV['PRD_SGPE_DATABASE_PASSWORD'] %>

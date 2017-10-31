@@ -43,7 +43,7 @@ set :forward_agent, true
 set :shared_dirs, fetch(:shared_dirs, []).push('log', 'tmp/pids', 'tmp/sockets', 'public/uploads')
 set :shared_files, fetch(:shared_files, []).push(
   'config/database.yml', 'config/secrets.yml', 'config/puma.rb',
-  '.env.test', '.env.development', '.env.staging', '.env.production'
+  '.env', '.env.test', '.env.development', '.env.staging', '.env.production'
 )
 
 # This task is the environment that is loaded for most commands, such as
