@@ -48,7 +48,7 @@ set :shared_files, fetch(:shared_files, []).push(
 
 # This task is the environment that is loaded for most commands, such as
 # `mina deploy` or `mina rake`.
-task :environment do
+task :remote_environment do
   invoke :'rbenv:load'
   # Necessário para funcionar o comando rake via crontab e whenever
   # command %[echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile]
@@ -58,7 +58,7 @@ end
 # Put any custom mkdir's in here for when `mina setup` is ran.
 # For Rails apps, we'll make some of the shared paths that are shared between
 # all releases.
-task :setup => :environment do
+task :setup => :remote_environment do
   command %[mkdir -p "#{fetch(:shared_path)}/tmp/pids"]
   command %[mkdir -p "#{fetch(:shared_path)}/log"]
   command %[mkdir -p "#{fetch(:shared_path)}/tmp/sockets"]
@@ -72,7 +72,7 @@ task :setup => :environment do
 end
 
 desc "Deploys the current version to the server."
-task :deploy => :environment do
+task :deploy => :remote_environment do
   deploy do
   	invoke :'git:clone'
     # invoke :'sidekiq:quiet'
@@ -92,14 +92,14 @@ task :deploy => :environment do
 end
 
 namespace :maintenance do
-  task :on => :environment do
+  task :on => :remote_environment do
     command %[echo "-----> Iniciando modo manutenção --#{fetch(:rails_env)}--"]
     command %[cd #{fetch(:deploy_to)}/current]
     command %[RAILS_ENV=#{fetch(:rails_env)} bundle exec rake maintenance:start]
     # command %[RAILS_ENV=#{fetch(:rails_env)} bundle exec rake maintenance:enable]
   end
 
-  task :off => :environment do
+  task :off => :remote_environment do
     command %[echo "-----> Finalizando modo manutenção --#{fetch(:rails_env)}--"]
     command %[cd #{fetch(:deploy_to)}/current]
     command %[RAILS_ENV=#{fetch(:rails_env)} bundle exec rake maintenance:end]
@@ -134,7 +134,7 @@ end
 
 
 # desc "BACKUP"
-task :backup => :environment do
+task :backup => :remote_environment do
   command %[echo "-----> Iniciando o DUMP #{fetch(:domain)}!"]
   # command %{#{fetch(:rails)} db:sql_dump}
   command %[cd #{fetch(:deploy_to)}/current]
