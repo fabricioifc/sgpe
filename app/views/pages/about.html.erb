@@ -3,10 +3,5 @@
 <p>Gerenciamento de planos de ensino</p>
 
 <hr>
-<p>
-  <%= ENV['TST_SISTEMA_VERSAO'] if RAILS_ENV='test' %>
-  <%= ENV['DEV_SISTEMA_VERSAO'] if RAILS_ENV='development' %>
-  <%= ENV['STG_SISTEMA_VERSAO'] if RAILS_ENV='staging' %>
-  <%= ENV['PRD_SISTEMA_VERSAO'] if RAILS_ENV='production' %>
-</p>
+<p><%= Rails.application.secrets.sistema_versao %></p>
 <h1>teste</h1>
