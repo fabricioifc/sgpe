@@ -23,7 +23,8 @@ class GridsController < ApplicationController
       format.html
       format.json
       format.pdf {
-        send_data @grid.receipt.render,
+        pdf = GridPdf.new(@grid)
+        send_data pdf.render,
           filename: "#{@grid.created_at.strftime("%Y-%m-%d")}-gorails-receipt.pdf",
           type: "application/pdf",
           disposition: :inline
