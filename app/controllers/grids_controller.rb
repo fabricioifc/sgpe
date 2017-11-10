@@ -22,13 +22,19 @@ class GridsController < ApplicationController
     respond_to do |format|
       format.html
       format.json
-      format.pdf do
-        pdf = GridPdf.new(@grid)
-        send_data pdf.render,
-            filename: "grid_#{@grid.id}",
-            type: 'application/pdf',
-            disposition: 'inline'
-      end
+      format.pdf {
+        send_data @grid.receipt.render,
+          filename: "#{@grid.created_at.strftime("%Y-%m-%d")}-gorails-receipt.pdf",
+          type: "application/pdf",
+          disposition: :inline
+      }
+      # format.pdf do
+      #   pdf = GridPdf.new(@grid)
+      #   send_data pdf.render,
+      #       filename: "grid_#{@grid.id}",
+      #       type: 'application/pdf',
+      #       disposition: 'inline'
+      # end
     end
   end
 
