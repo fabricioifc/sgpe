@@ -10,10 +10,9 @@ class GridPdf < PdfReport
   def initialize(grid)
     super()
     @grade = grid
-    font_size 9
+    # font_size 9
 
     header "Grade: #{@grade.id} - Ano: #{@grade.year}"
-    move_down(10)
     display_event_table
     footer
   end
@@ -35,31 +34,31 @@ class GridPdf < PdfReport
       width = 540
       indent_size = 10
       pad_size = 10
-      @grade.grid_disciplines.order(:year).map do |e|
-        bounding_box([0, cursor], :width => width, :height => cursor) do
-          transparent(0.5) { stroke_bounds }
-          indent(indent_size) do
-            pad(pad_size) {
-              text "No indentation inside this bounding box."
-              indent(40) do
-                text "Inside an indent block. And so is this horizontal line:"
-                stroke_horizontal_rule
-              end
-
-              move_down 10
-              text "No indentation"
-              move_down 20
-
-              text "Another indent block."
-              bounding_box([0, cursor], :width => width - indent_size * 2) do
-                text "Note that this bounding box coordinates are relative to the " +
-                "indent block"
-                transparent(0.5) { stroke_bounds }
-              end
-            }
-          end
-        end
-      end
+      # @grade.grid_disciplines.order(:year).map do |e|
+      #   bounding_box([0, cursor], :width => width, :height => cursor) do
+      #     transparent(0.5) { stroke_bounds }
+      #     indent(indent_size) do
+      #       pad(pad_size) {
+      #         text "No indentation inside this bounding box."
+      #         indent(40) do
+      #           text "Inside an indent block. And so is this horizontal line:"
+      #           stroke_horizontal_rule
+      #         end
+      #
+      #         move_down 10
+      #         text "No indentation"
+      #         move_down 20
+      #
+      #         text "Another indent block."
+      #         bounding_box([0, cursor], :width => width - indent_size * 2) do
+      #           text "Note that this bounding box coordinates are relative to the " +
+      #           "indent block"
+      #           transparent(0.5) { stroke_bounds }
+      #         end
+      #       }
+      #     end
+      #   end
+      # end
     end
   end
 
