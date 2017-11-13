@@ -1,4 +1,4 @@
-class GridPdf < PdfReport
+class GridPdfOld < PdfReport
 
   TABLE_ROW_COLORS = ['FFFFFF', 'DDDDDD']
   TABLE_WIDTHS = [30, 510] # Tamanho total: 540
@@ -15,7 +15,7 @@ class GridPdf < PdfReport
     header "Grade: #{@grade.id} - Ano: #{@grade.year}"
     display_event_table
     footer
-    
+
   end
 
   private

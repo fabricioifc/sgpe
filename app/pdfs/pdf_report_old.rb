@@ -1,4 +1,4 @@
-class PdfReport < Prawn::Document
+class PdfReportOld < Prawn::Document
 
   # Often-Used Constants
 
