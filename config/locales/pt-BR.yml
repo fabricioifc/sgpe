@@ -316,6 +316,7 @@ pt-BR:
       home: 'Página inicial'
       users: 'Usuários'
       admin: 'Administração'
+      pdf: 'Relatório'
       pages:
         about: 'Sobre'
         disciplines: 'Disciplinas'

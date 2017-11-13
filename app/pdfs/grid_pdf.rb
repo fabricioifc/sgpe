@@ -1,22 +1,21 @@
 class GridPdf < PdfReport
 
-  TABLE_WIDTHS = [50, 490] # Tamanho total: 540
+  TABLE_WIDTHS = [50, 510]
   TABLE_HEADERS = [["Ano", "Disciplina"]]
 
-  def initialize(grid)
+  def initialize(grid, user)
     @grade = grid
     super({
       id: grid.id,
-      product: 'IFC',
       title: 'Grade de Cursos',
+      user: user,
         company: {
-          name: "IFC",
-          address: "37 Great Jones\nFloor 2\nNew York City, NY 10012",
-          email: "teachers@onemonth.com",
-          logo: Rails.root.join("app/assets/images/logo.png")
+          name:   Rails.application.secrets.sistema_apelido,
+          email:  Rails.application.secrets.admin_email,
+          logo:   Rails.root.join("app/assets/images/logo.png")
         },
         data: {
-          table_data: table_data + table_data + table_data,
+          table_data: table_data,
           table_widths: TABLE_WIDTHS
         }
       },
@@ -35,8 +34,19 @@ class GridPdf < PdfReport
           "#{e.discipline.sigla} - #{e.discipline.title}"
         ]
       end
-    else
-      []
+    end
+  end
+
+  def generate
+    bounding_box [25, cursor], width: 540 do
+      bounding_box [0, cursor], width: 540 do
+        repeat :all, :dynamic => true do
+          header
+          show_pagination
+        end
+        display_event_table table_data, TABLE_WIDTHS
+      end
+      footer
     end
   end
 
