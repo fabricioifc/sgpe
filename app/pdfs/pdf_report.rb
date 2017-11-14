@@ -80,7 +80,7 @@ class PdfReport < Prawn::Document
       number_pages '<page>/<total>', options
     end
 
-    def display_event_table table_data = [], table_widths = [], options = {}, cells_options = {}
+    def display_event_table table_data = [], table_widths = [], options = {}
       @table_data   = table_data
       @table_widths = table_widths
 
