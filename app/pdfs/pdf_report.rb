@@ -18,7 +18,6 @@ class PdfReport < Prawn::Document
     super(margin: attributes.fetch(:margin, [70,0,50,0]))
 
     setup_fonts if custom_font.any?
-    generate
   end
 
   private
@@ -81,25 +80,30 @@ class PdfReport < Prawn::Document
       number_pages '<page>/<total>', options
     end
 
-    def display_event_table table_data = [], table_widths = []
+    def display_event_table table_data = [], table_widths = [], options = {}, cells_options = {}
       @table_data   = table_data
       @table_widths = table_widths
+
+      options = {
+        header: true,
+        column_widths: @table_widths,
+        cell_style: { border_color: 'cccccc', size: TABLE_FONT_SIZE },
+        width: @table_widths.sum,
+        row_colors: TABLE_ROW_COLORS
+      }.merge!(options)
 
       if !@table_data.empty?
         borders = @table_data.length - 2
         # move_down 90
-
-        table @table_data,
-          column_widths: @table_widths,
-          cell_style: { border_color: 'cccccc', size: TABLE_FONT_SIZE },
-          width: @table_widths.sum do
-            self.header = true
-            self.row_colors = TABLE_ROW_COLORS
-            cells.padding = 4
-            cells.borders = []
-            row(0).font_style = :bold
-            row(0).background_color = "f5f5f5"
-            row(0..borders).borders = [:bottom]
+        table @table_data, options do
+          # cells_options.each do |k, v|
+            # send("cells.#{k}=", v)
+          # end
+          cells.padding = 3
+          cells.borders = []
+          row(0).font_style = :bold
+          row(0).background_color = "f5f5f5"
+          row(0..borders).borders = [:bottom]
         end
       end
     end

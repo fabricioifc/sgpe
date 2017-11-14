@@ -23,7 +23,7 @@ class GridsController < ApplicationController
       format.html
       format.json
       format.pdf {
-        pdf = GridPdf.new(@grid, current_user)
+        pdf = GridPdf.new(@grid, current_user).generate
         send_data pdf.render,
           filename: "#{@grid.created_at.strftime("%Y%m%d")}_grade#{@grid.id}.pdf",
           type: "application/pdf",

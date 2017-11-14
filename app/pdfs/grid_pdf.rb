@@ -14,13 +14,27 @@ class GridPdf < PdfReport
           email:  Rails.application.secrets.admin_email,
           logo:   Rails.root.join("app/assets/images/logo.png")
         },
-        data: {
-          table_data: table_data,
-          table_widths: TABLE_WIDTHS
-        }
+        # data: {
+        #   table_data: table_data,
+        #   table_widths: TABLE_WIDTHS
+        # }
       },
 
     )
+  end
+
+  def generate options = [header:true, pagination:true, footer:true]
+    bounding_box [25, cursor], width: 540 do
+      bounding_box [0, cursor], width: 540 do
+        repeat :all, :dynamic => true do
+          header
+          show_pagination
+        end
+        display_event_table table_data, TABLE_WIDTHS, {header:false}
+      end
+      footer
+    end
+    self
   end
 
   private
@@ -37,17 +51,5 @@ class GridPdf < PdfReport
     end
   end
 
-  def generate
-    bounding_box [25, cursor], width: 540 do
-      bounding_box [0, cursor], width: 540 do
-        repeat :all, :dynamic => true do
-          header
-          show_pagination
-        end
-        display_event_table table_data, TABLE_WIDTHS
-      end
-      footer
-    end
-  end
 
 end
