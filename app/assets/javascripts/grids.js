@@ -79,9 +79,11 @@ document.addEventListener("turbolinks:load", function(event) {
     e.preventDefault();
   });
 
-  $(document).on('click', 'a.trigger', function(){
+  $(document).on('click', 'a.trigger.collapsed', function(e){
     $('.panel-collapse.collapse.in').collapse('hide');
-    $(this).find('div.panel-collapse').collapse('show');
+    var href = $(this).attr('href');
+    $(href).collapse('show');
+    // $(this).find('div.panel-collapse').collapse('show');
   });
 
   $('#grid_disciplines').on('cocoon:after-insert', function(event, insertedItem) {
@@ -112,7 +114,7 @@ $.ajustarGridDisciplinasCocoon = function(event){
 // Carrega configurações padrões
 $.init = function(event) {
   $.ajustarGridDisciplinasCocoon(event);
-  $('.panel-collapse.collapse:last').collapse('show');
+  // $('.panel-collapse.collapse:last').collapse('show');
 };
 
 

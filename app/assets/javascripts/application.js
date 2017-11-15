@@ -38,10 +38,35 @@ $(function() {
 
 // Função utilizada para adicionar editor HTML em textarea com data-provider = summernote
 $.addSummernote = function(){
-  $('[data-provider="summernote"]').each(function() {
-    $(this).summernote({
+  // $('[data-provider="summernote"]').each(function() {
+    $('[data-provider="summernote"]').summernote({
       lang: 'pt-BR',
       height: 100
     });
-  });
+  // });
 };
+
+document.addEventListener("turbolinks:load", function() {
+
+  var $cache = $('.fixed-on-scroll');
+
+  if ($cache.length > 0) {
+
+    var vTop = $($cache).offset().top - parseFloat($($cache).css('margin-top').replace(/auto/, 0));
+
+    $(window).scroll(function (event) {
+      // pega a posição atual (vertical) da tela
+      var y = $(this).scrollTop();
+
+      // Se a posição for maior que o elemento adiciona a classe stuck,
+      // caso contrário remove a mesma classe
+      if (y >= vTop) {
+        $($cache).addClass('stuck');
+      } else {
+        $($cache).removeClass('stuck');
+      }
+    });
+
+  }
+
+});

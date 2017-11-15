@@ -229,7 +229,17 @@ footer.page-footer p {
 
 
 // Table
-
 table tbody tr td.text-middle {
   vertical-align:middle;
+}
+
+// Quando alguma DIV precisa ficar fixa no fundo ao fazer scroll na página
+.fixed-on-scroll.stuck, .fixed-on-scroll.well.stuck {
+    position:fixed;
+    bottom:15px;
+    left: 0;
+    width: 100%;
+    z-index: 1; //posição do elemento, ou seja, acima dos outros
+
+    @extend .bg-primary
 }
