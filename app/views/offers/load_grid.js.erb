@@ -1,6 +1,7 @@
 <% if !params[:grid_id].nil? && !params[:grid_id].blank? %>
 
   <% if params[:grid_year].nil? && params[:grid_semestre].nil? %>
+    $("#grid_disciplines_partial").html('');
     $('#grid_ano_semestre_partial').html("<%= escape_javascript(render partial: 'grid_ano_semestre', locals: {  } ) %>");
   <% else %>
     $("#grid_disciplines_partial").html("<%= escape_javascript(render partial: 'grid', locals: {  } ) %>");
