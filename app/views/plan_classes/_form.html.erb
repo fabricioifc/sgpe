@@ -1,0 +1,10 @@
+<%= bootstrap_form_for(plan_class, local:true, html: { class: "", role: "form" }) do |f| %>
+  <%= error_messages_for(plan_class) %>
+
+
+    <%= f.text_field :name, id: :plan_class_name, autofocus:true %>
+    <%= f.number_field :ano, id: :plan_class_ano %>
+    <%= f.check_box :active, id: :plan_class_active %>
+
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>
