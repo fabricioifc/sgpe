@@ -1,7 +1,7 @@
 class GridPdf < PdfReport
 
-  TABLE_WIDTHS = [50, 510]
-  TABLE_HEADERS = [["Ano", "Disciplina"]]
+  TABLE_WIDTHS = [70, 490]
+  TABLE_HEADERS = [["Ano/semestre", "Disciplina"]]
 
   def initialize(grid, user)
     @grade = grid
@@ -44,7 +44,7 @@ class GridPdf < PdfReport
       TABLE_HEADERS +
       @grade.grid_disciplines.order(:year).map do |e|
         [
-          e.year,
+          e.year.nil? ? e.semestre : e.year,
           "#{e.discipline.sigla} - #{e.discipline.title}"
         ]
       end

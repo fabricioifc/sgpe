@@ -3,7 +3,7 @@ class Offer < ApplicationRecord
   has_many :offer_disciplines, dependent: :destroy
   accepts_nested_attributes_for :offer_disciplines
 
-  enum offer_types: [:tipo1, :tipo2]
+  enum offer_types: ['Regular', 'Não Regular']
 
   validates :type_offer, :grid_id, presence:true
   validates :semestre, presence: { if: -> { year.blank? } }
