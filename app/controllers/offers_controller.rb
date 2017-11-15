@@ -41,13 +41,63 @@ class OffersController < ApplicationController
   # POST /offers.json
   def create
     @offer = Offer.new(offer_params)
-    salvar_atualizar(true)
+    @offer.grid_id = params[:grid_id]
+    @offer.year_base = params[:grid_year]
+    @offer.semestre_base = params[:grid_semestre]
+
+    @grade_anos = load_grade_anos(params[:grid_id])
+    @grade_semestres = load_grade_semestres(params[:grid_id])
+
+    respond_to do |format|
+      if @offer.valid? && @offer.save
+        format.html { redirect_to @offer, notice: 'Offer was successfully created.' }
+        format.json { render :show, status: :created, location: @offer }
+      elsif @offer.offer_disciplines.empty?
+        @grid_disciplines = carregar_disciplinas_grade
+        @offer.offer_disciplines = []
+        @grid_disciplines.each do |g|
+          @offer.offer_disciplines << OfferDiscipline.new(grid_discipline: g, user:nil)
+        end
+        format.html { render :new }
+      else
+        @grid_disciplines = carregar_disciplinas_grade
+        format.html { render :new }
+        format.json { render json: @offer.errors, status: :unprocessable_entity }
+      end
+
+    end
   end
 
   # PATCH/PUT /offers/1
   # PATCH/PUT /offers/1.json
   def update
-    salvar_atualizar(false)
+    # @offer = Offer.new(offer_params)
+    @offer.grid_id = params[:grid_id]
+    @offer.year_base = params[:grid_year]
+    @offer.semestre_base = params[:grid_semestre]
+
+    @grade_anos = load_grade_anos(params[:grid_id])
+    @grade_semestres = load_grade_semestres(params[:grid_id])
+
+    respond_to do |format|
+      if offer_params[:offer_disciplines_attributes].nil? || offer_params[:offer_disciplines_attributes].empty?
+        @grid_disciplines = carregar_disciplinas_grade
+        @offer.offer_disciplines = []
+        @grid_disciplines.each do |g|
+          @offer.offer_disciplines << OfferDiscipline.new(grid_discipline: g, user:nil)
+        end
+        format.html { render :edit }
+      elsif @offer.update(offer_params)
+        format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
+        format.json { render :show, status: :ok, location: @offer }
+      else
+        @grid_disciplines = carregar_disciplinas_grade
+        format.html { render :edit }
+        format.json { render json: @offer.errors, status: :unprocessable_entity }
+      end
+
+    end
+    # salvar_atualizar(false)
     # respond_to do |format|
     #   if @offer.update(offer_params)
     #     format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
@@ -164,43 +214,43 @@ class OffersController < ApplicationController
       end
     end
 
-    def salvar_atualizar(novo = true)
-      @offer.grid_id = params[:grid_id]
-      @offer.year_base = params[:grid_year]
-      @offer.semestre_base = params[:grid_semestre]
-
-      @grade_anos = load_grade_anos(params[:grid_id])
-      @grade_semestres = load_grade_semestres(params[:grid_id])
-
-      respond_to do |format|
-        if !@offer.nil? && @offer.valid?
-          if @offer.offer_disciplines.empty?
-            carregar_disciplinas_grade
-            @offer.offer_disciplines = []
-            @grid_disciplines.each do |g|
-              @offer.offer_disciplines << OfferDiscipline.new(grid_discipline: g, user:nil)
-            end
-            format.html { render :new } if novo
-            format.html { render :edit } unless novo
-          elsif novo && @offer.save
-              format.html { redirect_to @offer, notice: 'Offer was successfully created.' }
-              format.json { render :show, status: :created, location: @offer }
-          elsif !novo && @offer.update(offer_params)
-            format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
-            format.json { render :show, status: :ok, location: @offer }
-          else
-            format.html { render :new } if novo
-            format.html { render :edit } unless novo
-            format.json { render json: @offer.errors, status: :unprocessable_entity }
-          end
-        else
-          @grid_disciplines = carregar_disciplinas_grade
-
-          format.html { render :new } if novo
-          format.html { render :edit } unless novo
-          format.json { render json: @offer.errors, status: :unprocessable_entity }
-        end
-      end
-
-    end
+    # def salvar_atualizar(novo = true)
+    #   @offer.grid_id = params[:grid_id]
+    #   @offer.year_base = params[:grid_year]
+    #   @offer.semestre_base = params[:grid_semestre]
+    #
+    #   @grade_anos = load_grade_anos(params[:grid_id])
+    #   @grade_semestres = load_grade_semestres(params[:grid_id])
+    #
+    #   respond_to do |format|
+    #     if !@offer.nil? && @offer.valid?
+    #       if @offer.offer_disciplines.empty?
+    #         @grid_disciplines = carregar_disciplinas_grade
+    #         @offer.offer_disciplines = []
+    #         @grid_disciplines.each do |g|
+    #           @offer.offer_disciplines << OfferDiscipline.new(grid_discipline: g, user:nil)
+    #         end
+    #         format.html { render :new } if novo
+    #         format.html { render :edit } unless novo
+    #       elsif novo && @offer.save
+    #           format.html { redirect_to @offer, notice: 'Offer was successfully created.' }
+    #           format.json { render :show, status: :created, location: @offer }
+    #       elsif !novo && @offer.update(offer_params)
+    #         format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
+    #         format.json { render :show, status: :ok, location: @offer }
+    #       else
+    #         format.html { render :new } if novo
+    #         format.html { render :edit } unless novo
+    #         format.json { render json: @offer.errors, status: :unprocessable_entity }
+    #       end
+    #     else
+    #       @grid_disciplines = carregar_disciplinas_grade
+    #
+    #       format.html { render :new } if novo
+    #       format.html { render :edit } unless novo
+    #       format.json { render json: @offer.errors, status: :unprocessable_entity }
+    #     end
+    #   end
+    #
+    # end
 end
