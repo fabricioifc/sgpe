@@ -1,6 +1,7 @@
 class GridDiscipline < ApplicationRecord
   belongs_to :grid
   belongs_to :discipline
+  has_many :offer_disciplines
 
   # accepts_nested_attributes_for :grid
 

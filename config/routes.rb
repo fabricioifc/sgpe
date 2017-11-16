@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :plan_classes
   resources :offers do
     collection do
       patch :load_grid

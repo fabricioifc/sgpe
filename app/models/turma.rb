@@ -1,4 +1,5 @@
 class Turma < ApplicationRecord
+  has_many :plans
 
   validates :name, presence:true
   validates :year, presence: true,

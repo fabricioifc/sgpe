@@ -1,19 +1,33 @@
 <%- model = Plan %>
 
-<% @plans.each do |p| %>
-  <div class="col-md-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%=  %></h3>
-      </div>
-      <div class="panel-body">
-        <%= p.inspect %>
-      </div>
-      <div class="panel-footer">
+<% if @plans.empty? %>
 
+  <ul class="list-group">
+    <li class="list-group-item">Disciplina: <strong><%= @disciplina.title %></strong></li>
+    <li class="list-group-item list-group-item-danger">Nenhum plano de ensino encontrado/ofertado para esta disciplina</li>
+    <li class="list-group-item list-group-item-info">
+      list-group
+    </li>
+  </ul>
+
+<% else %>
+
+  <% @plans.each do |p| %>
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= p.offer_discipline.grid_discipline.discipline.title %></h3>
+        </div>
+        <div class="panel-body">
+          <p><%= p.inspect %></p>
+        </div>
+        <div class="panel-footer">
+          <%= p.versao %>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
+
 <% end %>
 
 <!-- <div class="panel panel-default">
