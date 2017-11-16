@@ -14,4 +14,12 @@
       <%= show_profile_image %>
     </div>
 
+    <div class="row">
+      <%- if is_professor? %>
+        <% @ofertasProfessor.each do |v| %>
+          <p><%= v.inspect %></p>
+        <% end %>
+      <%- end %>
+    </div>
+
 </div>

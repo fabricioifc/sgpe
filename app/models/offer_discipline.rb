@@ -2,6 +2,7 @@ class OfferDiscipline < ApplicationRecord
   belongs_to :offer
   belongs_to :grid_discipline
   belongs_to :user#, optional:true
+  has_many :plans
 
   validates :user_id, presence:true
 

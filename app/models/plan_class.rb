@@ -1,4 +1,5 @@
 class PlanClass < ApplicationRecord
+  has_many :plans
 
   validates :name, :active, presence:true
   validates :ano, presence:true,

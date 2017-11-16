@@ -4,6 +4,10 @@ module ApplicationHelper
     user_signed_in? && current_user.try(:admin?)
   end
 
+  def is_professor?
+    user_signed_in? && current_user.try(:teacher?)
+  end
+
   def avatar_navbar_image(classe = ['special-img'])
     if user_signed_in?
       if current_user.avatar.present?
