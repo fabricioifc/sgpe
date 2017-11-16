@@ -61,7 +61,6 @@ class WizardsController < ApplicationController
           @offer_wizard.offer.offer_disciplines << OfferDiscipline.new(grid_discipline: g, user:User.last)
         end
       when 'step4'
-        binding.pry
     end
 
   end

@@ -14,7 +14,6 @@ module Wizard
       delegate :grid_year, :grid_semestre, to: :offer
 
       def initialize(offer_attributes)
-        binding.pry
         @offer = ::Offer.new(offer_attributes)
         @offer.offer_disciplines.build
       end

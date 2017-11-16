@@ -71,31 +71,40 @@ class OffersController < ApplicationController
   # PATCH/PUT /offers/1
   # PATCH/PUT /offers/1.json
   def update
-    # @offer = Offer.new(offer_params)
-    @offer.grid_id = params[:grid_id]
-    @offer.year_base = params[:grid_year]
-    @offer.semestre_base = params[:grid_semestre]
+    begin
+      # @offer = Offer.new(offer_params)
+      @offer.grid_id = params[:grid_id]
+      @offer.year_base = params[:grid_year]
+      @offer.semestre_base = params[:grid_semestre]
 
-    @grade_anos = load_grade_anos(params[:grid_id])
-    @grade_semestres = load_grade_semestres(params[:grid_id])
+      @grade_anos = load_grade_anos(params[:grid_id])
+      @grade_semestres = load_grade_semestres(params[:grid_id])
 
-    respond_to do |format|
-      if offer_params[:offer_disciplines_attributes].nil? || offer_params[:offer_disciplines_attributes].empty?
-        @grid_disciplines = carregar_disciplinas_grade
-        @offer.offer_disciplines = []
-        @grid_disciplines.each do |g|
-          @offer.offer_disciplines << OfferDiscipline.new(grid_discipline: g, user:nil)
+      respond_to do |format|
+        if offer_params[:offer_disciplines_attributes].nil? || offer_params[:offer_disciplines_attributes].empty?
+          @grid_disciplines = carregar_disciplinas_grade
+          @offer.offer_disciplines = []
+          @grid_disciplines.each do |g|
+            @offer.offer_disciplines << OfferDiscipline.new(grid_discipline: g, user:nil)
+          end
+          format.html { render :edit }
+        elsif @offer.update(offer_params)
+          format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
+          format.json { render :show, status: :ok, location: @offer }
+        else
+          @grid_disciplines = carregar_disciplinas_grade
+          format.html { render :edit }
+          format.json { render json: @offer.errors, status: :unprocessable_entity }
         end
-        format.html { render :edit }
-      elsif @offer.update(offer_params)
-        format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
-        format.json { render :show, status: :ok, location: @offer }
-      else
+
+      end
+    rescue ActiveRecord::InvalidForeignKey
+      respond_to do |format|
         @grid_disciplines = carregar_disciplinas_grade
+        flash[:alert] = 'Não é possível alterar a grade ofertada. Já existem planos gerados.'
         format.html { render :edit }
         format.json { render json: @offer.errors, status: :unprocessable_entity }
       end
-
     end
     # salvar_atualizar(false)
     # respond_to do |format|

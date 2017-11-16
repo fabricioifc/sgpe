@@ -8,7 +8,7 @@ class PlansController < ApplicationController
   # GET /plans
   # GET /plans.json
   def index
-    @plans = Plan.all
+    @plans = Plan.where(offer_discipline_id: params[:offer_discipline_id])
   end
 
   # GET /plans/1

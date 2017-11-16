@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
-  resources :plans
   resources :plan_classes
   resources :offers do
     collection do
       patch :load_grid
       # patch :load_grid_disciplines
     end
-    resources :offer_disciplines
+    resources :offer_disciplines do
+      resources :plans
+    end
   end
 
   resources :grid_disciplines

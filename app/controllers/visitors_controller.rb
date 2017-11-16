@@ -2,13 +2,29 @@ class VisitorsController < ApplicationController
   include ApplicationHelper
 
   def index
+
     if is_professor?
       # @ids = current_user.offer_disciplines.joins(:offer).select(:offer_id).where(active:true).where('offers.active = ?', true).group(:offer_id).map(&:offer_id)
       # @ofertasProfessor = Offer.where(id: @ids).order(year: :asc, semestre: :asc)
 
-      @ofertasProfessor = current_user.offer_disciplines.joins(:offer).joins(:grid_discipline => :discipline).
+      @ofertasCursoProfessor = {}
+      # @anos = current_user.offer_disciplines.joins(:offer).
+      #   where(active:true).where('offers.active = ?', true).
+      #   pluck('offers.year').uniq
+
+      @cursos = current_user.offer_disciplines.joins(:offer => :grid).
         where(active:true).where('offers.active = ?', true).
-        order('offers.year, offers.semestre, disciplines.title')
+        pluck('grids.course_id').uniq
+
+      @cursos.each do |curso|
+        @ofertasCursoProfessor[curso] = current_user.offer_disciplines.joins(:offer => :grid).
+          joins(:grid_discipline => :discipline).
+          where(active:true).where('offers.active = ?', true).
+          where('grids.course_id = ?', curso).
+          order('offers.year, offers.semestre, disciplines.title')
+
+      end
     end
+
   end
 end
