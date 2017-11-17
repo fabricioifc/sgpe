@@ -26,5 +26,9 @@ class GridDisciplineDecorator < ApplicationDecorator
     ActionView::Base.full_sanitizer.sanitize(component.bib_espec.html_safe) unless component.bib_espec.nil?
   end
 
+  # def year
+  #   component.year.ordinalize
+  # end
+
 
 end

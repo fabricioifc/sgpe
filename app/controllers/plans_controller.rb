@@ -5,12 +5,20 @@ class PlansController < ApplicationController
 
   before_action :load_professores
 
+  def copy
+    @source = Plan.find(params[:id])
+    @plan = @source.dup
+    @plan.versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
+    params[:versao] = @plan.versao
+    render 'new'
+  end
+
   # GET /plans
   # GET /plans.json
   def index
     if !params[:offer_discipline_id].nil?
       @disciplina = Discipline.joins(:grid_disciplines => :offer_disciplines).find_by('offer_disciplines.id = ?', params[:offer_discipline_id])
-      @plans = Plan.where(offer_discipline_id: params[:offer_discipline_id]).order(versao: :desc)
+      @plans = Plan.where(offer_discipline_id: params[:offer_discipline_id], active:true).order(versao: :desc)
     end
   end
 
@@ -21,7 +29,9 @@ class PlansController < ApplicationController
 
   # GET /plans/new
   def new
-    @plan = Plan.new
+    @plan = Plan.new(offer_discipline_id: params[:offer_discipline_id])
+    @plan.versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
+    params[:versao] = @plan.versao
   end
 
   # GET /plans/1/edit
@@ -32,10 +42,16 @@ class PlansController < ApplicationController
   # POST /plans.json
   def create
     @plan = Plan.new(plan_params)
+    @plan.offer_discipline_id = params[:offer_discipline_id]
+    @plan.user = current_user
+    @plan.active = true
+    if @plan.valid?
+      @plan.versao = @plan.versao.nil? ? 1 : @plan.versao + 1
+    end
 
     respond_to do |format|
       if @plan.save
-        format.html { redirect_to @plan, notice: 'Plan was successfully created.' }
+        format.html { redirect_to offer_offer_discipline_plans_path(@plan), notice: 'Plan was successfully created.' }
         format.json { render :show, status: :created, location: @plan }
       else
         format.html { render :new }
@@ -49,7 +65,7 @@ class PlansController < ApplicationController
   def update
     respond_to do |format|
       if @plan.update(plan_params)
-        format.html { redirect_to @plan, notice: 'Plan was successfully updated.' }
+        format.html { redirect_to offer_offer_discipline_plans_path(@plan), notice: 'Plan was successfully updated.' }
         format.json { render :show, status: :ok, location: @plan }
       else
         format.html { render :edit }
@@ -76,7 +92,7 @@ class PlansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plan_params
-      params.require(:plan).permit(:offer_discipline_id, :plan_class_id, :obj_espe, :conteudo_prog, :prat_prof, :interdisc, :met_tec, :met_met, :avaliacao, :cronograma, :atendimento, :versao, :active, :user_id)
+      params.require(:plan).permit(:offer_discipline_id, :turma_id, :obj_espe, :conteudo_prog, :prat_prof, :interdisc, :met_tec, :met_met, :avaliacao, :cronograma, :atendimento, :versao, :active, :user_id)
     end
 
     def load_professores

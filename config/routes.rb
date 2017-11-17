@@ -5,7 +5,11 @@ Rails.application.routes.draw do
       # patch :load_grid_disciplines
     end
     resources :offer_disciplines do
-      resources :plans
+      resources :plans do
+        member do
+          get 'copy'
+        end
+      end
     end
   end
 

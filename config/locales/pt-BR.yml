@@ -16,6 +16,8 @@ pt-BR:
       offers: Ofertas
       offer_discipline: Disciplina
       offer_disciplines: Disciplinas
+      plan: Plano
+      plans: Planos
     attributes:
       user:
         title: Usuários
@@ -317,6 +319,7 @@ pt-BR:
       users: 'Usuários'
       admin: 'Administração'
       pdf: 'Relatório'
+      duplicate: Duplicar %{model}
       pages:
         about: 'Sobre'
         disciplines: 'Disciplinas'
