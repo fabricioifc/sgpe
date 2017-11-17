@@ -48,8 +48,6 @@ class OffersController < ApplicationController
     @grade_anos = load_grade_anos(params[:grid_id])
     @grade_semestres = load_grade_semestres(params[:grid_id])
 
-    binding.pry
-
     respond_to do |format|
       if @offer.valid? && @offer.save
         format.html { redirect_to @offer, notice: 'Offer was successfully created.' }
@@ -82,12 +80,6 @@ class OffersController < ApplicationController
       @grade_anos = load_grade_anos(params[:grid_id])
       @grade_semestres = load_grade_semestres(params[:grid_id])
 
-      if !offer_params[:offer_disciplines_attributes].nil? && !offer_params[:offer_disciplines_attributes].empty?
-        offer_params[:offer_disciplines_attributes].each do |a,b|
-          # b[:offer_discipline_turmas_attributes]
-        end
-      end
-
       respond_to do |format|
         if offer_params[:offer_disciplines_attributes].nil? || offer_params[:offer_disciplines_attributes].empty?
           @grid_disciplines = carregar_disciplinas_grade
@@ -96,13 +88,30 @@ class OffersController < ApplicationController
             @offer.offer_disciplines << OfferDiscipline.new(grid_discipline: g, user:nil)
           end
           format.html { render :edit }
-        elsif @offer.update(offer_params)
-          format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
-          format.json { render :show, status: :ok, location: @offer }
         else
-          @grid_disciplines = carregar_disciplinas_grade
-          format.html { render :edit }
-          format.json { render json: @offer.errors, status: :unprocessable_entity }
+          ActiveRecord::Base.transaction do
+            # offer_params[:offer_disciplines_attributes]
+            if @offer.update(offer_params)
+              @offer.offer_disciplines.each do |d|
+                offer_params[:offer_disciplines_attributes].each do |k,v|
+                  if !v[:id].empty? && v[:id].to_i == d.id
+                    OfferDisciplineTurma.where(offer_discipline_id: d.id).destroy_all
+                    v[:turmas_id].each do |turma|
+                      if !turma.empty?
+                        OfferDisciplineTurma.find_or_create_by!(offer_discipline_id: d.id, turma_id: turma.to_i)
+                      end
+                    end
+                  end
+                end
+              end
+              format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
+              format.json { render :show, status: :ok, location: @offer }
+            else
+              @grid_disciplines = carregar_disciplinas_grade
+              format.html { render :edit }
+              format.json { render json: @offer.errors, status: :unprocessable_entity }
+            end
+          end
         end
 
       end
