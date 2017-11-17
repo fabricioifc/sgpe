@@ -48,6 +48,8 @@ class OffersController < ApplicationController
     @grade_anos = load_grade_anos(params[:grid_id])
     @grade_semestres = load_grade_semestres(params[:grid_id])
 
+    binding.pry
+
     respond_to do |format|
       if @offer.valid? && @offer.save
         format.html { redirect_to @offer, notice: 'Offer was successfully created.' }
@@ -79,6 +81,12 @@ class OffersController < ApplicationController
 
       @grade_anos = load_grade_anos(params[:grid_id])
       @grade_semestres = load_grade_semestres(params[:grid_id])
+
+      if !offer_params[:offer_disciplines_attributes].nil? && !offer_params[:offer_disciplines_attributes].empty?
+        offer_params[:offer_disciplines_attributes].each do |a,b|
+          # b[:offer_discipline_turmas_attributes]
+        end
+      end
 
       respond_to do |format|
         if offer_params[:offer_disciplines_attributes].nil? || offer_params[:offer_disciplines_attributes].empty?
@@ -152,7 +160,9 @@ class OffersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def offer_params
       params.require(:offer).permit(:year, :semestre, :type_offer, :grid_id,
-      offer_disciplines_attributes: [:id, :grid_discipline_id, :user_id, :active, :offer_id, :_destroy])
+        offer_disciplines_attributes: [:id, :grid_discipline_id, :user_id, :active, :offer_id, {turmas_id: []}, {offer_discipline_turmas_attributes: [:id, :offer_discipline_id, :turma_id]}, :_destroy
+        ]
+      )
     end
 
     def load_cursos

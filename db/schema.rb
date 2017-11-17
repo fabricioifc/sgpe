@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171117171254) do
+ActiveRecord::Schema.define(version: 20171117192541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,15 @@ ActiveRecord::Schema.define(version: 20171117171254) do
     t.boolean "enabled", default: true
     t.index ["course_id"], name: "index_grids_on_course_id"
     t.index ["user_id"], name: "index_grids_on_user_id"
+  end
+
+  create_table "offer_discipline_turmas", force: :cascade do |t|
+    t.bigint "offer_discipline_id"
+    t.bigint "turma_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["offer_discipline_id"], name: "index_offer_discipline_turmas_on_offer_discipline_id"
+    t.index ["turma_id"], name: "index_offer_discipline_turmas_on_turma_id"
   end
 
   create_table "offer_disciplines", force: :cascade do |t|
@@ -251,6 +260,8 @@ ActiveRecord::Schema.define(version: 20171117171254) do
   add_foreign_key "grid_disciplines", "grids"
   add_foreign_key "grids", "courses"
   add_foreign_key "grids", "users"
+  add_foreign_key "offer_discipline_turmas", "offer_disciplines"
+  add_foreign_key "offer_discipline_turmas", "turmas"
   add_foreign_key "offer_disciplines", "grid_disciplines"
   add_foreign_key "offer_disciplines", "offers"
   add_foreign_key "offer_disciplines", "users"
