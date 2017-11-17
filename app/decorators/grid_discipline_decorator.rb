@@ -30,9 +30,9 @@ class GridDisciplineDecorator < ApplicationDecorator
   #   component.year.ordinalize
   # end
 
-  # Verificar o cálculo de acordo com o tipo do curso [INT, SUB, etc]
   def carga_horaria_aula
-    component.carga_horaria unless component.carga_horaria.nil?
+    minutos_aula = component.grid.course.course_format.minutos_aula
+    (component.carga_horaria / (minutos_aula.to_f / 60)).to_i  unless component.carga_horaria.nil? || minutos_aula.nil?
   end
 
 

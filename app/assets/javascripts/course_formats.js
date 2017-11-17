@@ -30,7 +30,13 @@ document.addEventListener("turbolinks:load", function() {
           orderable: true
         },
         {
-          width: "75%",
+          width: "65%",
+          className: "",
+          searchable: true,
+          orderable: true
+        },
+        {
+          width: "10%",
           className: "",
           searchable: true,
           orderable: true

@@ -2,9 +2,9 @@ class CreateCourseService
 
   def call
     formatos = []
-    formatos << [ name: 'Integrado' ]
-    formatos << [ name: 'Subsequente' ]
-    formatos << [ name: 'Especialização' ]
+    formatos << [ name: 'Integrado', minutos_aula: 45 ]
+    formatos << [ name: 'Subsequente', minutos_aula: 50 ]
+    formatos << [ name: 'Especialização', , minutos_aula: 50 ]
 
     modalidades = []
     modalidades << [ sigla: 'PRE', description: 'Presencial']
