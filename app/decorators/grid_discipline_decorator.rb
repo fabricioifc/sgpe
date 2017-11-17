@@ -30,5 +30,10 @@ class GridDisciplineDecorator < ApplicationDecorator
   #   component.year.ordinalize
   # end
 
+  # Verificar o cálculo de acordo com o tipo do curso [INT, SUB, etc]
+  def carga_horaria_aula
+    component.carga_horaria unless component.carga_horaria.nil?
+  end
+
 
 end

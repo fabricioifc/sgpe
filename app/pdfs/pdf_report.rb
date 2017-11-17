@@ -2,7 +2,8 @@ class PdfReport < Prawn::Document
   attr_reader :attributes, :id, :company, :custom_font, :logo, :message
 
   TABLE_ROW_COLORS = ["FFFFFF","F5F5F5"]
-  FONT_SIZE = 10
+  FONT_SIZE_TITLE = 12
+  FONT_SIZE_TEXT = 10
   TABLE_FONT_SIZE = 9
   PAGE_NUMBER_FONT_SIZE = 8
 
@@ -80,7 +81,7 @@ class PdfReport < Prawn::Document
       number_pages '<page>/<total>', options
     end
 
-    def display_event_table table_data = [], table_widths = [], options = {}
+    def display_event_table table_data = [], table_widths = [], options = {}, cells_options = {}
       @table_data   = table_data
       @table_widths = table_widths
 
@@ -89,11 +90,18 @@ class PdfReport < Prawn::Document
         column_widths: @table_widths,
         cell_style: { border_color: 'cccccc', size: TABLE_FONT_SIZE },
         width: @table_widths.sum,
-        row_colors: TABLE_ROW_COLORS
+        row_colors: TABLE_ROW_COLORS,
       }.merge!(options)
 
+      cells_options = {
+        borders: [:bottom],
+        borders_length: -2,
+        columns_bold: [],
+        columns_background: []
+      }.merge!(cells_options)
+
       if !@table_data.empty?
-        borders = @table_data.length - 2
+        borders = @table_data.length + cells_options[:borders_length]
         # move_down 90
         table @table_data, options do
           # cells_options.each do |k, v|
@@ -103,7 +111,17 @@ class PdfReport < Prawn::Document
           cells.borders = []
           row(0).font_style = :bold
           row(0).background_color = "f5f5f5"
-          row(0..borders).borders = [:bottom]
+          row(0..borders).borders = cells_options[:borders]
+          cells_options[:columns_bold].each do |k,v|
+            row(k).columns(v).font_style = :bold
+          end
+          cells_options[:columns_background].each do |a|
+            a.each do |b,c|
+              c.each do |k, v|
+                row(b).columns(k).background_color = v
+              end
+            end
+          end
         end
       end
     end

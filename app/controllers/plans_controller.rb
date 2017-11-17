@@ -25,6 +25,17 @@ class PlansController < ApplicationController
   # GET /plans/1
   # GET /plans/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.json
+      format.pdf {
+        pdf = PlanPdf.new(@plan, current_user).generate
+        send_data pdf.render,
+          filename: "#{@plan.created_at.strftime("%Y%m%d")}_plano#{@plan.id}.pdf",
+          type: "application/pdf",
+          disposition: :inline
+      }
+    end
   end
 
   # GET /plans/new

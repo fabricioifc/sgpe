@@ -74,7 +74,7 @@
                       <% end %>
                     </td>
                     <td>
-                      <%= link_to offer_offer_discipline_plans_path(plan, format: :pdf), class: 'btn btn-block btn-xs btn-danger ' do %>
+                      <%= link_to offer_offer_discipline_plan_path(id: plan.id, format: :pdf), class: 'btn btn-block btn-xs btn-danger ' do %>
                         <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <%= t('helpers.links.pdf') %>
                       <% end %>
