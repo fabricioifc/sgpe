@@ -1,19 +1,23 @@
 <%- model = Plan %>
 
-<div class="row">
+<div class="container">
 
   <% if @plans.empty? %>
 
-    <ul class="list-group">
-      <li class="list-group-item">Disciplina: <strong><%= @disciplina.title %></strong></li>
-      <li class="list-group-item list-group-item-danger">Nenhum plano de ensino encontrado/ofertado para esta disciplina</li>
-    </ul>
+    <div class="col-md-12">
 
-    <%= link_to new_offer_offer_discipline_plan_path(offer_discipline_id: params[:offer_discipline_id]),
-        class: 'btn btn-block btn-xs btn-primary' do %>
+      <ul class="list-group">
+        <li class="list-group-item">Disciplina: <strong><%= @disciplina.title %></strong></li>
+        <li class="list-group-item list-group-item-danger">Nenhum plano de ensino encontrado/ofertado para esta disciplina</li>
+      </ul>
+
+      <%= link_to new_offer_offer_discipline_plan_path(offer_discipline_id: params[:offer_discipline_id]),
+          class: 'btn btn-primary' do %>
           <i class="fa fa-plus" aria-hidden="true"></i>
           <%= t('.new', :default => t("helpers.titles.new", model: model.model_name.human.downcase )) %>
-    <% end %>
+      <% end %>
+
+    </div>
 
   <% else %>
 
