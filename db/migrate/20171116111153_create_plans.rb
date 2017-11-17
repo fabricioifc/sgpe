@@ -2,7 +2,7 @@ class CreatePlans < ActiveRecord::Migration[5.1]
   def change
     create_table :plans do |t|
       t.references :offer_discipline, foreign_key: true, index:true
-      t.references :plan_class, foreign_key: true, index:true, null:true
+      # t.references :plan_class, foreign_key: true, index:true, null:true
       t.text :obj_espe
       t.text :conteudo_prog
       t.text :prat_prof
