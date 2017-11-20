@@ -22,7 +22,8 @@ class PlansController < ApplicationController
         joins(:grid_discipline => :discipline).
         where(active:true).where('offers.active = ?', true).
         where('grids.course_id = ?', params[:course_id]).
-        order('offers.year, offers.semestre, disciplines.title')
+        order('offers.year desc, offers.semestre desc, disciplines.title').
+        group_by{ |c| [c.offer.year, c.offer.semestre] }
     end
   end
 

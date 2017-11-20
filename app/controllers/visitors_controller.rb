@@ -7,7 +7,7 @@ class VisitorsController < ApplicationController
       # @ids = current_user.offer_disciplines.joins(:offer).select(:offer_id).where(active:true).where('offers.active = ?', true).group(:offer_id).map(&:offer_id)
       # @ofertasProfessor = Offer.where(id: @ids).order(year: :asc, semestre: :asc)
 
-      @ofertasCursoProfessor = {}
+      # @ofertasCursoProfessor = {}
       # @anos = current_user.offer_disciplines.joins(:offer).
       #   where(active:true).where('offers.active = ?', true).
       #   pluck('offers.year').uniq
@@ -18,14 +18,14 @@ class VisitorsController < ApplicationController
 
       @cursos = Course.where(id: curso_ids)
 
-      curso_ids.each do |curso_id|
-        @ofertasCursoProfessor[curso_id] = current_user.offer_disciplines.joins(:offer => :grid).
-          joins(:grid_discipline => :discipline).
-          where(active:true).where('offers.active = ?', true).
-          where('grids.course_id = ?', curso_id).
-          order('offers.year, offers.semestre, disciplines.title')
-
-      end
+      # curso_ids.each do |curso_id|
+      #   @ofertasCursoProfessor[curso_id] = current_user.offer_disciplines.joins(:offer => :grid).
+      #     joins(:grid_discipline => :discipline).
+      #     where(active:true).where('offers.active = ?', true).
+      #     where('grids.course_id = ?', curso_id).
+      #     order('offers.year, offers.semestre, disciplines.title')
+      #
+      # end
     end
 
 

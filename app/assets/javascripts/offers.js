@@ -21,6 +21,7 @@ document.addEventListener("turbolinks:load", function() {
       "language": {
           "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json"
       },
+      order: [[ 0, "desc" ], [3, 'asc']],
 
       columns: [
         {
