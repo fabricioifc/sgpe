@@ -10,18 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171117192541) do
+ActiveRecord::Schema.define(version: 20171120114141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "clazzs", force: :cascade do |t|
-    t.string "name", limit: 45, null: false
-    t.integer "year", null: false
-    t.boolean "active", default: true
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "course_formats", force: :cascade do |t|
     t.string "name", limit: 45, null: false
@@ -74,6 +66,15 @@ ActiveRecord::Schema.define(version: 20171117192541) do
     t.index ["user_id"], name: "index_disciplines_on_user_id"
   end
 
+  create_table "grid_discipline_turmas", force: :cascade do |t|
+    t.bigint "grid_discipline_id"
+    t.bigint "turma_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["grid_discipline_id"], name: "index_grid_discipline_turmas_on_grid_discipline_id"
+    t.index ["turma_id"], name: "index_grid_discipline_turmas_on_turma_id"
+  end
+
   create_table "grid_disciplines", force: :cascade do |t|
     t.integer "year"
     t.text "ementa", null: false
@@ -102,15 +103,6 @@ ActiveRecord::Schema.define(version: 20171117192541) do
     t.index ["user_id"], name: "index_grids_on_user_id"
   end
 
-  create_table "offer_discipline_turmas", force: :cascade do |t|
-    t.bigint "offer_discipline_id"
-    t.bigint "turma_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["offer_discipline_id"], name: "index_offer_discipline_turmas_on_offer_discipline_id"
-    t.index ["turma_id"], name: "index_offer_discipline_turmas_on_turma_id"
-  end
-
   create_table "offer_disciplines", force: :cascade do |t|
     t.bigint "grid_discipline_id"
     t.bigint "user_id"
@@ -133,7 +125,9 @@ ActiveRecord::Schema.define(version: 20171117192541) do
     t.bigint "grid_id"
     t.integer "year_base"
     t.integer "semestre_base"
+    t.bigint "turma_id"
     t.index ["grid_id"], name: "index_offers_on_grid_id"
+    t.index ["turma_id"], name: "index_offers_on_turma_id"
   end
 
   create_table "perfil_roles", force: :cascade do |t|
@@ -256,16 +250,17 @@ ActiveRecord::Schema.define(version: 20171117192541) do
   add_foreign_key "courses", "course_offers"
   add_foreign_key "courses", "users"
   add_foreign_key "disciplines", "users"
+  add_foreign_key "grid_discipline_turmas", "grid_disciplines"
+  add_foreign_key "grid_discipline_turmas", "turmas"
   add_foreign_key "grid_disciplines", "disciplines"
   add_foreign_key "grid_disciplines", "grids"
   add_foreign_key "grids", "courses"
   add_foreign_key "grids", "users"
-  add_foreign_key "offer_discipline_turmas", "offer_disciplines"
-  add_foreign_key "offer_discipline_turmas", "turmas"
   add_foreign_key "offer_disciplines", "grid_disciplines"
   add_foreign_key "offer_disciplines", "offers"
   add_foreign_key "offer_disciplines", "users"
   add_foreign_key "offers", "grids"
+  add_foreign_key "offers", "turmas"
   add_foreign_key "perfil_roles", "perfils"
   add_foreign_key "perfil_roles", "roles"
   add_foreign_key "plans", "offer_disciplines"

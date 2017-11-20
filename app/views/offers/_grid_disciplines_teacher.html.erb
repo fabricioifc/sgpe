@@ -2,7 +2,7 @@
 
   <% if !offer.offer_disciplines.empty? %>
     <% first = 0 %>
-    <% por_grupo = offer.offer_disciplines.count >= 3 ? offer.offer_disciplines.count / 2 : 1 %>
+    <% por_grupo = offer.offer_disciplines.count >= 3 ? offer.offer_disciplines.count / 3 : 1 %>
     <% ofertas = offer.offer_disciplines.in_groups_of(por_grupo, false) %>
 
     <% ofertas.each do |a| %>
@@ -11,7 +11,7 @@
           <thead>
             <tr>
               <th>Disciplina</th>
-              <th>Turmas</th>
+              <!-- <th>Turmas</th> -->
               <th>Professor</th>
             </tr>
           </thead>

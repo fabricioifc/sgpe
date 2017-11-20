@@ -92,18 +92,18 @@ class OffersController < ApplicationController
           ActiveRecord::Base.transaction do
             # offer_params[:offer_disciplines_attributes]
             if @offer.update(offer_params)
-              @offer.offer_disciplines.each do |d|
-                offer_params[:offer_disciplines_attributes].each do |k,v|
-                  if !v[:id].empty? && v[:id].to_i == d.id
-                    OfferDisciplineTurma.where(offer_discipline_id: d.id).destroy_all
-                    v[:turmas_id].each do |turma|
-                      if !turma.empty?
-                        OfferDisciplineTurma.find_or_create_by!(offer_discipline_id: d.id, turma_id: turma.to_i)
-                      end
-                    end
-                  end
-                end
-              end
+              # @offer.offer_disciplines.each do |d|
+              #   offer_params[:offer_disciplines_attributes].each do |k,v|
+              #     if !v[:id].empty? && v[:id].to_i == d.id
+              #       OfferDisciplineTurma.where(offer_discipline_id: d.id).destroy_all
+              #       v[:turmas_id].each do |turma|
+              #         if !turma.empty?
+              #           OfferDisciplineTurma.find_or_create_by!(offer_discipline_id: d.id, turma_id: turma.to_i)
+              #         end
+              #       end
+              #     end
+              #   end
+              # end
               format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
               format.json { render :show, status: :ok, location: @offer }
             else
@@ -168,11 +168,12 @@ class OffersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def offer_params
-      params.require(:offer).permit(:year, :semestre, :type_offer, :grid_id,
-        offer_disciplines_attributes: [:id, :grid_discipline_id, :user_id, :active, :offer_id, {turmas_id: []}, {offer_discipline_turmas_attributes: [:id, :offer_discipline_id, :turma_id]}, :_destroy
+      params.require(:offer).permit(:year, :semestre, :type_offer, :grid_id, :turma_id,
+        offer_disciplines_attributes: [:id, :grid_discipline_id, :user_id, :active, :offer_id, :_destroy
         ]
       )
     end
+    # {turmas_id: []}, {offer_discipline_turmas_attributes: [:id, :offer_discipline_id, :turma_id]},
 
     def load_cursos
       @cursos = Course.where(active:true)

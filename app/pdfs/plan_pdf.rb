@@ -50,7 +50,7 @@ class PlanPdf < PdfReport
           table_data(
             [['Turma', 'Forma', 'Qtd. Horas', 'Qtd. H/A']],
             [
-              "#{@plano.turma.year}.#{ano_semestre}.#{@plano.offer_discipline.grid_discipline.grid.course.sigla}.#{@plano.turma.name.upper}",
+              "#{@plano.offer_discipline.offer.year}.#{ano_semestre}.#{@plano.offer_discipline.grid_discipline.grid.course.sigla}.#{@plano.offer_discipline.offer.turma.name}",
               @plano.offer_discipline.grid_discipline.grid.course.course_format.name,
               @plano.offer_discipline.grid_discipline.carga_horaria,
               @plano.offer_discipline.grid_discipline.decorate.carga_horaria_aula

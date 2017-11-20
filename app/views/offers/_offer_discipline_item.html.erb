@@ -2,11 +2,11 @@
   <%= g.hidden_field :grid_discipline_id %>
   <td class="text-middle"><%= g.object.grid_discipline.discipline.title unless g.object.grid_discipline.nil? %></td>
 
-  <td style="width: 30%;"><%= g.select :turmas_id, options_for_select(Turma.all.collect { |c| [c.name, c.id ]},
+  <!-- <td style="width: 30%;"><= g.select :turmas_id, options_for_select(Turma.all.collect { |c| [c.name, c.id ]},
         OfferDisciplineTurma.where(offer_discipline_id: g.object.id).pluck(:turma_id)),
         { hide_label:true },
         { multiple:true, class: 'form-control input-sm select2', wrapper: { style: 'margin-bottom: 0;'} } %>
-  </td>
+  </td> -->
 
   <td style="width: 30%;"><%= g.select :user_id, options_for_select(@professores.collect { |c| [c.name, c.id ]}, g.object.user_id),
         { prompt:true, hide_label:true },

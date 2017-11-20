@@ -6,6 +6,10 @@ class GridsController < ApplicationController
   before_action :load_cursos_ativos
   before_action :load_disciplinas
 
+  def escolher
+    #code
+  end
+
   # GET /grids
   # GET /grids.json
   def index

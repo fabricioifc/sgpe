@@ -1,4 +1,5 @@
 class TurmasController < ApplicationController
+  has_many :offers
   before_action :set_turma, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   load_and_authorize_resource

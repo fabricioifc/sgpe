@@ -1,4 +1,6 @@
 class PlansController < ApplicationController
+  include ApplicationHelper
+
   before_action :set_plan, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   load_and_authorize_resource
@@ -11,6 +13,17 @@ class PlansController < ApplicationController
     @plan.versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
     params[:versao] = @plan.versao
     render 'new'
+  end
+
+  def course_plans
+    if is_professor?
+      @curso = Course.find(params[:course_id])
+      @ofertasCursoProfessor = current_user.offer_disciplines.joins(:offer => :grid).
+        joins(:grid_discipline => :discipline).
+        where(active:true).where('offers.active = ?', true).
+        where('grids.course_id = ?', params[:course_id]).
+        order('offers.year, offers.semestre, disciplines.title')
+    end
   end
 
   # GET /plans
@@ -103,7 +116,7 @@ class PlansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plan_params
-      params.require(:plan).permit(:offer_discipline_id, :turma_id, :obj_espe, :conteudo_prog, :prat_prof, :interdisc, :met_tec, :met_met, :avaliacao, :cronograma, :atendimento, :versao, :active, :user_id)
+      params.require(:plan).permit(:offer_discipline_id, :obj_espe, :conteudo_prog, :prat_prof, :interdisc, :met_tec, :met_met, :avaliacao, :cronograma, :atendimento, :versao, :active, :user_id)
     end
 
     def load_professores

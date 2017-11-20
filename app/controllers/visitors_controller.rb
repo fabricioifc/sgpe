@@ -12,19 +12,22 @@ class VisitorsController < ApplicationController
       #   where(active:true).where('offers.active = ?', true).
       #   pluck('offers.year').uniq
 
-      @cursos = current_user.offer_disciplines.joins(:offer => :grid).
+      curso_ids = current_user.offer_disciplines.joins(:offer => :grid).
         where(active:true).where('offers.active = ?', true).
         pluck('grids.course_id').uniq
 
-      @cursos.each do |curso|
-        @ofertasCursoProfessor[curso] = current_user.offer_disciplines.joins(:offer => :grid).
+      @cursos = Course.where(id: curso_ids)
+
+      curso_ids.each do |curso_id|
+        @ofertasCursoProfessor[curso_id] = current_user.offer_disciplines.joins(:offer => :grid).
           joins(:grid_discipline => :discipline).
           where(active:true).where('offers.active = ?', true).
-          where('grids.course_id = ?', curso).
+          where('grids.course_id = ?', curso_id).
           order('offers.year, offers.semestre, disciplines.title')
 
       end
     end
+
 
   end
 end

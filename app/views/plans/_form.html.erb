@@ -22,9 +22,7 @@
         <hr style="margin-top: 5px; margin-bottom: 10px;">
         <div class="tab-content">
           <div id="ementa" class="tab-pane fade in active">
-
-            <%= f.select :turma_id, Turma.all.collect { |c| ["#{c.year} - #{c.name}", c.id] }, id: :plan_turma, prompt:true %>
-
+            <!-- <= f.select :turma_id, Turma.all.collect { |c| ["#{c.year} - #{c.name}", c.id] }, id: :plan_turma, prompt:true %> -->
             <div class="form-group">
               <%= label_tag :ementa, nil, class: 'control-label' %>
               <%= text_area_tag :ementa, plan.offer_discipline.grid_discipline.decorate.ementa, id: :plan_ementa, class: 'form-control', readonly:true, rows: 10 %>

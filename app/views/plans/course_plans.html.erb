@@ -1,0 +1,34 @@
+<%- if is_professor? %>
+
+  <% first = 0 %>
+  <% por_grupo = @ofertasCursoProfessor.count >= 3 ? @ofertasCursoProfessor.count / 3 : 1 %>
+  <% ofertas = @ofertasCursoProfessor.in_groups_of(por_grupo, false) %>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= "[#{@curso.sigla}] #{@curso.name}" %></h3>
+    </div>
+    <div class="panel-body">
+      <% ofertas.each do |oferta| %>
+        <% oferta.each do |v| %>
+          <div class="col-md-3">
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-info"><%= v.grid_discipline.discipline.title %></li>
+              <li class="list-group-item">
+                <%= link_to 'Meus planos', offer_offer_discipline_plans_path(
+                    :offer_id => v.offer_id,
+                    :offer_discipline_id => v.id), class: 'btn btn-xs btn-primary' %>
+              </li>
+              <% if !v.offer.turma.nil? %>
+                <li class="list-group-item">Turma<span class="badge"><%= "#{v.offer.turma.name}" %></span></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="panel-footer">
+
+    </div>
+  </div>
+<%- end %>
