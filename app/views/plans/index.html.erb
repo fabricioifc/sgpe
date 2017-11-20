@@ -2,63 +2,49 @@
 
 <div class="row">
 
+  <div class="col-md-4 col-lg-4">
+    <%= render 'list_group_items_index', offer_discipline:@offer_discipline %>
+  </div>
+
   <% if @plans.empty? %>
 
-    <div class='container '>
-      <div class="col-md-12">
+    <div class="col-md-8">
 
-        <ul class="list-group">
-          <li class="list-group-item">Disciplina: <strong><%= @disciplina.title %></strong></li>
-          <li class="list-group-item list-group-item-danger">Nenhum plano de ensino encontrado/ofertado para esta disciplina</li>
-        </ul>
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-danger">Nenhum plano de ensino encontrado/ofertado para esta disciplina</li>
+      </ul>
 
-        <%= link_to new_offer_offer_discipline_plan_path(offer_discipline_id: params[:offer_discipline_id]),
-            class: 'btn btn-primary' do %>
-            <i class="fa fa-plus" aria-hidden="true"></i>
-            <%= t('.new', :default => t("helpers.titles.new", model: model.model_name.human.downcase )) %>
-        <% end %>
+      <%= link_to new_offer_offer_discipline_plan_path(offer_discipline_id: params[:offer_discipline_id]),
+          class: 'btn btn-primary' do %>
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          <%= t('.new', :default => t("helpers.titles.new", model: model.model_name.human.downcase )) %>
+      <% end %>
 
-      </div>
     </div>
 
   <% else %>
 
-    <div class="col-md-6 col-lg-6">
-      <!-- <= render 'list_group_items', @plans.first: @plans.first %> -->
-      <ul class="list-group col-md-6">
-        <li class="list-group-item list-group-item-info">Grade/Curso</li>
-        <li class="list-group-item">
-          <p><%= "#{@plans.first.offer_discipline.grid_discipline.grid.year}/#{@plans.first.offer_discipline.grid_discipline.grid.course.name}" %></p>
-          <p>
-            <span class="badge"><%= "#{@plans.first.offer_discipline.grid_discipline.grid.course.course_format.name}" %></span>
-            <span class="badge"><%= "#{@plans.first.offer_discipline.grid_discipline.grid.course.course_modality.description}" %></span>
-          </p>
-        </li>
-        <li class="list-group-item list-group-item-info">Disciplina</li>
-        <li class="list-group-item"><%= "#{@plans.first.offer_discipline.grid_discipline.discipline.sigla} - #{@plans.first.offer_discipline.grid_discipline.discipline.title}" %></li>
-        <li class="list-group-item list-group-item-info">Carga horária</li>
-        <li class="list-group-item"><%= @plans.first.offer_discipline.grid_discipline.carga_horaria %></li>
-      </ul>
-      <ul class="list-group col-md-6">
-        <li class="list-group-item list-group-item-info">Turma</li>
-        <li class="list-group-item"><%= "#{@plans.first.offer_discipline.offer.turma.year} - #{@plans.first.offer_discipline.offer.turma.name}" %></li>
-        <li class="list-group-item list-group-item-info">Ano</li>
-        <li class="list-group-item"><%= @plans.first.offer_discipline.grid_discipline.year || 'Sem Informação' %></li>
-        <li class="list-group-item list-group-item-info">Semestre</li>
-        <li class="list-group-item"><%= @plans.first.offer_discipline.grid_discipline.semestre || 'Sem informação' %></li>
-      </ul>
-    </div>
-    <div class="col-md-6 col-lg-6">
+    <div class="col-md-8 col-lg-8">
+
+      <div class="well well-sm">
+        <%= @plans.first.decorate.link_new '' %>
+        <%= @plans.first.decorate.link_gerar_pdf '' %>
+      </div>
 
       <ul class="list-group">
-        <li class="list-group-item list-group-item-success">Planos por versão</li>
+        <li class="list-group-item list-group-item-success clearfix">
+          <h4>
+            Planos por versão
+          </h4>
+        </li>
         <li class="list-group-item">
           <div class="table-responsive">
             <table class="table table-condensed table-striped">
               <thread>
                 <tr>
                   <th class="text-center">Versão</th>
-                  <th class="text-center" colspan="5">Ações</th>
+                  <th class="">Situação</th>
+                  <th class="">Ações</th>
                 </tr>
               </thread>
               <tbody>
@@ -67,35 +53,13 @@
                     <td class="text-center" style="vertical-align: middle;">
                       <span class="badge"><%= plan.versao unless plan.versao.nil? %></span>
                     </td>
-                    <td>
-                      <%= link_to edit_offer_offer_discipline_plan_path(offer_discipline_id: plan.offer_discipline_id, id: plan.id), class: "btn btn-block btn-xs btn-warning " do %>
-                        <i class="fa fa-edit" aria-hidden="true"></i>
-                        <%= t('helpers.links.edit') %>
-                      <% end %>
+                    <td class="" style="vertical-align: middle;">
+                      <%= plan.decorate.situacao %>
                     </td>
                     <td>
-                      <%= link_to offer_offer_discipline_plan_path(id: plan.id), class: 'btn btn-block btn-xs btn-info ' do %>
-                        <i class="fa fa-info-circle" aria-hidden="true"></i>
-                        <%= t('helpers.links.show') %>
-                      <% end %>
-                    </td>
-                    <td>
-                      <%= link_to offer_offer_discipline_plan_path(id: plan.id, format: :pdf), class: 'btn btn-block btn-xs btn-danger ' do %>
-                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                        <%= t('helpers.links.pdf') %>
-                      <% end %>
-                    </td>
-                    <td>
-                      <%= link_to new_offer_offer_discipline_plan_path(offer_discipline_id: params[:offer_discipline_id]), class: 'btn btn-block btn-xs btn-primary ' do %>
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                        <%= t('.new', :default => t("helpers.titles.new", model: model.model_name.human )) %>
-                      <% end %>
-                    </td>
-                    <td>
-                      <%= link_to copy_offer_offer_discipline_plan_path(offer_discipline_id: plan.offer_discipline_id, id: plan.id), class: "btn btn-block btn-xs btn-success " do %>
-                        <i class="fa fa-edit" aria-hidden="true"></i>
-                        <%= t('helpers.links.duplicate', model: model.model_name.human) %>
-                      <% end %>
+                      <%= plan.decorate.link_show %>
+                      <%= plan.decorate.link_editar %>
+                      <%= plan.decorate.link_duplicate %>
                     </td>
                   </tr>
                 <% end %>

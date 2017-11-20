@@ -45,4 +45,20 @@ module ApplicationHelper
     end
   end
 
+  def get_planos_disciplina offer_discipline_id
+    Plan.where(offer_discipline_id: offer_discipline_id, active:true).order(versao: :desc)
+  end
+
+  def get_planos_disciplina_aprovados offer_discipline_id
+    Plan.where(offer_discipline_id: offer_discipline_id, active:true, aprovado:true).order(versao: :desc)
+  end
+
+  def get_planos_disciplina_reprovados offer_discipline_id
+    Plan.where(offer_discipline_id: offer_discipline_id, active:true, reprovado:true).order(versao: :desc)
+  end
+
+  def get_planos_disciplina_analise offer_discipline_id
+    Plan.where(offer_discipline_id: offer_discipline_id, active:true, analise:true).order(versao: :desc)
+  end
+
 end

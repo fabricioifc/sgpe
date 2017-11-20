@@ -10,22 +10,37 @@
         <% ofertas_ano = ofertas.in_groups_of(por_grupo, false) %>
 
         <ul class="list-group">
-          <li class="list-group-item list-group-item-info">
-            <h5>
+          <li class="list-group-item list-group-item-success">
+            <h6>
               <span class="badge"><%= "Ano: #{ano_semestre[0]}" %></span>
-              <span class="badge"><%= "Semestre: #{ano_semestre[1] || 'Sem informação'}" %></span>
-            </h5>
+              <% if !ano_semestre[1].blank? %>
+                <span class="badge"><%= "Semestre: #{ano_semestre[1]}" %></span>
+              <% end %>
+            </h6>
           </li>
           <li class="list-group-item clearfix">
             <% ofertas_ano.each do |k, v| %>
+            <% aprovados = get_planos_disciplina_aprovados(k.id) %>
 
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <ul class="list-group">
                   <li class="list-group-item list-group-item-info"><%= k.grid_discipline.discipline.title %></li>
                   <li class="list-group-item">
                     <%= link_to 'Meus planos', offer_offer_discipline_plans_path(
                         :offer_id => k.offer_id,
                         :offer_discipline_id => k.id), class: 'btn btn-xs btn-primary' %>
+                    <% if !aprovados.empty? %>
+                      <span class="pull-right">
+                        <%= link_to offer_offer_discipline_plan_path(
+                              :offer_id => k.offer_id,
+                              :offer_discipline_id => k.id,
+                              id: aprovados.last.id, format: :pdf),
+                            class: 'btn btn-xs btn-danger ' do %>
+                            <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                            <%= t('helpers.links.pdf') %>
+                        <% end %>
+                      </span>
+                    <% end %>
                   </li>
                   <% if !k.offer.turma.nil? %>
                     <li class="list-group-item">Turma<span class="badge"><%= "#{k.offer.turma.name}" %></span></li>

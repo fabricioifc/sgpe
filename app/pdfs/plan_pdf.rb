@@ -7,7 +7,7 @@ class PlanPdf < PdfReport
     @plano = plan
     super({
       id: plan.id,
-      title: 'Plano de ensino',
+      title: 'Plano de Ensino',
       user: user,
         company: {
           name:   Rails.application.secrets.sistema_apelido,
@@ -38,7 +38,7 @@ class PlanPdf < PdfReport
             [['Componente curricular', 'Professor']],
             [
               @plano.offer_discipline.grid_discipline.discipline.title,
-              @plano.offer_discipline.user.name,
+              @plano.offer_discipline.user.name
             ]
           ),
           [280, 280],
@@ -135,6 +135,24 @@ class PlanPdf < PdfReport
         )
         display_event_table(
           table_data([['Bibliografia Complementar']], [@plano.offer_discipline.grid_discipline.bib_espec]),
+          [560],
+          { header:true },
+          { borders: [:top, :bottom, :left, :right], borders_length: 0 }
+        )
+
+        move_down 10
+        bounding_box [bleft, cursor + 5], :width  => 560 do
+          stroke_color "f2f2f2"
+          stroke_horizontal_rule
+        end
+
+        display_event_table(
+          table_data(
+            [['Informações complementares']],
+            [
+              "Versão: #{@plano.versao.to_f}"
+            ]
+          ),
           [560],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }

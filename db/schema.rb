@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171120114141) do
+ActiveRecord::Schema.define(version: 20171120194347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -170,9 +170,10 @@ ActiveRecord::Schema.define(version: 20171120114141) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "turma_id"
+    t.boolean "analise", default: false, null: false
+    t.boolean "aprovado", default: false, null: false
+    t.boolean "reprovado", default: false, null: false
     t.index ["offer_discipline_id"], name: "index_plans_on_offer_discipline_id"
-    t.index ["turma_id"], name: "index_plans_on_turma_id"
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
@@ -264,7 +265,6 @@ ActiveRecord::Schema.define(version: 20171120114141) do
   add_foreign_key "perfil_roles", "perfils"
   add_foreign_key "perfil_roles", "roles"
   add_foreign_key "plans", "offer_disciplines"
-  add_foreign_key "plans", "turmas"
   add_foreign_key "plans", "users"
   add_foreign_key "users_perfils", "perfils"
   add_foreign_key "users_perfils", "users"
