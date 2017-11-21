@@ -1,5 +1,5 @@
 class Turma < ApplicationRecord
-  has_many :plans
+#  has_many :offers
 
   validates :name, presence:true
   validates :year, presence: true,
