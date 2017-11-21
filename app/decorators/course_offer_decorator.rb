@@ -6,8 +6,8 @@ class CourseOfferDecorator < ApplicationDecorator
     @component = component
   end
 
-  def name
-    component.title.capitalize
+  def description
+    component.description.humanize
   end
 
   def active

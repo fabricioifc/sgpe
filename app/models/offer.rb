@@ -7,7 +7,7 @@ class Offer < ApplicationRecord
   enum offer_types: ['Regular', 'Não Regular']
 
   validates :type_offer, :grid_id, presence:true
-  validates :semestre, presence: { if: -> { year.blank? } }
+  validates :semestre, presence: { if: -> { self.grid.course.course_offer.description.eql?("semestral") } }
 
   validates :year, presence: { if: -> { semestre.blank? } },
     format: {

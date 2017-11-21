@@ -14,7 +14,7 @@ class CourseOfferDatatable < ApplicationDatatable
       [].tap do |column|
 
         column << course_offer.id
-        column << course_offer.description
+        column << course_offer.decorate.description
         column << course_offer.decorate.active
 
         links = []

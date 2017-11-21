@@ -147,6 +147,8 @@ class OffersController < ApplicationController
 
   def load_grid
     if !params[:grid_id].nil? && !params[:grid_id].blank?
+      params[:tipo_oferta] = Grid.find(params[:grid_id]).course.course_offer.description
+
       if params[:grid_year].nil? && params[:grid_semestre].nil?
         @grade_anos = load_grade_anos(params[:grid_id])
         @grade_semestres = load_grade_semestres(params[:grid_id])

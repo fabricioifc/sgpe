@@ -12,7 +12,7 @@ class Turma < ApplicationRecord
       less_than_or_equal_to: Date.today.year + 25
     }
 
-  validates :name, :year, uniqueness:true
+  validates :name, uniqueness: { scope: [:name, :year] }
 
   def decorate
     @decorate ||= TurmaDecorator.new self

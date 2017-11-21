@@ -32,7 +32,11 @@
         <%= f.number_field :year, id: :offer_year, placeholder:true %>
       </div>
       <div class="col-md-3">
-        <%= f.number_field :semestre, id: :offer_semestre, placeholder:'1,2,3...' %>
+        <% if !f.object.nil? && !f.object.grid.nil? && !f.object.grid.course.course_offer.description.eql?("semestral") %>
+          <%= f.number_field :semestre, id: :offer_semestre, placeholder:'1,2,3...', disabled:true %>
+        <% else %>
+          <%= f.number_field :semestre, id: :offer_semestre, placeholder:'1,2,3...' %>
+        <% end %>
       </div>
 
       <div class="form-group col-md-12">

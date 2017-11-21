@@ -12,10 +12,10 @@ class CreateCourseService
     modalidades << [ sigla: 'DIS', description: 'À Distância']
 
     ofertas = []
-    ofertas << [description: 'Ano']
-    ofertas << [description: 'Semestre']
-    ofertas << [description: 'Ciclo']
-    ofertas << [description: 'Oferta única (FIC)']
+    ofertas << [description: 'anual']
+    ofertas << [description: 'semestral']
+    ofertas << [description: 'ciclo']
+    ofertas << [description: 'oferta_unica']
 
     formatos.each do |k, v|
       CourseFormat.find_or_create_by!(k)
@@ -36,7 +36,7 @@ class CreateCourseService
       carga_horaria:    3000,
       course_modality:  CourseModality.find_by(sigla: 'PRE'),
       course_format:    CourseFormat.find_by(name: 'Integrado'),
-      course_offer:    CourseOffer.find_by(description: 'Ano'),
+      course_offer:    CourseOffer.find_by(description: 'anual'),
       user:             User.where(admin: true).last,
     ]
 
