@@ -61,4 +61,15 @@ module ApplicationHelper
     Plan.where(offer_discipline_id: offer_discipline_id, active:true, analise:true).order(versao: :desc)
   end
 
+  def dropdown_autorizacao *models
+    autorizado = false
+    models.each do |m|
+      if can? :read, m
+        autorizado = true
+        break
+      end
+    end
+    autorizado
+  end
+
 end
