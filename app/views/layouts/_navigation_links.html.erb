@@ -1,7 +1,4 @@
 <%# add navigation links to this file %>
-<li><%= link_to t('helpers.links.pages.about'), page_path('about') %></li>
-<li class="divider-vertical"></li>
-
 <% if user_signed_in? %>
   <% if dropdown_autorizacao CourseFormat, CourseModality, CourseOffer, Course, Turma %>
     <li class="dropdown">
