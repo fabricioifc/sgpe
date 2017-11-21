@@ -9,7 +9,7 @@
   </td> -->
 
   <td style="width: 30%;"><%= g.select :user_id, options_for_select(@professores.collect { |c| [c.name, c.id ]}, g.object.user_id),
-        { prompt:true, hide_label:true, include_blank:'Professor' },
+        { prompt:true, hide_label:true },
         {class: 'form-control input-sm', wrapper: { style: 'margin-bottom: 0;'} } %>
   </td>
 </tr>
