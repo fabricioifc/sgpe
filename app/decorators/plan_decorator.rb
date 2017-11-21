@@ -20,28 +20,31 @@ class PlanDecorator < ApplicationDecorator
     end
   end
 
-  def link_gerar_pdf classes = 'btn-xs'
-    plano = plano_aprovado
-    if !plano.nil?
-      h.link_to h.offer_offer_discipline_plan_path(id: plano.id,
-                                                   offer_discipline_id: plano.offer_discipline_id,
-                                                   offer_id: plano.offer_discipline.offer_id,
-                                                   format: :pdf),
-        class: "btn btn-danger #{classes}", target:'_blank' do
-          h.content_tag :i, nil, class: 'fa fa-file-pdf-o' do
-            h.content_tag :span, " #{I18n.t 'helpers.links.pdf'}"
-          end
-      end
+  def situacao_texto
+    if component.aprovado?
+        'Aprovado'
+    elsif component.reprovado?
+      'Reprovado'
+    elsif component.analise?
+      'Em análise'
     else
-      h.button_tag nil, class: "btn btn-danger #{classes}", disabled:true do
-          h.content_tag :i, nil, class: 'fa fa-file-pdf-o' do
-            h.content_tag :span, " #{I18n.t 'helpers.links.pdf'}"
-          end
-      end
+      'Editando'
     end
   end
 
-  def link_editar classes = 'btn-xs'
+  def link_pdf classes = 'btn-sm'
+    h.link_to h.offer_offer_discipline_plan_path(id: component.id,
+                                                 offer_discipline_id: component.offer_discipline_id,
+                                                 offer_id: component.offer_discipline.offer_id,
+                                                 format: :pdf),
+      class: "btn btn-primary #{classes}", target:'_blank' do
+        h.content_tag :i, nil, class: 'fa fa-file-pdf-o' do
+          h.content_tag :span, " #{I18n.t 'helpers.links.pdf'}"
+        end
+    end
+  end
+
+  def link_editar classes = 'btn-sm'
     if pode_editar?
       h.link_to h.edit_offer_offer_discipline_plan_path(offer_discipline_id: component.offer_discipline_id, id: component.id),
         class: "btn btn-warning #{classes}" do
@@ -58,7 +61,7 @@ class PlanDecorator < ApplicationDecorator
     end
   end
 
-  def link_show classes = 'btn-xs'
+  def link_show classes = 'btn-sm'
     h.link_to h.offer_offer_discipline_plan_path(id: component.id),
       class: "btn btn-info #{classes}" do
         h.content_tag :i, nil, class: 'fa fa-info-circle' do
@@ -67,7 +70,7 @@ class PlanDecorator < ApplicationDecorator
     end
   end
 
-  def link_index classes = 'btn-xs'
+  def link_index classes = 'btn-sm'
     h.link_to h.offer_offer_discipline_plans_path(offer_discipline_id: component.offer_discipline_id),
       class: "btn btn-default #{classes}" do
         h.content_tag :i, nil, class: 'fa fa-list' do
@@ -76,7 +79,7 @@ class PlanDecorator < ApplicationDecorator
     end
   end
 
-  def link_new classes = 'btn-xs'
+  def link_new classes = 'btn-sm'
     if pode_novo?
       h.link_to h.new_offer_offer_discipline_plan_path(offer_discipline_id: component.offer_discipline_id),
         class: "btn btn-primary #{classes}" do
@@ -93,7 +96,7 @@ class PlanDecorator < ApplicationDecorator
     end
   end
 
-  def link_duplicate classes = 'btn-xs'
+  def link_duplicate classes = 'btn-sm'
     if pode_excluir?
       h.link_to h.offer_offer_discipline_plan_path(id: component.id),
         method: :delete, data: { confirm: 'Tem certeza?' },

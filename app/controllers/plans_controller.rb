@@ -47,15 +47,13 @@ class PlansController < ApplicationController
     respond_to do |format|
       format.html
       format.json
-      if @plan.aprovado?
-        format.pdf {
-            pdf = PlanPdf.new(@plan, current_user).generate
-            send_data pdf.render,
-              filename: "#{@plan.created_at.strftime("%Y%m%d")}_plano#{@plan.id}.pdf",
-              type: "application/pdf",
-              disposition: :inline
-        }
-      end
+      format.pdf {
+          pdf = PlanPdf.new(@plan, current_user).generate
+          send_data pdf.render,
+            filename: "#{@plan.created_at.strftime("%Y%m%d")}_plano#{@plan.id}.pdf",
+            type: "application/pdf",
+            disposition: :inline
+      }
     end
   end
 

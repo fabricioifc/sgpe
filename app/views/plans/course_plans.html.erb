@@ -31,7 +31,7 @@
                         :offer_discipline_id => k.id), class: 'btn btn-xs btn-primary' %>
                     <% if !aprovados.empty? %>
                       <span class="pull-right">
-                        <%= aprovados.last.decorate.link_gerar_pdf %>
+                        <%= aprovados.first.decorate.link_pdf %>
                       </span>
                     <% end %>
                   </li>

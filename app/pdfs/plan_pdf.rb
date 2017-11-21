@@ -1,4 +1,5 @@
 class PlanPdf < PdfReport
+  include ApplicationHelper
 
   TABLE_WIDTHS = [70, 490]
   TABLE_HEADERS = [["Ano/semestre", "Disciplina"]]
@@ -31,32 +32,38 @@ class PlanPdf < PdfReport
           show_pagination
         end
 
-        ano_semestre = @plano.offer_discipline.grid_discipline.year? ? @plano.offer_discipline.grid_discipline.year : @plano.offer_discipline.grid_discipline.semestre
+        ano_semestre = @plano.offer_discipline.offer.year.to_s << (
+          @plano.offer_discipline.offer.semestre? ? "/#{@plano.offer_discipline.offer.semestre}" : ''
+        )
+
+        ultimo_plano_aprovado = get_planos_disciplina_aprovados(@plano.offer_discipline_id).first
 
         display_event_table(
           table_data(
-            [['Componente curricular', 'Professor']],
+            [['Componente curricular', 'Professor', 'Turma']],
             [
               @plano.offer_discipline.grid_discipline.discipline.title,
-              @plano.offer_discipline.user.name
+              @plano.offer_discipline.user.name,
+              "#{@plano.offer_discipline.offer.turma.year}.#{@plano.offer_discipline.offer.turma.name}",
             ]
           ),
-          [280, 280],
+          [250, 250, 60],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0, columns_bold: [[1,0..0]], columns_background: [1 => [[0, "ffffcc"]]] }
         )
 
         display_event_table(
           table_data(
-            [['Turma', 'Forma', 'Qtd. Horas', 'Qtd. H/A']],
+            [['Oferta', 'Modalidade', 'Forma', 'Qtd. Horas', 'Qtd. H/A']],
             [
-              "#{@plano.offer_discipline.offer.year}.#{ano_semestre}.#{@plano.offer_discipline.grid_discipline.grid.course.sigla}.#{@plano.offer_discipline.offer.turma.name}",
-              @plano.offer_discipline.grid_discipline.grid.course.course_format.name,
+              "#{ano_semestre}",
+              @plano.offer_discipline.grid_discipline.grid.course.course_modality.description,
+              "#{@plano.offer_discipline.grid_discipline.grid.course.sigla} - #{@plano.offer_discipline.grid_discipline.grid.course.course_format.name}",
               @plano.offer_discipline.grid_discipline.carga_horaria,
               @plano.offer_discipline.grid_discipline.decorate.carga_horaria_aula
             ]
           ),
-          [180, 180, 100, 100],
+          [112, 112, 112, 112, 112],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
@@ -146,18 +153,38 @@ class PlanPdf < PdfReport
           stroke_horizontal_rule
         end
 
+        observacoes = nil
+        if !ultimo_plano_aprovado.nil?
+          if !ultimo_plano_aprovado.versao.eql?(@plano.versao)
+            observacoes = "A versão #{ultimo_plano_aprovado.versao.to_f} é a última versão aprovada para este plano de ensino."
+          end
+        end
+
         display_event_table(
           table_data(
             [['Informações complementares']],
             [
-              "Versão: #{@plano.versao.to_f}"
+              "Versão: #{@plano.versao.to_f} - #{@plano.decorate.situacao_texto}"
             ]
           ),
-          [560],
-          { header:true },
-          { borders: [:top, :bottom, :left, :right], borders_length: 0 }
-        )
-      end
+            [560],
+            { header:true },
+            { borders: [:top, :bottom, :left, :right], borders_length: 0 }
+          )
+          if !observacoes.nil?
+            display_event_table(
+              table_data(
+                [['Observações']],
+                [
+                  observacoes
+                ]
+              ),
+                [560],
+                { header:true },
+                { borders: [:top, :bottom, :left, :right], borders_length: 0 }
+            )
+          end
+        end
       footer
     end
     self

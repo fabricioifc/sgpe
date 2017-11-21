@@ -26,14 +26,10 @@
 
     <div class="col-md-8 col-lg-8">
 
-      <div class="well well-sm">
-        <%= @plans.first.decorate.link_new '' %>
-        <%= @plans.first.decorate.link_gerar_pdf '' %>
-      </div>
-
       <ul class="list-group">
         <li class="list-group-item list-group-item-success clearfix">
           <h4>
+            <%= @plans.first.decorate.link_new '' %>
             Planos por versão
           </h4>
         </li>
@@ -45,6 +41,7 @@
                   <th class="text-center">Versão</th>
                   <th class="">Situação</th>
                   <th class="">Ações</th>
+                  <th class="">Relatório</th>
                 </tr>
               </thread>
               <tbody>
@@ -61,6 +58,7 @@
                       <%= plan.decorate.link_editar %>
                       <%= plan.decorate.link_duplicate %>
                     </td>
+                    <td><%= plan.decorate.link_pdf 'btn-sm btn-block' %></td>
                   </tr>
                 <% end %>
               </tbody>
