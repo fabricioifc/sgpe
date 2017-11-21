@@ -31,14 +31,7 @@
                         :offer_discipline_id => k.id), class: 'btn btn-xs btn-primary' %>
                     <% if !aprovados.empty? %>
                       <span class="pull-right">
-                        <%= link_to offer_offer_discipline_plan_path(
-                              :offer_id => k.offer_id,
-                              :offer_discipline_id => k.id,
-                              id: aprovados.last.id, format: :pdf),
-                            class: 'btn btn-xs btn-danger ' do %>
-                            <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                            <%= t('helpers.links.pdf') %>
-                        <% end %>
+                        <%= aprovados.last.decorate.link_gerar_pdf %>
                       </span>
                     <% end %>
                   </li>

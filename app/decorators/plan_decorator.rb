@@ -23,7 +23,10 @@ class PlanDecorator < ApplicationDecorator
   def link_gerar_pdf classes = 'btn-xs'
     plano = plano_aprovado
     if !plano.nil?
-      h.link_to h.offer_offer_discipline_plan_path(id: plano.id, format: :pdf),
+      h.link_to h.offer_offer_discipline_plan_path(id: plano.id,
+                                                   offer_discipline_id: plano.offer_discipline_id,
+                                                   offer_id: plano.offer_discipline.offer_id,
+                                                   format: :pdf),
         class: "btn btn-danger #{classes}", target:'_blank' do
           h.content_tag :i, nil, class: 'fa fa-file-pdf-o' do
             h.content_tag :span, " #{I18n.t 'helpers.links.pdf'}"
