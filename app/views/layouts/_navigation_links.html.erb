@@ -8,6 +8,7 @@
         <li><%= link_to t('helpers.links.pages.course_modalities'), course_modalities_path if can? :read, CourseModality %></li>
         <li><%= link_to t('helpers.links.pages.course_offers'), course_offers_path if can? :read, CourseOffer %></li>
         <li><%= link_to t('helpers.links.pages.courses'), courses_path if can? :read, Course %></li>
+        <li role="presentation" class="divider"></li>
         <li><%= link_to t('helpers.links.pages.turmas'), turmas_path if can? :read, Turma %></li>
       </ul>
     </li>

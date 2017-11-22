@@ -18,35 +18,71 @@
               <% end %>
             </h6>
           </li>
-          <li class="list-group-item clearfix">
+          <li class="list-group-item">
+            <div class="row">
             <% ofertas_ano.each do |k, v| %>
-            <% aprovados = get_planos_disciplina_aprovados(k.id) %>
+            <!-- < aprovados = get_planos_disciplina_aprovados(k.id) %> -->
+            <% planos = planos_por_disciplina(k.id) %>
 
-              <div class="col-md-4">
-                <ul class="list-group">
-                  <li class="list-group-item list-group-item-info"><%= k.grid_discipline.discipline.title %></li>
+              <div class="col-md-6">
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-info">
+                  <h4>
+                    <%= k.grid_discipline.discipline.title %>
+                    <span class="badge pull-right"><%= "Turma - #{k.offer.turma.year}.#{k.offer.turma.name}" %></span>
+                  </h4>
+                </li>
+                <!-- <li class="list-group-item">
+                  < if !aprovados.empty? %>
+                    <span class="pull-right">
+                      <= aprovados.first.decorate.link_pdf %>
+                    </span>
+                  < end %>
+                </li> -->
+                <% if !k.offer.turma.nil? %>
                   <li class="list-group-item">
-                    <%= link_to 'Meus planos', offer_offer_discipline_plans_path(
+                    <div class="table-responsive">
+                      <table class="table table-striped table-condensed">
+                        <thead>
+                          <tr>
+                            <th class="text-center">Aprovados</th>
+                            <th class="text-center">Reprovados</th>
+                            <th class="text-center">Em análise</th>
+                            <th class="text-center">Editando</th>
+                            <th class="text-center">Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="text-center"><span class="badge alert-success"><%= aprovados_por_disciplina(planos) %></span></td>
+                            <td class="text-center"><span class="badge alert-danger"><%= reprovados_por_disciplina(planos) %></span></td>
+                            <td class="text-center"><span class="badge alert-warning"><%= analise_por_disciplina(planos) %></span></td>
+                            <td class="text-center"><span class="badge alert-info"><%= editando_por_disciplina(planos) %></span></td>
+                            <td class="text-center"><span class="badge"><%= planos.count %></span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </li>
+                  <li class="list-group-item clearfix">
+                    <%= link_to offer_offer_discipline_plans_path(
                         :offer_id => k.offer_id,
-                        :offer_discipline_id => k.id), class: 'btn btn-xs btn-primary' %>
-                    <% if !aprovados.empty? %>
-                      <span class="pull-right">
-                        <%= aprovados.first.decorate.link_pdf %>
-                      </span>
+                        :offer_discipline_id => k.id), class: 'btn btn-sm btn-primary' do %>
+                      <i class="fa fa-bars" aria-hidden="true"></i>
+                      Meus planos
+                    <% end %>
+                    <% if planos.count.eql?(0) %>
+                      <span class="badge alert-danger pull-right">Nenhum plano de ensino.</span>
                     <% end %>
                   </li>
-                  <% if !k.offer.turma.nil? %>
-                    <li class="list-group-item">Turma<span class="badge"><%= "#{k.offer.turma.name}" %></span></li>
-                  <% end %>
-                </ul>
+                <% end %>
+              </ul>
               </div>
             <% end %>
           </li>
+          </div>
         </ul>
       <% end %>
-    </div>
-    <div class="panel-footer">
-
     </div>
   </div>
 <%- end %>

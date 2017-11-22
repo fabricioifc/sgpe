@@ -15,11 +15,11 @@ class CourseDatatable < ApplicationDatatable
 
         column << course.name
         column << course.sigla
-        column << course.decorate.active
         column << course.carga_horaria
         column << course.course_modality.description
         column << course.course_format.name
         column << course.course_offer.description
+        column << course.decorate.active
 
         links = []
         column << link_to("<i class='fa fa-list fa-2'></i>".html_safe, course)
