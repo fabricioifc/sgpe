@@ -10,6 +10,15 @@ module CoursesHelper
     end
   end
 
+  # Retorna apenas os cursos onde o professor tenha algum plano de ensino ofertado
+  def cursos_por_professor
+    if user_signed_in? && is_professor?
+      Plan.distinct.joins(offer_discipline: {offer: { grid: :course }}).
+        where('plans.active is true').
+        where('offer_disciplines.user_id = ?', current_user.id).pluck('courses.id, courses.name')
+    end
+  end
+
   def aprovados_por_curso planos
     planos.where(aprovado:true).count
   end

@@ -21,13 +21,19 @@ class PlansController < ApplicationController
 
   def course_plans
     if is_professor?
+      # Pode ser que o parâmetro venha de um form de pesquisa (course_tag_id)
+      params[:course_id] = params[:course_id_tag] || params[:course_id]
+      params[:discipline_id] = params[:discipline_id_tag] || params[:discipline_id]
+
       @curso = Course.find(params[:course_id])
       @ofertasCursoProfessor = current_user.offer_disciplines.joins(:offer => :grid).
         joins(:grid_discipline => :discipline).
         where(active:true).where('offers.active = ?', true).
         where('grids.course_id = ?', params[:course_id]).
+        where(params[:discipline_id].blank? ? 'grid_disciplines.id is not null' : 'grid_disciplines.id = ?', params[:discipline_id]).
         order('offers.year desc, offers.semestre desc, disciplines.title').
         group_by{ |c| [c.offer.year, c.offer.semestre] }
+
     end
   end
 
