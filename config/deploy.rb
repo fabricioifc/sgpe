@@ -16,8 +16,8 @@ set :repository, 'git@bitbucket.org:fraiburgoifc/planodeensinoifc.git'
 task :production do
   set :rails_env, 'production'
   set :user, 'deploy'
-  set :domain, '200.135.61.15'
-  set :port, '50235'
+  set :domain, ENV['DEPLOY_SERVER_IP']
+  set :port, ENV['DEPLOY_SERVER_PORT']
   set :deploy_to, '/home/deploy/sgpe_production'
   set :branch, 'master'
   # set :whenever_name, 'production'
@@ -27,8 +27,8 @@ end
 task :staging do
   set :rails_env, 'staging'
   set :user, 'deploy'
-  set :domain, '200.135.61.15'
-  set :port, '50235'
+  set :domain, ENV['DEPLOY_SERVER_IP']
+  set :port, ENV['DEPLOY_SERVER_PORT']
   set :deploy_to, '/home/deploy/sgpe_staging'
   set :branch, 'staging'
 end
