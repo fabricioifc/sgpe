@@ -1,8 +1,10 @@
 class PlanPdf < PdfReport
   include ApplicationHelper
 
-  TABLE_WIDTHS = [70, 490]
+  TABLE_WIDTHS = [70, 470]
   TABLE_HEADERS = [["Ano/semestre", "Disciplina"]]
+
+  TABLE_WIDTHS_2 = 540
 
   def initialize(plan, user)
     @plano = plan
@@ -10,11 +12,11 @@ class PlanPdf < PdfReport
       id: plan.id,
       title: 'Plano de Ensino',
       user: user,
-        company: {
-          name:   Rails.application.secrets.sistema_apelido,
-          email:  Rails.application.secrets.admin_email,
-          logo:   Rails.root.join("app/assets/images/logo.png")
-        },
+      company: {
+        name:   Rails.application.secrets.sistema_apelido,
+        email:  Rails.application.secrets.admin_email,
+        logo:   Rails.root.join("app/assets/images/logo.png")
+      },
         # data: {
         #   table_data: table_data,
         #   table_widths: TABLE_WIDTHS
@@ -25,7 +27,7 @@ class PlanPdf < PdfReport
   end
 
   def generate options = [header:true, pagination:true, footer:true]
-    bounding_box [25, cursor], width: 540 do
+    bounding_box [35, cursor], width: 540 do
       bounding_box [0, cursor], width: 540 do
         repeat :all, :dynamic => true do
           header
@@ -47,7 +49,7 @@ class PlanPdf < PdfReport
               "#{@plano.offer_discipline.offer.turma.year}.#{@plano.offer_discipline.offer.turma.name}",
             ]
           ),
-          [250, 250, 60],
+          [240, 240, 60],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0, columns_bold: [[1,0..0]], columns_background: [1 => [[0, "ffffcc"]]] }
         )
@@ -63,92 +65,92 @@ class PlanPdf < PdfReport
               @plano.offer_discipline.grid_discipline.decorate.carga_horaria_aula
             ]
           ),
-          [112, 112, 112, 112, 112],
+          [108, 108, 108, 108, 108],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
 
         move_down 10
-        bounding_box [bleft, cursor + 5], :width  => 560 do
+        bounding_box [bleft, cursor + 5], :width  => TABLE_WIDTHS_2 do
           stroke_color "f2f2f2"
           stroke_horizontal_rule
         end
 
         display_event_table(
-          table_data([['Ementa']], [@plano.offer_discipline.grid_discipline.ementa]),
-          [560],
+          table_data([['Ementa']], [@plano.offer_discipline.grid_discipline.decorate.ementa]),
+          [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Objetivo Geral']], [@plano.offer_discipline.grid_discipline.objetivo_geral]),
-          [560],
+          table_data([['Objetivo Geral']], [@plano.offer_discipline.grid_discipline.decorate.objetivo_geral]),
+          [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Objetivos Específicos']], [@plano.obj_espe]),
-          [560],
+          table_data([['Objetivos Específicos']], [@plano.decorate.obj_espe]),
+          [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Conteúdo programático']], [@plano.conteudo_prog]),
-          [560],
+          table_data([['Conteúdo programático']], [@plano.decorate.conteudo_prog]),
+          [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Práticas profissionais']], [@plano.prat_prof]),
-          [560],
+          table_data([['Práticas profissionais']], [@plano.decorate.prat_prof]),
+          [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Interdisciplinariedade']], [@plano.interdisc]),
-          [560],
+          table_data([['Interdisciplinariedade']], [@plano.decorate.interdisc]),
+          [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Metodologia Técnica']], [@plano.met_tec]),
-          [560],
+          table_data([['Metodologia Técnica']], [@plano.decorate.met_tec]),
+          [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Recursos metodológicos']], [@plano.met_met]),
-          [560],
+          table_data([['Recursos metodológicos']], [@plano.decorate.met_met]),
+          [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Sistema de avaliação e recuperação']], [@plano.avaliacao]),
-          [560],
+          table_data([['Sistema de avaliação e recuperação']], [@plano.decorate.avaliacao]),
+          [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Cronograma de atividades']], [@plano.cronograma]),
-          [560],
+          table_data([['Cronograma de atividades']], [@plano.decorate.cronograma]),
+          [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Bibliografia Básica']], [@plano.offer_discipline.grid_discipline.bib_geral]),
-          [560],
+          table_data([['Bibliografia Básica']], [@plano.offer_discipline.grid_discipline.decorate.bib_geral]),
+          [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Bibliografia Complementar']], [@plano.offer_discipline.grid_discipline.bib_espec]),
-          [560],
+          table_data([['Bibliografia Complementar']], [@plano.offer_discipline.grid_discipline.decorate.bib_espec]),
+          [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
 
         move_down 10
-        bounding_box [bleft, cursor + 5], :width  => 560 do
+        bounding_box [bleft, cursor + 5], :width  => TABLE_WIDTHS_2 do
           stroke_color "f2f2f2"
           stroke_horizontal_rule
         end
@@ -167,7 +169,7 @@ class PlanPdf < PdfReport
               "Versão: #{@plano.versao.to_f} - #{@plano.decorate.situacao_texto}"
             ]
           ),
-            [560],
+            [TABLE_WIDTHS_2],
             { header:true },
             { borders: [:top, :bottom, :left, :right], borders_length: 0 }
           )
@@ -179,9 +181,9 @@ class PlanPdf < PdfReport
                   observacoes
                 ]
               ),
-                [560],
-                { header:true },
-                { borders: [:top, :bottom, :left, :right], borders_length: 0 }
+              [TABLE_WIDTHS_2],
+              { header:true },
+              { borders: [:top, :bottom, :left, :right], borders_length: 0 }
             )
           end
         end

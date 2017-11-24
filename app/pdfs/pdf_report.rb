@@ -10,9 +10,14 @@ class PdfReport < Prawn::Document
   def initialize(attributes)
     @attributes   = attributes
     @id           = attributes.fetch(:id)
-    @company      = attributes.fetch(:company)
     @custom_font  = attributes.fetch(:font, {})
     @user         = attributes.fetch(:user, nil)
+    # @company      = attributes.fetch(:company)
+    @company = {
+      name:   Rails.application.secrets.sistema_apelido,
+      email:  Rails.application.secrets.admin_email,
+      logo:   Rails.root.join("app/assets/images/logo.png")
+    }
     # @table_data   = attributes.fetch(:data).fetch(:table_data)
     # @table_widths = attributes.fetch(:data).fetch(:table_widths)
 

@@ -6,6 +6,8 @@ class Course < ApplicationRecord
   has_many :grids
 
   validates :sigla, :name, :active, :carga_horaria, :course_modality_id, :course_format_id, :course_offer_id, presence:true
+  validates :sigla, uniqueness:true
+  validates :carga_horaria, :numericality => { :greater_than => 0 }
 
   def decorate
     @decorate ||= CourseDecorator.new self
