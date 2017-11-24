@@ -27,8 +27,8 @@ Deploy
 O deploy da aplicação é feito em dois ambientes.
 
 <ul>
-  <li><b>STAGING:<b> Ambiente de aprovação. Onde o cliente pode acessar e aprovar as tarefas desenvolvidas.</li>
-  <li><b>PRODUCTION:<b> Ambiente de produção. Ambiente real da aplicação.</li>
+  <li><b>STAGING:</b> Ambiente de aprovação. Onde o cliente pode acessar e aprovar as tarefas desenvolvidas.</li>
+  <li><b>PRODUCTION:</b> Ambiente de produção. Ambiente real da aplicação.</li>
 </ul>
 
 Cada ambiente possui uma base de dados distinta.
