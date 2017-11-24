@@ -19,3 +19,21 @@ Tecnologias utilizadas
   <li>IDE: Atom</li>
   <li>Controle de versão: GIT/GITHUB</li>
 </ul>
+
+-----------
+Deploy
+================
+
+O deploy da aplicação é feito em dois ambientes.
+
+<ul>
+  <li><b>STAGING:<b> Ambiente de aprovação. Onde o cliente pode acessar e aprovar as tarefas desenvolvidas.</li>
+  <li><b>PRODUCTION:<b> Ambiente de produção. Ambiente real da aplicação.</li>
+</ul>
+
+Cada ambiente possui uma base de dados distinta.
+
+O deploy da aplicação é feita de forma automatizada, através da gem MINA em conjunto com o github. Basta configurar o IP da máquina (staging, production) e realizar o deploy.
+
+- Para o ambiente de aprovação (staging) é utilizado a ramificação (branch) staging.
+- Para o ambiente de produção (production) é utilizado a ramificação (branch) master.
