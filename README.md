@@ -1,58 +1,19 @@
-PDEIF - PlanoDeEnsinoIF
+SGPE - PlanoDeEnsinoIF - Sistema gerenciador de planos de ensino
 ================
 
-This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
-provided by the [RailsApps Project](http://railsapps.github.io/).
+Este sistema está sendo desenvolvido no Instituto Federal Catarinense - Campus Fraiburgo.
 
-Rails Composer is supported by developers who purchase our RailsApps tutorials.
+Cada disciplina ofertada pela instituição precisa de um plano de ensino, criado pelo seu respectivo professor. O objetivo é desenvolver um sistema para gerenciar, criar e publicar estes planos de ensino criados em cada disciplina.
 
-Problems? Issues?
+Na prática, o setor responsável vai gerenciar as disciplinas que serão ofertadas em cada ano/semestre letivo. Ao ser ofertada, o professor poderá escrever seu plano de ensino, que será aprovado ou reprovado.
+
+Com o plano de ensino pronto e aprovado, o mesmo estará visível de forma pública no sistema.
+
 -----------
-
-Need help? Ask on Stack Overflow with the tag 'railsapps.'
-
-Your application contains diagnostics in the README file. Please provide a copy of the README file when reporting any issues.
-
-If the application doesn't work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include the diagnostics.
-
-Ruby on Rails
--------------
-
-This application requires:
-
-- Ruby 2.4.1
-- Rails 5.1.3
-
-Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
-
-Getting Started
----------------
-
-Integrando com o codeship testando
-
-Documentation and Support
--------------------------
-
-Issues
--------------
-
-Similar Projects
-----------------
-
-Contributing
-------------
-
-Credits
--------
-
-License
--------
-Vagrant up your Rails development
-Antes de executar 'vagrant up', é preciso instalar:
-sudo apt-get install nfs-kernel-server
-vagrant plugin install vagrant-vbguest
-# vagrant plugin install vagrant-librarian-chef-nochef
-vagrant plugin install vagrant-env
-
-# After vagrant up
+Tecnologias utilizadas
+================
+Linguagem de programação: Ruby 2.4.1
+Framework MVC: Rails 5.1.3
+Banco de Dados: Postgresql 9.6
+IDE: Atom
+Controle de versão: GIT/GITHUB
