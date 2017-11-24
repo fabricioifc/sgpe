@@ -12,8 +12,10 @@ Com o plano de ensino pronto e aprovado, o mesmo estará visível de forma públ
 -----------
 Tecnologias utilizadas
 ================
-Linguagem de programação: Ruby 2.4.1
-Framework MVC: Rails 5.1.3
-Banco de Dados: Postgresql 9.6
-IDE: Atom
-Controle de versão: GIT/GITHUB
+<ul>
+  <li>Linguagem de programação: Ruby 2.4.1</li>
+  <li>Framework MVC: Rails 5.1.3</li>
+  <li>Banco de Dados: Postgresql 9.6</li>
+  <li>IDE: Atom</li>
+  <li>Controle de versão: GIT/GITHUB</li>
+</ul>
