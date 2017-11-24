@@ -1,7 +1,7 @@
 namespace :db do
   DUMP_FMT = 't' # 'c', 'p', 't', 'd'
 
-  desc 'Dumps the database to backups'
+  desc 'Efetuar dump da base de dados'
   task sql_dump: :environment do
     dump_sfx = suffix_for_format(DUMP_FMT)
     backup_dir = backup_directory(true)
@@ -14,7 +14,7 @@ namespace :db do
     exec cmd
   end
 
-  desc 'Dumps a specific table to backups'
+  desc 'Efetuar dump de uma tabela/backup específico'
   task sql_dump_table: :environment do |_task, args|
     table_name = ENV['table']
     fail ArgumentError unless table_name
@@ -29,14 +29,14 @@ namespace :db do
     exec cmd
   end
 
-  desc 'Show the existing database backups'
+  desc 'Mostrar os backups existentes'
   task list_backups: :environment do
       backup_dir = backup_directory
       puts "#{backup_dir}"
       exec "/bin/ls -lt #{backup_dir}"
   end
 
-  desc 'Restores the database from a backup using PATTERN'
+  desc 'Restaurar a base de dados do backup usando PATTERN'
   task :sql_restore, [:pat] => :environment do |task,args|
       if args.pat.present?
           cmd = nil
@@ -46,20 +46,20 @@ namespace :db do
               files = Dir.glob("#{backup_dir}/*#{args.pat}*")
               case files.size
               when 0
-                puts "No backups found for the pattern '#{args.pat}'"
+                puts "Nenhum backup encontrado para o padrão '#{args.pat}'"
               when 1
                 file = files.first
                 fmt = format_for_file file
                 if fmt.nil?
-                  puts "No recognized dump file suffix: #{file}"
+                  puts "Sufixo do arquivo dump não reconhecido: #{file}"
                 else
                   cmd = "pg_restore -F #{fmt} -U #{user} -d #{db} -v -c #{file}"
                   # cmd = "pg_restore -F #{fmt} -U #{user} -d #{db} -v -c -C #{file}"
                 end
               else
-                puts "Too many files match the pattern '#{args.pat}':"
+                puts "Muitos arquivos não conferem com o padrão '#{args.pat}':"
                 puts ' ' + files.join("\n ")
-                puts "Try a more specific pattern"
+                puts "Tente um padrão mais específico"
               end
           end
           unless cmd.nil?
@@ -71,7 +71,7 @@ namespace :db do
             # Rake::Task["db:migrate"].invoke
           end
       else
-          puts 'Please pass a pattern to the task'
+          puts 'Informe o padrão da tarefa'
       end
   end
 

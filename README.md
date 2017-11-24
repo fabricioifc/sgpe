@@ -37,3 +37,28 @@ O deploy da aplicação é feita de forma automatizada, através da gem MINA em 
 
 - Para o ambiente de aprovação (staging) é utilizado a ramificação (branch) staging.
 - Para o ambiente de produção (production) é utilizado a ramificação (branch) master.
+
+
+Resumindo. basta digitar os comanso abaixo (com tudo já configurado).
+- mina production deploy
+- mina staging deploy
+
+-----------
+Manutenções
+================
+
+Caso ocorra algum problema no sistema, existe a possibilidade de colocar o sistema em modo manutenção, sem a necessidade de parar o servidor. Isso pode ser feito com os comandos abaixo:
+
+- mina production maintenance:on: Coloca o ambiente de produção em modo manutenção.
+- mina staging maintenance:on: Coloca o ambiente de aprovação em modo manutenção.
+- mina production maintenance:off: Cancela modo manutenção
+- mina staging maintenance:off: Cancela modo manutenção
+
+- mais detalhes em lib/tasks/maintenance.rake
+
+-----------
+Backup
+================
+
+Para realizar o backup automatizado foi criado um script utilizando o comando rake.
+- mais detalhes em lib/tasks/db.rake
