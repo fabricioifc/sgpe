@@ -33,10 +33,10 @@ class CreateCourseService
     cursos << [
       name:             'Curso integrado ao ensino médio',
       sigla:            'INT',
-      carga_horaria:    3000,
+      carga_horaria:    1200,
       course_modality:  CourseModality.find_by(sigla: 'PRE'),
       course_format:    CourseFormat.find_by(name: 'Integrado'),
-      course_offer:    CourseOffer.find_by(description: 'anual'),
+      course_offer:     CourseOffer.find_by(description: 'anual'),
       user:             User.where(admin: true).last,
     ]
 
