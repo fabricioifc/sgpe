@@ -41,7 +41,7 @@ class CreateCourseService
     ]
 
     cursos.each do |k, v|
-      Course.find_or_create_by(k)
+      Course.find_or_create_by!(k)
     end
 
     puts "Lista de cursos atualizada!"
