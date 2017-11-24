@@ -18,15 +18,15 @@ class CreateCourseService
     ofertas << [description: 'oferta_unica']
 
     formatos.each do |k, v|
-      CourseFormat.find_or_create_by!(k)
+      CourseFormat.find_or_create_by(k)
     end
 
     modalidades.each do |k, v|
-      CourseModality.find_or_create_by!(k)
+      CourseModality.find_or_create_by(k)
     end
 
     ofertas.each do |k, v|
-      CourseOffer.find_or_create_by!(k)
+      CourseOffer.find_or_create_by(k)
     end
 
     cursos = []
