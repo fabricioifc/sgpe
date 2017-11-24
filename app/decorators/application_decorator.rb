@@ -31,6 +31,10 @@ class ApplicationDecorator < Draper::Decorator
     component.class.name.singularize.downcase
   end
 
+  def converter_para_html componente
+    ActionView::Base.full_sanitizer.sanitize(componente.html_safe) unless componente.nil?
+  end
+
   # links << link_to("<i class='fa fa-pencil-square-o fa-2'></i>".html_safe, edit_test_path(test))
   # links << link_to("<i class='fa fa-trash-o fa-2'></i>".html_safe, test, method: :delete, data: { confirm: 'Tem certeza?' })
   # links << link_to("<i class='fa fa-file-pdf-o fa-2'></i>".html_safe, "tests/#{test.id}.pdf", method: :get, target: '_blank')

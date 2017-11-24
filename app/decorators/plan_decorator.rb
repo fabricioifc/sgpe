@@ -7,6 +7,38 @@ class PlanDecorator < ApplicationDecorator
     @component = component
   end
 
+  def obj_espe
+    converter_para_html component.obj_espe
+  end
+
+  def conteudo_prog
+    converter_para_html component.conteudo_prog
+  end
+
+  def prat_prof
+    converter_para_html component.prat_prof
+  end
+
+  def interdisc
+    converter_para_html component.interdisc
+  end
+
+  def met_tec
+    converter_para_html component.met_tec
+  end
+
+  def met_met
+    converter_para_html component.met_met
+  end
+
+  def avaliacao
+    converter_para_html component.avaliacao
+  end
+
+  def cronograma
+    converter_para_html component.cronograma
+  end
+
   def situacao
     # active_tag component.active?, 'fa-2'
     if component.aprovado?
