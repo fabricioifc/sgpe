@@ -61,7 +61,11 @@ class PlansController < ApplicationController
   # GET /plans/1.json
   def show
     respond_to do |format|
-      format.html
+      format.html {
+        @curso = @plan.offer_discipline.grid_discipline.grid.course
+        adicionar_breadcrumb_curso @curso
+        adicionar_breadcrumb_planos @plan
+      }
       format.json
       format.pdf {
           pdf = PlanPdf.new(@plan, current_user).generate
@@ -87,6 +91,8 @@ class PlansController < ApplicationController
 
   # GET /plans/1/edit
   def edit
+    adicionar_breadcrumb_curso @plan.offer_discipline.grid_discipline.grid.course
+    adicionar_breadcrumb_planos @plan
   end
 
   # POST /plans
