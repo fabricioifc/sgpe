@@ -16,6 +16,9 @@ class PlansController < ApplicationController
     @plan = @source.dup
     @plan.versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
     params[:versao] = @plan.versao
+
+    @curso = @plan.offer_discipline.grid_discipline.grid.course
+    adicionar_breadcrumb_curso @curso
     render 'new'
   end
 
@@ -36,6 +39,8 @@ class PlansController < ApplicationController
         order('offers.year desc, offers.semestre desc, disciplines.title').
         group_by{ |c| [c.offer.year, c.offer.semestre] }
 
+
+      adicionar_breadcrumb_curso @curso
     end
   end
 
@@ -48,7 +53,7 @@ class PlansController < ApplicationController
       @plans = get_planos_disciplina params[:offer_discipline_id]
 
       @curso = @offer_discipline.grid_discipline.grid.course
-      add_breadcrumb @curso.sigla, plans_by_course_path(@curso.id)
+      adicionar_breadcrumb_curso @curso
     end
   end
 
@@ -73,6 +78,10 @@ class PlansController < ApplicationController
     @plan = Plan.new(offer_discipline_id: params[:offer_discipline_id])
     @plan.versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
     params[:versao] = @plan.versao
+
+    @curso = @plan.offer_discipline.grid_discipline.grid.course
+    adicionar_breadcrumb_curso @curso
+    adicionar_breadcrumb_planos @plan
     @plan
   end
 
@@ -177,5 +186,13 @@ class PlansController < ApplicationController
 
     def pode_excluir?
       !@plan.analise? && !@plan.aprovado? && !@plan.reprovado?
+    end
+
+    def adicionar_breadcrumb_curso curso
+      add_breadcrumb curso.sigla, plans_by_course_path(curso.id)
+    end
+
+    def adicionar_breadcrumb_planos plano
+      add_breadcrumb 'Meus planos', offer_offer_discipline_plans_path(offer_discipline_id: plano.offer_discipline_id)
     end
 end

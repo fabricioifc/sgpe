@@ -37,7 +37,7 @@
           <ul class="list-group">
             <li class="list-group-item list-group-item-success">
               <%= link_to "##{div_id}", class: 'trigger', aria: {expanded: false, controls: 'collapse'},
-                  data: {toggle: 'collapse', parent: "#accordion", ano: ano_semestre[0], abrir: ano_semestre[0].eql?(Date.today.year + 1) } do %>
+                  data: {toggle: 'collapse', parent: "#accordion", ano: ano_semestre[0], abrir: ano_semestre[0].eql?(Date.today.year) } do %>
                     <span class="badge"><%= "Ano: #{ano_semestre[0]}" %></span>
                     <% if !ano_semestre[1].blank? %>
                       <span class="badge"><%= "Semestre: #{ano_semestre[1]}" %></span>

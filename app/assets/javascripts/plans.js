@@ -1,4 +1,4 @@
-document.addEventListener("turbolinks:load", function() {
+document.addEventListener("turbolinks:load", function(e) {
   // $("#accordion").find('a.trigger:first').click();
   // var link = "a[data-ano=" + new Date().getFullYear() + "]";
   // $("#accordion").find('a[data-abrir="true"]').click();
