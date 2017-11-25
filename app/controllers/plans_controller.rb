@@ -46,6 +46,9 @@ class PlansController < ApplicationController
       # @disciplina = Discipline.joins(:grid_disciplines => :offer_disciplines).find_by('offer_disciplines.id = ?', params[:offer_discipline_id])
       @offer_discipline = OfferDiscipline.find(params[:offer_discipline_id])
       @plans = get_planos_disciplina params[:offer_discipline_id]
+
+      @curso = @offer_discipline.grid_discipline.grid.course
+      add_breadcrumb @curso.sigla, plans_by_course_path(@curso.id)
     end
   end
 

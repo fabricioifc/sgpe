@@ -63,6 +63,7 @@ GEM
     bootstrap_form (2.7.0)
     bootswatch-rails (3.3.5)
       railties (>= 3.1)
+    breadcrumbs_on_rails (3.0.1)
     builder (3.2.3)
     byebug (9.1.0)
     cancancan (2.0.0)
@@ -394,6 +395,7 @@ DEPENDENCIES
   bootstrap-sass
   bootstrap_form
   bootswatch-rails
+  breadcrumbs_on_rails
   byebug
   cancancan (~> 2.0)
   capybara (~> 2.13)
@@ -454,4 +456,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.15.4
+   1.16.0

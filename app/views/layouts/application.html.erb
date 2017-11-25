@@ -15,8 +15,9 @@
       <%= render 'layouts/navigation' %>
     </header>
     <main role="main">
-       <%= render 'layouts/messages' %>
-       <%= yield %>
+      <p class="well well-sm"><%= render_breadcrumbs :separator => ' / ' %></p>
+      <%= render 'layouts/messages' %>
+      <%= yield %>
     </main>
     <%= render 'layouts/footer' %>
   </body>

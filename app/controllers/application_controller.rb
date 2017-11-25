@@ -16,6 +16,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  add_breadcrumb "Inicio", :root_path
+
   protected
 
   def configure_permitted_parameters
