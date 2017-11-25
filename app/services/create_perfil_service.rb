@@ -24,22 +24,16 @@ class CreatePerfilService
     end
 
     # Papéis do nupe
-    # perfil_papeis = {
-    #   Perfil.find_by(name: 'NUPE').id => {
-    #     Role.find_by(resource_id: 'manage', resource_type: 'CourseOffers')
-    #     # Role.find_by(resource_id: 'manage', resource_type: 'CourseModality'),
-    #     # Role.find_by(resource_id: 'manage', resource_type: 'CourseFormat'),
-    #     # Role.find_by(resource_id: 'manage', resource_type: 'Discipline'),
-    #     # Role.find_by(resource_id: 'manage', resource_type: 'Course'),
-    #     # Role.find_by(resource_id: 'manage', resource_type: 'Turma')
-    #   }
-    # }
-
-
-    # papeis.each do |papel|
-    #   PerfilRole.find_or_create_by!(perfil: perfil, role: )
-    # end
-
+    perfil = Perfil.find_by(name: 'NUPE')
+    papeis_perfil = ['CourseOffer', 'CourseModality', 'CourseFormat', 'Course', 'Discipline', 'Turma']
+    if !perfil.nil?
+      Role.where(resource_id: 'manage', resource_type: papeis_perfil).pluck(:id).each do |role_id|
+        PerfilRole.find_or_create_by!(
+          perfil_id: perfil.id,
+          role_id: role_id
+        )
+      end
+    end
 
   end
 end
