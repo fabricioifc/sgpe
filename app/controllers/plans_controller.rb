@@ -106,6 +106,9 @@ class PlansController < ApplicationController
       @plan.versao = @plan.versao.nil? ? 1 : @plan.versao + 1
     end
 
+    adicionar_breadcrumb_curso @plan.offer_discipline.grid_discipline.grid.course
+    adicionar_breadcrumb_planos @plan
+
     respond_to do |format|
       ActiveRecord::Base.transaction do
         if params[:commit_analise]
@@ -125,6 +128,8 @@ class PlansController < ApplicationController
   # PATCH/PUT /plans/1
   # PATCH/PUT /plans/1.json
   def update
+    adicionar_breadcrumb_curso @plan.offer_discipline.grid_discipline.grid.course
+    adicionar_breadcrumb_planos @plan
     respond_to do |format|
       ActiveRecord::Base.transaction do
         if params[:commit_analise]
