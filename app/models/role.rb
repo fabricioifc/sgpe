@@ -12,7 +12,8 @@ class Role < ApplicationRecord
 
   scopify
 
-  validates :name, :resource_type, presence:true, uniqueness: {scope: [:resource_type, :resource_id]}
+  validates :name, :resource_type, presence:true
+  validates :resource_type, :resource_id, uniqueness: {scope: [:resource_type, :resource_id]}
 
   ACTIONS = {
     'Gerenciar todos os recursos' =>  'manage',
