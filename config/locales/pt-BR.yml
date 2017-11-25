@@ -16,6 +16,8 @@ pt-BR:
       offers: Ofertas
       offer_discipline: Disciplina
       offer_disciplines: Disciplinas
+      plan: Plano
+      plans: Planos
     attributes:
       user:
         title: Usuários
@@ -34,6 +36,11 @@ pt-BR:
         active: Ativo
       course_format:
         name: Nome
+      course_modality:
+        description: Descrição
+      course_offer:
+        description: Descrição
+        active: Ativo
       course:
         name: Nome
         sigla: Sigla
@@ -41,7 +48,7 @@ pt-BR:
         course_modality: Modalidade
         course_format: Formato
         course_offer: Oferta
-        carga_horaria: CH
+        carga_horaria: Carga horária
       discipline:
         title: Título
         description: Descrição
@@ -60,9 +67,12 @@ pt-BR:
       offer:
         grid: Grade
         grid_id: Grade
-        type_offer: Tipo
+        type: Tipo
         semestre: Semestre
         year: Ano
+        course: Curso
+        turma: Turma
+        type_offer: Tipo
       offer_discipline:
         user: Professor
         user_id: Professor
@@ -317,6 +327,7 @@ pt-BR:
       users: 'Usuários'
       admin: 'Administração'
       pdf: 'Relatório'
+      duplicate: Duplicar %{model}
       pages:
         about: 'Sobre'
         disciplines: 'Disciplinas'

@@ -7,7 +7,7 @@ class OfferDisciplinesController < ApplicationController
 private
 
   def offer_discipline_params
-    params.require(:offer_discipline).permit(:id, :grid_discipline_id, :user_id, :active, :offer_id)
+    params.require(:offer_discipline).permit(:id, :grid_discipline_id, :user_id, :active, :offer_id, :turmas_id)
   end
 
 end

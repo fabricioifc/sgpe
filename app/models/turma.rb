@@ -1,4 +1,5 @@
 class Turma < ApplicationRecord
+#  has_many :offers
 
   validates :name, presence:true
   validates :year, presence: true,
@@ -10,6 +11,8 @@ class Turma < ApplicationRecord
       greater_than_or_equal_to: 1900,
       less_than_or_equal_to: Date.today.year + 25
     }
+
+  validates :name, uniqueness: { scope: [:name, :year] }
 
   def decorate
     @decorate ||= TurmaDecorator.new self

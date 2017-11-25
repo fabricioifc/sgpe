@@ -1,5 +1,7 @@
 class GridDisciplinesController < ApplicationController
   before_action :set_grid_discipline, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  load_and_authorize_resource
 
   # GET /grid_disciplines
   # GET /grid_disciplines.json

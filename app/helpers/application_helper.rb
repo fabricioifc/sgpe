@@ -4,6 +4,10 @@ module ApplicationHelper
     user_signed_in? && current_user.try(:admin?)
   end
 
+  def is_professor?
+    user_signed_in? && current_user.try(:teacher?)
+  end
+
   def avatar_navbar_image(classe = ['special-img'])
     if user_signed_in?
       if current_user.avatar.present?
@@ -39,6 +43,33 @@ module ApplicationHelper
       text << ' ' << t('.new', :default => t("helpers.titles.new", model: model))
       text
     end
+  end
+
+  def get_planos_disciplina offer_discipline_id
+    Plan.where(offer_discipline_id: offer_discipline_id, active:true).order(versao: :desc)
+  end
+
+  def get_planos_disciplina_aprovados offer_discipline_id
+    Plan.where(offer_discipline_id: offer_discipline_id, active:true, aprovado:true).order(versao: :desc)
+  end
+
+  def get_planos_disciplina_reprovados offer_discipline_id
+    Plan.where(offer_discipline_id: offer_discipline_id, active:true, reprovado:true).order(versao: :desc)
+  end
+
+  def get_planos_disciplina_analise offer_discipline_id
+    Plan.where(offer_discipline_id: offer_discipline_id, active:true, analise:true).order(versao: :desc)
+  end
+
+  def dropdown_autorizacao *models
+    autorizado = false
+    models.each do |m|
+      if can? :read, m
+        autorizado = true
+        break
+      end
+    end
+    autorizado
   end
 
 end

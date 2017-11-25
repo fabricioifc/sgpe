@@ -81,6 +81,6 @@ class CourseFormatsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_format_params
-      params.require(:course_format).permit(:name)
+      params.require(:course_format).permit(:name, :minutos_aula)
     end
 end

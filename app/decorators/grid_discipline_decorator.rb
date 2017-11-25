@@ -26,5 +26,25 @@ class GridDisciplineDecorator < ApplicationDecorator
     ActionView::Base.full_sanitizer.sanitize(component.bib_espec.html_safe) unless component.bib_espec.nil?
   end
 
+  def year
+    component.year.to_s << '°' unless component.year.nil?
+  end
+
+  def semestre
+    component.semestre.to_s << '°' unless component.semestre.nil?
+  end
+
+  def carga_horaria_hora_text
+    component.carga_horaria.to_s << ' H'
+  end
+
+  def carga_horaria_aula
+    minutos_aula = component.grid.course.course_format.minutos_aula
+    (component.carga_horaria / (minutos_aula.to_f / 60)).to_i  unless component.carga_horaria.nil? || minutos_aula.nil?
+  end
+
+  def carga_horaria_aula_text
+    carga_horaria_aula.to_s << ' H/A'
+  end
 
 end

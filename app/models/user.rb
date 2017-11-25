@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   # rolify
   has_and_belongs_to_many :perfils, :join_table => :users_perfils
+  has_many :offer_disciplines
+  has_many :plans
   # enum role: [:user, :vip, :admin]
   # after_initialize :set_default_role, :if => :new_record?
   #

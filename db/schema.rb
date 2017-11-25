@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20171115195429) do
+=======
+ActiveRecord::Schema.define(version: 20171120194347) do
+>>>>>>> e3720ab645a29e7d7dddf2ccf73ceb25f60e1668
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +23,7 @@ ActiveRecord::Schema.define(version: 20171115195429) do
     t.string "name", limit: 45, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "minutos_aula"
     t.index ["name"], name: "index_course_formats_on_name"
   end
 
@@ -63,6 +68,15 @@ ActiveRecord::Schema.define(version: 20171115195429) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_disciplines_on_user_id"
+  end
+
+  create_table "grid_discipline_turmas", force: :cascade do |t|
+    t.bigint "grid_discipline_id"
+    t.bigint "turma_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["grid_discipline_id"], name: "index_grid_discipline_turmas_on_grid_discipline_id"
+    t.index ["turma_id"], name: "index_grid_discipline_turmas_on_turma_id"
   end
 
   create_table "grid_disciplines", force: :cascade do |t|
@@ -115,7 +129,9 @@ ActiveRecord::Schema.define(version: 20171115195429) do
     t.bigint "grid_id"
     t.integer "year_base"
     t.integer "semestre_base"
+    t.bigint "turma_id"
     t.index ["grid_id"], name: "index_offers_on_grid_id"
+    t.index ["turma_id"], name: "index_offers_on_turma_id"
   end
 
   create_table "perfil_roles", force: :cascade do |t|
@@ -142,6 +158,32 @@ ActiveRecord::Schema.define(version: 20171115195429) do
     t.datetime "updated_at", null: false
   end
 
+<<<<<<< HEAD
+=======
+  create_table "plans", force: :cascade do |t|
+    t.bigint "offer_discipline_id"
+    t.text "obj_espe"
+    t.text "conteudo_prog"
+    t.text "prat_prof"
+    t.text "interdisc"
+    t.text "met_tec"
+    t.text "met_met"
+    t.text "avaliacao"
+    t.text "cronograma"
+    t.text "atendimento"
+    t.integer "versao"
+    t.boolean "active"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "analise", default: false, null: false
+    t.boolean "aprovado", default: false, null: false
+    t.boolean "reprovado", default: false, null: false
+    t.index ["offer_discipline_id"], name: "index_plans_on_offer_discipline_id"
+    t.index ["user_id"], name: "index_plans_on_user_id"
+  end
+
+>>>>>>> e3720ab645a29e7d7dddf2ccf73ceb25f60e1668
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
@@ -216,6 +258,8 @@ ActiveRecord::Schema.define(version: 20171115195429) do
   add_foreign_key "courses", "course_offers"
   add_foreign_key "courses", "users"
   add_foreign_key "disciplines", "users"
+  add_foreign_key "grid_discipline_turmas", "grid_disciplines"
+  add_foreign_key "grid_discipline_turmas", "turmas"
   add_foreign_key "grid_disciplines", "disciplines"
   add_foreign_key "grid_disciplines", "grids"
   add_foreign_key "grids", "courses"
@@ -224,8 +268,11 @@ ActiveRecord::Schema.define(version: 20171115195429) do
   add_foreign_key "offer_disciplines", "offers"
   add_foreign_key "offer_disciplines", "users"
   add_foreign_key "offers", "grids"
+  add_foreign_key "offers", "turmas"
   add_foreign_key "perfil_roles", "perfils"
   add_foreign_key "perfil_roles", "roles"
+  add_foreign_key "plans", "offer_disciplines"
+  add_foreign_key "plans", "users"
   add_foreign_key "users_perfils", "perfils"
   add_foreign_key "users_perfils", "users"
 end

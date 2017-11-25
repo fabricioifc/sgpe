@@ -17,6 +17,8 @@ class OfferDatatable < ApplicationDatatable
         column << offer.semestre
         column << offer.type_offer
         column << offer.grid.course.name
+        column << "#{offer.turma.year}.#{offer.turma.name}"
+        column << "<span class='badge'>#{offer.offer_disciplines.count}</span>"
 
         links = []
         column << link_to("<i class='fa fa-list fa-2'></i>".html_safe, offer)
@@ -50,8 +52,7 @@ class OfferDatatable < ApplicationDatatable
 
     # will_paginate
     # offers = Offer.page(page).per_page(per_page)
-    offers = Offer.joins(:grid => :course).
-      select('offers.id, offers.year, offers.semestre, offers.type_offer, offers.active, offers.grid_id, courses.name').
+    offers = Offer.joins(:grid => :course).joins(:turma).
       order("#{sort_column} #{sort_direction}")
     offers = offers.page(page).per(per_page)
     offers = offers.where(search_string.join(' or '), search: "%#{params[:search][:value]}%")
@@ -59,6 +60,6 @@ class OfferDatatable < ApplicationDatatable
 
   # The columns needs to be the same list of searchable items and IN ORDER that they will appear in Data.
   def columns
-    %w(offers.year offers.semestre offers.type_offer courses.name)
+    %w(offers.year offers.semestre offers.type_offer courses.name turmas.name turmas.year)
   end
 end

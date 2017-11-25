@@ -15,6 +15,7 @@ class CourseFormatDatatable < ApplicationDatatable
 
         column << course_format.id
         column << course_format.name
+        column << course_format.minutos_aula
 
         links = []
         column << link_to("<i class='fa fa-list fa-2'></i>".html_safe, course_format)
@@ -55,6 +56,6 @@ class CourseFormatDatatable < ApplicationDatatable
 
   # The columns needs to be the same list of searchable items and IN ORDER that they will appear in Data.
   def columns
-    %w(id name)
+    %w(id name minutos_aula)
   end
 end

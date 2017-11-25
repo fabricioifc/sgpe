@@ -1,12 +1,13 @@
 class Offer < ApplicationRecord
   belongs_to :grid
+  belongs_to :turma
   has_many :offer_disciplines, dependent: :destroy
   accepts_nested_attributes_for :offer_disciplines
 
   enum offer_types: ['Regular', 'Não Regular']
 
   validates :type_offer, :grid_id, presence:true
-  validates :semestre, presence: { if: -> { year.blank? } }
+  validates :semestre, presence: { if: -> { self.grid.course.course_offer.description.eql?("semestral") } }
 
   validates :year, presence: { if: -> { semestre.blank? } },
     format: {
@@ -19,6 +20,13 @@ class Offer < ApplicationRecord
     }
 
   validates :offer_disciplines, presence:true#, on: [:update]
+  validates :turma_id, presence:true
+  validates :grid_id,
+    uniqueness: {
+      scope: [:turma_id, :year, :semestre, :grid_id],
+      conditions: -> { where(active: true) },
+      message: lambda { |x, y| "Já existe grade ofertada para esta turma, ano e semestre." }
+    }
 
   # accepts_nested_attributes_for :grid_disciplines, :allow_destroy => true
 

@@ -10,7 +10,8 @@ require 'mina_sidekiq/tasks'
 # set :ruby_version, '2.4.0'
 
 # Repository project
-set :repository, 'git@bitbucket.org:fraiburgoifc/planodeensinoifc.git'
+# set :repository, 'git@bitbucket.org:fraiburgoifc/planodeensinoifc.git'
+set :repository, 'git@github.com:fabricioifc/sgpe.git'
 
 # Server Production
 task :production do

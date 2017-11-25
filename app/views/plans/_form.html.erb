@@ -1,0 +1,80 @@
+<%= bootstrap_form_for(plan, url: url,
+    local:true, html: { class: "", role: "form" }) do |f| %>
+  <%= error_messages_for(plan) %>
+
+  <%= f.hidden_field :versao %>
+
+  <div class="row">
+    <div class="col-md-9 col-lg-9">
+
+      <div class="col-md-12">
+        <ul class="nav nav-tabs nav-justified">
+          <li class="active"><a href="#ementa" data-toggle="tab">Ementa</a></li>
+          <li><a href="#objetivos" data-toggle="tab">Objetivos</a></li>
+          <li><a href="#conteudos" data-toggle="tab">Conteúdos</a></li>
+          <li><a href="#metodologias" data-toggle="tab">Metodologias</a></li>
+          <li><a href="#avaliacao" data-toggle="tab">Avaliação</a></li>
+          <li><a href="#outros" data-toggle="tab">Outros</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-12">
+        <hr style="margin-top: 5px; margin-bottom: 10px;">
+        <div class="tab-content">
+          <div id="ementa" class="tab-pane fade in active">
+            <!-- <= f.select :turma_id, Turma.all.collect { |c| ["#{c.year} - #{c.name}", c.id] }, id: :plan_turma, prompt:true %> -->
+            <div class="form-group">
+              <%= label_tag :ementa, nil, class: 'control-label' %>
+              <%= text_area_tag :ementa, plan.offer_discipline.grid_discipline.decorate.ementa, id: :plan_ementa, class: 'form-control', readonly:true, rows: 10 %>
+            </div>
+          </div>
+
+          <div id="objetivos" class="tab-pane fade in">
+            <div class="form-group">
+              <%= label_tag :objetivo_geral, nil, class: 'control-label' %>
+              <%= text_area_tag :objetivo_geral, plan.offer_discipline.grid_discipline.decorate.objetivo_geral, id: :plan_objetivo_geral, class: 'form-control', readonly:true, rows: 5 %>
+            </div>
+            <%= f.text_area :obj_espe, id: :plan_obj_espe, rows: 6 %>
+          </div>
+
+          <div id="conteudos" class="tab-pane fade in">
+            <%= f.text_area :conteudo_prog, id: :plan_conteudo_prog, rows: 5 %>
+            <%= f.text_area :prat_prof, id: :plan_prat_prof, rows: 5 %>
+          </div>
+
+          <div id="metodologias" class="tab-pane fade in">
+            <%= f.text_area :met_tec, id: :plan_met_tec, rows: 5 %>
+            <%= f.text_area :met_met, id: :plan_met_met, rows: 5 %>
+          </div>
+
+          <div id="avaliacao" class="tab-pane fade in">
+            <%= f.text_area :avaliacao, id: :plan_avaliacao, rows: 15 %>
+          </div>
+
+          <div id="outros" class="tab-pane fade in">
+            <%= f.text_area :interdisc, id: :plan_interdisc, rows: 4 %>
+            <%= f.text_area :cronograma, id: :plan_cronograma, rows: 5 %>
+            <%= f.text_area :atendimento, id: :plan_atendimento, rows: 1 %>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+    <div class="col-md-3 col-ld-3">
+      <ul class="list-group">
+        <%= render 'list_group_items', plan: @plan %>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.submit class: "btn btn-primary" %>
+      <%= f.submit 'Salvar e enviar', class: "btn btn-success", name: 'commit_analise' %>
+    </div>
+  </div>
+
+<% end %>

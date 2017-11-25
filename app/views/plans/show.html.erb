@@ -1,0 +1,53 @@
+<div class="well well-sm">
+  <%= @plan.decorate.link_index '' %>
+  <%= @plan.decorate.link_editar '' %>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Offer discipline:</dt>
+  <dd><%= @plan.offer_discipline %></dd>
+
+  <dt>Plan class:</dt>
+  <dd><%= @plan.offer_discipline.offer.turma %></dd>
+
+  <dt>Obj espe:</dt>
+  <dd><%= @plan.obj_espe %></dd>
+
+  <dt>Conteudo prog:</dt>
+  <dd><%= @plan.conteudo_prog %></dd>
+
+  <dt>Prat prof:</dt>
+  <dd><%= @plan.prat_prof %></dd>
+
+  <dt>Interdisc:</dt>
+  <dd><%= @plan.interdisc %></dd>
+
+  <dt>Met tec:</dt>
+  <dd><%= @plan.met_tec %></dd>
+
+  <dt>Met met:</dt>
+  <dd><%= @plan.met_met %></dd>
+
+  <dt>Avaliacao:</dt>
+  <dd><%= @plan.avaliacao %></dd>
+
+  <dt>Cronograma:</dt>
+  <dd><%= @plan.cronograma %></dd>
+
+  <dt>Atendimento:</dt>
+  <dd><%= @plan.atendimento %></dd>
+
+  <dt>Versao:</dt>
+  <dd><%= @plan.versao %></dd>
+
+  <dt>Active:</dt>
+  <dd><%= @plan.active %></dd>
+
+  <dt>User:</dt>
+  <dd><%= @plan.user %></dd>
+
+</dl>
+
+<hr>
+
+<%= render 'list_group_items', plan: @plan %>

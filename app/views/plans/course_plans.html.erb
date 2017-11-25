@@ -1,0 +1,64 @@
+<%- if is_professor? %>
+
+  <div class="well well-sm">
+    <%= form_for plans_by_course_path, method: :get, html: {class: ''} do |f| %>
+      <div class="form-group col-md-3">
+        <%= select_tag :course_id_tag, options_for_select(cursos_por_professor.map { |k,v| [v, k]}, params[:course_id] ),
+            id: :course_id_tag, class: 'select2', prompt:'Selecione', required:true, autofocus:true %>
+      </div>
+      <div class="form-group col-md-3">
+        <%= select_tag :discipline_id_tag, options_for_select(disciplinas_curso_e_por_professor.map { |k,v| [v, k]}, params[:discipline_id] ),
+            id: :discipline_id_tag, class: 'select2', prompt:'Selecione' %>
+      </div>
+      <div class="form-group col-md-2">
+        <%= text_field_tag :ano_tag, params[:ano_tag], id: :ano_tag, class: 'form-control', placeholder: 'Ano' %>
+      </div>
+      <%= submit_tag 'Pesquisar', class: 'btn btn-primary' %>
+    <% end %>
+    <!-- <= form_for @curso, url: plans_by_course_path, method: :get, html: {class: ''} do |f| %>
+      <div class="form-group col-md-4">
+        <= f.select :id, cursos_por_professor.map { |k,v| [v, k] }, {}, class: 'select2', prompt:true, required:true, autofocus:true %>
+      </div>
+      <= f.submit 'Pesquisar', class: 'btn btn-primary' %>
+    < end %> -->
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><strong><%= "[#{@curso.sigla}] #{@curso.name}" %></strong></h3>
+    </div>
+    <div class="panel-body" id="accordion">
+      <% if @ofertasCursoProfessor.empty? %>
+        <p class="well well-sm">Nenhuma disciplina encontrada.</p>
+      <% else %>
+        <% @ofertasCursoProfessor.each do |ano_semestre, ofertas| %>
+          <% div_id = "collapse#{ano_semestre[0]}#{ano_semestre[1] || ''}" %>
+
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-success">
+              <%= link_to "##{div_id}", class: 'trigger', aria: {expanded: false, controls: 'collapse'},
+                  data: {toggle: 'collapse', parent: "#accordion", ano: ano_semestre[0], abrir: ano_semestre[0].eql?(Date.today.year + 1) } do %>
+                    <span class="badge"><%= "Ano: #{ano_semestre[0]}" %></span>
+                    <% if !ano_semestre[1].blank? %>
+                      <span class="badge"><%= "Semestre: #{ano_semestre[1]}" %></span>
+                    <% end %>
+              <% end %>
+              <span class="pull-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+            </li>
+            <div id="<%= div_id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
+              <div class="controls">
+                <li class="list-group-item">
+                  <div class="row">
+                    <% ofertas.each do |k, v| %>
+                      <%= render 'plans/ofertas_professor/course_plans_status', k: k %>
+                    <% end %>
+                  </div>
+                </li>
+              </div>
+            </div>
+          </ul>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<%- end %>

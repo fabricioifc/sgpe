@@ -1,58 +1,64 @@
-PDEIF - PlanoDeEnsinoIF
+SGPE - PlanoDeEnsinoIF - Sistema gerenciador de planos de ensino
 ================
 
-This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
-provided by the [RailsApps Project](http://railsapps.github.io/).
+Este sistema está sendo desenvolvido no Instituto Federal Catarinense - Campus Fraiburgo.
 
-Rails Composer is supported by developers who purchase our RailsApps tutorials.
+Cada disciplina ofertada pela instituição precisa de um plano de ensino, criado pelo seu respectivo professor. O objetivo é desenvolver um sistema para gerenciar, criar e publicar estes planos de ensino criados em cada disciplina.
 
-Problems? Issues?
+Na prática, o setor responsável vai gerenciar as disciplinas que serão ofertadas em cada ano/semestre letivo. Ao ser ofertada, o professor poderá escrever seu plano de ensino, que será aprovado ou reprovado.
+
+Com o plano de ensino pronto e aprovado, o mesmo estará visível de forma pública no sistema.
+
 -----------
+Tecnologias utilizadas
+================
+<ul>
+  <li>Linguagem de programação: Ruby 2.4.1</li>
+  <li>Framework MVC: Rails 5.1.3</li>
+  <li>Banco de Dados: Postgresql 9.6</li>
+  <li>IDE: Atom</li>
+  <li>Controle de versão: GIT/GITHUB</li>
+</ul>
 
-Need help? Ask on Stack Overflow with the tag 'railsapps.'
+-----------
+Deploy
+================
 
-Your application contains diagnostics in the README file. Please provide a copy of the README file when reporting any issues.
+O deploy da aplicação é feito em dois ambientes.
 
-If the application doesn't work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include the diagnostics.
+<ul>
+  <li><b>STAGING:</b> Ambiente de aprovação. Onde o cliente pode acessar e aprovar as tarefas desenvolvidas.</li>
+  <li><b>PRODUCTION:</b> Ambiente de produção. Ambiente real da aplicação.</li>
+</ul>
 
-Ruby on Rails
--------------
+Cada ambiente possui uma base de dados distinta.
 
-This application requires:
+O deploy da aplicação é feita de forma automatizada, através da gem MINA em conjunto com o github. Basta configurar o IP da máquina (staging, production) e realizar o deploy.
 
-- Ruby 2.4.1
-- Rails 5.1.3
+- Para o ambiente de aprovação (staging) é utilizado a ramificação (branch) staging.
+- Para o ambiente de produção (production) é utilizado a ramificação (branch) master.
 
-Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
 
-Getting Started
----------------
+Resumindo. basta digitar os comanso abaixo (com tudo já configurado).
+- mina production deploy
+- mina staging deploy
 
-Integrando com o codeship testando
+-----------
+Manutenções
+================
 
-Documentation and Support
--------------------------
+Caso ocorra algum problema no sistema, existe a possibilidade de colocar o sistema em modo manutenção, sem a necessidade de parar o servidor. Isso pode ser feito com os comandos abaixo:
 
-Issues
--------------
+- mina production maintenance:on: Coloca o ambiente de produção em modo manutenção.
+- mina staging maintenance:on: Coloca o ambiente de aprovação em modo manutenção.
+- mina production maintenance:off: Cancela modo manutenção
+- mina staging maintenance:off: Cancela modo manutenção
 
-Similar Projects
-----------------
+- mais detalhes em lib/tasks/maintenance.rake
 
-Contributing
-------------
+-----------
+Backup
+================
 
-Credits
--------
-
-License
--------
-Vagrant up your Rails development
-Antes de executar 'vagrant up', é preciso instalar:
-sudo apt-get install nfs-kernel-server
-vagrant plugin install vagrant-vbguest
-# vagrant plugin install vagrant-librarian-chef-nochef
-vagrant plugin install vagrant-env
-
-# After vagrant up
+Para realizar o backup automatizado foi criado um script utilizando o comando rake.
+- mais detalhes em lib/tasks/db.rake

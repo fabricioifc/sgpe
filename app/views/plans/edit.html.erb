@@ -1,0 +1,16 @@
+<%- model = Plan %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <%= t('helpers.titles.edit', model: model.model_name.human.downcase) %>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <%= render 'form', plan: @plan, url: offer_offer_discipline_plan_path %>
+  </div>
+  <div class="panel-footer">
+    <%= @plan.decorate.link_index %>
+    <%= @plan.decorate.link_show %>
+  </div>
+</div>

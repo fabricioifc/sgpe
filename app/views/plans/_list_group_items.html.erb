@@ -1,0 +1,28 @@
+<li class="list-group-item list-group-item-info">Grade/Curso</li>
+<li class="list-group-item">
+  <p><%= "#{plan.offer_discipline.grid_discipline.grid.year}/#{plan.offer_discipline.grid_discipline.grid.course.name}" %></p>
+  <p>
+    <span class="badge"><%= "#{plan.offer_discipline.grid_discipline.grid.course.course_format.name}" %></span>
+    <span class="badge"><%= "#{plan.offer_discipline.grid_discipline.grid.course.course_modality.description}" %></span>
+  </p>
+</li>
+<li class="list-group-item list-group-item-info">Disciplina</li>
+<li class="list-group-item">
+  <p><span><%= "#{plan.offer_discipline.grid_discipline.discipline.sigla} - #{plan.offer_discipline.grid_discipline.discipline.title}" %></span></p>
+  <p>
+    <span class="badge"><%= "#{plan.offer_discipline.grid_discipline.carga_horaria} horas" %></span>
+    <span class="badge"><%= "Turma: #{plan.offer_discipline.offer.turma.name}" %></span>
+    <span class="badge"><%= "Ano: #{plan.offer_discipline.offer.year}" %></span>
+    <% if plan.offer_discipline.offer.semestre %>
+      <span class="badge"><%= "Semestre: #{plan.offer_discipline.offer.semestre}" %></span>
+    <% end %>
+  </p>
+</li>
+<!--
+<li class="list-group-item list-group-item-info">Carga horária</li>
+<li class="list-group-item"><= plan.offer_discipline.grid_discipline.carga_horaria %></li>
+<li class="list-group-item list-group-item-info">Turma</li>
+<li class="list-group-item"><= plan.offer_discipline.offer.turma.name %></li>
+<li class="list-group-item list-group-item-info">Ano/semestre</li>
+<li class="list-group-item"><= plan.offer_discipline.offer.year || 'Sem Informação' %></li>
+ -->

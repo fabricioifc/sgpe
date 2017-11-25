@@ -28,7 +28,7 @@ class CreateDisciplineService
     disciplinas << [ title: 'Projeto Integrador', sigla: 'PIN', active: true, user: user ]
 
     disciplinas.each do |k, v|
-      Discipline.find_or_create_by!(k)
+      Discipline.find_or_create_by(k)
     end
 
     puts "Lista de disciplinas atualizada!"

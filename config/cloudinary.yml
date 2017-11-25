@@ -1,25 +1,25 @@
 ---
 development:
-  cloud_name: dnyov3ak4
-  api_key: '699184988394877'
-  api_secret: TImZToasGkL0byOXpqQIy6KstSo
+  cloud_name: <%= ENV['CLOUD_NAME'] %>
+  api_key: <%= ENV['CLOUD_API_KEY'] %>
+  api_secret: <%= ENV['CLOUD_API_SECRET'] %>
   enhance_image_tag: true
   static_image_support: false
 production:
-  cloud_name: dnyov3ak4
-  api_key: '699184988394877'
-  api_secret: TImZToasGkL0byOXpqQIy6KstSo
+  cloud_name: <%= ENV['CLOUD_NAME'] %>
+  api_key: <%= ENV['CLOUD_API_KEY'] %>
+  api_secret: <%= ENV['CLOUD_API_SECRET'] %>
   enhance_image_tag: true
   static_image_support: true
 staging:
-  cloud_name: dnyov3ak4
-  api_key: '699184988394877'
-  api_secret: TImZToasGkL0byOXpqQIy6KstSo
+  cloud_name: <%= ENV['CLOUD_NAME'] %>
+  api_key: <%= ENV['CLOUD_API_KEY'] %>
+  api_secret: <%= ENV['CLOUD_API_SECRET'] %>
   enhance_image_tag: true
   static_image_support: true
 test:
-  cloud_name: dnyov3ak4
-  api_key: '699184988394877'
-  api_secret: TImZToasGkL0byOXpqQIy6KstSo
+  cloud_name: <%= ENV['CLOUD_NAME'] %>
+  api_key: <%= ENV['CLOUD_API_KEY'] %>
+  api_secret: <%= ENV['CLOUD_API_SECRET'] %>
   enhance_image_tag: true
   static_image_support: false
