@@ -3,14 +3,11 @@
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
     <h3 class="panel-title pull-left">
-      <%= link_to new_course_modality_path do %>
+      <%= link_to new_course_modality_path, class: 'btn btn-xs btn-default' do %>
         <i class="fa fa-plus" aria-hidden="true"></i>
       <% end %>
       <%= t '.title', :default => model.model_name.human %>
     </h3>
-    <div class="pull-right">
-
-    </div>
   </div>
   <div class="panel-body">
     <div class="table-responsive">

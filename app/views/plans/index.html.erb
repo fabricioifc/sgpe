@@ -2,13 +2,9 @@
 
 <div class="row">
 
-  <div class="col-md-4 col-lg-4">
-    <%= render 'list_group_items_index', offer_discipline:@offer_discipline %>
-  </div>
-
   <% if @plans.empty? %>
 
-    <div class="col-md-8">
+    <div class="col-md-9 col-lg-9">
 
       <ul class="list-group">
         <li class="list-group-item list-group-item-danger">Nenhum plano de ensino encontrado/ofertado para esta disciplina</li>
@@ -24,7 +20,7 @@
 
   <% else %>
 
-    <div class="col-md-8 col-lg-8">
+    <div class="col-md-9 col-lg-9">
 
       <ul class="list-group">
         <li class="list-group-item list-group-item-success clearfix">
@@ -70,4 +66,9 @@
     </div>
 
   <% end %>
+
+  <div class="col-md-3 col-lg-3">
+    <%= render 'list_group_items_index', offer_discipline:@offer_discipline %>
+  </div>
+
 </div>

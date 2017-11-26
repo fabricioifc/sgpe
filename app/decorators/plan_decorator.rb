@@ -39,6 +39,14 @@ class PlanDecorator < ApplicationDecorator
     converter_para_html component.cronograma
   end
 
+  def atendimento
+    converter_para_html component.atendimento
+  end
+
+  def versao
+    component.versao.to_f unless component.versao.nil?
+  end
+
   def situacao
     # active_tag component.active?, 'fa-2'
     if component.aprovado?

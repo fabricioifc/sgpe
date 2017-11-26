@@ -79,6 +79,23 @@ pt-BR:
       offer_disciplines:
         user: Professor
         user_id: Professor
+      plan:
+        offer_discipline_id: Disciplina
+        obj_espe: Objetivos Específicos
+        conteudo_prog: Conteúdo Programático
+        prat_prof: Prática profissional
+        interdisc: Interdisciplinariedade
+        met_tec: Metodologia Técnica
+        met_met: Recursos metodológicos
+        avaliacao: Sistema de avaliação
+        cronograma: Cronograma
+        atendimento: Atendimento
+        versao: Versão
+        active: Ativo
+        user_id: Usuário
+        analise: Em análise
+        aprovado: Aprovado
+        reprovado: Reprovado
     errors:
       models:
         offer:

@@ -1,53 +1,55 @@
+<%- model = Plan %>
+
 <div class="well well-sm">
   <%= @plan.decorate.link_index '' %>
   <%= @plan.decorate.link_editar '' %>
+  <%= @plan.decorate.link_pdf '' %>
 </div>
 
-<dl class="dl-horizontal">
-  <dt>Offer discipline:</dt>
-  <dd><%= @plan.offer_discipline %></dd>
+<div class="row">
+  <div class="col-md-3 col-lg-3">
+    <%= render 'list_group_items', plan: @plan %>
+  </div>
+  <div class="col-md-9 col-lg-9">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <%= model.human_attribute_name(:obj_espe) %>
+      </li>
+      <li class="list-group-item"><%= @plan.decorate.obj_espe %></li>
+      <li class="list-group-item">
+        <%= model.human_attribute_name(:conteudo_prog) %>
+      </li>
+      <li class="list-group-item"><%= @plan.decorate.conteudo_prog %></li>
+      <li class="list-group-item">
+        <%= model.human_attribute_name(:prat_prof) %>
+      </li>
+      <li class="list-group-item"><%= @plan.decorate.prat_prof %></li>
+      <li class="list-group-item">
+        <%= model.human_attribute_name(:interdisc) %>
+      </li>
+      <li class="list-group-item"><%= @plan.decorate.interdisc %></li>
+      <li class="list-group-item">
+        <%= model.human_attribute_name(:met_tec) %>
+      </li>
+      <li class="list-group-item"><%= @plan.decorate.met_tec %></li>
+      <li class="list-group-item">
+        <%= model.human_attribute_name(:met_met) %>
+      </li>
+      <li class="list-group-item"><%= @plan.decorate.met_met %></li>
+      <li class="list-group-item">
+        <%= model.human_attribute_name(:avaliacao) %>
+      </li>
+      <li class="list-group-item"><%= @plan.decorate.avaliacao %></li>
+      <li class="list-group-item">
+        <%= model.human_attribute_name(:cronograma) %>
+      </li>
+      <li class="list-group-item"><%= @plan.decorate.cronograma %></li>
+      <li class="list-group-item">
+        <%= model.human_attribute_name(:atendimento) %>
+      </li>
+      <li class="list-group-item"><%= @plan.decorate.atendimento %></li>
 
-  <dt>Plan class:</dt>
-  <dd><%= @plan.offer_discipline.offer.turma %></dd>
+    </ul>
 
-  <dt>Obj espe:</dt>
-  <dd><%= @plan.obj_espe %></dd>
-
-  <dt>Conteudo prog:</dt>
-  <dd><%= @plan.conteudo_prog %></dd>
-
-  <dt>Prat prof:</dt>
-  <dd><%= @plan.prat_prof %></dd>
-
-  <dt>Interdisc:</dt>
-  <dd><%= @plan.interdisc %></dd>
-
-  <dt>Met tec:</dt>
-  <dd><%= @plan.met_tec %></dd>
-
-  <dt>Met met:</dt>
-  <dd><%= @plan.met_met %></dd>
-
-  <dt>Avaliacao:</dt>
-  <dd><%= @plan.avaliacao %></dd>
-
-  <dt>Cronograma:</dt>
-  <dd><%= @plan.cronograma %></dd>
-
-  <dt>Atendimento:</dt>
-  <dd><%= @plan.atendimento %></dd>
-
-  <dt>Versao:</dt>
-  <dd><%= @plan.versao %></dd>
-
-  <dt>Active:</dt>
-  <dd><%= @plan.active %></dd>
-
-  <dt>User:</dt>
-  <dd><%= @plan.user %></dd>
-
-</dl>
-
-<hr>
-
-<%= render 'list_group_items', plan: @plan %>
+  </div>
+</div>
