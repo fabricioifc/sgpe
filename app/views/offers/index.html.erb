@@ -5,8 +5,8 @@
     <h3 class="panel-title pull-left">
       <%= link_to new_offer_path do %>
         <i class="fa fa-plus" aria-hidden="true"></i>
+        <%= t '.title', :default => model.model_name.human.pluralize.titleize %>
       <% end %>
-      <%= t '.title', :default => model.model_name.human.pluralize.titleize %>
     </h3>
     <div class="pull-right">
 

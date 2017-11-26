@@ -2,11 +2,11 @@
 
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
-    <h3 class="panel-title pull-left">
-      <%= link_to new_course_modality_path, class: 'btn btn-xs btn-default' do %>
+    <h3 class="panel-title">
+      <%= link_to new_course_modality_path do %>
         <i class="fa fa-plus" aria-hidden="true"></i>
+        <%= t('.new', :default => t("helpers.titles.newa", model: model.model_name.human.downcase )) %>
       <% end %>
-      <%= t '.title', :default => model.model_name.human %>
     </h3>
   </div>
   <div class="panel-body">
@@ -32,9 +32,6 @@
         <i class="fa fa-plus" aria-hidden="true"></i>
         <%= t('.new', :default => t("helpers.titles.newa", model: model.model_name.human.downcase )) %>
       <% end %>
-    </div>
-    <div class="pull-right">
-
     </div>
   </div>
 </div>
