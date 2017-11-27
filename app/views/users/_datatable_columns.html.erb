@@ -1,0 +1,6 @@
+<td><%= user.name %></td>
+<td><%= user.email %></td>
+<td><%= render('users/user_perfis.html.erb', user: user) %></td>
+<td>
+  <%= link_to("<i class='fa fa-trash-o fa-2 text-danger'></i>".html_safe, user, :data => { :confirm => "Tem certeza?" }, :method => :delete, :class => '') unless user == current_user %>
+</td>

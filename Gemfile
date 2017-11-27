@@ -76,6 +76,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'foreman'
   gem 'pry-rails'
+  gem 'faker'
   # gem 'guard-bundler'
   # gem 'guard-rails'
   # gem 'guard-rspec'
@@ -89,7 +90,6 @@ group :development, :test do
   # gem 'cucumber-rails', require: false
   # gem 'coveralls', require: false
   # gem 'factory_girl_rails'
-  # gem 'faker'
   # gem 'pry-rescue'
   # gem 'pry-byebug'
   # gem 'rspec-rails'

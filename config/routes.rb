@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   end
 
   get 'course_plans/:course_id', to: 'plans#course_plans', as: 'plans_by_course'
+  # put 'update_perfils/:users', to: 'user#update_perfils', as: 'update_perfils_users'
 
   resources :grid_disciplines
   resources :grids, except: [:destroy] do
@@ -36,5 +37,9 @@ Rails.application.routes.draw do
 
   root to: 'visitors#index'
   devise_for :users
-  resources :users
+  resources :users do
+    collection do
+      put 'update_perfils'
+    end
+  end
 end

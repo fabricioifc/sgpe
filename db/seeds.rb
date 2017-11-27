@@ -15,3 +15,5 @@ CreateCourseService.new.call
 CreateDisciplineService.new.call
 # Criar perfis
 CreatePerfilService.new.call
+# Criar usuários fake para testes
+CreateFakeUsersService.new.call

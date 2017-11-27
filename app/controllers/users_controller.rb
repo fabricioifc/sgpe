@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def index
     respond_to do |format|
       format.html
-      format.json { render json: UserDatatable.new(view_context, current_user) }
+      format.json { render json: UserDatatable.new(view_context, current_user, update_perfils_users_path) }
     end
     # @users = User.all
     # respond_to do |format|
@@ -24,6 +24,10 @@ class UsersController < ApplicationController
     #         disposition: 'inline'
     #   end
     # end
+  end
+
+  def update_perfils
+    binding.pry
   end
 
   def show

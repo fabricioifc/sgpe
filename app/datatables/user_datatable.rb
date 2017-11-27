@@ -1,9 +1,10 @@
 class UserDatatable < ApplicationDatatable
-  delegate :edit_user_path, to: :@view
+  delegate :edit_user_path, :form_for, to: :@view
 
-  def initialize(view, current_user)
+  def initialize(view, current_user, update_perfils_users_path)
     @view = view
     @current_user = current_user
+    @update_perfils_users_path = update_perfils_users_path
   end
 
   private
@@ -20,14 +21,13 @@ class UserDatatable < ApplicationDatatable
       [].tap do |column|
 
         column << user.name
-        # column << user.username
         column << user.email
         column << @view.render('users/user_perfis.html.erb', user: user)
 
         if user == @current_user
           column << ''
         else
-          column << link_to("<i class='fa fa-trash-o fa-2 text-danger'></i>".html_safe, user, :data => { :confirm => "Tem certeza?" }, :method => :delete, :class => 'btn btn-sm btn-danger')
+          column << link_to("<i class='fa fa-trash-o fa-2 text-danger'></i>".html_safe, user, :data => { :confirm => "Tem certeza?" }, :method => :delete, :class => '')
         end
 
         # links = []
