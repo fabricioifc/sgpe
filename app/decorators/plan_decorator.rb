@@ -73,7 +73,8 @@ class PlanDecorator < ApplicationDecorator
   end
 
   def link_pdf classes = 'btn-sm'
-    h.link_to h.offer_offer_discipline_plan_path(id: component.id,
+    if !component.id.nil?
+      h.link_to h.offer_offer_discipline_plan_path(id: component.id,
                                                  offer_discipline_id: component.offer_discipline_id,
                                                  offer_id: component.offer_discipline.offer_id,
                                                  format: :pdf),
@@ -81,22 +82,25 @@ class PlanDecorator < ApplicationDecorator
         h.content_tag :i, nil, class: 'fa fa-file-pdf-o' do
           h.content_tag :span, " #{I18n.t 'helpers.links.pdf'}"
         end
+      end
     end
   end
 
   def link_editar classes = 'btn-sm'
-    if pode_editar?
-      h.link_to h.edit_offer_offer_discipline_plan_path(offer_discipline_id: component.offer_discipline_id, id: component.id),
-        class: "btn btn-warning #{classes}" do
-          h.content_tag :i, nil, class: 'fa fa-edit' do
-            h.content_tag :span, " #{I18n.t 'helpers.links.edit'}"
-          end
-      end
-    else
-      h.button_tag nil, class: "btn btn-warning #{classes}", disabled:true do
-          h.content_tag :i, nil, class: 'fa fa-edit' do
-            h.content_tag :span, " #{I18n.t 'helpers.links.edit'}"
-          end
+    if !component.id.nil?
+      if pode_editar?
+        h.link_to h.edit_offer_offer_discipline_plan_path(offer_discipline_id: component.offer_discipline_id, id: component.id),
+          class: "btn btn-warning #{classes}" do
+            h.content_tag :i, nil, class: 'fa fa-edit' do
+              h.content_tag :span, " #{I18n.t 'helpers.links.edit'}"
+            end
+        end
+      else
+        h.button_tag nil, class: "btn btn-warning #{classes}", disabled:true do
+            h.content_tag :i, nil, class: 'fa fa-edit' do
+              h.content_tag :span, " #{I18n.t 'helpers.links.edit'}"
+            end
+        end
       end
     end
   end

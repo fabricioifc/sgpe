@@ -3,6 +3,8 @@ class CourseModalitiesController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
 
+  add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :course_modalities_path
+
   # GET /course_modalities
   # GET /course_modalities.json
   def index

@@ -18,6 +18,10 @@ class Ability
       #   end
       # end
 
+      # new e copy mesma coisa
+      alias_action :new, :copy, :to => :novo
+      alias_action :get_planos_aprovar, :aprovar, :reprovar, :to => :aprovar_reprovar
+
       @perfils = user.perfils
       @perfils.each do |perfil|
         if perfil.idativo?

@@ -3,6 +3,8 @@ class CourseOffersController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
 
+  add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :course_offers_path
+
 
   # GET /course_offers
   # GET /course_offers.json

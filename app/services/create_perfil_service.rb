@@ -1,11 +1,17 @@
 class CreatePerfilService
 
   def call
-    acoes = { 'Gerenciar' => 'manage', 'Visualizar' => 'read', 'Excluir' => 'destroy', 'Editar' =>  'update', 'Criar' => 'create' }
+    # acoes = {
+    #   'Gerenciar' => 'manage', 'Visualizar' => 'read', 'Excluir' => 'destroy', 'Editar' =>  'update', 'Criar' => 'create',
+    #   'Novo' => 'novo',
+    #   'Aprovar planos' => 'aprovar_reprovar'
+    # }
 
     perfils = []
     perfils << [ name: 'DDE', idativo: true ]
     perfils << [ name: 'CGE', idativo: true ]
+    perfils << [ name: 'NUPE', idativo: true ]
+    perfils << [ name: 'Professor', idativo: true ]
 
     perfils.each do |k, v|
       Perfil.find_or_create_by(k)
@@ -20,19 +26,29 @@ class CreatePerfilService
     models.sort
 
     models.each do |m|
-      acoes.each do |k,v|
-        Role.find_or_create_by( name: k, resource_type: m.to_s, resource_id: v ) unless m.nil?
+      Role::ACTIONS.each do |k,v|
+        Role.find_or_create_by( name: "#{k} - #{m.to_s}", resource_type: m.to_s, resource_id: v ) unless m.nil?
       end
     end
 
     papeis_perfil ||= []
     # Papéis do nupe
     papeis_perfil << { Perfil.find_or_create_by(name: 'NUPE').id => {
-      manage: ['CourseOffer', 'CourseModality', 'CourseFormat', 'Course', 'Discipline', 'Turma'], read: ['Plan'] }
+        manage: ['CourseOffer', 'CourseModality', 'CourseFormat', 'Course', 'Discipline', 'Turma'],
+        read: ['Plan'],
+        aprovar_reprovar: ['Plan']
+      }
+    }
+    # Papéis do DDE
+    papeis_perfil << { Perfil.find_or_create_by(name: 'DDE').id => {
+        manage: ['CourseOffer', 'CourseModality', 'CourseFormat', 'Course', 'Discipline', 'Turma'],
+        read: ['Plan'],
+        aprovar_reprovar: ['Plan']
+      }
     }
     # Papéis do professor
     papeis_perfil << {Perfil.find_or_create_by(name: 'Professor').id => {
-      manage: ['Plan'] }
+      read: ['Plan'], create: ['Plan'], destroy: ['Plan'], update: ['Plan'], novo: ['Plan'], course_plans: ['Plan'] }
     }
 
 

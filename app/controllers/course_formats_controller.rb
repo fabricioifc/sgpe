@@ -5,6 +5,8 @@ class CourseFormatsController < ApplicationController
 
   responders :flash
 
+  add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :course_formats_path
+
   # GET /course_formats
   # GET /course_formats.json
   def index

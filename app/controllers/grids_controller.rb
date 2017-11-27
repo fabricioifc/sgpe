@@ -3,6 +3,8 @@ class GridsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
 
+  add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :grids_path
+
   before_action :load_cursos_ativos
   before_action :load_disciplinas
 

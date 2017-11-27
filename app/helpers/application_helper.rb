@@ -8,6 +8,10 @@ module ApplicationHelper
     user_signed_in? && current_user.try(:teacher?)
   end
 
+  def is_professor_discipline? professor
+    user_signed_in? && current_user.try(:teacher?) && current_user.eql?(professor)
+  end
+
   def avatar_navbar_image(classe = ['special-img'])
     if user_signed_in?
       if current_user.avatar.present?

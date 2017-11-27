@@ -158,11 +158,6 @@ footer.page-footer p {
   margin: 5px 10px;
 }
 
-
-.select2 {
-  width: 100% !important;
-}
-
 .border {
   border: 1px solid;
 }
@@ -246,12 +241,13 @@ table tbody tr td.text-middle {
     @extend .bg-primary
 }
 
+.select2 {
+  width: 100% !important;
+}
+
 .select2-container--bootstrap .select2-selection--single {
   @extend .form-control;
   height: 45px;
   line-height: 1.428571429;
   padding: 10px 24px 6px 12px;
-  /**
-   * Adjust the single Select2's dropdown arrow button appearance.
-   */
 }

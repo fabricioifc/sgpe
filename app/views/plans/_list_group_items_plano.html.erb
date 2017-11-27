@@ -1,0 +1,48 @@
+<li class="list-group-item">
+  <div class="btn-group btn-group-justified">
+    <% if is_professor_discipline? @plan.user %>
+      <!-- <div class="btn-group" role="group">
+        <= @plan.decorate.link_index %>
+      </div> -->
+      <div class="btn-group" role="group">
+        <%= @plan.decorate.link_editar %>
+      </div>
+    <% end %>
+    <div class="btn-group" role="group">
+      <%= @plan.decorate.link_pdf %>
+    </div>
+  </div>
+</li>
+
+<hr>
+
+<li class="list-group-item list-group-item-success">
+  Situação
+</li>
+<li class="list-group-item">
+  <%= @plan.decorate.situacao %>
+  <span class="badge pull-right">
+    <%= @plan.decorate.versao %>
+  </span>
+  <% if @plan.analise? %>
+    <% if can? :aprovar_reprovar, Plan %>
+      <hr>
+      <%= form_for(@plan, url: aprovar_offer_offer_discipline_plan_path, method: :post) do |f| %>
+        <div class="btn-group btn-group-justified">
+          <% if !@plan.aprovado? %>
+            <div class="btn-group" role="group">
+              <%= f.submit 'Aprovar', class: "btn btn-success" %>
+            </div>
+          <% end %>
+          <% if !@plan.reprovado? %>
+            <div class="btn-group" role="group">
+              <%= f.submit 'Reprovar', class: "btn btn-danger", name: 'commit_reprovar' %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</li>
+
+<hr>

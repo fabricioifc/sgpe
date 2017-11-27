@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :plans do
         member do
           get 'copy'
+          post 'aprovar'
         end
       end
     end
@@ -16,6 +17,8 @@ Rails.application.routes.draw do
 
   get 'course_plans/:course_id', to: 'plans#course_plans', as: 'plans_by_course'
   # put 'update_perfils/:users', to: 'user#update_perfils', as: 'update_perfils_users'
+  get 'aprovacao', to: 'plans#get_planos_aprovar', as: 'get_planos_aprovar'
+  # put 'aprovacao/:plan', to: 'plans#aprovar', as: 'aprovar_plano'
 
   resources :grid_disciplines
   resources :grids, except: [:destroy] do

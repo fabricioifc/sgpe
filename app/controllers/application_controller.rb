@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
   def rescue_from_fk_contraint
     begin
       yield
-    rescue ActiveRecord::InvalidForeignKey do |exception|
+    rescue ActiveRecord::InvalidForeignKey
       respond_to do |format|
         flash[:alert] = 'Não foi possível excluir este ítem. Existem registros vinculados.'
         format.html { redirect_to url_for(request.path) }
@@ -59,5 +59,10 @@ class ApplicationController < ActionController::Base
       :current_user => current_user
     }
   end
+
+  # def add_current_breadcrumb
+    # add_breadcrumb "Inicio", :root_path
+    # add_breadcrumb (t "helpers.links.pages.#{controller_name}", default: controller_name), "#{url_for(:only_path => false)}"
+  # end
 
 end

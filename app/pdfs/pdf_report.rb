@@ -16,7 +16,7 @@ class PdfReport < Prawn::Document
     @company = {
       name:   Rails.application.secrets.sistema_apelido,
       email:  Rails.application.secrets.admin_email,
-      logo:   Rails.root.join("app/assets/images/logo.png")
+      logo:   Rails.root.join("app/assets/images/logo-ifc-fraiburgo.png")
     }
     # @table_data   = attributes.fetch(:data).fetch(:table_data)
     # @table_widths = attributes.fetch(:data).fetch(:table_widths)

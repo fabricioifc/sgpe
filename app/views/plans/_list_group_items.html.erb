@@ -1,5 +1,7 @@
 <%- model = Plan %>
 
+<%= render 'list_group_items_plano', plan: plan unless plan.id.nil? %>
+
 <li class="list-group-item list-group-item-info">Grade/Curso</li>
 <li class="list-group-item">
   <p><%= "#{plan.offer_discipline.grid_discipline.grid.year}/#{plan.offer_discipline.grid_discipline.grid.course.name}" %></p>
@@ -26,14 +28,4 @@
       <%= plan.offer_discipline.grid_discipline.decorate.carga_horaria_aula_text %>
     </span>
   </p>
-</li>
-
-<li class="list-group-item list-group-item-success">
-  Situação
-</li>
-<li class="list-group-item">
-  <%= @plan.decorate.situacao %>
-  <span class="badge pull-right">
-    <%= @plan.decorate.versao %>
-  </span>
 </li>

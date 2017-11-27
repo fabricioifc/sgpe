@@ -7,6 +7,8 @@ class CoursesController < ApplicationController
   before_action :load_formatos
   before_action :load_ofertas
 
+  add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :courses_path
+
   # GET /courses
   # GET /courses.json
   def index

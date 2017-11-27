@@ -16,11 +16,15 @@ class Role < ApplicationRecord
   validates :resource_type, :resource_id, uniqueness: {scope: [:resource_type, :resource_id]}
 
   ACTIONS = {
-    'Gerenciar todos os recursos' =>  'manage',
-		'Apenas visualizar'           =>  'read',
-		'Apenas Excluir'              =>  'destroy',
-		'Apenas Editar'               =>  'update',
-		'Apenas Criar'                =>  'create'
+    'Gerenciar' =>  'manage',
+		'Visualizar'                  =>  'read',
+		'Excluir'                     =>  'destroy',
+		'Atualizar'                      =>  'update',
+		'Criar'                       =>  'create',
+    'Editar'                      =>  'edit',
+    'Novo'                        => 'novo',
+    'Aprovar planos'              => 'aprovar_reprovar',
+    'Ver planos por curso'     => 'course_plans',
 	}
 
   rails_admin do

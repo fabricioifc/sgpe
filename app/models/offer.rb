@@ -31,7 +31,7 @@ class Offer < ApplicationRecord
   # accepts_nested_attributes_for :grid_disciplines, :allow_destroy => true
 
   def decorate
-    @decorate ||= GridDecorator.new self
+    @decorate ||= OfferDecorator.new self
   end
 
   attr_accessor :grid_year, :grid_semestre

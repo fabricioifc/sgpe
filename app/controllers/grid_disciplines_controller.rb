@@ -3,6 +3,8 @@ class GridDisciplinesController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
 
+  add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :grid_disciplines_path
+
   # GET /grid_disciplines
   # GET /grid_disciplines.json
   def index

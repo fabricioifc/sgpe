@@ -3,6 +3,8 @@ class PerfilsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
 
+  add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :perfils_path
+
   # GET /perfils
   # GET /perfils.json
   def index

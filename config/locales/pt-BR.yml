@@ -360,6 +360,8 @@ pt-BR:
         courses: Cursos
         turmas: Turmas
         offers: Ofertar grades
+        perfils: Perfis
+        users: Usuários
     titles:
       edit: "Editar %{model}"
       save: "Salvar %{model}"
