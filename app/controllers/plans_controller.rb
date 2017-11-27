@@ -81,7 +81,7 @@ class PlansController < ApplicationController
   def planos_professor
     if is_professor?
 
-      curso_ids = current_user.offer_disciplines.joins(:offer => :grid).
+      curso_ids = User.first.offer_disciplines.joins(:offer => :grid).
         where(active:true).where('offers.active = ?', true).
         pluck('grids.course_id').uniq
 

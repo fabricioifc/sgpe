@@ -39,7 +39,7 @@ module PlansHelper
       if professor.nil?
         Plan.where('plans.active is true').where(analise:true, aprovado:true, reprovado:false)
       else
-        Plan.where('plans.active is true and user_id = ?', professor.id).where(analise:true, aprovado:true, reprovado:false)
+        Plan.where('plans.active is true and plans.user_id = ?', professor.id).where(analise:true, aprovado:true, reprovado:false)
       end
     end
   end
@@ -50,7 +50,7 @@ module PlansHelper
       if professor.nil?
         Plan.where('plans.active is true').where(analise:true, aprovado:false, reprovado:true)
       else
-        Plan.where('plans.active is true and user_id = ?', professor.id).where(analise:true, aprovado:false, reprovado:true)
+        Plan.where('plans.active is true and plans.user_id = ?', professor.id).where(analise:true, aprovado:false, reprovado:true)
       end
     end
   end
@@ -61,7 +61,7 @@ module PlansHelper
       if professor.nil?
         Plan.where('plans.active is true').where(analise:true, aprovado:false, reprovado:false)
       else
-        Plan.where('plans.active is true and user_id = ?', professor.id).where(analise:true, aprovado:false, reprovado:false)
+        Plan.where('plans.active is true and plans.user_id = ?', professor.id).where(analise:true, aprovado:false, reprovado:false)
       end
     end
   end
@@ -72,7 +72,7 @@ module PlansHelper
       if professor.nil?
         Plan.where('plans.active is true').where(analise:false, aprovado:false, reprovado:false)
       else
-        Plan.where('plans.active is true and user_id = ?', professor.id).where(analise:false, aprovado:true, reprovado:false)
+        Plan.where('plans.active is true and plans.user_id = ?', professor.id).where(analise:false, aprovado:true, reprovado:false)
       end
     end
   end
@@ -83,7 +83,7 @@ module PlansHelper
       if professor.nil?
         Plan.where('plans.active is true')
       else
-        Plan.where('plans.active is true and user_id = ?', professor.id)
+        Plan.where('plans.active is true and plans.user_id = ?', professor.id)
       end
     end
   end
