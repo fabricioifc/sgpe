@@ -9,12 +9,6 @@ class UserDatatable < ApplicationDatatable
 
   private
 
-  # Loop through memoized collection and build the columns.
-  # If extracting from a view, be sure to add delegates
-  # and to also clean up and inject each column into the column var.
-  # Also, if you have multiple items (links) in a single column, you
-  # will need to create a separate variable and join them accordingly
-  # when pushing to the column array
   def data
     # binding.pry
     users.map do |user|
