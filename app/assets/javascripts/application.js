@@ -41,7 +41,12 @@ $.addSummernote = function(){
   // $('[data-provider="summernote"]').each(function() {
     $('[data-provider="summernote"]').summernote({
       lang: 'pt-BR',
-      height: 100
+      height: 100,
+      toolbar: [
+         ["style", ["bold", "italic", "underline", "clear"]],
+         ["para", ["ul", "ol", "paragraph"]],
+         ["help", ["help"]]
+      ]
     });
   // });
 };
