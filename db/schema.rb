@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20171115195429) do
-=======
-ActiveRecord::Schema.define(version: 20171120194347) do
->>>>>>> e3720ab645a29e7d7dddf2ccf73ceb25f60e1668
+ActiveRecord::Schema.define(version: 20171127161643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -158,8 +154,6 @@ ActiveRecord::Schema.define(version: 20171120194347) do
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< HEAD
-=======
   create_table "plans", force: :cascade do |t|
     t.bigint "offer_discipline_id"
     t.text "obj_espe"
@@ -179,11 +173,11 @@ ActiveRecord::Schema.define(version: 20171120194347) do
     t.boolean "analise", default: false, null: false
     t.boolean "aprovado", default: false, null: false
     t.boolean "reprovado", default: false, null: false
+    t.text "parecer"
     t.index ["offer_discipline_id"], name: "index_plans_on_offer_discipline_id"
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
->>>>>>> e3720ab645a29e7d7dddf2ccf73ceb25f60e1668
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false

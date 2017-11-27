@@ -28,6 +28,10 @@
     <% if can? :aprovar_reprovar, Plan %>
       <hr>
       <%= form_for(@plan, url: aprovar_offer_offer_discipline_plan_path, method: :post) do |f| %>
+        <div class="form-group">
+          <%= f.label :parecer, class: 'control-label' %>
+          <%= f.text_area :parecer, class: 'form-control', rows: 6, autofocus:true %>
+        </div>
         <div class="btn-group btn-group-justified">
           <% if !@plan.aprovado? %>
             <div class="btn-group" role="group">

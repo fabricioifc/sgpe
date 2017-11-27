@@ -30,7 +30,7 @@ class PlansController < ApplicationController
 
     respond_to do |format|
       ActiveRecord::Base.transaction do
-        if @plan.update(aprovado:aprovado, reprovado:reprovado)
+        if @plan.update(aprovado:aprovado, reprovado:reprovado, parecer: plan_params[:parecer])
           flash[:notice] = "Plano #{aprovado == true ? 'aprovado' : 'reprovado'} com sucesso."
           # format.html { render :show }
           format.html { redirect_to offer_offer_discipline_plan_path(@plan) }
@@ -197,7 +197,7 @@ class PlansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plan_params
-      params.require(:plan).permit(:offer_discipline_id, :obj_espe, :conteudo_prog, :prat_prof, :interdisc, :met_tec, :met_met, :avaliacao, :cronograma, :atendimento, :versao, :active, :user_id, :analise, :aprovado, :reprovado)
+      params.require(:plan).permit(:offer_discipline_id, :obj_espe, :conteudo_prog, :prat_prof, :interdisc, :met_tec, :met_met, :avaliacao, :cronograma, :atendimento, :versao, :active, :user_id, :analise, :aprovado, :reprovado, :parecer)
     end
 
     def load_professores
