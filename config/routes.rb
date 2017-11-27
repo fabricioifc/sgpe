@@ -15,7 +15,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'course_plans/:course_id', to: 'plans#course_plans', as: 'plans_by_course'
+  get 'planos/:course_id', to: 'plans#planos_curso', as: 'planos_curso'
+  get 'planos', to: 'plans#planos_professor', as: 'planos_professor'
   # put 'update_perfils/:users', to: 'user#update_perfils', as: 'update_perfils_users'
   get 'aprovacao', to: 'plans#get_planos_aprovar', as: 'get_planos_aprovar'
   # put 'aprovacao/:plan', to: 'plans#aprovar', as: 'aprovar_plano'

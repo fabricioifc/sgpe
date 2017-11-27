@@ -16,9 +16,7 @@
     </header>
     <main role="main">
       <%= render 'layouts/messages' %>
-      <% if user_signed_in? %>
-        <p class="well well-sm"><%= render_breadcrumbs :separator => ' / ' %></p>
-      <% end %>
+      <%= render 'layouts/breadcrumbs' %>
       <%= yield %>
     </main>
     <%= render 'layouts/footer' %>

@@ -26,6 +26,68 @@ document.addEventListener("turbolinks:load", function(e) {
     $(this).siblings('li.list-group-item').find('span > i').addClass('fa-arrow-right');
   });
 
+  var dataTableId = "table[id='plans_datatable']";
+
+  $(dataTableId).each(function(){
+    dataTable = $(this).DataTable({
+      responsive: true,
+      destroy: true,
+      processing: true,
+      serverSide: true,
+      ajax: $(this).data('url'),
+      "language": {
+          "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json"
+      },
+
+      columns: [
+        {
+          width: "15%",
+          className: "",
+          searchable: true,
+          orderable: true
+        },
+        {
+          width: "15%",
+          className: "",
+          searchable: true,
+          orderable: true
+        },
+        {
+          width: "15%",
+          className: "",
+          searchable: true,
+          orderable: true
+        },
+        {
+          width: "15%",
+          className: "",
+          searchable: true,
+          orderable: true
+        },
+        {
+          width: "15%",
+          className: "",
+          searchable: true,
+          orderable: true
+        },
+        {
+          width: "15%",
+          className: "",
+          searchable: true,
+          orderable: true
+        },
+        {
+          width: "10%",
+          className: "",
+          searchable: true,
+          orderable: true
+        },
+      ],
+      // order: [[1, 'asc']]
+
+    });
+  });
+
 });
 
 $.abrirPainel = function(painel) {

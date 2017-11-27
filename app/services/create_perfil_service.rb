@@ -48,7 +48,7 @@ class CreatePerfilService
     }
     # Papéis do professor
     papeis_perfil << {Perfil.find_or_create_by(name: 'Professor').id => {
-      read: ['Plan'], create: ['Plan'], destroy: ['Plan'], update: ['Plan'], novo: ['Plan'], course_plans: ['Plan'] }
+      read: ['Plan'], create: ['Plan'], destroy: ['Plan'], update: ['Plan'], novo: ['Plan'], planos_curso: ['Plan'], planos_professor: ['Plan'] }
     }
 
 

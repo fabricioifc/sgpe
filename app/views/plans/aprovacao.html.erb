@@ -4,7 +4,7 @@
   </div>
   <div class="panel-body">
     <div class="table-responsive">
-      <table class="table table-striped table-condensed">
+      <%= content_tag :table, id: 'plans_datatable', class: 'table table-striped table-bordered', data: { url: get_planos_aprovar_path(format: :json)} do %>
         <thead>
           <tr>
             <th>Curso</th>
@@ -16,37 +16,8 @@
             <th>Ações</th>
           </tr>
         </thead>
-        <tbody>
-          <% if @planos_aprovar %>
-            <% @planos_aprovar.each do |plano| %>
-              <tr>
-                <td>
-                  <%= "#{plano.offer_discipline.grid_discipline.grid.year} - #{plano.offer_discipline.grid_discipline.grid.course.name}" %>
-                </td>
-                <td>
-                  <%= "#{plano.offer_discipline.grid_discipline.discipline.sigla} - #{plano.offer_discipline.grid_discipline.discipline.title}" %>
-                </td>
-                <td>
-                  <%= "#{plano.offer_discipline.offer.turma.year} - #{plano.offer_discipline.offer.turma.name}" %>
-                </td>
-                <td><%= plano.user.name %></td>
-                <td><%= plano.offer_discipline.offer.decorate.ano_semestre %></td>
-                <td><%= plano.decorate.situacao %></td>
-                <td><%= link_to offer_offer_discipline_plan_path(
-                        offer_discipline_id: plano.offer_discipline_id,
-                        offer_id: plano.offer_discipline.offer_id,
-                        id: plano.id),
-                    class: "btn btn-xs btn-info" do %>
-                    <%= content_tag :i, nil, class: 'fa fa-info-circle' do %>
-                      <% content_tag :span, " #{I18n.t 'helpers.links.show'}" %>
-                    <% end %>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-          <% end %>
-        </tbody>
-      </table>
+        <tbody></tbody>
+      <% end %>
     </div>
 
   </div>

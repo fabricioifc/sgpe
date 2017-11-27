@@ -12,15 +12,16 @@ class PlansController < ApplicationController
   before_action :pode_excluir?, only: [:destroy]
 
   before_action :checar_professor_plano, except: [:show, :get_planos_aprovar, :aprovar]
-  # before_action :checar_autorizacao_aprovar, only: [:get_planos_aprovar]
 
   def get_planos_aprovar
     if user_signed_in?
-      @planos_aprovar = Plan.joins(offer_discipline: {offer: { grid: :course }}).
-        where('plans.active is true').
-        where(analise:true, aprovado:false, reprovado:false)
-
-      render 'aprovacao'
+      # @planos_aprovar = Plan.joins(offer_discipline: {offer: { grid: :course }}).
+      #   where('plans.active is true').
+      #   where(analise:true, aprovado:false, reprovado:false)
+      respond_to do |format|
+        format.html { render 'aprovacao' }
+        format.json { render json: AprovarPlanosDatatable.new(view_context) }
+      end
     end
   end
 
@@ -32,9 +33,9 @@ class PlansController < ApplicationController
       ActiveRecord::Base.transaction do
         if @plan.update(aprovado:aprovado, reprovado:reprovado, parecer: plan_params[:parecer])
           flash[:notice] = "Plano #{aprovado == true ? 'aprovado' : 'reprovado'} com sucesso."
-          # format.html { render :show }
-          format.html { redirect_to offer_offer_discipline_plan_path(@plan) }
-          format.json { render :show, status: :updated, location: @plan }
+          # format.html { redirect_to aprovar_offer_offer_discipline_plan_path(@plan) }
+          format.html { redirect_to get_planos_aprovar_path }
+          # format.json { render :show, status: :updated, location: @plan }
         else
           format.html { render :show }
           format.json { render json: @plan.errors, status: :unprocessable_entity }
@@ -56,7 +57,7 @@ class PlansController < ApplicationController
     end
   end
 
-  def course_plans
+  def planos_curso
     if is_professor?
       # Pode ser que o parâmetro venha de um form de pesquisa (course_tag_id)
       params[:course_id] = params[:course_id_tag] || params[:course_id]
@@ -74,6 +75,17 @@ class PlansController < ApplicationController
         group_by{ |c| [c.offer.year, c.offer.semestre] }
 
       adicionar_breadcrumb_curso @curso
+    end
+  end
+
+  def planos_professor
+    if is_professor?
+
+      curso_ids = current_user.offer_disciplines.joins(:offer => :grid).
+        where(active:true).where('offers.active = ?', true).
+        pluck('grids.course_id').uniq
+
+      @cursos = Course.where(id: curso_ids)
     end
   end
 
@@ -233,7 +245,7 @@ class PlansController < ApplicationController
     end
 
     def adicionar_breadcrumb_curso curso
-      add_breadcrumb curso.sigla, plans_by_course_path(curso.id)
+      add_breadcrumb curso.sigla, planos_curso_path(curso.id)
     end
 
     def adicionar_breadcrumb_planos plano
@@ -245,10 +257,6 @@ class PlansController < ApplicationController
         @offer_discipline = OfferDiscipline.find(params[:offer_discipline_id])
         raise CanCan::AccessDenied if @offer_discipline.user != current_user
       end
-    end
-
-    def checar_autorizacao_aprovar
-      authorize!(params[:action].to_sym, Plan)
     end
 
 end
