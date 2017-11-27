@@ -18,9 +18,9 @@ class CourseFormatDatatable < ApplicationDatatable
         column << course_format.minutos_aula
 
         links = []
-        column << link_to("<i class='fa fa-list fa-2'></i>".html_safe, course_format)
-        column << link_to("<i class='fa fa-pencil-square-o fa-2'></i>".html_safe, edit_course_format_path(course_format))
-        column << link_to("<i class='fa fa-trash-o fa-2'></i>".html_safe, course_format, method: :delete, data: { confirm: 'Tem certeza?' })
+        column << link_to("<i class='fa fa-list fa-2 text-info'></i>".html_safe, course_format)
+        column << link_to("<i class='fa fa-pencil-square-o fa-2 text-warning'></i>".html_safe, edit_course_format_path(course_format))
+        column << link_to("<i class='fa fa-trash-o fa-2 text-danger'></i>".html_safe, course_format, method: :delete, data: { confirm: 'Tem certeza?' })
         # column << links.join(" <span style='padding-right: 5px;'></span> ")
       end
     end

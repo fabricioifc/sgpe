@@ -345,6 +345,7 @@ pt-BR:
       admin: 'Administração'
       pdf: 'Relatório'
       duplicate: Duplicar %{model}
+      perfis: Perfis
       pages:
         about: 'Sobre'
         disciplines: 'Disciplinas'

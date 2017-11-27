@@ -18,9 +18,9 @@ class TurmaDatatable < ApplicationDatatable
         column << turma.decorate.active
 
         links = []
-        column << link_to("<i class='fa fa-list fa-2'></i>".html_safe, turma)
-        column << link_to("<i class='fa fa-pencil-square-o fa-2'></i>".html_safe, edit_turma_path(turma))
-        column << link_to("<i class='fa fa-trash-o fa-2'></i>".html_safe, turma, method: :delete, data: { confirm: 'Tem certeza?' })
+        column << link_to("<i class='fa fa-list fa-2 text-info'></i>".html_safe, turma)
+        column << link_to("<i class='fa fa-pencil-square-o fa-2 text-warning'></i>".html_safe, edit_turma_path(turma))
+        column << link_to("<i class='fa fa-trash-o fa-2 text-danger'></i>".html_safe, turma, method: :delete, data: { confirm: 'Tem certeza?' })
         # column << links.join(" <span style='padding-right: 5px;'></span> ")
       end
     end

@@ -2,22 +2,28 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_only, :except => :show
 
+  responders :flash
+
   def index
-    @users = User.all
     respond_to do |format|
       format.html
-      # format.json { render json: TestDatatable.new(view_context) }
-      format.pdf do
-        35.times do
-          @users += User.all
-        end
-        pdf = UsersPdf.new(@users)
-        send_data pdf.render,
-            filename: "usuários_#{@users.count}",
-            type: 'application/pdf',
-            disposition: 'inline'
-      end
+      format.json { render json: UserDatatable.new(view_context, current_user) }
     end
+    # @users = User.all
+    # respond_to do |format|
+    #   format.html
+    #   # format.json { render json: TestDatatable.new(view_context) }
+    #   format.pdf do
+    #     35.times do
+    #       @users += User.all
+    #     end
+    #     pdf = UsersPdf.new(@users)
+    #     send_data pdf.render,
+    #         filename: "usuários_#{@users.count}",
+    #         type: 'application/pdf',
+    #         disposition: 'inline'
+    #   end
+    # end
   end
 
   def show
@@ -25,7 +31,7 @@ class UsersController < ApplicationController
 
     unless current_user.admin?
       unless @user == current_user
-        redirect_to root_path, :alert => "Access denied."
+        redirect_to root_path, :alert => "Acesso negado. Você não tem permissão para acessar este recurso."
       end
     end
   end
@@ -33,23 +39,23 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(secure_params)
-      redirect_to users_path, :notice => "User updated."
+      redirect_to users_path, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human)
     else
-      redirect_to users_path, :alert => "Unable to update user."
+      redirect_to users_path, :alert => "Não foi possível atualizar o usuário."
     end
   end
 
   def destroy
     user = User.find(params[:id])
     user.destroy
-    redirect_to users_path, :notice => "User deleted."
+    redirect_to users_path, notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human)
   end
 
   private
 
   def admin_only
     unless current_user.admin?
-      redirect_to root_path, :alert => "Access denied."
+      redirect_to root_path, :alert => "Acesso negado. Você não tem permissão para acessar este recurso."
     end
   end
 

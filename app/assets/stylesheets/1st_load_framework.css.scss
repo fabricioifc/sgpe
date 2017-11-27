@@ -6,8 +6,8 @@
  //Import bootstrap-sprockets
  @import "bootstrap-sprockets";
  // Import cerulean variables
+ @import "bootswatch/variaveis_custom";
  @import "bootswatch/flatly/variables";
- @import "_variaveis_custom";
   // Then bootstrap itself
  @import "bootstrap";
  // And finally bootswatch style itself
@@ -20,20 +20,22 @@
 
 @import "summernote";
 
-// INICIO das configurações
-body {
-  font-size: 14px;
-}
-
-// make all images responsive by default
-// img {
-//   @extend .img-responsive;
-//   margin: 0 auto;
-//   }
-// override for the 'Home' navigation link
 .navbar-brand {
   font-size: inherit;
   padding: 4.5px 5px;
+}
+
+@media (min-width: 767px) {
+  .nav > li > a {
+    padding: 10px 7px;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-nav > li > a {
+    padding-top: 19.5px;
+    padding-bottom: 19.5px;
+  }
 }
 
 // THESE ARE EXAMPLES YOU CAN MODIFY

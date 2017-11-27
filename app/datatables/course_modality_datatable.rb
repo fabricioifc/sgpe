@@ -18,9 +18,9 @@ class CourseModalityDatatable < ApplicationDatatable
         column << course_modality.description
 
         links = []
-        column << link_to("<i class='fa fa-list fa-2'></i>".html_safe, course_modality)
-        column << link_to("<i class='fa fa-pencil-square-o fa-2'></i>".html_safe, edit_course_modality_path(course_modality))
-        column << link_to("<i class='fa fa-trash-o fa-2'></i>".html_safe, course_modality, method: :delete, data: { confirm: 'Tem certeza?' })
+        column << link_to("<i class='fa fa-list fa-2 text-info'></i>".html_safe, course_modality)
+        column << link_to("<i class='fa fa-pencil-square-o fa-2 text-warning'></i>".html_safe, edit_course_modality_path(course_modality))
+        column << link_to("<i class='fa fa-trash-o fa-2 text-danger'></i>".html_safe, course_modality, method: :delete, data: { confirm: 'Tem certeza?' })
         # column << links.join(" <span style='padding-right: 5px;'></span> ")
       end
     end

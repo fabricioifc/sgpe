@@ -1,26 +1,7 @@
 <%- if is_professor? %>
 
   <div class="well well-sm">
-    <%= form_for plans_by_course_path, method: :get, html: {class: ''} do |f| %>
-      <div class="form-group col-md-3">
-        <%= select_tag :course_id_tag, options_for_select(cursos_por_professor.map { |k,v| [v, k]}, params[:course_id] ),
-            id: :course_id_tag, class: 'select2', prompt:'Selecione', required:true, autofocus:true %>
-      </div>
-      <div class="form-group col-md-3">
-        <%= select_tag :discipline_id_tag, options_for_select(disciplinas_curso_e_por_professor.map { |k,v| [v, k]}, params[:discipline_id] ),
-            id: :discipline_id_tag, class: 'select2', prompt:'Selecione' %>
-      </div>
-      <div class="form-group col-md-2">
-        <%= text_field_tag :ano_tag, params[:ano_tag], id: :ano_tag, class: 'form-control', placeholder: 'Ano' %>
-      </div>
-      <%= submit_tag 'Pesquisar', class: 'btn btn-primary' %>
-    <% end %>
-    <!-- <= form_for @curso, url: plans_by_course_path, method: :get, html: {class: ''} do |f| %>
-      <div class="form-group col-md-4">
-        <= f.select :id, cursos_por_professor.map { |k,v| [v, k] }, {}, class: 'select2', prompt:true, required:true, autofocus:true %>
-      </div>
-      <= f.submit 'Pesquisar', class: 'btn btn-primary' %>
-    < end %> -->
+    <%= render 'form_search' %>
   </div>
 
   <div class="panel panel-default">

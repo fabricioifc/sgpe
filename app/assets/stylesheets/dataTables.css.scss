@@ -1,5 +1,11 @@
 // Customizando o componente datatables
- @import "_variaveis_custom";
+ @import "bootswatch/variaveis_custom";
+
+ div.table-responsive {
+   background-color: #fff;
+   padding: 5px;
+   font-size: $table-font-size-base;
+ }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button {
   padding: 0;
