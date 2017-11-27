@@ -44,7 +44,7 @@
                 <% @plans.each do |plan| %>
                   <tr>
                     <td class="text-center" style="vertical-align: middle;">
-                      <span class="badge"><%= plan.versao unless plan.versao.nil? %></span>
+                      <span class="badge"><%= "v#{plan.versao}" unless plan.versao.nil? %></span>
                     </td>
                     <td class="" style="vertical-align: middle;">
                       <%= plan.decorate.situacao %>

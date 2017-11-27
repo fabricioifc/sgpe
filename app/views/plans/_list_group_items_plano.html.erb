@@ -17,12 +17,12 @@
 <hr>
 
 <li class="list-group-item list-group-item-success">
-  Situação
+  Parecer
 </li>
 <li class="list-group-item">
   <%= @plan.decorate.situacao %>
   <span class="badge pull-right">
-    <%= @plan.decorate.versao %>
+    <%= "v#{@plan.decorate.versao}" %>
   </span>
   <% if @plan.analise? %>
     <% if can? :aprovar_reprovar, Plan %>
