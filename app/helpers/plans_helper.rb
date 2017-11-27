@@ -72,7 +72,7 @@ module PlansHelper
       if professor.nil?
         Plan.where('plans.active is true').where(analise:false, aprovado:false, reprovado:false)
       else
-        Plan.where('plans.active is true and plans.user_id = ?', professor.id).where(analise:false, aprovado:true, reprovado:false)
+        Plan.where('plans.active is true and plans.user_id = ?', professor.id).where(analise:false, aprovado:false, reprovado:false)
       end
     end
   end
