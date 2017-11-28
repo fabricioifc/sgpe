@@ -9,7 +9,7 @@ class CreatePerfilService
 
     perfils = []
     perfils << [ name: 'DDE', idativo: true ]
-    perfils << [ name: 'CGE', idativo: true ]
+    # perfils << [ name: 'CGE', idativo: true ]
     perfils << [ name: 'NUPE', idativo: true ]
     perfils << [ name: 'Professor', idativo: true ]
 
@@ -33,24 +33,21 @@ class CreatePerfilService
 
     papeis_perfil ||= []
     # Papéis do nupe
+    # manage: ['CourseOffer', 'CourseModality', 'CourseFormat', 'Course', 'Discipline', 'Turma'],
     papeis_perfil << { Perfil.find_or_create_by(name: 'NUPE').id => {
-        manage: ['CourseOffer', 'CourseModality', 'CourseFormat', 'Course', 'Discipline', 'Turma'],
-        read: ['Plan'],
-        aprovar_reprovar: ['Plan']
+        manage: ['Discipline', 'Grid', 'GridDiscipline'],
+        read: ['Plan'], aprovar_reprovar: ['Plan']
       }
     }
     # Papéis do DDE
     papeis_perfil << { Perfil.find_or_create_by(name: 'DDE').id => {
-        manage: ['CourseOffer', 'CourseModality', 'CourseFormat', 'Course', 'Discipline', 'Turma'],
-        read: ['Plan'],
-        aprovar_reprovar: ['Plan']
+        manage: 'all'
       }
     }
     # Papéis do professor
     papeis_perfil << {Perfil.find_or_create_by(name: 'Professor').id => {
       read: ['Plan'], create: ['Plan'], destroy: ['Plan'], update: ['Plan'], novo: ['Plan'], planos_curso: ['Plan'], planos_professor: ['Plan'] }
     }
-
 
     # Salvar os papeis por perfil
     papeis_perfil.each do |p|

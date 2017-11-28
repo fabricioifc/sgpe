@@ -24,8 +24,8 @@ class Role < ApplicationRecord
     'Editar'                      => 'edit',
     'Novo'                        => 'novo',
     'Aprovar planos'              => 'aprovar_reprovar',
-    'Ver planos por curso'        => 'planos_curso',
-    'Ver planos por professor'    => 'planos_professor',
+    'Ver planos curso'        => 'planos_curso',
+    'Ver planos professor'    => 'planos_professor'
 	}
 
   rails_admin do

@@ -46,7 +46,7 @@ $.addSummernote = function(){
         ['insert', ['link']], // no insert buttons
         // ["style", ["style"]],
         // ["color", ["color"]],
-        ["style", ["bold", "italic", "underline", "clear"]],
+        ["style", ["bold", "italic", "clear"]],
         // ["para", ["ul"]],
         // ["height", ["height"]],
         ["help", ["help"]]
