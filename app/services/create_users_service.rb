@@ -1,6 +1,7 @@
 class CreateUsersService
 
   def call
+    senha_padrao = 'ifcfraiburgo'
 
     # Usuários NUPE, CGE, DDE com seus devidos perfis
     users = []
@@ -12,12 +13,15 @@ class CreateUsersService
     users << User.new( name: 'Paulo Roberto Ribeiro Nunes', email: 'paulo.nunes@fraiburgo.ifc.edu.br', perfils: [Perfil.find_by(name: 'NUPE')])
 
     users.each do |u, v|
-      u.username               = u.email.split('@')[0]
-      u.password               = u.username
-      u.password_confirmation  = u.username
-      u.perfils                = u.perfils
-      u.confirm
-      User.create(u) if User.find_by(email: u.email).nil?
+      if User.find_by(email: u.email).nil?
+        # u.username               = u.email.split('@')[0]
+        u.username               = u.name.parameterize.underscore
+        u.password               = senha_padrao
+        u.password_confirmation  = senha_padrao
+        u.perfils                = u.perfils
+        u.confirm
+        u.save!
+      end
     end
 
     # users.each do |u, v|
