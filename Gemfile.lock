@@ -102,6 +102,9 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
+    devise-async (1.0.0)
+      activejob (>= 5.0)
+      devise (>= 4.0)
     devise-i18n (1.4.0)
       devise (>= 3.1)
     domain_name (0.5.20170404)
@@ -405,6 +408,7 @@ DEPENDENCIES
   cloudinary
   cocoon
   devise
+  devise-async
   devise-i18n
   dotenv-rails
   draper (~> 3.0)

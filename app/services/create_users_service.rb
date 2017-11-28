@@ -19,7 +19,7 @@ class CreateUsersService
         u.password               = senha_padrao
         u.password_confirmation  = senha_padrao
         u.perfils                = u.perfils
-        u.confirm
+        # u.confirm
         u.save!
       end
     end
