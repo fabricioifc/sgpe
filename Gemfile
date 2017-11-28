@@ -52,6 +52,7 @@ gem 'kaminari' #paginação
 gem 'record_tag_helper', '~> 1.0' #permite usar content_for_tag
 gem 'draper', '~> 3.0' #padrão decorator
 #Gerador de PDF
+gem 'prawn', '~> 2.2', '>= 2.2.2'
 gem 'prawn-rails', '~> 1.0', '>= 1.0.1'
 gem 'prawn-table', '~> 0.2.2'
 ###############################################################################

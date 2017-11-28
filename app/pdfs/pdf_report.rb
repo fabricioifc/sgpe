@@ -93,7 +93,7 @@ class PdfReport < Prawn::Document
       options = {
         header: true,
         column_widths: @table_widths,
-        cell_style: { border_color: 'cccccc', size: TABLE_FONT_SIZE },
+        cell_style: { border_color: 'cccccc', size: TABLE_FONT_SIZE, inline_format: true },
         width: @table_widths.sum,
         row_colors: TABLE_ROW_COLORS,
       }.merge!(options)
@@ -112,6 +112,7 @@ class PdfReport < Prawn::Document
           # cells_options.each do |k, v|
             # send("cells.#{k}=", v)
           # end
+
           cells.padding = 3
           cells.borders = []
           row(0).font_style = :bold

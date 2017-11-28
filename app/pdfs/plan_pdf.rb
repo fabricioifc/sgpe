@@ -89,7 +89,7 @@ class PlanPdf < PdfReport
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Objetivos Específicos']], [@plano.obj_espe.html_safe]),
+          table_data([['Objetivos Específicos']], [@plano.decorate.obj_espe]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }

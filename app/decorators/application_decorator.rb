@@ -31,9 +31,11 @@ class ApplicationDecorator < Draper::Decorator
     component.class.name.singularize.downcase
   end
 
-  def converter_para_html componente, formato_pdf = false
+  def converter_para_html componente, formato_pdf = true
     if formato_pdf
-      ActionView::Base.full_sanitizer.sanitize(componente) unless componente.nil?
+      componente.gsub(/<p[^>]*>/, '').split("</p>").map { |x| "#{x.strip}\r\n" }.join
+      # ActionView::Base.full_sanitizer.sanitize(componente, :tags => %w(img br p), :attributes => %w(src style)) unless componente.nil?
+      # ActionView::Base.full_sanitizer.sanitize(componente) unless componente.nil?
     else
       componente.html_safe unless componente.nil?
     end
