@@ -33,17 +33,21 @@ class ApplicationDecorator < Draper::Decorator
 
   def converter_para_html componente, pdf = false
     unless componente.nil?
-      whitelist = ['b', 'i', 'u', 'strikethrough', 'sub', 'sup', 'font', 'color', 'link', 'p', 'li', 'ul']
-      ActionController::Base.helpers.sanitize(componente, :tags => whitelist).
-        gsub(/<p[^>]*>/, '').split("</p>").map { |x|
-          "#{x.strip}\r\n"
-        }.join.
-        gsub(/<li[^>]*>/, '•  ').split("</li>").map { |x|
-          "#{x.strip}\r\n"
-        }.join.
-        gsub(/<ul[^>]*>/, '').split(/<\/ul[^>]*>/).map { |x|
-          "#{x.strip}\n\r\n"
-        }.join
+      if pdf
+        whitelist = ['b', 'i', 'u', 'strikethrough', 'sub', 'sup', 'font', 'color', 'link', 'p', 'li', 'ul']
+        ActionController::Base.helpers.sanitize(componente, :tags => whitelist).
+          gsub(/<p[^>]*>/, '').split("</p>").map { |x|
+            "#{x.strip}\r\n"
+          }.join.
+          gsub(/<li[^>]*>/, '•  ').split("</li>").map { |x|
+            "#{x.strip}\r\n"
+          }.join.
+          gsub(/<ul[^>]*>/, '').split(/<\/ul[^>]*>/).map { |x|
+            "#{x.strip}\n\r\n"
+          }.join
+      else
+        ActionController::Base.helpers.sanitize(componente)
+      end
     end
   end
 end
