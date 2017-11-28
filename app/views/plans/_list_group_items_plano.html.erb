@@ -24,27 +24,36 @@
   <span class="badge pull-right">
     <%= "v#{@plan.decorate.versao}" %>
   </span>
+  <hr>
   <% if @plan.analise? %>
     <% if can? :aprovar_reprovar, Plan %>
-      <hr>
       <%= form_for(@plan, url: aprovar_offer_offer_discipline_plan_path, method: :post) do |f| %>
         <div class="form-group">
           <%= f.label :parecer, class: 'control-label' %>
-          <%= f.text_area :parecer, class: 'form-control', rows: 6, autofocus:true %>
+          <%= f.text_area :parecer, class: 'form-control', rows: 10, autofocus:true %>
         </div>
         <div class="btn-group btn-group-justified">
           <% if !@plan.aprovado? %>
             <div class="btn-group" role="group">
-              <%= f.submit 'Aprovar', class: "btn btn-success" %>
+              <%= button_tag type: "submit", class: "btn btn-success" do %>
+                <i class="fa fa-2 fa-check pull-left"></i>
+                Aprovar
+              <% end %>
             </div>
           <% end %>
           <% if !@plan.reprovado? %>
             <div class="btn-group" role="group">
-              <%= f.submit 'Reprovar', class: "btn btn-danger", name: 'commit_reprovar' %>
+              <%= button_tag type: "submit", class: "btn btn-danger", name: 'commit_reprovar' do %>
+                <i class="fa fa-2 fa-window-close pull-left"></i>
+                Reprovar
+              <% end %>
             </div>
           <% end %>
         </div>
       <% end %>
+    <% else %>
+      <%= label_tag :parecer, 'Parecer', class: 'control-label' %>
+      <%= text_area_tag :parecer, @plan.parecer, rows: 10, disabled:true, class: 'form-control'%>
     <% end %>
   <% end %>
 </li>

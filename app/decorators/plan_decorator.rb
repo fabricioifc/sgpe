@@ -7,40 +7,40 @@ class PlanDecorator < ApplicationDecorator
     @component = component
   end
 
-  def obj_espe
-    converter_para_html component.obj_espe
+  def obj_espe pdf = false
+    converter_para_html component.obj_espe, pdf
   end
 
-  def conteudo_prog
-    converter_para_html component.conteudo_prog
+  def conteudo_prog pdf = false
+    converter_para_html component.conteudo_prog, pdf
   end
 
-  def prat_prof
-    converter_para_html component.prat_prof
+  def prat_prof pdf = false
+    converter_para_html component.prat_prof, pdf
   end
 
-  def interdisc
-    converter_para_html component.interdisc
+  def interdisc pdf = false
+    converter_para_html component.interdisc, pdf
   end
 
-  def met_tec
-    converter_para_html component.met_tec
+  def met_tec pdf = false
+    converter_para_html component.met_tec, pdf
   end
 
-  def met_met
-    converter_para_html component.met_met
+  def met_met pdf = false
+    converter_para_html component.met_met, pdf
   end
 
-  def avaliacao
-    converter_para_html component.avaliacao
+  def avaliacao pdf = false
+    converter_para_html component.avaliacao, pdf
   end
 
-  def cronograma
-    converter_para_html component.cronograma
+  def cronograma pdf = false
+    converter_para_html component.cronograma, pdf
   end
 
-  def atendimento
-    converter_para_html component.atendimento
+  def atendimento pdf = false
+    converter_para_html component.atendimento, pdf
   end
 
   def versao

@@ -77,73 +77,73 @@ class PlanPdf < PdfReport
         end
 
         display_event_table(
-          table_data([['Ementa']], [@plano.offer_discipline.grid_discipline.decorate.ementa]),
+          table_data([['Ementa']], [@plano.offer_discipline.grid_discipline.decorate.ementa(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Objetivo Geral']], [@plano.offer_discipline.grid_discipline.decorate.objetivo_geral]),
+          table_data([['Objetivo Geral']], [@plano.offer_discipline.grid_discipline.decorate.objetivo_geral(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Objetivos Específicos']], [@plano.decorate.obj_espe]),
+          table_data([['Objetivos Específicos']], [@plano.decorate.obj_espe(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Conteúdo programático']], [@plano.decorate.conteudo_prog]),
+          table_data([['Conteúdo programático']], [@plano.decorate.conteudo_prog(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Práticas profissionais']], [@plano.decorate.prat_prof]),
+          table_data([['Práticas profissionais']], [@plano.decorate.prat_prof(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Interdisciplinariedade']], [@plano.decorate.interdisc]),
+          table_data([['Interdisciplinariedade']], [@plano.decorate.interdisc(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Metodologia Técnica']], [@plano.decorate.met_tec]),
+          table_data([['Metodologia Técnica']], [@plano.decorate.met_tec(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Recursos metodológicos']], [@plano.decorate.met_met]),
+          table_data([['Recursos metodológicos']], [@plano.decorate.met_met(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Sistema de avaliação e recuperação']], [@plano.decorate.avaliacao]),
+          table_data([['Sistema de avaliação e recuperação']], [@plano.decorate.avaliacao(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Cronograma de atividades']], [@plano.decorate.cronograma]),
+          table_data([['Cronograma de atividades']], [@plano.decorate.cronograma(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Bibliografia Básica']], [@plano.offer_discipline.grid_discipline.decorate.bib_geral]),
+          table_data([['Bibliografia Básica']], [@plano.offer_discipline.grid_discipline.decorate.bib_geral(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Bibliografia Complementar']], [@plano.offer_discipline.grid_discipline.decorate.bib_espec]),
+          table_data([['Bibliografia Complementar']], [@plano.offer_discipline.grid_discipline.decorate.bib_espec(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }

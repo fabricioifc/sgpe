@@ -48,7 +48,7 @@
           </div>
 
           <div id="avaliacao" class="tab-pane fade in">
-            <%= f.text_area :avaliacao, id: :plan_avaliacao, rows: 15, data: {provider: 'summernote'} %>
+            <%= f.text_area :avaliacao, id: :plan_avaliacao, data: {provider: 'summernote'}, rows: 15 %>
           </div>
 
           <div id="outros" class="tab-pane fade in">
@@ -73,7 +73,10 @@
   <div class="row">
     <div class="col-md-12">
       <%= f.submit class: "btn btn-primary" %>
-      <%= f.submit 'Salvar e enviar', class: "btn btn-success", name: 'commit_analise' %>
+      <%= button_tag type: "submit", class: "btn btn-success", name: 'commit_analise' do %>
+        <i class="fa fa-2 fa-check pull-left"></i>
+        Salvar e enviar para análise
+      <% end %>
     </div>
   </div>
 

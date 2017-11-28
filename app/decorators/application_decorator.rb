@@ -31,17 +31,19 @@ class ApplicationDecorator < Draper::Decorator
     component.class.name.singularize.downcase
   end
 
-  def converter_para_html componente, formato_pdf = true
-    if formato_pdf
-      componente.gsub(/<p[^>]*>/, '').split("</p>").map { |x| "#{x.strip}\r\n" }.join
-      # ActionView::Base.full_sanitizer.sanitize(componente, :tags => %w(img br p), :attributes => %w(src style)) unless componente.nil?
-      # ActionView::Base.full_sanitizer.sanitize(componente) unless componente.nil?
-    else
-      componente.html_safe unless componente.nil?
+  def converter_para_html componente, pdf = false
+    unless componente.nil?
+      whitelist = ['b', 'i', 'u', 'strikethrough', 'sub', 'sup', 'font', 'color', 'link', 'p', 'li', 'ul']
+      ActionController::Base.helpers.sanitize(componente, :tags => whitelist).
+        gsub(/<p[^>]*>/, '').split("</p>").map { |x|
+          "#{x.strip}\r\n"
+        }.join.
+        gsub(/<li[^>]*>/, '•  ').split("</li>").map { |x|
+          "#{x.strip}\r\n"
+        }.join.
+        gsub(/<ul[^>]*>/, '').split(/<\/ul[^>]*>/).map { |x|
+          "#{x.strip}\n\r\n"
+        }.join
     end
   end
-
-  # links << link_to("<i class='fa fa-pencil-square-o fa-2'></i>".html_safe, edit_test_path(test))
-  # links << link_to("<i class='fa fa-trash-o fa-2'></i>".html_safe, test, method: :delete, data: { confirm: 'Tem certeza?' })
-  # links << link_to("<i class='fa fa-file-pdf-o fa-2'></i>".html_safe, "tests/#{test.id}.pdf", method: :get, target: '_blank')
 end
