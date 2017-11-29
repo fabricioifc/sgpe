@@ -61,8 +61,7 @@ private
       joins(:user).
       where('plans.active is true').
       where('analise is true OR aprovado is true OR reprovado is true').
-      order(user_parecer_id: :desc).
-      # where(analise:true, aprovado:false, reprovado:false).
+      order(analise: :desc, reprovado: :asc, aprovado: :asc).
       order("#{sort_column} #{sort_direction}")
     planos = planos.page(page).per(per_page)
     planos = planos.where(search_string.join(' or '), search: "%#{params[:search][:value]}%")
@@ -70,6 +69,6 @@ private
 
   # The columns needs to be the same list of searchable items and IN ORDER that they will appear in Data.
   def columns
-    %w(users.name disciplines.sigla disciplines.title offers.year analise aprovado reprovado)
+    %w(grids.year courses.name users.name disciplines.sigla disciplines.title offers.year)
   end
 end

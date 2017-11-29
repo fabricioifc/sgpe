@@ -50,8 +50,8 @@ class PlansController < ApplicationController
     if is_professor?
       @source = Plan.find(params[:id])
       @plan = @source.dup
-      @plan.versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
-      params[:versao] = @plan.versao
+      # @plan.versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
+      # params[:versao] = @plan.versao
 
       @curso = @plan.offer_discipline.grid_discipline.grid.course
       adicionar_breadcrumb_curso @curso
@@ -127,8 +127,8 @@ class PlansController < ApplicationController
   # GET /plans/new
   def new
     @plan = Plan.new(offer_discipline_id: params[:offer_discipline_id])
-    @plan.versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
-    params[:versao] = @plan.versao
+    # @plan.versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
+    # params[:versao] = @plan.versao
 
     @curso = @plan.offer_discipline.grid_discipline.grid.course
     adicionar_breadcrumb_curso @curso
@@ -149,9 +149,8 @@ class PlansController < ApplicationController
     @plan.offer_discipline_id = params[:offer_discipline_id]
     @plan.user = current_user
     @plan.active = true
-    if @plan.valid?
-      @plan.versao = @plan.versao.nil? ? 1 : @plan.versao + 1
-    end
+    ultima_versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
+    @plan.versao = ultima_versao.nil? ? 1 : ultima_versao + 1
 
     adicionar_breadcrumb_curso @plan.offer_discipline.grid_discipline.grid.course
     adicionar_breadcrumb_planos @plan
