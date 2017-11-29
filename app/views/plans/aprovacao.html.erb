@@ -1,3 +1,27 @@
+  <!-- <= form_for get_planos_aprovar_path, method: :get, html: {class: ''} do |f| %>
+    <span class="badge">
+      <= f.check_box :analise,
+            id: :analise, class: 'form-check-input' %>
+      <= label_tag :analise, 'Planos em análise' %>
+    </span>
+
+    <span class="badge">
+      <= f.check_box :aprovado,
+            id: :aprovado, class: 'form-check-input' %>
+      <= label_tag :aprovado, 'Planos aprovados' %>
+    </span>
+
+    <span class="badge">
+      <= f.check_box :reprovado,
+            id: :reprovado, class: 'form-check-input' %>
+      <= label_tag :reprovado, 'Planos reprovados' %>
+    </span>
+
+  <= submit_tag 'Pesquisar', class: 'btn btn-sm btn-primary' %>
+< end %>
+
+<hr> -->
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Aprovar/Reprovar planos</h3>

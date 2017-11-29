@@ -9,4 +9,13 @@ module OffersHelper
     end
   end
 
+  def ofertas_sem_plano_por_professor
+    if is_professor?
+      current_user.offer_disciplines.
+        joins(offer: { grid: :course }).
+        left_joins(:plans).
+        where('offer_disciplines.active is true and plans.id is null')
+    end
+  end
+
 end

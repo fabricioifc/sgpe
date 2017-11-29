@@ -10,6 +10,6 @@ class VisitorsController < ApplicationController
     #
     #   @cursos = Course.where(id: curso_ids)
     # end
-  
+
   end
 end

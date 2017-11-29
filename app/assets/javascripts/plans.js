@@ -38,10 +38,11 @@ document.addEventListener("turbolinks:load", function(e) {
       "language": {
           "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json"
       },
+      // order: [[ 6, "asc" ]],
 
       columns: [
         {
-          width: "15%",
+          width: "33%",
           className: "",
           searchable: true,
           orderable: true
@@ -53,32 +54,32 @@ document.addEventListener("turbolinks:load", function(e) {
           orderable: true
         },
         {
-          width: "15%",
+          width: "7%",
           className: "",
           searchable: true,
           orderable: true
         },
         {
-          width: "15%",
+          width: "20%",
           className: "",
           searchable: true,
           orderable: true
         },
         {
-          width: "15%",
-          className: "",
-          searchable: true,
-          orderable: true
-        },
-        {
-          width: "15%",
-          className: "",
+          width: "5%",
+          className: "text-center",
           searchable: true,
           orderable: true
         },
         {
           width: "10%",
-          className: "",
+          className: "text-center",
+          searchable: true,
+          orderable: true
+        },
+        {
+          width: "10%",
+          className: "text-center",
           searchable: true,
           orderable: true
         },

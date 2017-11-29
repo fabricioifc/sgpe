@@ -12,6 +12,7 @@ class PlansController < ApplicationController
   before_action :pode_excluir?, only: [:destroy]
 
   before_action :checar_professor_plano, except: [:show, :get_planos_aprovar, :aprovar]
+  # before_action :get_planos_aprovar_search, only: [:get_planos_aprovar]
 
   def get_planos_aprovar
     if user_signed_in?
@@ -25,13 +26,14 @@ class PlansController < ApplicationController
     end
   end
 
+  # aprovar ou reprovar o plano de ensino
   def aprovar
     aprovado = params[:commit_reprovar].nil?
     reprovado = !params[:commit_reprovar].nil?
 
     respond_to do |format|
       ActiveRecord::Base.transaction do
-        if @plan.update(aprovado:aprovado, reprovado:reprovado, parecer: plan_params[:parecer])
+        if @plan.update(aprovado:aprovado, reprovado:reprovado, parecer: plan_params[:parecer], user_parecer: current_user)
           flash[:notice] = "Plano #{aprovado == true ? 'aprovado' : 'reprovado'} com sucesso."
           # format.html { redirect_to aprovar_offer_offer_discipline_plan_path(@plan) }
           format.html { redirect_to get_planos_aprovar_path }
@@ -209,7 +211,7 @@ class PlansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plan_params
-      params.require(:plan).permit(:offer_discipline_id, :obj_espe, :conteudo_prog, :prat_prof, :interdisc, :met_tec, :met_met, :avaliacao, :cronograma, :atendimento, :versao, :active, :user_id, :analise, :aprovado, :reprovado, :parecer)
+      params.require(:plan).permit(:offer_discipline_id, :obj_espe, :conteudo_prog, :prat_prof, :interdisc, :met_tec, :met_met, :avaliacao, :cronograma, :atendimento, :versao, :active, :user_id, :analise, :aprovado, :reprovado, :parecer, :user_parecer_id)
     end
 
     def load_professores
@@ -258,5 +260,9 @@ class PlansController < ApplicationController
         raise CanCan::AccessDenied if @offer_discipline.user != current_user
       end
     end
+
+    # def get_planos_aprovar_search
+    #   @plan_search = PlanSearch.new(analise:true) if params[:plan_search].nil?
+    # end
 
 end

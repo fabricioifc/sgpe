@@ -1,6 +1,10 @@
 class AprovarPlanosDatatable < ApplicationDatatable
   delegate :offer_offer_discipline_plan_path, to: :@view
 
+  def initialize(view)
+    @view = view
+  end
+
 private
 
   def data
@@ -56,7 +60,9 @@ private
       joins(offer_discipline: {grid_discipline: :discipline }).
       joins(:user).
       where('plans.active is true').
-      where(analise:true, aprovado:false, reprovado:false).
+      where('analise is true OR aprovado is true OR reprovado is true').
+      order(user_parecer_id: :desc).
+      # where(analise:true, aprovado:false, reprovado:false).
       order("#{sort_column} #{sort_direction}")
     planos = planos.page(page).per(per_page)
     planos = planos.where(search_string.join(' or '), search: "%#{params[:search][:value]}%")
@@ -64,6 +70,6 @@ private
 
   # The columns needs to be the same list of searchable items and IN ORDER that they will appear in Data.
   def columns
-    %w(users.name disciplines.sigla)
+    %w(users.name disciplines.sigla disciplines.title offers.year analise aprovado reprovado)
   end
 end
