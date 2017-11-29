@@ -18,9 +18,15 @@ class User < ApplicationRecord
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :async, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :authentication_keys => [:login]
+  if Rails.env.production?
+    devise :database_authenticatable, :async, :registerable, :confirmable,
+           :recoverable, :rememberable, :trackable, :validatable,
+           :authentication_keys => [:login]
+   else
+     devise :database_authenticatable, :registerable, :confirmable,
+            :recoverable, :rememberable, :trackable, :validatable,
+            :authentication_keys => [:login]
+   end
 
   # mount_uploader :avatar, PictureUploader
   mount_uploader :avatar, AvatarUploader
