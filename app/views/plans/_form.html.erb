@@ -24,15 +24,20 @@
           <div id="ementa" class="tab-pane fade in active">
             <!-- <= f.select :turma_id, Turma.all.collect { |c| ["#{c.year} - #{c.name}", c.id] }, id: :plan_turma, prompt:true %> -->
             <div class="form-group">
-              <%= label_tag :ementa, nil, class: 'control-label' %>
-              <%= text_area_tag :ementa, plan.offer_discipline.grid_discipline.decorate.ementa, id: :plan_ementa, class: 'form-control', readonly:true, rows: 10 %>
+              <fieldset>
+                <p class="header"><%= label_tag :ementa, nil, class: 'control-label' %></p>
+                <%= plan.offer_discipline.grid_discipline.ementa.html_safe %>
+              </fieldset>
+              <!-- <= text_area_tag :ementa, plan.offer_discipline.grid_discipline.ementa.html_safe, id: :plan_ementa, class: 'form-control', readonly:true, rows: 10%> -->
             </div>
           </div>
 
           <div id="objetivos" class="tab-pane fade in">
             <div class="form-group">
-              <%= label_tag :objetivo_geral, nil, class: 'control-label' %>
-              <%= text_area_tag :objetivo_geral, plan.offer_discipline.grid_discipline.decorate.objetivo_geral, id: :plan_objetivo_geral, class: 'form-control', readonly:true, rows: 5 %>
+              <fieldset>
+                <p class="header"><%= label_tag :objetivo_geral, nil, class: 'control-label' %></p>
+                <%= plan.offer_discipline.grid_discipline.objetivo_geral.html_safe %>
+              </fieldset>
             </div>
             <%= f.text_area :obj_espe, id: :plan_obj_espe, rows: 6, data: {provider: 'summernote'} %>
           </div>

@@ -47,6 +47,7 @@ class ApplicationDecorator < Draper::Decorator
           }.join
       else
         ActionController::Base.helpers.sanitize(componente)
+        # Nokogiri::HTML(componente).search('//text()').map(&:text).join
       end
     end
   end

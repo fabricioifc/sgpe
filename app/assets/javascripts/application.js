@@ -43,7 +43,7 @@ $.addSummernote = function(){
       lang: 'pt-BR',
       height: 200,
       toolbar: [
-        ['insert', ['link']], // no insert buttons
+        // ['insert', ['link']], // no insert buttons
         // ["style", ["style"]],
         // ["color", ["color"]],
         ["style", ["bold", "italic", "clear"]],
