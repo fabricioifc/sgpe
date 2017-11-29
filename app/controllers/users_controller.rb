@@ -2,8 +2,6 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_only, :except => :show
 
-  add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :users_path
-
   responders :flash
 
   def index
@@ -29,7 +27,6 @@ class UsersController < ApplicationController
   end
 
   def update_perfils
-    binding.pry
   end
 
   def show
@@ -62,6 +59,8 @@ class UsersController < ApplicationController
   def admin_only
     unless current_user.admin?
       redirect_to root_path, :alert => "Acesso negado. Você não tem permissão para acessar este recurso."
+    else
+      add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :users_path
     end
   end
 

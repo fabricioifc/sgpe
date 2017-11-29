@@ -11,33 +11,52 @@
       <div class="col-md-8">
 
           <% if @user.name %>
-            <p>
+            <p class="row">
               <strong class="col-md-2"><%= model_class.human_attribute_name(:name) %>: </strong>
-              <span><%= @user.name %></span>
+              <span class="col-md-10">
+                <span><%= @user.name %></span>
+              </span>
             </p>
           <% end %>
 
           <% if @user.username %>
-            <p>
+            <p class="row">
               <strong class="col-md-2"><%= model_class.human_attribute_name(:username) %>: </strong>
-              <span><%= @user.username %></span>
+              <span class="col-md-10">
+                <span><%= @user.username %></span>
+              </span>
             </p>
           <% end %>
 
           <% if @user.name %>
-            <p>
+            <p class="row">
               <strong class="col-md-2"><%= model_class.human_attribute_name(:email) %>: </strong>
-              <span><%= mail_to @user.email %></span>
+              <span class="col-md-10">
+                <span><%= mail_to @user.email %></span>
+              </span>
             </p>
           <% end %>
 
-          <% if @user.bio %>
-            <strong class="col-md-2"><%= model_class.human_attribute_name(:bio) %>: </strong>
-            <div style="max-height: 150px; overflow-y: auto; padding: 5px;" class="border border-primary">
-              <% 10.times do %>
-                <%= @user.bio.html_safe %>
-              <% end %>
-            </div>
+          <% unless @user.bio.empty? %>
+            <p class="row">
+              <strong class="col-md-2"><%= model_class.human_attribute_name(:bio) %>: </strong>
+              <span class="col-md-10">
+                <div style="max-height: 150px; overflow-y: auto; padding: 5px;" class="border border-primary">
+                  <%= @user.bio.html_safe %>
+                </div>
+              </span>
+            </p>
+          <% end %>
+
+          <% unless current_user.perfils.nil? %>
+            <p class="row">
+              <strong class="col-md-2"><%= model_class.human_attribute_name(:perfis) %>: </strong>
+              <span class="col-md-10">
+                <% current_user.perfils.each do |perfil| %>
+                  <span class="badge"><%= perfil.name %></span>
+                <% end %>
+              </span>
+            </p>
           <% end %>
 
       </div>
