@@ -7,7 +7,7 @@
   padding: 8px 8px 0px 10px !important;
 }
 
-fieldset {
+div.html_safe_div {
   border: 1px solid #ccc;
   height: 250px;
   max-height: 250px;
@@ -15,7 +15,7 @@ fieldset {
   padding: 5px;
 }
 
-fieldset > p.header {
+div.html_safe_div > p.header {
   background-color: #eaeef0;
   color: #333;
   padding-left: 5px;

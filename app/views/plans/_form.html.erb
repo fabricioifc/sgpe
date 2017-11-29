@@ -15,6 +15,7 @@
           <li><a href="#metodologias" data-toggle="tab">Metodologias</a></li>
           <li><a href="#avaliacao" data-toggle="tab">Avaliação</a></li>
           <li><a href="#outros" data-toggle="tab">Outros</a></li>
+          <li><a href="#bibliografias" data-toggle="tab">Bibliografias</a></li>
         </ul>
       </div>
 
@@ -24,20 +25,20 @@
           <div id="ementa" class="tab-pane fade in active">
             <!-- <= f.select :turma_id, Turma.all.collect { |c| ["#{c.year} - #{c.name}", c.id] }, id: :plan_turma, prompt:true %> -->
             <div class="form-group">
-              <fieldset>
+              <div class="html_safe_div">
                 <p class="header"><%= label_tag :ementa, nil, class: 'control-label' %></p>
                 <%= plan.offer_discipline.grid_discipline.ementa.html_safe %>
-              </fieldset>
+              </div>
               <!-- <= text_area_tag :ementa, plan.offer_discipline.grid_discipline.ementa.html_safe, id: :plan_ementa, class: 'form-control', readonly:true, rows: 10%> -->
             </div>
           </div>
 
           <div id="objetivos" class="tab-pane fade in">
             <div class="form-group">
-              <fieldset>
+              <div class="html_safe_div">
                 <p class="header"><%= label_tag :objetivo_geral, nil, class: 'control-label' %></p>
                 <%= plan.offer_discipline.grid_discipline.objetivo_geral.html_safe %>
-              </fieldset>
+              </div>
             </div>
             <%= f.text_area :obj_espe, id: :plan_obj_espe, rows: 6, data: {provider: 'summernote'} %>
           </div>
@@ -60,6 +61,22 @@
             <%= f.text_area :interdisc, id: :plan_interdisc, rows: 4, data: {provider: 'summernote'} %>
             <%= f.text_area :cronograma, id: :plan_cronograma, rows: 5, data: {provider: 'summernote'} %>
             <%= f.text_area :atendimento, id: :plan_atendimento, rows: 1 %>
+          </div>
+
+          <div id="bibliografias" class="tab-pane fade in">
+            <!-- <= f.select :turma_id, Turma.all.collect { |c| ["#{c.year} - #{c.name}", c.id] }, id: :plan_turma, prompt:true %> -->
+            <div class="form-group">
+              <div class="html_safe_div">
+                <p class="header"><%= label_tag :bib_geral, nil, class: 'control-label' %></p>
+                <%= plan.offer_discipline.grid_discipline.bib_geral.html_safe %>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="html_safe_div">
+                <p class="header"><%= label_tag :bib_espec, nil, class: 'control-label' %></p>
+                <%= plan.offer_discipline.grid_discipline.bib_espec.html_safe %>
+              </div>
+            </div>
           </div>
 
         </div>

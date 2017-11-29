@@ -11,8 +11,8 @@ class GridDisciplineDecorator < ApplicationDecorator
   end
 
   def ementa pdf = false
-    # converter_para_html component.ementa, pdf
-    ActionView::Base.full_sanitizer.sanitize(component.ementa.html_safe) unless component.ementa.nil?
+    converter_para_html component.ementa, pdf
+    # ActionView::Base.full_sanitizer.sanitize(component.ementa.html_safe) unless component.ementa.nil?
   end
 
   def objetivo_geral pdf = false

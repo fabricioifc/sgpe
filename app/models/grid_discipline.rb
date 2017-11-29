@@ -5,9 +5,11 @@ class GridDiscipline < ApplicationRecord
 
   # accepts_nested_attributes_for :grid
 
-  validates :ementa, :objetivo_geral, :bib_geral, :bib_espec, :discipline_id, :carga_horaria, presence:true
+  validates :discipline_id, :carga_horaria, presence:true
   validates :year, presence: { if: -> { semestre.blank? } }
   validates :semestre, presence: { if: -> { year.blank? } }
+
+  validates :ementa, :objetivo_geral, :bib_geral, :bib_espec, html: { presence: true }
 
   def decorate
     @decorate ||= GridDisciplineDecorator.new self
