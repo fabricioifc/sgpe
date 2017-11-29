@@ -56,12 +56,12 @@ pt-BR:
         submit: Reiniciar minha senha
         signup: Registrar
         forgot: Esqueceu sua Senha?
-      no_token:
+      no_token: Você só pode acessra esta página através de um e-mail de redefinição de senha.
 #      send_instructions: Instruções enviadas para %{recipient}
-      send_instructions: Instruções enviadas
-      send_paranoid_instructions:
-      updated:
-      updated_not_active:
+      send_instructions: Dentro de alguns minutos irá receber um email com instruções de reinicialização da palavra-passe.
+      send_paranoid_instructions: Se a sua conta existir, irá receber dentro de alguns minutos um email com instruções para a desbloquear.
+      updated: A sua senha foi alterada com sucesso.
+      updated_not_active: A sua senha foi alterada com sucesso mas você ainda não está ativo no sistema.
     registrations:
       destroyed: Tchau! Sua conta foi cancelada com sucesso. Esperamos vê-lo novamente em breve.
       signed_up: Login efetuado com sucesso. Se não foi autorizado, a confirmação será enviada por e-mail.
