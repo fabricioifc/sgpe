@@ -115,3 +115,5 @@ gem 'summernote-rails'
 gem 'page_title_helper'
 gem 'amoeba' # para duplicar registros e seus filhos
 gem "breadcrumbs_on_rails" # breadcrumb
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'

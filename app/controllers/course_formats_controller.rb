@@ -20,6 +20,12 @@ class CourseFormatsController < ApplicationController
   # GET /course_formats/1
   # GET /course_formats/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "formatos_de_curso", header: { right: '[page] / [topage]' }
+      end
+    end
   end
 
   # GET /course_formats/new
