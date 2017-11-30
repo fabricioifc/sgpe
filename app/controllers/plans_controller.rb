@@ -13,6 +13,101 @@ class PlansController < ApplicationController
 
   before_action :checar_professor_plano, except: [:show, :get_planos_aprovar, :aprovar]
   # before_action :get_planos_aprovar_search, only: [:get_planos_aprovar]
+  before_action :set_public_index
+
+  def public_index
+    # Cursos com algum plano aprovado
+    @cursos = Course.joins(grids: {grid_disciplines: {offer_disciplines: :plans}}).where('plans.active is true').where('plans.aprovado is true')
+
+    respond_to do |format|
+      format.html { render 'plans/public/index' }
+      format.json
+    end
+  end
+
+  def public_index_course
+    unless params[:course_id].nil?
+
+      respond_to do |format|
+        format.html { redirect_to public_disciplinas_path(params[:course_id]) }
+      end
+    end
+  end
+
+  def public_disciplinas
+    unless params[:course_id].nil?
+      @discipline = Discipline.new
+      # Disciplinas por curso com plano aprovado
+      @disciplinas = Discipline.joins(grid_disciplines: { offer_disciplines: :plans}).
+        joins(grid_disciplines: {grid: :course}).
+        where('plans.aprovado is true').
+        where('plans.active is true').
+        where('courses.id = ?', params[:course_id])
+      respond_to do |format|
+        format.html { render 'plans/public/disciplinas' }
+        format.json
+      end
+
+    end
+  end
+
+  def public_disciplina_planos
+    unless params[:discipline_id].nil? && params[:course_id].nil?
+      respond_to do |format|
+        format.html { redirect_to public_curso_disciplina_planos_path(params[:course_id], params[:discipline_id]) }
+      end
+
+    end
+  end
+
+  def public_curso_disciplina_planos
+    unless params[:discipline_id].nil? && params[:course_id].nil?
+      @discipline = Discipline.find(params[:discipline_id])
+      @course = Course.find(params[:course_id])
+      # Disciplinas por curso com plano aprovado
+      @planos = Plan.joins(offer_discipline: { grid_discipline: :discipline}).
+        joins(offer_discipline: { grid_discipline: {grid: :course} }).
+        where('plans.aprovado is true').
+        where('plans.active is true').
+        where('disciplines.id = ?', params[:discipline_id]).
+        where('courses.id = ?', params[:course_id])
+      respond_to do |format|
+        format.html { render 'plans/public/planos' }
+        format.json
+      end
+
+    end
+  end
+
+  def publico_index
+    # Cursos com algum plano aprovado
+    @cursos = Course.joins(grids: {grid_disciplines: {offer_disciplines: :plans}}).where('plans.active is true').where('plans.aprovado is true')
+
+    respond_to do |format|
+      format.html { render 'plans/publico/index' }
+      format.json
+    end
+  end
+
+  def publico_index_planos
+    if !params[:course_id].nil? && !params[:course_id].blank?
+      @course = Course.find(params[:course_id])
+      # Disciplinas por curso com plano aprovado
+      @planos = Plan.joins(offer_discipline: { grid_discipline: :discipline}).
+        joins(offer_discipline: { grid_discipline: {grid: :course} }).
+        where('plans.aprovado is true').
+        where('plans.active is true').
+        where('courses.id = ?', params[:course_id])
+    end
+
+    @cursos = Course.joins(grids: {grid_disciplines: {offer_disciplines: :plans}}).where('plans.active is true').where('plans.aprovado is true')
+
+    respond_to do |format|
+      format.html { render 'plans/publico/planos' }
+      # format.html { redirect_to publico_index_planos_path }
+      format.json
+    end
+  end
 
   def get_planos_aprovar
     if user_signed_in?
@@ -263,5 +358,9 @@ class PlansController < ApplicationController
     # def get_planos_aprovar_search
     #   @plan_search = PlanSearch.new(analise:true) if params[:plan_search].nil?
     # end
+
+    def set_public_index
+      @curso = Course.last
+    end
 
 end

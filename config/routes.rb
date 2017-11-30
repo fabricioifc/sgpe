@@ -23,6 +23,19 @@ Rails.application.routes.draw do
   get 'aprovacao', to: 'plans#get_planos_aprovar', as: 'get_planos_aprovar'
   # put 'aprovacao/:plan', to: 'plans#aprovar', as: 'aprovar_plano'
 
+  # Área pública para planos
+  get 'plans/public/index', to: 'plans#public_index', as: 'public_index'
+  post 'plans/public/index', to: 'plans#public_index_course', as: 'public_index_course'
+
+  get 'plans/public/:course_id/disciplinas', to: 'plans#public_disciplinas', as: 'public_disciplinas'
+  post 'plans/public/:course_id/disciplinas', to: 'plans#public_disciplina_planos', as: 'public_disciplina_planos'
+
+  get 'plans/public/:course_id/:discipline_id/planos', to: 'plans#public_curso_disciplina_planos', as: 'public_curso_disciplina_planos'
+  # post 'plans/public/:course_id/:discipline_id/planos', to: 'plans#public_curso_disciplina_planos', as: 'public_curso_disciplina_planos'
+
+  get 'plans/publico/index', to: 'plans#publico_index', as: 'publico_index'
+  post 'plans/publico/index', to: 'plans#publico_index_planos', as: 'publico_index_planos'
+
   resources :grid_disciplines
   resources :grids, except: [:destroy] do
     member do

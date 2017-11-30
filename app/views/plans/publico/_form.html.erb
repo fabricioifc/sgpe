@@ -1,0 +1,12 @@
+<%= form_for publico_index_planos_path, html: { class: 'form-inline'} do %>
+  <div class="form-group">
+    <!-- <= label_tag :course_id, nil %> -->
+    <%= select_tag :course_id, options_from_collection_for_select(@cursos, :id, :name, params[:course_id]),
+        include_blank: "Selecione um curso", class: 'form-control',
+        :onchange => 'this.form.submit()' %>
+  </div>
+  <!-- <div class="form-group">
+    <= submit_tag 'Procurar', class: 'btn btn-primary' %>
+  </div> -->
+
+<% end %>
