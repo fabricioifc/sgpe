@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   resources :offers do
     collection do
@@ -45,5 +47,11 @@ Rails.application.routes.draw do
     collection do
       put 'update_perfils'
     end
+  end
+
+
+  # Interface para acessar as tarefas em background através do sidekiq
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
   end
 end

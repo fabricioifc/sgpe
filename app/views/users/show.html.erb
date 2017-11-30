@@ -37,7 +37,7 @@
             </p>
           <% end %>
 
-          <% unless @user.bio.empty? %>
+          <% unless @user.bio.nil? && @user.bio.blank? %>
             <p class="row">
               <strong class="col-md-2"><%= model_class.human_attribute_name(:bio) %>: </strong>
               <span class="col-md-10">
@@ -48,11 +48,11 @@
             </p>
           <% end %>
 
-          <% unless current_user.perfils.nil? %>
+          <% unless @user.perfils.empty? %>
             <p class="row">
               <strong class="col-md-2"><%= model_class.human_attribute_name(:perfis) %>: </strong>
               <span class="col-md-10">
-                <% current_user.perfils.each do |perfil| %>
+                <% @user.perfils.each do |perfil| %>
                   <span class="badge"><%= perfil.name %></span>
                 <% end %>
               </span>
@@ -69,18 +69,13 @@
   </div>
   <% if current_user.try(:admin) %>
     <div class="panel-footer">
-
-      <%= form_for(@user)  do |f| %>
-
-        <p>Perfis</p>
-        <div class="input-group">
-          <%= f.select(:perfil_ids, Perfil.all.collect {|a| [a.name, a.id]}, {},
-            class: "select2 form-control", :multiple => true) %>
-          <div class="input-group-btn">
-            <%= f.submit :class => 'btn btn-primary btn-sm' %>
-          </div>
-        </div>
-      <% end %>
+      <p>Perfis</p>
+      <%= render 'user_perfis', user: @user %>
     </div>
+
   <% end %>
 </div>
+
+<% if current_user.try(:admin) %>
+  <p><%= link_to t('helpers.links.back'), users_path %></p>
+<% end %>

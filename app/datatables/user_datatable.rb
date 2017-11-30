@@ -1,5 +1,5 @@
 class UserDatatable < ApplicationDatatable
-  delegate :edit_user_path, :form_for, to: :@view
+  delegate :edit_user_registration_path, :form_for, to: :@view
 
   def initialize(view, current_user, update_perfils_users_path)
     @view = view
@@ -15,18 +15,19 @@ class UserDatatable < ApplicationDatatable
       [].tap do |column|
 
         column << user.name
+        column << user.username
         column << user.email
-        column << @view.render('users/user_perfis.html.erb', user: user)
+        # column << @view.render('users/user_perfis.html.erb', user: user)
 
-        if user == @current_user
-          column << ''
-        else
-          column << link_to("<i class='fa fa-trash-o fa-2 text-danger'></i>".html_safe, user, :data => { :confirm => "Tem certeza?" }, :method => :delete, :class => '')
-        end
+        # if user == @current_user
+        #   column << ''
+        # else
+        #   column << link_to("<i class='fa fa-trash-o fa-2 text-danger'></i>".html_safe, user, :data => { :confirm => "Tem certeza?" }, :method => :delete, :class => '')
+        # end
 
         # links = []
-        # column << link_to("<i class='fa fa-list fa-2 text-info'></i>".html_safe, user)
-        # column << link_to("<i class='fa fa-pencil-square-o fa-2 text-warning'></i>".html_safe, edit_user_path(user))
+        column << link_to("<i class='fa fa-list fa-2 text-info'></i>".html_safe, user)
+        # column << link_to("<i class='fa fa-pencil-square-o fa-2 text-warning'></i>".html_safe, edit_user_registration_path(user))
         # column << link_to("<i class='fa fa-trash-o fa-2 text-danger'></i>".html_safe, user, method: :delete, data: { confirm: 'Tem certeza?' })
         # column << links.join(" <span style='padding-right: 5px;'></span> ")
       end

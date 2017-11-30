@@ -42,7 +42,11 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(secure_params)
-      redirect_to users_path, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human)
+      if current_user.try(:admin?)
+        redirect_to user_path(@user), notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human)
+      else
+        redirect_to users_path, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human)
+      end
     else
       redirect_to users_path, :alert => "Não foi possível atualizar o usuário."
     end

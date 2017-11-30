@@ -4,18 +4,8 @@ class User < ApplicationRecord
   has_many :offer_disciplines
   has_many :plans, :class_name => 'Plan'
   has_many :plans_parecer, :class_name => 'Plan', :foreign_key => 'user_parecer_id'
-  # enum role: [:user, :vip, :admin]
-  # after_initialize :set_default_role, :if => :new_record?
-  #
-  # def set_default_role
-  #   self.role ||= :user
-  # end
 
-  # after_create :assign_default_role
-  #
-  # def assign_default_role
-  #   self.add_role(:usuario) if self.roles.blank?
-  # end
+  # before_create :set_default_role
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -36,11 +26,14 @@ class User < ApplicationRecord
   attr_accessor :login
 
   validates :name, presence:true, length: 5..150
-  validates :username, presence:true, length: 5..100, uniqueness:true#, on: :create
-  # Permitir apenas numetros, letras, underline e ponto. Não permitir apenas números
-  validates_format_of :username, with: /^(?![0-9]*$)[a-zA-Z0-9_.]+$/, :multiline => true#, on: :create
+  # validates :username, presence:true, length: 5..100, uniqueness:true#, on: :create
+  validates :username, length: 5..100, unless: Proc.new { |a| a.username.blank? }
+  validates :username, uniqueness:true, unless: Proc.new { |a| a.username.blank? }
 
-  protected
+  # Permitir apenas numetros, letras, underline e ponto. Não permitir apenas números
+  validates_format_of :username, with: /^(?![0-9]*$)[a-zA-Z0-9_.]+$/, :multiline => true, unless: Proc.new { |a| a.username.blank? }
+
+protected
 
   def self.find_for_database_authentication warden_conditions
     conditions = warden_conditions.dup
@@ -87,5 +80,11 @@ class User < ApplicationRecord
   def self.find_record login
     where(["username = :value OR email = :value", {value: login}]).first
   end
+
+# private
+#
+#   def set_default_role
+#     self.perfils ||= Perfil.find_by_name('Professor')
+#   end
 
 end

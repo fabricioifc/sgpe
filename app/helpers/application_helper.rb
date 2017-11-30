@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   def is_professor?
-    user_signed_in? && current_user.try(:teacher?)
+    user_signed_in? && (current_user.try(:teacher?) || current_user.perfils.pluck('UPPER(name)').include?('PROFESSOR') )
   end
 
   def is_professor_discipline? professor

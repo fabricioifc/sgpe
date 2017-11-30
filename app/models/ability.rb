@@ -22,8 +22,7 @@ class Ability
       alias_action :new, :copy, :to => :novo
       alias_action :get_planos_aprovar, :aprovar, :reprovar, :to => :aprovar_reprovar
 
-      @perfils = user.perfils
-      @perfils.each do |perfil|
+      user.perfils.each do |perfil|
         if perfil.idativo?
           PerfilRole.where(perfil: perfil).each do |papel|
             can papel.role.resource_id.present? ? papel.role.resource_id.to_sym : "all".to_sym, papel.role.resource_type.constantize
