@@ -11,22 +11,22 @@ class GridDisciplineDecorator < ApplicationDecorator
   end
 
   def ementa pdf = false
-    converter_para_html component.ementa, pdf
+    formatar_texto component.ementa, pdf
     # ActionView::Base.full_sanitizer.sanitize(component.ementa.html_safe) unless component.ementa.nil?
   end
 
   def objetivo_geral pdf = false
-    converter_para_html component.objetivo_geral, pdf
+    formatar_texto component.objetivo_geral, pdf
     # ActionView::Base.full_sanitizer.sanitize(component.objetivo_geral.html_safe) unless component.objetivo_geral.nil?
   end
 
   def bib_geral pdf = false
-    converter_para_html component.bib_geral, pdf
+    formatar_texto component.bib_geral, pdf
     # ActionView::Base.full_sanitizer.sanitize(component.bib_geral.html_safe) unless component.bib_geral.nil?
   end
 
   def bib_espec pdf = false
-    converter_para_html component.bib_espec, pdf
+    formatar_texto component.bib_espec, pdf
     # ActionView::Base.full_sanitizer.sanitize(component.bib_espec.html_safe) unless component.bib_espec.nil?
   end
 

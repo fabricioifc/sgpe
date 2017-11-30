@@ -31,24 +31,30 @@ class ApplicationDecorator < Draper::Decorator
     component.class.name.singularize.downcase
   end
 
-  def converter_para_html componente, pdf = false
-    unless componente.nil?
+  def formatar_texto value, pdf = false
+    unless value.nil?
       if pdf
-        whitelist = ['b', 'i', 'u', 'strikethrough', 'sub', 'sup', 'font', 'color', 'link', 'p', 'li', 'ul']
-        ActionController::Base.helpers.sanitize(componente, :tags => whitelist).
-          gsub(/<p[^>]*>/, '').split("</p>").map { |x|
-            "#{x.strip}\r\n"
-          }.join.
-          gsub(/<li[^>]*>/, '•  ').split("</li>").map { |x|
-            "#{x.strip}\r\n"
-          }.join.
-          gsub(/<ul[^>]*>/, '').split(/<\/ul[^>]*>/).map { |x|
-            "#{x.strip}\n\r\n"
-          }.join
+        # whitelist = ['b', 'i', 'u', 'strikethrough', 'sub', 'sup', 'font', 'color', 'link', 'p', 'li', 'ul']
+        # ActionController::Base.helpers.sanitize(value, :tags => whitelist).
+        #   gsub(/<p[^>]*>/, '').split("</p>").map { |x|
+        #     "#{x.strip}\r\n"
+        #   }.join.
+        #   gsub(/<li[^>]*>/, '•  ').split("</li>").map { |x|
+        #     "#{x.strip}\r\n"
+        #   }.join.
+        #   gsub(/<ul[^>]*>/, '').split(/<\/ul[^>]*>/).map { |x|
+        #     "#{x.strip}\n\r\n"
+        #   }.join
+        ActionController::Base.helpers.sanitize(value)
       else
-        ActionController::Base.helpers.sanitize(componente)
-        # Nokogiri::HTML(componente).search('//text()').map(&:text).join
+        show_textarea_text value
+        # ActionController::Base.helpers.sanitize(value)
+        # Nokogiri::HTML(value).search('//text()').map(&:text).join
       end
     end
+  end
+
+  def show_textarea_text value
+    h.content_tag :span, value, style: 'white-space: pre-wrap;'
   end
 end

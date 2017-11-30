@@ -27,7 +27,7 @@
             <div class="form-group">
               <div class="html_safe_div">
                 <p class="header"><%= label_tag :ementa, nil, class: 'control-label' %></p>
-                <%= plan.offer_discipline.grid_discipline.ementa.html_safe %>
+                <%= plan.offer_discipline.grid_discipline.decorate.ementa %>
               </div>
               <!-- <= text_area_tag :ementa, plan.offer_discipline.grid_discipline.ementa.html_safe, id: :plan_ementa, class: 'form-control', readonly:true, rows: 10%> -->
             </div>
@@ -40,26 +40,26 @@
                 <%= plan.offer_discipline.grid_discipline.objetivo_geral.html_safe %>
               </div>
             </div>
-            <%= f.text_area :obj_espe, id: :plan_obj_espe, rows: 6, data: {provider: 'summernote'} %>
+            <%= f.text_area :obj_espe, id: :plan_obj_espe, rows: 6, data: {provider: :none} %>
           </div>
 
           <div id="conteudos" class="tab-pane fade in">
-            <%= f.text_area :conteudo_prog, id: :plan_conteudo_prog, rows: 5, data: {provider: 'summernote'} %>
-            <%= f.text_area :prat_prof, id: :plan_prat_prof, rows: 5, data: {provider: 'summernote'} %>
+            <%= f.text_area :conteudo_prog, id: :plan_conteudo_prog, rows: 5, data: {provider: :none} %>
+            <%= f.text_area :prat_prof, id: :plan_prat_prof, rows: 5, data: {provider: :none} %>
           </div>
 
           <div id="metodologias" class="tab-pane fade in">
-            <%= f.text_area :met_tec, id: :plan_met_tec, rows: 5, data: {provider: 'summernote'} %>
-            <%= f.text_area :met_met, id: :plan_met_met, rows: 5, data: {provider: 'summernote'} %>
+            <%= f.text_area :met_tec, id: :plan_met_tec, rows: 5, data: {provider: :none} %>
+            <%= f.text_area :met_met, id: :plan_met_met, rows: 5, data: {provider: :none} %>
           </div>
 
           <div id="avaliacao" class="tab-pane fade in">
-            <%= f.text_area :avaliacao, id: :plan_avaliacao, data: {provider: 'summernote'}, rows: 15 %>
+            <%= f.text_area :avaliacao, id: :plan_avaliacao, data: {provider: :none}, rows: 15 %>
           </div>
 
           <div id="outros" class="tab-pane fade in">
-            <%= f.text_area :interdisc, id: :plan_interdisc, rows: 4, data: {provider: 'summernote'} %>
-            <%= f.text_area :cronograma, id: :plan_cronograma, rows: 5, data: {provider: 'summernote'} %>
+            <%= f.text_area :interdisc, id: :plan_interdisc, rows: 4, data: {provider: :none} %>
+            <%= f.text_area :cronograma, id: :plan_cronograma, rows: 5, data: {provider: :none} %>
             <%= f.text_area :atendimento, id: :plan_atendimento, rows: 1 %>
           </div>
 
