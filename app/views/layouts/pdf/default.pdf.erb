@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+  </head>
+  <body>
+    <div id="content">
+      <%= render 'layouts/pdf/header' %>
+      <%= yield %>
+    </div>
+  </body>
+</html>

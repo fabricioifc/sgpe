@@ -18,4 +18,13 @@ WickedPdf.config = {
   # Layout file to be used for all PDFs
   # (but can be overridden in `render :pdf` calls)
   # layout: 'pdf.html',
+  :layout => 'layouts/pdf/default.pdf.erb',
+  # :header => { :html => {:template => "layouts/pdf/header.pdf.erb"} },
+  :footer => { :html => {:template => "layouts/pdf/footer.pdf.erb"} },
+  margin:  {
+    top:    15,
+    bottom: 30,
+    left: 15,
+    right: 15
+  }
 }

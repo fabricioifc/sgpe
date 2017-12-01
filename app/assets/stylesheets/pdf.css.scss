@@ -1,0 +1,6 @@
+div.alwaysbreak { page-break-before: always; }
+div.nobreak:before { clear:both; }
+div.nobreak { page-break-inside: avoid; }
+
+// table { page-break-before: always; }
+table tr { page-break-inside: avoid; }

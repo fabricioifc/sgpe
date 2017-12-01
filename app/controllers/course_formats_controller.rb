@@ -23,7 +23,7 @@ class CourseFormatsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "formatos_de_curso", header: { right: '[page] / [topage]' }
+        render pdf: "formatos_de_curso"
       end
     end
   end

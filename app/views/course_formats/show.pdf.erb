@@ -1,4 +1,5 @@
-<table class="table" border="1">
+<h3>Titulo da página</h3>
+<table>
   <thead>
     <tr>
       <th>Name</th>
@@ -6,9 +7,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td><%= @course_format.name %></td>
-      <td><%= @course_format.minutos_aula %></td>
-    </tr>
+    <% 50.times do %>
+      <tr>
+        <td><%= @course_format.name %></td>
+        <td><%= @course_format.minutos_aula %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
