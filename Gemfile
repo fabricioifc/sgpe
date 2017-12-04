@@ -17,6 +17,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap-sass'
 gem 'devise'
+gem 'devise_invitable', '~> 1.7.0'
 # gem "devise-async", :group => [:production, :staging]
 gem "devise-async", :group => [:production]
 gem 'devise-i18n'

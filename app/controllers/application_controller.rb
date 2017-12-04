@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :prepare_exception_notifier
+  before_action :dont_allow_user_self_registration
 
   # load_and_authorize_resource unless: :devise_controller?
   before_action do fix_carrega_permissoes end
@@ -29,9 +30,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up,         keys: [:username, :email, :name, :bio, :teacher, :avatar, :avatar_cache, :remove_avatar, :password, :password_confirmation])
-    devise_parameter_sanitizer.permit(:sign_in,         keys: [:login, :password, :password_confirmation])
-    devise_parameter_sanitizer.permit(:account_update,  keys: [:login, :username, :email, :name, :bio, :teacher, :avatar, :avatar_cache, :remove_avatar, :password, :password_confirmation, :current_password])
+    devise_parameter_sanitizer.permit(:sign_up,           keys: [:username, :email, :name, :bio, :teacher, :avatar, :avatar_cache, :remove_avatar, :password, :password_confirmation])
+    devise_parameter_sanitizer.permit(:sign_in,           keys: [:login, :password, :password_confirmation])
+    devise_parameter_sanitizer.permit(:account_update,    keys: [:login, :username, :email, :name, :bio, :teacher, :avatar, :avatar_cache, :remove_avatar, :password, :password_confirmation, :current_password])
+    devise_parameter_sanitizer.permit(:invite,            keys: [:username, :email, :name, :invitation_token, :avatar, :avatar_cache, :perfils, :perfil_ids => []])
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:username, :email, :name, :password, :password_confirmation, :invitation_token, :avatar, :avatar_cache, :perfils, :perfil_ids => []])
   end
 
   def fix_carrega_permissoes
@@ -58,6 +61,20 @@ class ApplicationController < ActionController::Base
     request.env["exception_notifier.exception_data"] = {
       :current_user => current_user
     }
+  end
+
+  def dont_allow_user_self_registration
+    if ['devise/registrations','devise_invitable/registrations'].include?(params[:controller]) && ['new','create'].include?(params[:action])
+      flash[:warning] = 'A sua inscrição pode ser feita apenas através de convite.'
+      redirect_to root_path
+    end
+  end
+
+  def authenticate_inviter!
+    unless user_signed_in? && current_user.try(:admin?)
+      redirect_to root_url, :alert => "Acesso negado! Você não tem permissão para acessar este recurso."
+    end
+    super
   end
 
   # def add_current_breadcrumb

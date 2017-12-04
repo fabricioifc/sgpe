@@ -26,9 +26,6 @@ class UsersController < ApplicationController
     # end
   end
 
-  def update_perfils
-  end
-
   def show
     @user = User.find(params[:id])
 
@@ -43,6 +40,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(secure_params)
       if current_user.try(:admin?)
+        if !params[:send_invite].nil? && params[:send_invite].eql?("true")
+          current_user.invite!(@user)
+        end
         redirect_to user_path(@user), notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human)
       else
         redirect_to users_path, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human)

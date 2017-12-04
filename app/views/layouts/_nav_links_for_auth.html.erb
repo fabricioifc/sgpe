@@ -40,13 +40,21 @@
         <%= t('helpers.links.pages.about') %>
         <% end %>
       </li>
-      <li role="presentation" class="divider"></li>
       <li>
         <%= link_to user_path(current_user) do %>
         <i class="fa fa-user-md" aria-hidden="true"></i>
         <%= t('helpers.links.pages.profile') %>
         <% end %>
       </li>
+      <li role="presentation" class="divider"></li>
+      <% if is_admin? %>
+        <li>
+          <%= link_to new_user_invitation_path do %>
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            <%= t('devise.shared.links.convite') %>
+          <% end %>
+        </li>
+      <% end %>
       <li>
         <%= link_to edit_user_registration_path do %>
           <i class="fa fa-user" aria-hidden="true"></i>
@@ -69,10 +77,10 @@
       <%= t('devise.shared.links.sign_in') %>
     <% end %>
   </li>
-  <li>
-    <%= link_to new_user_registration_path do %>
+  <!-- <li>
+    <= link_to new_user_registration_path do %>
       <i class="fa fa-user-plus" aria-hidden="true"></i>
-      <%= t('devise.shared.links.sign_up') %>
-    <% end %>
-  </li>
+      <= t('devise.shared.links.sign_up') %>
+    < end %>
+  </li> -->
 <% end %>

@@ -1,0 +1,73 @@
+<%= form_for(resource, :as => resource_name, :url => invitation_path(resource_name), :html => { multipart: true, :method => :put, :class => "form-horizontal" }) do |f| %>
+    <%= devise_error_messages! %>
+    <%= f.hidden_field :invitation_token %>
+
+    <div class="col-md-8 col-sm-8">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="panel-title"><%= t ".title", resource: (t "activerecord.models.#{resource_name.to_s}") %></div>
+        </div>
+        <div class="panel-body">
+
+          <div class="form-group">
+            <%= f.label :name, :class => 'col-md-2 control-label' %>
+            <div class="col-md-10">
+              <%= f.text_field :name, :class => 'form-control', autofocus:true, placeholder:true %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :username, :class => 'col-md-2 control-label' %>
+            <div class="col-md-10">
+              <%= f.text_field :username, :class => 'form-control', autofocus:true, placeholder:true %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :email, :class => 'col-md-2 control-label' %>
+            <div class="col-md-10">
+              <%= f.email_field :email, :class => 'form-control', placeholder:true %>
+            </div>
+          </div>
+
+          <!-- <div class="form-group">
+            <= f.label :bio, :class => 'col-md-2 control-label' %>
+            <div class="col-md-10">
+              <= f.text_area :bio, :class => 'form-control', placeholder:true, rows: 5 %>
+            </div>
+          </div> -->
+
+          <% if f.object.class.require_password_on_accepting %>
+              <div class="form-group">
+                <%= f.label :password, :class => 'col-md-2 control-label' %>
+                <div class="col-md-10">
+                  <%= f.password_field :password, :class => 'form-control', placeholder:true %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :password_confirmation, :class => 'col-md-2 control-label' %>
+                <div class="col-md-10">
+                  <%= f.password_field :password_confirmation, :class => 'form-control', placeholder:true %>
+                </div>
+              </div>
+          <% end %>
+
+          <div class="form-group">
+              <div class="col-md-offset-2 col-md-10">
+                <%= f.submit :class => 'btn btn-primary' do |b| %>
+                  <i class="icon-hand-right"></i> <%= t(".update") %>
+                  <!-- <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button> -->
+                <% end %>
+              </div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 col-sm-4">
+    <%= render partial: 'devise/shared/avatar_panel', locals: {f: f} %>
+  </div>
+
+<% end %>

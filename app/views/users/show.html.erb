@@ -1,5 +1,7 @@
 <%- model_class = User -%>
 
+
+
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h3 class="panel-title">Profile</h3>
@@ -41,12 +43,13 @@
             <p class="row">
               <strong class="col-md-2"><%= model_class.human_attribute_name(:bio) %>: </strong>
               <span class="col-md-10">
-                <div style="max-height: 150px; overflow-y: auto; padding: 5px;" class="border border-primary">
+                <div style="max-height: 150px; overflow-y: auto;" class="border border-primary">
                   <%= @user.bio.html_safe %>
                 </div>
               </span>
             </p>
           <% end %>
+
 
           <% unless @user.perfils.empty? %>
             <p class="row">
@@ -67,15 +70,33 @@
     </div>
 
   </div>
-  <% if current_user.try(:admin) %>
-    <div class="panel-footer">
-      <p>Perfis</p>
-      <%= render 'user_perfis', user: @user %>
-    </div>
-
-  <% end %>
 </div>
 
 <% if current_user.try(:admin) %>
-  <p><%= link_to t('helpers.links.back'), users_path %></p>
+  <%= form_for(@user, remote:true) do |f| %>
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">Atualizar profile</h3>
+      </div>
+      <div class="panel-body">
+
+        <div class="form-group">
+          <%= f.label :perfil_ids %>
+          <%= f.select(:perfil_ids, Perfil.all.collect {|a| [a.name, a.id]}, {}, class: "select2 form-control", :multiple => true) %>
+        </div>
+
+        <div class="form-group">
+          <% unless @user.invitation_token.nil? %>
+            <%= label_tag 'Reenviar convite por e-mail' %>
+            <%= check_box_tag :send_invite, true, false %>
+          <% end %>
+        </div>
+
+      </div>
+      <div class="panel-footer">
+        <%= f.submit :class => 'btn btn-primary btn-sm' %>
+        <%= link_to t('helpers.links.back'), users_path %>
+      </div>
+    </div>
+  <% end %>
 <% end %>

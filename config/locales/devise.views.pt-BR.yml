@@ -111,6 +111,7 @@ pt-BR:
         sign_in: Entrar
         sign_in_with_provider: Entrar com %{provider}
         sign_up: Inscrever-se
+        convite: Convidar
         edit_account: Editar conta
         sign_out: Sair
     unlocks:

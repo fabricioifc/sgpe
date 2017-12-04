@@ -8,13 +8,13 @@ class User < ApplicationRecord
   # before_create :set_default_role
 
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :confirmable, :lockable, :timeoutable and :omniauthable :registerable
   if Rails.env.production?
-    devise :database_authenticatable, :async, :registerable, :confirmable,
+    devise :invitable, :database_authenticatable, :async, :confirmable, :registerable,
            :recoverable, :rememberable, :trackable, :validatable,
            :authentication_keys => [:login]
    else
-     devise :database_authenticatable, :registerable, :confirmable,
+     devise :invitable, :database_authenticatable, :confirmable, :registerable,
             :recoverable, :rememberable, :trackable, :validatable,
             :authentication_keys => [:login]
    end
