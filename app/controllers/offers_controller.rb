@@ -235,6 +235,7 @@ class OffersController < ApplicationController
       if !grid_id.nil? && !grid_id.blank?
         Grid.joins(:grid_disciplines => :discipline).
           where('grids.id = ? and grid_disciplines.year is not null', grid_id).
+          order('grid_disciplines.year').
           pluck('grid_disciplines.year').uniq
       end
     end
@@ -243,6 +244,7 @@ class OffersController < ApplicationController
       if !grid_id.nil? && !grid_id.blank?
         Grid.joins(:grid_disciplines => :discipline).
           where('grids.id = ? and grid_disciplines.semestre is not null', grid_id).
+          order('grid_disciplines.semestre').
           pluck('grid_disciplines.semestre').uniq
       end
     end
