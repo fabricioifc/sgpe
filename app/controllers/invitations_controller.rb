@@ -1,6 +1,6 @@
 class InvitationsController < Devise::InvitationsController
 
-  before_filter :update_sanitized_params
+  before_action :update_sanitized_params
 
   # PUT /resource/invitation
   def update
