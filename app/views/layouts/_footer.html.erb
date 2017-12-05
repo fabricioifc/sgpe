@@ -1,4 +1,4 @@
-<footer class="page-footer <%= ENV['ENVIRONMENT'] == 'staging' ? 'bg-warning' : 'bg-primary' %>">
+<footer class="page-footer <%= Rails.env.eql?('staging') ? 'bg-warning' : 'bg-primary' %>">
   <p class="text-uppercase pull-left"><%= ENV['SISTEMA_APELIDO'] %> - <%= Rails.application.secrets.sistema_versao %></p>
   <p class="pull-right"><%= image_tag 'spinner.gif', class: 'spinner', height: 18, style: 'display:none;' %></p>
   <div class="container">
