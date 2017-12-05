@@ -2,6 +2,7 @@ class OffersController < ApplicationController
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   load_and_authorize_resource
+  responders :flash
 
   add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :offers_path
 
@@ -52,7 +53,7 @@ class OffersController < ApplicationController
 
     respond_to do |format|
       if @offer.valid? && @offer.save
-        format.html { redirect_to @offer, notice: 'Offer was successfully created.' }
+        format.html { redirect_to @offer, notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :show, status: :created, location: @offer }
       elsif @offer.offer_disciplines.empty?
         @grid_disciplines = carregar_disciplinas_grade
@@ -106,7 +107,7 @@ class OffersController < ApplicationController
               #     end
               #   end
               # end
-              format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
+              format.html { redirect_to @offer, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
               format.json { render :show, status: :ok, location: @offer }
             else
               @grid_disciplines = carregar_disciplinas_grade
@@ -142,7 +143,7 @@ class OffersController < ApplicationController
   def destroy
     @offer.destroy
     respond_to do |format|
-      format.html { redirect_to offers_url, notice: 'Offer was successfully destroyed.' }
+      format.html { redirect_to offers_url, notice: t('flash.actions.destroy.notice', resource_name: controller_name.classify.constantize.model_name.human) }
       format.json { head :no_content }
     end
   end

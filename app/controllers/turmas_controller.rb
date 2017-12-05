@@ -2,7 +2,7 @@ class TurmasController < ApplicationController
   before_action :set_turma, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   load_and_authorize_resource
-
+  responders :flash
 
   add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :turmas_path
 
@@ -51,7 +51,7 @@ class TurmasController < ApplicationController
   def update
     respond_to do |format|
       if @turma.update(turma_params)
-        format.html { redirect_to @turma, notice: 'Turma was successfully updated.' }
+        format.html { redirect_to @turma, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :show, status: :ok, location: @turma }
       else
         format.html { render :edit }
@@ -65,7 +65,7 @@ class TurmasController < ApplicationController
   def destroy
     @turma.destroy
     respond_to do |format|
-      format.html { redirect_to turmas_url, notice: 'Turma was successfully destroyed.' }
+      format.html { redirect_to turmas_url, notice: t('flash.actions.destroy.notice', resource_name: controller_name.classify.constantize.model_name.human) }
       format.json { head :no_content }
     end
   end

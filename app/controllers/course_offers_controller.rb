@@ -2,6 +2,7 @@ class CourseOffersController < ApplicationController
   before_action :set_course_offer, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   load_and_authorize_resource
+  responders :flash
 
   add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :course_offers_path
 
@@ -51,7 +52,7 @@ class CourseOffersController < ApplicationController
   def update
     respond_to do |format|
       if @course_offer.update(course_offer_params)
-        format.html { redirect_to @course_offer, notice: 'Course offer was successfully updated.' }
+        format.html { redirect_to @course_offer, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :show, status: :ok, location: @course_offer }
       else
         format.html { render :edit }
@@ -65,7 +66,7 @@ class CourseOffersController < ApplicationController
   def destroy
     @course_offer.destroy
     respond_to do |format|
-      format.html { redirect_to course_offers_url, notice: 'Course offer was successfully destroyed.' }
+      format.html { redirect_to course_offers_url, notice: t('flash.actions.destroy.notice', resource_name: controller_name.classify.constantize.model_name.human) }
       format.json { head :no_content }
     end
   end

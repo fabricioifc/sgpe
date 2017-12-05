@@ -1,6 +1,7 @@
 class PlansController < ApplicationController
   include ApplicationHelper
   include PlansHelper
+  responders :flash
 
   before_action :set_plan, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
@@ -256,7 +257,7 @@ class PlansController < ApplicationController
           @plan.analise = true
         end
         if @plan.save
-          format.html { redirect_to offer_offer_discipline_plans_path(@plan), notice: 'Plan was successfully created.' }
+          format.html { redirect_to offer_offer_discipline_plans_path(@plan), notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
           format.json { render :show, status: :created, location: @plan }
         else
           format.html { render :new }
@@ -277,7 +278,7 @@ class PlansController < ApplicationController
           @plan.update(:analise => true)
         end
         if @plan.update(plan_params)
-          format.html { redirect_to offer_offer_discipline_plans_path(@plan), notice: 'Plan was successfully updated.' }
+          format.html { redirect_to offer_offer_discipline_plans_path(@plan), notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
           format.json { render :show, status: :ok, location: @plan }
         else
           format.html { render :edit }
@@ -292,7 +293,7 @@ class PlansController < ApplicationController
   def destroy
     @plan.destroy
     respond_to do |format|
-      format.html { redirect_to offer_offer_discipline_plans_path(offer_discipline_id: params[:offer_discipline_id]), notice: 'Plan was successfully destroyed.' }
+      format.html { redirect_to offer_offer_discipline_plans_path(offer_discipline_id: params[:offer_discipline_id]), notice: t('flash.actions.destroy.notice', resource_name: controller_name.classify.constantize.model_name.human) }
       format.json { head :no_content }
     end
   end

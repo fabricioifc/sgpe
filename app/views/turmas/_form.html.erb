@@ -1,8 +1,8 @@
 <%= bootstrap_form_for(turma, local:true, html: { class: "", role: "form" }) do |f| %>
   <%= error_messages_for(turma) %>
 
-    <%= f.text_field :name, id: :turma_name %>
-    <%= f.text_field :year, id: :turma_year %>
+    <%= f.text_field :name, id: :turma_name, placeholder:true, autofocus:true %>
+    <%= f.text_field :year, id: :turma_year, placeholder:true %>
     <%= f.check_box :active, id: :turma_active %>
 
   <%= f.submit class: "btn btn-primary" %>

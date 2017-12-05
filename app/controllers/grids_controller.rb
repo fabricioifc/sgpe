@@ -2,6 +2,7 @@ class GridsController < ApplicationController
   before_action :set_grid, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   load_and_authorize_resource
+  responders :flash
 
   add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :grids_path
 

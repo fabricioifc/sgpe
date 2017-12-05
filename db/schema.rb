@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171205161418) do
+ActiveRecord::Schema.define(version: 20171205170032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 20171205161418) do
     t.string "name", limit: 100, null: false
     t.string "sigla", limit: 5, null: false
     t.boolean "active", default: true
-    t.integer "carga_horaria", null: false
     t.bigint "course_modality_id"
     t.bigint "course_format_id"
     t.bigint "user_id"

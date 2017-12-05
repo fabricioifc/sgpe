@@ -2,6 +2,7 @@ class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   load_and_authorize_resource
+  responders :flash
 
   before_action :load_modalidades
   before_action :load_formatos
@@ -55,7 +56,7 @@ class CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
-        format.html { redirect_to courses_path, notice: 'Course was successfully updated.' }
+        format.html { redirect_to courses_path, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :index, status: :ok, location: @course }
       else
         format.html { render :edit }
@@ -69,7 +70,7 @@ class CoursesController < ApplicationController
   def destroy
     @course.destroy
     respond_to do |format|
-      format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
+      format.html { redirect_to courses_url, notice: t('flash.actions.destroy.notice', resource_name: controller_name.classify.constantize.model_name.human) }
       format.json { head :no_content }
     end
   end

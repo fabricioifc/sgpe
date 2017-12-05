@@ -2,6 +2,7 @@ class DisciplinesController < ApplicationController
   before_action :set_discipline, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   load_and_authorize_resource
+  responders :flash
 
   add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :disciplines_path
 
@@ -64,7 +65,7 @@ class DisciplinesController < ApplicationController
     respond_to do |format|
       @discipline.user = current_user
       if @discipline.update(discipline_params)
-        format.html { redirect_to @discipline, notice: 'Discipline was successfully updated.' }
+        format.html { redirect_to @discipline, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :show, status: :ok, location: @discipline }
       else
         format.html { render :edit }
@@ -78,7 +79,7 @@ class DisciplinesController < ApplicationController
   def destroy
     @discipline.destroy
     respond_to do |format|
-      format.html { redirect_to disciplines_url, notice: 'Discipline was successfully destroyed.' }
+      format.html { redirect_to disciplines_url, notice: t('flash.actions.destroy.notice', resource_name: controller_name.classify.constantize.model_name.human) }
       format.json { head :no_content }
     end
   end

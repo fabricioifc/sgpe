@@ -2,6 +2,7 @@ class GridDisciplinesController < ApplicationController
   before_action :set_grid_discipline, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   load_and_authorize_resource
+  responders :flash
 
   add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :grid_disciplines_path
 
@@ -46,7 +47,7 @@ class GridDisciplinesController < ApplicationController
   def update
     respond_to do |format|
       if @grid_discipline.update(grid_discipline_params)
-        format.html { redirect_to @grid_discipline, notice: 'Grid discipline was successfully updated.' }
+        format.html { redirect_to @grid_discipline, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :show, status: :ok, location: @grid_discipline }
       else
         format.html { render :edit }
@@ -60,7 +61,7 @@ class GridDisciplinesController < ApplicationController
   def destroy
     @grid_discipline.destroy
     respond_to do |format|
-      format.html { redirect_to grid_disciplines_url, notice: 'Grid discipline was successfully destroyed.' }
+      format.html { redirect_to grid_disciplines_url, notice: t('flash.actions.destroy.notice', resource_name: controller_name.classify.constantize.model_name.human) }
       format.json { head :no_content }
     end
   end

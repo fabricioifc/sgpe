@@ -8,13 +8,19 @@ pt-BR:
       discipline: Disciplina
       grid: Grade
       grid_discipline: Disciplina da grade
+      griddiscipline: Disciplina da grade
       course_format: Formato de curso
+      courseformat: Formato de curso
       course_modality: Modalidade de curso
+      coursemodality: Modalidade de curso
       course_offer: Oferta de curso
+      courseoffer: Oferta de curso
       course: Curso
       offer: Oferta
       offers: Ofertas
+      offerdiscipline: Disciplina
       offer_discipline: Disciplina
+      offerdisciplines: Disciplinas
       offer_disciplines: Disciplinas
       plan: Plano
       plans: Planos
@@ -30,6 +36,7 @@ pt-BR:
         password_confirmation: "Confirmar Senha"
         current_password: "Senha Atual"
         remember_me: "Lembre-se de mim"
+        bio: Biografia
       turma:
         name: Nome
         year: Ano
@@ -96,20 +103,27 @@ pt-BR:
         analise: Em análise
         aprovado: Aprovado
         reprovado: Reprovado
-    errors:
-      models:
-        offer:
-          attributes:
-            grid:
-              required: Campo requerido!
-            grid_year:
-              required: Campo requerido!
-            grid_semestre:
-              required: Campo requerido!
-        offer_discipline:
-          attributes:
-            user:
-              required: Campo requerido!
+    # errors:
+    #   models:
+    #     course:
+    #       attributes:
+    #         course_modality:
+    #           required: 'Campo requerido'
+    #         course_format: Formato
+    #         course_offer: Oferta
+    #         carga_horaria: Carga horária
+    #     offer:
+    #       attributes:
+    #         grid:
+    #           required: Campo requerido!
+    #         grid_year:
+    #           required: Campo requerido!
+    #         grid_semestre:
+    #           required: Campo requerido!
+    #     offer_discipline:
+    #       attributes:
+    #         user:
+    #           required: Campo requerido!
   date:
     meses: {'01' : 'Janeiro', '02' : 'Fevereiro', '03' : 'Março','04' : 'Abril','05' : 'Maio','06' : 'Junho','07' : 'Julho','08' : 'Agosto','09' : 'Setembro','10' : 'Outubro','11' : 'Novembro','12' : 'Dezembro'}
     meses_abbr: {'01' : 'Jan', '02' : 'Fev', '03' : 'Mar','04' : 'Abr','05' : 'Mai','06' : 'Jun','07' : 'Jul','08' : 'Ago','09' : 'Set','10' : 'Out','11' : 'Nov','12' : 'Dez'}
@@ -211,6 +225,7 @@ pt-BR:
   errors:
     format: ! '%{attribute} %{message}'
     messages:
+      required: 'Campo requerido!'
       page_missing: Desculpe, esta página não foi encontrada ou não existe!
       accepted: deve ser aceito
       blank: não pode ficar em branco

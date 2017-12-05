@@ -2,6 +2,7 @@ class PerfilsController < ApplicationController
   before_action :set_perfil, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   load_and_authorize_resource
+  responders :flash
 
   add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :perfils_path
 
@@ -50,7 +51,7 @@ class PerfilsController < ApplicationController
   def update
     respond_to do |format|
       if @perfil.update(perfil_params)
-        format.html { redirect_to perfils_path, notice: 'Perfil was successfully updated.' }
+        format.html { redirect_to perfils_path, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :index, status: :ok, location: @perfil }
       else
         format.html { render :edit }
@@ -64,7 +65,7 @@ class PerfilsController < ApplicationController
   def destroy
     @perfil.destroy
     respond_to do |format|
-      format.html { redirect_to perfils_url, notice: 'Perfil was successfully destroyed.' }
+      format.html { redirect_to perfils_url, notice: t('flash.actions.destroy.notice', resource_name: controller_name.classify.constantize.model_name.human) }
       format.json { head :no_content }
     end
   end
