@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_in,           keys: [:login, :password, :password_confirmation])
     devise_parameter_sanitizer.permit(:account_update,    keys: [:login, :username, :email, :name, :bio, :teacher, :avatar, :avatar_cache, :remove_avatar, :password, :password_confirmation, :current_password])
     devise_parameter_sanitizer.permit(:invite,            keys: [:username, :email, :name, :invitation_token, :avatar, :avatar_cache, :perfils, :perfil_ids => []])
-    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:username, :email, :name, :password, :password_confirmation, :invitation_token, :avatar, :avatar_cache, :perfils, :perfil_ids => []])
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:username, :name, :password, :password_confirmation, :invitation_token, :avatar, :avatar_cache, :perfils, :perfil_ids => []])
   end
 
   def fix_carrega_permissoes

@@ -1,13 +1,14 @@
-class UserDecorator < Draper::Decorator
+class UserDecorator < ApplicationDecorator
   delegate_all
+  attr_reader :component
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
+  def initialize(component)
+    @component = component
+  end
+
+  def bio
+    formatar_texto component.bio
+    # ActionView::Base.full_sanitizer.sanitize(component.ementa.html_safe) unless component.ementa.nil?
+  end
 
 end

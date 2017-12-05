@@ -25,13 +25,17 @@ class User < ApplicationRecord
   # Permitir o atributo login, que poderá ser username ou email
   attr_accessor :login
 
-  validates :name, presence:true, length: 5..150
+  # validates :name, presence:true, length: 0..150
   # validates :username, presence:true, length: 5..100, uniqueness:true#, on: :create
   validates :username, length: 5..100, unless: Proc.new { |a| a.username.blank? }
   validates :username, uniqueness:true, unless: Proc.new { |a| a.username.blank? }
 
   # Permitir apenas numetros, letras, underline e ponto. Não permitir apenas números
   validates_format_of :username, with: /^(?![0-9]*$)[a-zA-Z0-9_.]+$/, :multiline => true, unless: Proc.new { |a| a.username.blank? }
+
+  def decorate
+    @user ||= UserDecorator.new self
+  end
 
 protected
 

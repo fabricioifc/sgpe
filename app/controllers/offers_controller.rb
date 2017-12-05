@@ -184,7 +184,7 @@ class OffersController < ApplicationController
     end
 
     def load_professores
-      @professores = User.where(teacher:true).order(:name)
+      @professores = User.distinct.joins(:perfils).where('users.teacher is true OR upper(perfils.name) = ?', 'PROFESSOR').order(:name)
     end
 
     def carregar_disciplinas_grade
