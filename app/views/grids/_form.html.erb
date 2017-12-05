@@ -5,10 +5,13 @@
       <div class="col-md-3">
         <%= f.text_field :year, id: :grid_year, autofocus:true %>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <%= f.select :course_id, @cursos.collect { |c| ["#{c.sigla} - #{c.name}", c.id] }, id: :grid_course_id, prompt: true %>
       </div>
       <div class="col-md-3">
+        <%= f.number_field :carga_horaria, id: :grid_carga_horaria %>
+      </div>
+      <div class="col-md-2">
         <label for="">Situação</label>
         <%= f.check_box :active, id: :grid_active %>
       </div>

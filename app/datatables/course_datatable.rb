@@ -15,7 +15,7 @@ class CourseDatatable < ApplicationDatatable
 
         column << course.name
         column << course.sigla
-        column << course.carga_horaria
+        # column << course.carga_horaria
         column << course.course_modality.description
         column << course.course_format.name
         column << course.course_offer.description
@@ -60,6 +60,6 @@ class CourseDatatable < ApplicationDatatable
 
   # The columns needs to be the same list of searchable items and IN ORDER that they will appear in Data.
   def columns
-    %w(name sigla active carga_horaria course_modality_id course_format_id)
+    %w(name sigla active course_modality_id course_format_id)
   end
 end

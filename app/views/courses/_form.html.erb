@@ -4,7 +4,7 @@
 
       <%= f.text_field :name, id: :course_name, autofocus:true %>
       <%= f.text_field :sigla, id: :course_sigla %>
-      <%= f.number_field :carga_horaria, id: :course_carga_horaria %>
+      <!-- <= f.number_field :carga_horaria, id: :course_carga_horaria %> -->
       <%= f.select :course_modality_id, @modalidades.collect { |c| [c.description, c.id] }, id: :course_course_modality, prompt: true %>
       <%= f.select :course_format_id, @formatos.collect { |c| [c.name, c.id] }, id: :course_course_format, prompt: true %>
       <%= f.select :course_offer_id, @ofertas.collect { |c| [c.decorate.description, c.id] }, id: :course_course_offer, prompt: true %>

@@ -88,9 +88,9 @@ class GridsController < ApplicationController
         #   format.html { redirect_to @grid, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         #   format.json { render :show, status: :ok, location: @grid }
         # else
-          format.html { render :edit }
-          format.json { render json: @grid.errors, status: :unprocessable_entity }
-        # end
+          format.html { redirect_to @grid, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
+          format.json { render :show, status: :ok, location: @grid }
+      # end
       else
         format.html { render :edit }
         format.json { render json: @grid.errors, status: :unprocessable_entity }
@@ -116,7 +116,7 @@ class GridsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def grid_params
-      params.require(:grid).permit(:year, :active, :enabled, :course_id, :user_id,
+      params.require(:grid).permit(:year, :active, :enabled, :course_id, :user_id, :carga_horaria,
         grid_disciplines_attributes: [:id, :year, :semestre, :carga_horaria, :ementa, :objetivo_geral, :bib_geral, :bib_espec, :discipline_id, :_destroy]
       )
     end

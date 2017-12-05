@@ -16,6 +16,8 @@ class Grid < ApplicationRecord
       less_than_or_equal_to: Date.today.year + 25
     }
 
+  validates :carga_horaria, presence:true, :numericality => { :greater_than => 0 }
+
   accepts_nested_attributes_for :grid_disciplines, :allow_destroy => true
 
   amoeba do
