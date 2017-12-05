@@ -14,12 +14,12 @@ class CreateUsersService
 
     users.each do |u, v|
       if User.find_by(email: u.email).nil?
-        # u.username               = u.email.split('@')[0]
-        u.username               = u.name.parameterize.underscore
+        u.username               = u.email.split('@')[0]
+        # u.username               = u.name.parameterize.underscore
         u.password               = senha_padrao
         u.password_confirmation  = senha_padrao
         u.perfils                = u.perfils
-        # u.confirm
+        u.confirm
         u.save!
       end
     end
