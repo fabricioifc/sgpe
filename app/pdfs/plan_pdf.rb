@@ -45,7 +45,7 @@ class PlanPdf < PdfReport
             [['Componente curricular', 'Professor', 'Turma']],
             [
               @plano.offer_discipline.grid_discipline.discipline.title,
-              @plano.offer_discipline.user.name,
+              @plano.offer_discipline.user.name || @plano.offer_discipline.user.email,
               "#{@plano.offer_discipline.offer.turma.year}.#{@plano.offer_discipline.offer.turma.name}",
             ]
           ),
