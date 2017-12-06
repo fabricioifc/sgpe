@@ -38,8 +38,9 @@ Rails.application.routes.draw do
 
   resources :grid_disciplines
   resources :grids, except: [:destroy] do
-    member do
-      get 'escolher'
+    collection do
+      get :importar
+      post  :importar
     end
     resources :grid_disciplines
   end

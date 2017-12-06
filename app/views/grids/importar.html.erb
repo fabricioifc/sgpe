@@ -1,0 +1,13 @@
+<% binding.pry %>
+<h2>Importar grades</h2>
+<%= form_tag importar_grids_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Importar" %>
+<% end %>
+
+<% unless @grades.nil? %>
+  <hr>
+  <% @grades.each do |grade| %>
+    <%= error_messages_for(grade) unless grade.nil? %>
+  <% end %>
+<% end %>

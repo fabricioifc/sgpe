@@ -9,8 +9,33 @@ class GridsController < ApplicationController
   before_action :load_cursos_ativos
   before_action :load_disciplinas
 
-  def escolher
-    #code
+  def importar
+    file = params[:file]
+    unless file.nil?
+      respond_to do |format|
+
+        @grades = []
+        spreadsheet = Roo::Spreadsheet.open(file.path)
+        header = spreadsheet.row(1)
+        (2..spreadsheet.last_row).each do |i|
+          row = Hash[[header, spreadsheet.row(i)].transpose]
+          @grade = Grid.last
+          @grade.year = nil
+          # product = find_by(id: row["id"]) || new
+          # product.attributes = row.to_hash
+          # product.save!
+          if @grade.valid?
+
+          else
+            @grade.errors.add(:base, "Erro na linha #{i}")
+          end
+          @grades << @grade
+        end
+        flash[:notice] = 'Arquivo de grades importado com sucesso.'
+        format.html { render :importar }
+        # redirect_to import_grids_path, notice: 'Arquivo de grades importado com sucesso.'
+      end
+    end
   end
 
   # GET /grids
