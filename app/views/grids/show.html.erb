@@ -34,6 +34,8 @@
           <dd><%= @grid.course.name %></dd>
           <dt><%= model.human_attribute_name(:active) %></dt>
           <dd><%= @grid.decorate.active %></dd>
+          <dt><%= modelDiscipline.human_attribute_name(:discipline_id).pluralize %></dt>
+          <dd><span class="badge"><%= @grid.grid_disciplines.count %></span></dd>
         </dl>
 
       </div>
@@ -58,8 +60,8 @@
             <% @grid.grid_disciplines.order(:year).each do |d| %>
               <tr>
                 <td><%= "#{d.discipline.sigla} - #{d.discipline.title}" %></td>
-                <td><%= d.year %></td>
-                <td><%= d.semestre %></td>
+                <td class="text-center"><%= d.year %></td>
+                <td class="text-center"><%= d.semestre %></td>
                 <td><%= d.carga_horaria %></td>
                 <td class="text-center"><%= d.decorate.link_show %></td>
               </tr>

@@ -1,12 +1,44 @@
-<h2>Importar grades</h2>
-<%= form_tag importar_grids_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "Importar" %>
-<% end %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Importar grades</h3>
+  </div>
+  <div class="panel-body">
+    <%= form_tag importar_grids_path, multipart: true do %>
 
-<% unless @grades.nil? %>
-  <hr>
-  <% @grades.each do |grade| %>
-    <%= error_messages_for(grade) unless grade.nil? %>
-  <% end %>
-<% end %>
+
+      <% if !@grade.nil? && @grade.errors.any? %>
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Erros na grade</h3>
+            </div>
+            <div class="panel-body">
+              <%= error_messages_for(@grade) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="form-group col-md-4">
+        <%= label_tag :year, 'Ano da grade' %>
+        <%= text_field_tag :year, params[:year], id: :year, autofocus:true, class: 'form-control', placeholder: 'Ano da grade' %>
+      </div>
+      <div class="form-group col-md-8">
+        <%= label_tag :course_id %>
+        <%= select_tag :course_id, options_for_select(Course.where(active:true).map { |c| ["#{c.sigla} - #{c.name}", c.id] }, params[:course_id] ),
+            id: :course_id, class: 'form-control', prompt:'Selecione o curso', required:true %>
+      </div>
+
+      <div class="form-group col-md-6">
+        <%= label_tag :file, 'Arquivo xls' %>
+        <%= file_field_tag :file, class: 'form-control' %>
+      </div>
+
+      <div class="form-group col-md-12">
+        <%= submit_tag "Importar", class: 'btn btn-primary' %>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>

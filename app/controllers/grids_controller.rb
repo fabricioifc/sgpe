@@ -10,32 +10,122 @@ class GridsController < ApplicationController
   before_action :load_disciplinas
 
   def importar
+
     file = params[:file]
     unless file.nil?
-      respond_to do |format|
+      ActiveRecord::Base.transaction do
 
-        @grades = []
         spreadsheet = Roo::Spreadsheet.open(file.path)
         header = spreadsheet.row(1)
+        course = Course.find(params[:course_id])
+
+        @grid = Grid.find_or_initialize_by(year: params[:year], course: course) do |grid|
+          grid.user = current_user
+          active    = true
+        end
+        @grid.carga_horaria = 0 if @grid.carga_horaria.nil?
+
         (2..spreadsheet.last_row).each do |i|
           row = Hash[[header, spreadsheet.row(i)].transpose]
-          @grade = Grid.last
-          @grade.year = nil
-          # product = find_by(id: row["id"]) || new
-          # product.attributes = row.to_hash
-          # product.save!
-          if @grade.valid?
 
+          if row['discipline_title'].blank? || row['discipline_title'].nil?
+            break
           else
-            @grade.errors.add(:base, "Erro na linha #{i}")
+
+            # Criar a disciplina
+            discipline = Discipline.find_or_initialize_by(
+              title: row['discipline_title'],
+              sigla: row['discipline_title'].upcase[0, 3],
+              active:true,
+              user: current_user
+            )
+
+            ano = row['ano_semestre'].downcase.include?('ano') ? row['ano_semestre'].to_i : nil unless row['ano_semestre'].nil?
+            semestre = row['ano_semestre'].downcase.include?('semestre') ? row['ano_semestre'].to_i : nil unless row['ano_semestre'].nil?
+
+            # Disciplina da grade
+            grid_discipline = GridDiscipline.find_or_initialize_by(
+              discipline: discipline,
+              year: ano,
+              semestre: semestre,
+              carga_horaria: row['grid_discipline_carga_horaria'].to_i || 0,
+              ementa: row['ementa'],
+              objetivo_geral: row['objetivo_geral'],
+              bib_geral: row['bib_geral'],
+              bib_espec: row['bib_espec'],
+            )
+            grid_discipline.grid = @grid
+
+            if grid_discipline.valid?
+              @grid.carga_horaria += row['grid_discipline_carga_horaria'].to_i
+            else
+              grid_discipline.errors.add(:base, "Erro na linha #{i}")
+            end
+
+            @grid.grid_disciplines << grid_discipline
           end
-          @grades << @grade
         end
-        flash[:notice] = 'Arquivo de grades importado com sucesso.'
-        format.html { render :importar }
+
+        if @grid.valid?
+          if @grid.new_record?
+            respond_to do |format|
+              flash[:notice] = 'Arquivo de grades importado com sucesso. Verifique as disciplinas.'
+              format.html { render :new }
+            end
+            # redirect_to new_grid_path(grid: @grid), notice: 'Arquivo de grades importado com sucesso. Verifique as disciplinas.'
+          else
+            redirect_to edit_grid_path(@grid), notice: 'Arquivo de grades importado com sucesso. Verifique as disciplinas.'
+          end
+          # if @grid.save!
+            # flash[:notice] = 'Arquivo de grades importado com sucesso.'
+          # else
+          #   flash[:alert] = 'Erro ao importar a grade e suas disciplinas.'
+          # end
+        else
+          respond_to do |format|
+            flash[:alert] = 'Existem inconsistências no arquivo que impedem a sua importação.'
+            format.html { render :importar }
+          end
+        end
         # redirect_to import_grids_path, notice: 'Arquivo de grades importado com sucesso.'
       end
     end
+
+
+                # course_format = CourseFormat.find_or_create_by(name: row['course_course_format'])
+                # course = Course.find_or_create_by(name: row['course_course_name'], course_format: course_format) do |c|
+                #   c.sigla           = row['course_course_name'][0, 5]
+                #   c.active          = true
+                #   c.user            = current_user
+                #   c.course_modality = CourseModality.first
+                # end
+
+    # file = params[:file]
+    # unless file.nil?
+    #   respond_to do |format|
+    #
+    #     @grids = []
+    #     spreadsheet = Roo::Spreadsheet.open(file.path)
+    #     header = spreadsheet.row(1)
+    #     (2..spreadsheet.last_row).each do |i|
+    #       row = Hash[[header, spreadsheet.row(i)].transpose]
+    #       @grid = Grid.last
+    #       @grid.year = nil
+    #       # product = find_by(id: row["id"]) || new
+    #       # product.attributes = row.to_hash
+    #       # product.save!
+    #       if @grid.valid?
+    #
+    #       else
+    #         @grid.errors.add(:base, "Erro na linha #{i}")
+    #       end
+    #       @grids << @grid
+    #     end
+    #     flash[:notice] = 'Arquivo de grades importado com sucesso.'
+    #     format.html { render :importar }
+    #     # redirect_to import_grids_path, notice: 'Arquivo de grades importado com sucesso.'
+    #   end
+    # end
   end
 
   # GET /grids
@@ -73,8 +163,11 @@ class GridsController < ApplicationController
 
   # GET /grids/new
   def new
-    @grid = Grid.new
-    @grid.grid_disciplines.build
+    binding.pry
+    if @grid.nil?
+      @grid = Grid.new
+      @grid.grid_disciplines.build
+    end
   end
 
   # GET /grids/1/edit
