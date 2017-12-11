@@ -8,15 +8,18 @@ class GridsController < ApplicationController
 
   before_action :load_cursos_ativos
   before_action :load_disciplinas
+  before_action :load_parameters_importar
 
   def importar
-
     file = params[:file]
     unless file.nil?
       ActiveRecord::Base.transaction do
 
         spreadsheet = Roo::Spreadsheet.open(file.path)
-        header = spreadsheet.row(1)
+        header = []
+        spreadsheet.row(1).each do |h|
+          header << h.gsub(/\s+/, "").downcase
+        end
         course = Course.find(params[:course_id])
 
         @grid = Grid.find_or_initialize_by(year: params[:year], course: course) do |grid|
@@ -25,39 +28,39 @@ class GridsController < ApplicationController
         end
         @grid.carga_horaria = 0 if @grid.carga_horaria.nil?
 
-        (2..spreadsheet.last_row).each do |i|
+        puts "****************************************"
+        (params[:linha_inicial]..spreadsheet.last_row).each do |i|
           row = Hash[[header, spreadsheet.row(i)].transpose]
+          puts "Linha: #{i}"
 
-          if row['discipline_title'].blank? || row['discipline_title'].nil?
-            break
+          if row[ajustar_header_coluna(params[:column_discipline])].blank? || row[ajustar_header_coluna(params[:column_discipline])].nil?
+            # break
           else
 
             # Criar a disciplina
             discipline = Discipline.find_or_initialize_by(
-              title: row['discipline_title'],
-              sigla: row['discipline_title'].upcase[0, 3],
+              title: row[ajustar_header_coluna(params[:column_discipline])],
+              sigla: row[ajustar_header_coluna(params[:column_discipline])].upcase[0, 3],
               active:true,
               user: current_user
             )
 
-            ano = row['ano_semestre'].downcase.include?('ano') ? row['ano_semestre'].to_i : nil unless row['ano_semestre'].nil?
-            semestre = row['ano_semestre'].downcase.include?('semestre') ? row['ano_semestre'].to_i : nil unless row['ano_semestre'].nil?
+            ano = row[ajustar_header_coluna(params[:column_ano_semestre])].downcase.include?('ano') ? row[ajustar_header_coluna(params[:column_ano_semestre])].to_i : nil unless row[ajustar_header_coluna(params[:column_ano_semestre])].nil?
+            semestre = row[ajustar_header_coluna(params[:column_ano_semestre])].downcase.include?('semestre') ? row[ajustar_header_coluna(params[:column_ano_semestre])].to_i : nil unless row[ajustar_header_coluna(params[:column_ano_semestre])].nil?
 
             # Disciplina da grade
             grid_discipline = GridDiscipline.find_or_initialize_by(
-              discipline: discipline,
-              year: ano,
-              semestre: semestre,
-              carga_horaria: row['grid_discipline_carga_horaria'].to_i || 0,
-              ementa: row['ementa'],
-              objetivo_geral: row['objetivo_geral'],
-              bib_geral: row['bib_geral'],
-              bib_espec: row['bib_espec'],
+              discipline: discipline, year: ano, semestre: semestre
             )
-            grid_discipline.grid = @grid
+            grid_discipline.carga_horaria    = row[ajustar_header_coluna(params[:column_carga_horaria])].to_i || 0
+            grid_discipline.ementa           = row[ajustar_header_coluna(params[:column_ementa])]
+            grid_discipline.objetivo_geral   = row[ajustar_header_coluna(params[:column_objetivo])]
+            grid_discipline.bib_geral        = row[ajustar_header_coluna(params[:column_ref_basica])]
+            grid_discipline.bib_espec        = row[ajustar_header_coluna(params[:column_ref_compl])]
+            grid_discipline.grid             = @grid
 
             if grid_discipline.valid?
-              @grid.carga_horaria += row['grid_discipline_carga_horaria'].to_i
+              @grid.carga_horaria += row[ajustar_header_coluna(params[:column_carga_horaria])].to_i
             else
               grid_discipline.errors.add(:base, "Erro na linha #{i}")
             end
@@ -69,12 +72,12 @@ class GridsController < ApplicationController
         if @grid.valid?
           if @grid.new_record?
             respond_to do |format|
-              flash[:notice] = 'Arquivo de grades importado com sucesso. Verifique as disciplinas.'
+              flash[:notice] = 'Arquivo de grades importado com sucesso. Verifique as disciplinas e salve a grade.'
               format.html { render :new }
             end
             # redirect_to new_grid_path(grid: @grid), notice: 'Arquivo de grades importado com sucesso. Verifique as disciplinas.'
           else
-            redirect_to edit_grid_path(@grid), notice: 'Arquivo de grades importado com sucesso. Verifique as disciplinas.'
+            redirect_to edit_grid_path(@grid), notice: 'Arquivo de grades importado com sucesso. Verifique as disciplinas e atualize a grade.'
           end
           # if @grid.save!
             # flash[:notice] = 'Arquivo de grades importado com sucesso.'
@@ -87,7 +90,6 @@ class GridsController < ApplicationController
             format.html { render :importar }
           end
         end
-        # redirect_to import_grids_path, notice: 'Arquivo de grades importado com sucesso.'
       end
     end
 
@@ -163,11 +165,8 @@ class GridsController < ApplicationController
 
   # GET /grids/new
   def new
-    binding.pry
-    if @grid.nil?
-      @grid = Grid.new
-      @grid.grid_disciplines.build
-    end
+    @grid = Grid.new
+    @grid.grid_disciplines.build
   end
 
   # GET /grids/1/edit
@@ -246,5 +245,20 @@ class GridsController < ApplicationController
 
     def load_disciplinas
       @disciplinas = Discipline.all
+    end
+
+    def load_parameters_importar
+      params[:column_discipline] = "Disciplina"
+      params[:column_ementa] = "Ementa"
+      params[:column_objetivo] = "Objetivo"
+      params[:column_ref_basica] = "Ref. Básica"
+      params[:column_ref_compl] = "Ref. Complementar"
+      params[:column_carga_horaria] = "C.H"
+      params[:column_ano_semestre] = "Ano Semestre"
+      params[:linha_inicial] = 3
+    end
+
+    def ajustar_header_coluna valor
+      valor.gsub(/\s+/, "").downcase unless valor.nil?
     end
 end

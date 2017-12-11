@@ -1,44 +1,107 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Importar grades</h3>
-  </div>
-  <div class="panel-body">
-    <%= form_tag importar_grids_path, multipart: true do %>
+<%= form_tag importar_grids_path, multipart: true do %>
 
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Importação de grades</h3>
+    </div>
+    <div class="panel-body">
 
-      <% if !@grade.nil? && @grade.errors.any? %>
-        <div class="col-md-12">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Erros na grade</h3>
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#importar" data-toggle="tab">Importar grade</a></li>
+        <li><a href="#configuracoes" data-toggle="tab">Configurações</a></li>
+      </ul>
+
+      <div class="tab-content">
+
+        <div id="importar" class="tab-pane fade in active">
+
+          <div class="row">
+            <div class="alert alert-info">Informe ano, curso e selecione o arquivo (xls, xlsx, ods) a ser importado.</div>
+            <% if !@grid.nil? && @grid.errors.any? %>
+              <div class="col-md-12">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Erros na grade</h3>
+                  </div>
+                  <div class="panel-body">
+                    <%= error_messages_for(@grid) %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+
+            <div class="form-group col-md-6">
+              <%= label_tag :year, 'Ano da grade' %>
+              <%= text_field_tag :year, params[:year], id: :year, autofocus:true, class: 'form-control', placeholder: 'Ano da grade', required:true %>
             </div>
-            <div class="panel-body">
-              <%= error_messages_for(@grade) %>
+            <div class="form-group col-md-6">
+              <%= label_tag :course_id %>
+              <%= select_tag :course_id, options_for_select(Course.where(active:true).map { |c| ["#{c.sigla} - #{c.name}", c.id] }, params[:course_id] ),
+                  id: :course_id, class: 'form-control', prompt:'Selecione o curso', required:true %>
+            </div>
+
+            <div class="form-group col-md-12">
+              <%= label_tag :file, 'Arquivo (xls, xlsx, ods)' %>
+              <%= file_field_tag :file, class: 'form-control' %>
+            </div>
+            <!-- <div class="form-group col-md-12">
+              <div class="checkbox-inline">
+                <= check_box_tag :mesclar, params[:mesclar], true, id: :mesclar, class: '' %>
+                <= label_tag :mesclar, 'Mesclar' %>
+                <p class="help-block">Marque se deseja mesclar as disciplinas da grade (caso a grade já exista).</p>
+              </div>
+            </div> -->
+
+            <div class="form-group col-md-12">
+              <%= submit_tag "Importar", class: 'btn btn-primary' %>
+            </div>
+          </div>
+
+        </div>
+
+        <div id="configuracoes" class="tab-pane">
+          <div class="row">
+            <div class="alert alert-info">Defina aqui o cabeçalho das colunas presentes no arquivo (xls, xlsx, ods) e a linha inicial com informações sobre disciplinas.</div>
+            <div class="form-group col-md-3">
+              <%= label_tag :column_discipline, 'Coluna disciplina' %>
+              <%= text_field_tag :column_discipline, params[:column_discipline], placeholder: 'Título da coluna disciplina', class: 'form-control', required:true %>
+            </div>
+            <div class="form-group col-md-3">
+              <%= label_tag :column_ementa, 'Coluna ementa' %>
+              <%= text_field_tag :column_ementa, params[:column_ementa], placeholder: 'Título da coluna ementa', class: 'form-control', required:true %>
+            </div>
+            <div class="form-group col-md-3">
+              <%= label_tag :column_objetivo, 'Coluna objetivo' %>
+              <%= text_field_tag :column_objetivo, params[:column_objetivo], placeholder: 'Título da coluna objetivo', class: 'form-control', required:true %>
+            </div>
+            <div class="form-group col-md-3">
+              <%= label_tag :column_ref_basica, 'Coluna Ref. Básica' %>
+              <%= text_field_tag :column_ref_basica, params[:column_ref_basica], placeholder: 'Título da coluna Ref. Básica', class: 'form-control', required:true %>
+            </div>
+            <div class="form-group col-md-3">
+              <%= label_tag :column_ref_compl, 'Coluna Ref. Complementar' %>
+              <%= text_field_tag :column_ref_compl, params[:column_ref_compl], placeholder: 'Título da coluna Ref. Complementar', class: 'form-control', required:true %>
+            </div>
+            <div class="form-group col-md-3">
+              <%= label_tag :column_ano_semestre, 'Coluna Ano/Semestre' %>
+              <%= text_field_tag :column_ano_semestre, params[:column_ano_semestre], placeholder: 'Título da coluna Ano/Semestre', class: 'form-control', required:true %>
+            </div>
+            <div class="form-group col-md-3">
+              <%= label_tag :column_carga_horaria, 'Coluna carga horária (C.H)' %>
+              <%= text_field_tag :column_carga_horaria, params[:column_carga_horaria], placeholder: 'Título da coluna C.H', class: 'form-control', required:true %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="alert alert-info">Defina aqui a linha inicial com informações sobre disciplinas.</div>
+            <div class="form-group col-md-3">
+              <%= label_tag :linha_inicial, 'Linha inicial' %>
+              <%= text_field_tag :linha_inicial, params[:linha_inicial], placeholder: 'Informe a linha inicial', class: 'form-control', required:true %>
             </div>
           </div>
         </div>
-      <% end %>
-
-      <div class="form-group col-md-4">
-        <%= label_tag :year, 'Ano da grade' %>
-        <%= text_field_tag :year, params[:year], id: :year, autofocus:true, class: 'form-control', placeholder: 'Ano da grade' %>
       </div>
-      <div class="form-group col-md-8">
-        <%= label_tag :course_id %>
-        <%= select_tag :course_id, options_for_select(Course.where(active:true).map { |c| ["#{c.sigla} - #{c.name}", c.id] }, params[:course_id] ),
-            id: :course_id, class: 'form-control', prompt:'Selecione o curso', required:true %>
-      </div>
-
-      <div class="form-group col-md-6">
-        <%= label_tag :file, 'Arquivo xls' %>
-        <%= file_field_tag :file, class: 'form-control' %>
-      </div>
-
-      <div class="form-group col-md-12">
-        <%= submit_tag "Importar", class: 'btn btn-primary' %>
-      </div>
-
-    <% end %>
-
+    </div>
   </div>
-</div>
+
+
+<% end %>

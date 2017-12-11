@@ -10,5 +10,4 @@ class GridDecorator < ApplicationDecorator
     active_tag component.active?, 'fa-2'
   end
 
-
 end
