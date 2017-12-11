@@ -130,7 +130,7 @@ class PlansController < ApplicationController
     respond_to do |format|
       ActiveRecord::Base.transaction do
         if @plan.update(aprovado:aprovado, reprovado:reprovado, parecer: plan_params[:parecer], user_parecer: current_user)
-          flash[:notice] = "Plano #{aprovado == true ? 'aprovado' : 'reprovado'} com sucesso."
+          flash[:notice] = "Plano #{aprovado == true ? 'aprovado' : 'com pendências'}."
           # format.html { redirect_to aprovar_offer_offer_discipline_plan_path(@plan) }
           format.html { redirect_to get_planos_aprovar_path }
           # format.json { render :show, status: :updated, location: @plan }

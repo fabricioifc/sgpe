@@ -52,7 +52,7 @@ class PlanDecorator < ApplicationDecorator
     if component.aprovado?
       h.content_tag :span, 'Aprovado', class: 'label label-success', style: 'font-size: 14px;'
     elsif component.reprovado?
-      h.content_tag :span, 'Reprovado', class: 'label label-danger', style: 'font-size: 14px;'
+      h.content_tag :span, 'Pendências', class: 'label label-danger', style: 'font-size: 14px;'
     elsif component.analise?
       h.content_tag :span, 'Em análise', class: 'label label-warning', style: 'font-size: 14px;'
     else
@@ -62,9 +62,9 @@ class PlanDecorator < ApplicationDecorator
 
   def situacao_texto
     if component.aprovado?
-        'Aprovado'
+      'Aprovado'
     elsif component.reprovado?
-      'Reprovado'
+      'Pendências'
     elsif component.analise?
       'Em análise'
     else
