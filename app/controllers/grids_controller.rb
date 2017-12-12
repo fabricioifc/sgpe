@@ -38,12 +38,11 @@ class GridsController < ApplicationController
           else
 
             # Criar a disciplina
-            discipline = Discipline.find_or_initialize_by(
-              title: row[ajustar_header_coluna(params[:column_discipline])],
-              sigla: row[ajustar_header_coluna(params[:column_discipline])].upcase[0, 3],
-              active:true,
-              user: current_user
-            )
+            discipline = Discipline.find_or_create_by(title: row[ajustar_header_coluna(params[:column_discipline])]) do |d|
+              d.sigla       = row[ajustar_header_coluna(params[:column_discipline])].upcase[0, 3] if d.sigla.nil?
+              d.user        = current_user
+              d.active      = true
+            end
 
             ano = row[ajustar_header_coluna(params[:column_ano_semestre])].downcase.include?('ano') ? row[ajustar_header_coluna(params[:column_ano_semestre])].to_i : nil unless row[ajustar_header_coluna(params[:column_ano_semestre])].nil?
             semestre = row[ajustar_header_coluna(params[:column_ano_semestre])].downcase.include?('semestre') ? row[ajustar_header_coluna(params[:column_ano_semestre])].to_i : nil unless row[ajustar_header_coluna(params[:column_ano_semestre])].nil?
