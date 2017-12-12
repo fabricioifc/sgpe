@@ -44,7 +44,7 @@
           <div id="objetivos" class="tab-pane fade in">
             <% if plan.offer_discipline.grid_discipline.discipline.especial? %>
               <%= label_tag :objetivo_geral, t('activerecord.attributes.grid_discipline.objetivo_geral'), class: 'control-label' %>
-              <%= text_area_tag :objetivo_geral, params[:objetivo_geral], id: :plan_objetivo_geral, rows: 8, data: {provider: :none}, class: 'form-control', placeholder: 'Objetivo geral da disciplina', autofocus:true %>
+              <%= text_area_tag :objetivo_geral, params[:objetivo_geral] || plan.offer_discipline.grid_discipline.objetivo_geral, id: :plan_objetivo_geral, rows: 8, data: {provider: :none}, class: 'form-control', placeholder: 'Objetivo geral da disciplina', autofocus:true %>
             <% else %>
               <div class="form-group">
                 <div class="html_safe_div">
@@ -80,9 +80,9 @@
           <div id="bibliografias" class="tab-pane fade in">
             <% if plan.offer_discipline.grid_discipline.discipline.especial? %>
               <%= label_tag :bib_geral, t('activerecord.attributes.grid_discipline.bib_geral'), class: 'control-label' %>
-              <%= text_area_tag :bib_geral, params[:bib_geral], id: :plan_bib_geral, rows: 8, data: {provider: :none}, class: 'form-control', placeholder: 'Bibliografia básica', autofocus:true %>
+              <%= text_area_tag :bib_geral, params[:bib_geral] || plan.offer_discipline.grid_discipline.bib_geral, id: :plan_bib_geral, rows: 8, data: {provider: :none}, class: 'form-control', placeholder: 'Bibliografia básica', autofocus:true %>
               <%= label_tag :bib_espec, t('activerecord.attributes.grid_discipline.bib_espec'), class: 'control-label' %>
-              <%= text_area_tag :bib_espec, params[:bib_espec], id: :plan_bib_geral, rows: 8, data: {provider: :none}, class: 'form-control', placeholder: 'Bibliografia complementar', autofocus:true %>
+              <%= text_area_tag :bib_espec, params[:bib_espec] || plan.offer_discipline.grid_discipline.bib_espec, id: :plan_bib_geral, rows: 8, data: {provider: :none}, class: 'form-control', placeholder: 'Bibliografia complementar', autofocus:true %>
             <% else %>
               <div class="form-group">
                 <div class="html_safe_div">
