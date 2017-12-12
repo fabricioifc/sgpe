@@ -1,5 +1,6 @@
 class GridDatatable < ApplicationDatatable
   delegate :edit_grid_path, to: :@view
+  delegate :copy_grid_path, to: :@view
 
   private
 
@@ -20,6 +21,7 @@ class GridDatatable < ApplicationDatatable
         links = []
         column << link_to("<i class='fa fa-list fa-2 text-info'></i>".html_safe, grid)
         column << link_to("<i class='fa fa-pencil-square-o fa-2 text-warning'></i>".html_safe, edit_grid_path(grid))
+        column << link_to("<i class='fa fa-files-o fa-2 text-success'></i>".html_safe, copy_grid_path(id: grid.id))
         # column << link_to("<i class='fa fa-trash-o fa-2 text-danger'></i>".html_safe, grid, method: :delete, data: { confirm: 'Tem certeza?' })
         column << ''
         # column << links.join(" <span style='padding-right: 5px;'></span> ")

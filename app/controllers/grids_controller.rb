@@ -18,7 +18,7 @@ class GridsController < ApplicationController
         spreadsheet = Roo::Spreadsheet.open(file.path)
         header = []
         spreadsheet.row(1).each do |h|
-          header << h.gsub(/\s+/, "").downcase
+          header << (h.nil? ? h : h.gsub(/\s+/, "").downcase)
         end
         course = Course.find(params[:course_id])
 
@@ -44,19 +44,26 @@ class GridsController < ApplicationController
               d.active      = true
             end
 
-            ano = row[ajustar_header_coluna(params[:column_ano_semestre])].downcase.include?('ano') ? row[ajustar_header_coluna(params[:column_ano_semestre])].to_i : nil unless row[ajustar_header_coluna(params[:column_ano_semestre])].nil?
-            semestre = row[ajustar_header_coluna(params[:column_ano_semestre])].downcase.include?('semestre') ? row[ajustar_header_coluna(params[:column_ano_semestre])].to_i : nil unless row[ajustar_header_coluna(params[:column_ano_semestre])].nil?
+            ano = nil
+            semestre = nil
+            # Se não for anual então é tudo semestral
+            unless row[ajustar_header_coluna(params[:column_ano_semestre])].nil?
+              if row[ajustar_header_coluna(params[:column_ano_semestre])].to_s.downcase.include?('ano')
+                ano = row[ajustar_header_coluna(params[:column_ano_semestre])].to_i
+              else
+                semestre = row[ajustar_header_coluna(params[:column_ano_semestre])].to_i
+              end
+            end
 
             # Disciplina da grade
             grid_discipline = GridDiscipline.find_or_initialize_by(
-              discipline: discipline, year: ano, semestre: semestre
+              discipline: discipline, year: ano, semestre: semestre, grid: @grid
             )
-            grid_discipline.carga_horaria    = row[ajustar_header_coluna(params[:column_carga_horaria])].to_i || 0
+            grid_discipline.carga_horaria    = row[ajustar_header_coluna(params[:column_carga_horaria])].to_i
             grid_discipline.ementa           = row[ajustar_header_coluna(params[:column_ementa])]
             grid_discipline.objetivo_geral   = row[ajustar_header_coluna(params[:column_objetivo])]
             grid_discipline.bib_geral        = row[ajustar_header_coluna(params[:column_ref_basica])]
             grid_discipline.bib_espec        = row[ajustar_header_coluna(params[:column_ref_compl])]
-            grid_discipline.grid             = @grid
 
             if grid_discipline.valid?
               @grid.carga_horaria += row[ajustar_header_coluna(params[:column_carga_horaria])].to_i
@@ -129,6 +136,12 @@ class GridsController < ApplicationController
     # end
   end
 
+  def copy
+    @source = Grid.find(params[:id])
+    @grid = @source.amoeba_dup
+    render 'new'
+  end
+
   # GET /grids
   # GET /grids.json
   def index
@@ -145,20 +158,13 @@ class GridsController < ApplicationController
     respond_to do |format|
       format.html
       format.json
-      format.pdf {
-        pdf = GridPdf.new(@grid, current_user).generate
-        send_data pdf.render,
-          filename: "#{@grid.created_at.strftime("%Y%m%d")}_grade#{@grid.id}.pdf",
-          type: "application/pdf",
-          disposition: :inline
-      }
-      # format.pdf do
-      #   pdf = GridPdf.new(@grid)
+      # format.pdf {
+      #   pdf = GridPdf.new(@grid, current_user).generate
       #   send_data pdf.render,
-      #       filename: "grid_#{@grid.id}",
-      #       type: 'application/pdf',
-      #       disposition: 'inline'
-      # end
+      #     filename: "#{@grid.created_at.strftime("%Y%m%d")}_grade#{@grid.id}.pdf",
+      #     type: "application/pdf",
+      #     disposition: :inline
+      # }
     end
   end
 

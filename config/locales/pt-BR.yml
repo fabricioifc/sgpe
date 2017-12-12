@@ -52,9 +52,9 @@ pt-BR:
         name: Nome
         sigla: Sigla
         active: Ativo
-        course_modality: Modalidade
-        course_format: Formato
-        course_offer: Oferta
+        course_modality_id: Modalidade
+        course_format_id: Formato
+        course_offer_id: Oferta
         carga_horaria: Carga horária
       discipline:
         title: Título

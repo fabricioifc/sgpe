@@ -32,10 +32,13 @@
           <dd><%= @grid.year %></dd>
           <dt><%= model.human_attribute_name(:course) %></dt>
           <dd><%= @grid.course.name %></dd>
-          <dt><%= model.human_attribute_name(:active) %></dt>
-          <dd><%= @grid.decorate.active %></dd>
+          <dt><%= model.human_attribute_name(:carga_horaria) %></dt>
+          <dd><span class="badge"><%= @grid.carga_horaria %></span></dd>
           <dt><%= modelDiscipline.human_attribute_name(:discipline_id).pluralize %></dt>
           <dd><span class="badge"><%= @grid.grid_disciplines.count %></span></dd>
+          <hr>
+          <dt><%= model.human_attribute_name(:active) %></dt>
+          <dd><%= @grid.decorate.active %></dd>
         </dl>
 
       </div>
@@ -49,7 +52,7 @@
           <caption class="well-sm alert-success">Disciplinas da grade</caption>
           <thead>
             <tr class="alert-warning">
-              <th><%= modelDiscipline.human_attribute_name(:discipline) %></th>
+              <th><%= modelDiscipline.human_attribute_name(:discipline_id) %></th>
               <th><%= modelDiscipline.human_attribute_name(:year) %></th>
               <th><%= modelDiscipline.human_attribute_name(:semestre) %></th>
               <th><%= modelDiscipline.human_attribute_name(:carga_horaria) %></th>
@@ -57,7 +60,7 @@
             </tr>
           </thead>
           <tbody>
-            <% @grid.grid_disciplines.order(:year).each do |d| %>
+            <% @grid.grid_disciplines.order(:year, :semestre).each do |d| %>
               <tr>
                 <td><%= "#{d.discipline.sigla} - #{d.discipline.title}" %></td>
                 <td class="text-center"><%= d.year %></td>

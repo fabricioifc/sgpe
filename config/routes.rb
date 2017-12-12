@@ -38,6 +38,9 @@ Rails.application.routes.draw do
 
   resources :grid_disciplines
   resources :grids, except: [:destroy] do
+    member do
+      get 'copy'
+    end
     collection do
       get :importar
       post  :importar

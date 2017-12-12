@@ -17,6 +17,8 @@ class Grid < ApplicationRecord
     }
 
   validates :carga_horaria, presence:true, :numericality => { :greater_than => 0 }
+  # Grade única por ano e curso
+  validates :year, :course_id, uniqueness: {scope: [:year, :course_id]}
 
   accepts_nested_attributes_for :grid_disciplines, :allow_destroy => true
 
