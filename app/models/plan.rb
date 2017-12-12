@@ -3,7 +3,7 @@ class Plan < ApplicationRecord
   belongs_to :user, :class_name => 'User'
   belongs_to :user_parecer, :class_name => 'User', optional:true
 
-  attr_accessor :ementa, :objetivo_geral, :bib_geral, :bib_espec
+  # attr_accessor :ementa, :objetivo_geral, :bib_geral, :bib_espec
 
   validates :offer_discipline_id, presence:true,
     if: Proc.new { |a| a.analise? }
