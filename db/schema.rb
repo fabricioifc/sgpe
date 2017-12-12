@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171211172814) do
+ActiveRecord::Schema.define(version: 20171212175519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,15 +70,16 @@ ActiveRecord::Schema.define(version: 20171211172814) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "especial", default: false, null: false
     t.index ["user_id"], name: "index_disciplines_on_user_id"
   end
 
   create_table "grid_disciplines", force: :cascade do |t|
     t.integer "year"
-    t.text "ementa", null: false
-    t.text "objetivo_geral", null: false
-    t.text "bib_geral", null: false
-    t.text "bib_espec", null: false
+    t.text "ementa"
+    t.text "objetivo_geral"
+    t.text "bib_geral"
+    t.text "bib_espec"
     t.bigint "grid_id"
     t.bigint "discipline_id"
     t.datetime "created_at", null: false

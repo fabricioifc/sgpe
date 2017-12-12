@@ -11,6 +11,7 @@ class CreateUsersService
     users << User.new( name: 'Coordenação Geral de Ensino', email: 'cge@fraiburgo.ifc.edu.br', perfils: [Perfil.find_by(name: 'NUPE'), Perfil.find_by(name: 'CGE')] )
     users << User.new( name: 'Tiago Gonçalves', email: 'tiago.goncalves@ifc.edu.br', admin:true, teacher:true, perfils: [Perfil.find_by(name: 'DDE')] )
     users << User.new( name: 'Paulo Roberto Ribeiro Nunes', email: 'paulo.nunes@fraiburgo.ifc.edu.br', perfils: [Perfil.find_by(name: 'NUPE')])
+    users << User.new( name: 'Davi Penno', email: 'davi.penno@ifc.edu.br', perfils: [Perfil.find_by(name: 'NUPE')])
 
     users.each do |u, v|
       if User.find_by(email: u.email).nil?

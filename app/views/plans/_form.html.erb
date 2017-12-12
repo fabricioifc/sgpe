@@ -23,23 +23,37 @@
         <hr style="margin-top: 5px; margin-bottom: 10px;">
         <div class="tab-content">
           <div id="ementa" class="tab-pane fade in active">
-            <!-- <= f.select :turma_id, Turma.all.collect { |c| ["#{c.year} - #{c.name}", c.id] }, id: :plan_turma, prompt:true %> -->
-            <div class="form-group">
-              <div class="html_safe_div">
-                <p class="header"><%= label_tag :ementa, nil, class: 'control-label' %></p>
-                <%= plan.offer_discipline.grid_discipline.decorate.ementa %>
+            <% if plan.offer_discipline.grid_discipline.discipline.especial? %>
+              <!-- <= f.fields_for :offer_discipline do |a| %>
+                <= a.fields_for :grid_discipline do |b| %>
+                  <= b.text_area :ementa, id: :plan_offer_discipline_grid_discipline_ementa, rows: 8, data: {provider: :none} %>
+                < end %>
+              < end %> -->
+              <%= label_tag :ementa, t('activerecord.attributes.grid_discipline.ementa'), class: 'control-label' %>
+              <%= text_area_tag :ementa, params[:ementa] || plan.offer_discipline.grid_discipline.ementa, id: :plan_ementa, rows: 8, data: {provider: :none}, class: 'form-control', placeholder: 'Ementa da disciplina', autofocus:true %>
+            <% else %>
+              <div class="form-group">
+                <div class="html_safe_div">
+                  <p class="header"><%= label_tag :ementa, t('activerecord.attributes.grid_discipline.ementa'), class: 'control-label' %></p>
+                  <%= plan.offer_discipline.grid_discipline.decorate.ementa %>
+                </div>
               </div>
-              <!-- <= text_area_tag :ementa, plan.offer_discipline.grid_discipline.ementa.html_safe, id: :plan_ementa, class: 'form-control', readonly:true, rows: 10%> -->
-            </div>
+            <% end %>
           </div>
 
           <div id="objetivos" class="tab-pane fade in">
-            <div class="form-group">
-              <div class="html_safe_div">
-                <p class="header"><%= label_tag :objetivo_geral, nil, class: 'control-label' %></p>
-                <%= plan.offer_discipline.grid_discipline.objetivo_geral.html_safe %>
+            <% if plan.offer_discipline.grid_discipline.discipline.especial? %>
+              <%= label_tag :objetivo_geral, t('activerecord.attributes.grid_discipline.objetivo_geral'), class: 'control-label' %>
+              <%= text_area_tag :objetivo_geral, params[:objetivo_geral], id: :plan_objetivo_geral, rows: 8, data: {provider: :none}, class: 'form-control', placeholder: 'Objetivo geral da disciplina', autofocus:true %>
+            <% else %>
+              <div class="form-group">
+                <div class="html_safe_div">
+                  <p class="header"><%= label_tag :objetivo_geral, t('activerecord.attributes.grid_discipline.objetivo_geral'), class: 'control-label' %></p>
+                  <%= plan.offer_discipline.grid_discipline.objetivo_geral.html_safe %>
+                </div>
               </div>
-            </div>
+            <% end %>
+
             <%= f.text_area :obj_espe, id: :plan_obj_espe, rows: 6, data: {provider: :none} %>
           </div>
 
@@ -64,19 +78,25 @@
           </div>
 
           <div id="bibliografias" class="tab-pane fade in">
-            <!-- <= f.select :turma_id, Turma.all.collect { |c| ["#{c.year} - #{c.name}", c.id] }, id: :plan_turma, prompt:true %> -->
-            <div class="form-group">
-              <div class="html_safe_div">
-                <p class="header"><%= label_tag :bib_geral, nil, class: 'control-label' %></p>
-                <%= plan.offer_discipline.grid_discipline.bib_geral.html_safe %>
+            <% if plan.offer_discipline.grid_discipline.discipline.especial? %>
+              <%= label_tag :bib_geral, t('activerecord.attributes.grid_discipline.bib_geral'), class: 'control-label' %>
+              <%= text_area_tag :bib_geral, params[:bib_geral], id: :plan_bib_geral, rows: 8, data: {provider: :none}, class: 'form-control', placeholder: 'Bibliografia básica', autofocus:true %>
+              <%= label_tag :bib_espec, t('activerecord.attributes.grid_discipline.bib_espec'), class: 'control-label' %>
+              <%= text_area_tag :bib_espec, params[:bib_espec], id: :plan_bib_geral, rows: 8, data: {provider: :none}, class: 'form-control', placeholder: 'Bibliografia complementar', autofocus:true %>
+            <% else %>
+              <div class="form-group">
+                <div class="html_safe_div">
+                  <p class="header"><%= label_tag :bib_geral, t('activerecord.attributes.grid_discipline.bib_geral'), class: 'control-label' %></p>
+                  <%= plan.offer_discipline.grid_discipline.bib_geral %>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <div class="html_safe_div">
-                <p class="header"><%= label_tag :bib_espec, nil, class: 'control-label' %></p>
-                <%= plan.offer_discipline.grid_discipline.bib_espec.html_safe %>
+              <div class="form-group">
+                <div class="html_safe_div">
+                  <p class="header"><%= label_tag :bib_espec, t('activerecord.attributes.grid_discipline.bib_espec'), class: 'control-label' %></p>
+                  <%= plan.offer_discipline.grid_discipline.bib_espec %>
+                </div>
               </div>
-            </div>
+            <% end %>
           </div>
 
         </div>

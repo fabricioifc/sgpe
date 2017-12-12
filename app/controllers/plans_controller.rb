@@ -222,6 +222,7 @@ class PlansController < ApplicationController
 
   # GET /plans/new
   def new
+    # @plan = Plan.new(offer_discipline_id: params[:offer_discipline_id])
     @plan = Plan.new(offer_discipline_id: params[:offer_discipline_id])
     # @plan.versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
     # params[:versao] = @plan.versao
@@ -234,6 +235,10 @@ class PlansController < ApplicationController
 
   # GET /plans/1/edit
   def edit
+    params[:ementa] = @plan.offer_discipline.grid_discipline.ementa
+    params[:objetivo_geral] = @plan.offer_discipline.grid_discipline.objetivo_geral
+    params[:bib_geral] = @plan.offer_discipline.grid_discipline.bib_geral
+    params[:bib_espec] = @plan.offer_discipline.grid_discipline.bib_espec
     adicionar_breadcrumb_curso @plan.offer_discipline.grid_discipline.grid.course
     adicionar_breadcrumb_planos @plan
   end
@@ -247,6 +252,13 @@ class PlansController < ApplicationController
     @plan.active = true
     ultima_versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
     @plan.versao = ultima_versao.nil? ? 1 : ultima_versao + 1
+
+    if @plan.offer_discipline.grid_discipline.discipline.especial?
+      @plan.offer_discipline.grid_discipline.ementa = params[:ementa]
+      @plan.offer_discipline.grid_discipline.objetivo_geral = params[:objetivo_geral]
+      @plan.offer_discipline.grid_discipline.bib_geral = params[:bib_geral]
+      @plan.offer_discipline.grid_discipline.bib_espec = params[:bib_espec]
+    end
 
     adicionar_breadcrumb_curso @plan.offer_discipline.grid_discipline.grid.course
     adicionar_breadcrumb_planos @plan
@@ -270,6 +282,13 @@ class PlansController < ApplicationController
   # PATCH/PUT /plans/1
   # PATCH/PUT /plans/1.json
   def update
+    if @plan.offer_discipline.grid_discipline.discipline.especial?
+      @plan.offer_discipline.grid_discipline.ementa = params[:ementa]
+      @plan.offer_discipline.grid_discipline.objetivo_geral = params[:objetivo_geral]
+      @plan.offer_discipline.grid_discipline.bib_geral = params[:bib_geral]
+      @plan.offer_discipline.grid_discipline.bib_espec = params[:bib_espec]
+    end
+
     adicionar_breadcrumb_curso @plan.offer_discipline.grid_discipline.grid.course
     adicionar_breadcrumb_planos @plan
     respond_to do |format|
@@ -306,7 +325,9 @@ class PlansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plan_params
-      params.require(:plan).permit(:offer_discipline_id, :obj_espe, :conteudo_prog, :prat_prof, :interdisc, :met_tec, :met_met, :avaliacao, :cronograma, :atendimento, :versao, :active, :user_id, :analise, :aprovado, :reprovado, :parecer, :user_parecer_id)
+      params.require(:plan).permit(:offer_discipline_id, :obj_espe, :conteudo_prog, :prat_prof, :interdisc, :met_tec, :met_met, :avaliacao, :cronograma, :atendimento, :versao, :active, :user_id, :analise, :aprovado, :reprovado, :parecer, :user_parecer_id,
+        offer_discipline_attributes: [grid_discipline_attributes: [:ementa, :objetivo_geral, :bib_geral, :bib_espec]]
+      )
     end
 
     def load_professores

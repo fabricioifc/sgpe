@@ -4,6 +4,8 @@ class OfferDiscipline < ApplicationRecord
   belongs_to :user, optional:true
   has_many :plans
 
+  accepts_nested_attributes_for :grid_discipline
+
   # validates :user_id, presence:true
 
   # attr_accessor :offer_discipline_turmas_attributes

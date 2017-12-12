@@ -13,4 +13,8 @@ class DisciplineDecorator < ApplicationDecorator
   def active
     active_tag component.active?, 'fa-2'
   end
+
+  def especial
+    active_tag component.especial?, 'fa-2'
+  end
 end

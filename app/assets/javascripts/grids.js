@@ -111,11 +111,26 @@ $.ajustarGridDisciplinasCocoon = function(event){
   return false;
 };
 
+$.ajustarDisciplinaTitle = function(event, disciplina) {
+    var value = $(disciplina).find('option:selected').text();
+
+    if ($(value).val() !== '') {
+      $(disciplina).closest('div.panel-collapse').closest('div.panel').find('.panel-title a.trigger').text(value);
+    }
+};
+
 // Carrega configurações padrões
 $.init = function(event) {
   $.ajustarGridDisciplinasCocoon(event);
+  $('select.select-discipline').each(function(){
+    $.ajustarDisciplinaTitle(event, this);
+  });
   // $('.panel-collapse.collapse:last').collapse('show');
 };
+
+$(document).on('change', 'select.select-discipline', function(event) {
+  $.ajustarDisciplinaTitle(event, this);
+});
 
 
 // $('ul.nav.nav-tabs').each(function(k, v) {

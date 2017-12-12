@@ -1,20 +1,18 @@
 <%- model = Grid %>
 
-<div class="alert alert-info">
-  <%= link_to importar_grids_path, class: "btn btn-primary" do %>
-    <i class="fa fa-upload"></i>
-    Importar um arquivo de grades
-  <% end %>
-  <p>Caso possua um arquivo xls com informações sobre as grades/PPCs, existe a possibilidade de efetuar a sua importação.</p>
-</div>
-
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
-    <h3 class="panel-title pull-left">
+    <h3 class="panel-title">
       <%= link_to new_grid_path do %>
         <i class="fa fa-plus" aria-hidden="true"></i>
         <%= t '.title', :default => model.model_name.human.pluralize %>
       <% end %>
+      <span class="pull-right">
+        <%= link_to importar_grids_path, class: "btn btn-xs btn-info" do %>
+          <i class="fa fa-upload"></i>
+          Importar arquvo de grade
+        <% end %>
+      </span>
     </h3>
   </div>
   <div class="panel-body">

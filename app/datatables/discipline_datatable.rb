@@ -10,6 +10,7 @@ class DisciplineDatatable < ApplicationDatatable
           column << discipline.title
           column << discipline.sigla
           column << discipline.decorate.active
+          column << discipline.decorate.especial
 
           links = []
           links << link_to("<i class='fa fa-list fa-2 text-info'></i>".html_safe, discipline)
@@ -50,6 +51,6 @@ class DisciplineDatatable < ApplicationDatatable
 
     def columns
       # (title last_name email phone_number)
-      %w(id title sigla active)
+      %w(id title sigla active especial)
     end
 end

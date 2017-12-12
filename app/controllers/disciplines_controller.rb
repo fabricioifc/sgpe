@@ -92,6 +92,6 @@ class DisciplinesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def discipline_params
-      params.require(:discipline).permit(:title, :sigla, :active, :user_id)
+      params.require(:discipline).permit(:title, :sigla, :active, :user_id, :especial)
     end
 end

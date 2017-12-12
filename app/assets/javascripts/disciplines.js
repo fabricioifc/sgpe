@@ -36,7 +36,7 @@ document.addEventListener("turbolinks:load", function() {
           orderable: true
         },
         {
-          width: "50%",
+          width: "40%",
           className: "",
           searchable: true,
           orderable: true
@@ -46,6 +46,12 @@ document.addEventListener("turbolinks:load", function() {
           className: "text-center",
           searchable: true,
           orderable: true
+        },
+        {
+          width: "10%",
+          className: "",
+          searchable: false,
+          orderable: false
         },
         {
           width: "10%",

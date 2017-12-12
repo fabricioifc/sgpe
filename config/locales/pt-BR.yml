@@ -69,8 +69,8 @@ pt-BR:
         discipline_id: Disciplina
         ementa: Ementa
         objetivo_geral: Objetivo geral
-        bib_geral: Bibliografia geral
-        bib_espec: Bigliografia específica
+        bib_geral: Bibliografia básica
+        bib_espec: Bigliografia complementar
       offer:
         grid: Grade
         grid_id: Grade

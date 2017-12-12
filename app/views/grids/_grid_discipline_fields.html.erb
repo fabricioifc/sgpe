@@ -13,7 +13,7 @@
         <div class="controls">
           <div class="row">
             <div class="col-md-3">
-              <%= f.select :discipline_id, @disciplinas.collect { |c| [c.title, c.id] }, id: :grid_discipline_id, prompt: true %>
+              <%= f.select :discipline_id, @disciplinas.collect { |c| [c.title, c.id] }, {id: :grid_discipline_id, prompt: true}, { class: 'select-discipline'} %>
             </div>
             <div class="col-md-3">
               <%= f.number_field :year, id: :grid_discipline_year, class: 'grid_discipline_year', placeholder:'1,2,3...' %>
