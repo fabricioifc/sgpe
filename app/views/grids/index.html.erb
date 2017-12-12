@@ -1,7 +1,10 @@
 <%- model = Grid %>
 
 <div class="alert alert-info">
-  <%= link_to "Importar um arquivo de grades", importar_grids_path, class: "btn btn-primary" %>
+  <%= link_to importar_grids_path, class: "btn btn-primary" do %>
+    <i class="fa fa-upload"></i>
+    Importar um arquivo de grades
+  <% end %>
   <p>Caso possua um arquivo xls com informações sobre as grades/PPCs, existe a possibilidade de efetuar a sua importação.</p>
 </div>
 
