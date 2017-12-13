@@ -122,18 +122,6 @@ class PlansController < ApplicationController
     end
   end
 
-  def get_planos_user_aprovar
-    if user_signed_in?
-      # @planos_aprovar = Plan.joins(offer_discipline: {offer: { grid: :course }}).
-      #   where('plans.active is true').
-      #   where(analise:true, aprovado:false, reprovado:false)
-      respond_to do |format|
-        format.html { render 'aprovacao' }
-        format.json { render json: AprovarPlanosUserDatatable.new(view_context, current_user) }
-      end
-    end
-  end
-
   # aprovar ou reprovar o plano de ensino
   def aprovar
     aprovado = params[:commit_reprovar].nil?

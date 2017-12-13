@@ -18,7 +18,8 @@ private
         column << "#{plano.offer_discipline.offer.turma.year} - #{plano.offer_discipline.offer.turma.name}"
         column << plano.user.name
         column << plano.offer_discipline.offer.decorate.ano_semestre
-        column << plano.decorate.versao
+        column << (plano.user_parecer.nil? ? nil : plano.user_parecer.name)
+        column << "<span class='badge text-center'>v.#{plano.decorate.versao}</span>"
         column << plano.decorate.situacao
 
         # links = []
@@ -62,13 +63,13 @@ private
       joins(offer_discipline: {grid_discipline: :discipline }).
       joins(:user).
       where('plans.active is true').
-      where('plans.user_parecer_id is null OR plans.user_parecer_id != ?', @user.id).
       where('analise is true OR aprovado is true OR reprovado is true').
       order(analise: :desc, reprovado: :asc, aprovado: :asc).
       order("#{sort_column} #{sort_direction}")
     planos = planos.page(page).per(per_page)
     planos = planos.where(search_string.join(' or '), search: "%#{params[:search][:value]}%")
   end
+  # where('plans.user_parecer_id is null OR plans.user_parecer_id != ?', @user.id).
 
   # The columns needs to be the same list of searchable items and IN ORDER that they will appear in Data.
   def columns

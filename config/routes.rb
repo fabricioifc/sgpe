@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   get 'planos', to: 'plans#planos_professor', as: 'planos_professor'
   # put 'update_perfils/:users', to: 'user#update_perfils', as: 'update_perfils_users'
   get 'aprovacao', to: 'plans#get_planos_aprovar', as: 'get_planos_aprovar'
-  get 'aprovacao_user', to: 'plans#get_planos_user_aprovar', as: 'get_planos_user_aprovar'
+  # get 'aprovacao_user', to: 'plans#get_planos_user_aprovar', as: 'get_planos_user_aprovar'
   # put 'aprovacao/:plan', to: 'plans#aprovar', as: 'aprovar_plano'
 
   # Área pública para planos
