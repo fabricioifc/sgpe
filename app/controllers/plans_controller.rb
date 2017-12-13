@@ -117,7 +117,19 @@ class PlansController < ApplicationController
       #   where(analise:true, aprovado:false, reprovado:false)
       respond_to do |format|
         format.html { render 'aprovacao' }
-        format.json { render json: AprovarPlanosDatatable.new(view_context) }
+        format.json { render json: AprovarPlanosDatatable.new(view_context, current_user) }
+      end
+    end
+  end
+
+  def get_planos_user_aprovar
+    if user_signed_in?
+      # @planos_aprovar = Plan.joins(offer_discipline: {offer: { grid: :course }}).
+      #   where('plans.active is true').
+      #   where(analise:true, aprovado:false, reprovado:false)
+      respond_to do |format|
+        format.html { render 'aprovacao' }
+        format.json { render json: AprovarPlanosUserDatatable.new(view_context, current_user) }
       end
     end
   end
@@ -128,16 +140,22 @@ class PlansController < ApplicationController
     reprovado = !params[:commit_reprovar].nil?
 
     respond_to do |format|
-      ActiveRecord::Base.transaction do
-        if @plan.update(aprovado:aprovado, reprovado:reprovado, parecer: plan_params[:parecer], user_parecer: current_user)
-          flash[:notice] = "Plano #{aprovado == true ? 'aprovado' : 'com pendências'}."
-          # format.html { redirect_to aprovar_offer_offer_discipline_plan_path(@plan) }
-          format.html { redirect_to get_planos_aprovar_path }
-          # format.json { render :show, status: :updated, location: @plan }
-        else
-          format.html { render :show }
-          format.json { render json: @plan.errors, status: :unprocessable_entity }
+      # Se alguém já aprovou o plano então somente ele poderá analisar novamente
+      if @plan.user_parecer.nil? || @plan.user_parecer.eql?(current_user)
+        ActiveRecord::Base.transaction do
+          if @plan.update(aprovado:aprovado, reprovado:reprovado, parecer: plan_params[:parecer], user_parecer: current_user)
+            flash[:notice] = "Plano #{aprovado == true ? 'aprovado' : 'com pendências'}."
+            # format.html { redirect_to aprovar_offer_offer_discipline_plan_path(@plan) }
+            format.html { redirect_to get_planos_aprovar_path }
+            # format.json { render :show, status: :updated, location: @plan }
+          else
+            format.html { render :show }
+            format.json { render json: @plan.errors, status: :unprocessable_entity }
+          end
         end
+      else
+        flash[:warning] = "Não foi possível efetuar a operação. Este plano já foi analisado por outro usuário."
+        format.html { render :show }
       end
     end
   end

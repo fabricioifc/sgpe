@@ -8,7 +8,7 @@
   </span>
   <hr>
   <% if @plan.analise? %>
-    <% if can? :aprovar_reprovar, Plan %>
+    <% if ((can? :aprovar_reprovar, Plan) && (@plan.user_parecer.nil? || @plan.user_parecer.eql?(current_user))) %>
       <%= form_for(@plan, url: aprovar_offer_offer_discipline_plan_path, method: :post) do |f| %>
         <div class="form-group">
           <%= f.label :parecer, class: 'control-label' %>
@@ -33,5 +33,11 @@
     <% end %>
   <% end %>
 </li>
+<% unless @plan.user_parecer.nil? %>
+  <li class="list-group-item list-group-item-info">
+    <p>Analisado por:</p>
+    <p><strong><%= @plan.user_parecer.name %></strong></p>
+  </li>
+<% end %>
 
 <hr>
