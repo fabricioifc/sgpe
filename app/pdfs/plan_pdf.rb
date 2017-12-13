@@ -42,6 +42,18 @@ class PlanPdf < PdfReport
 
         display_event_table(
           table_data(
+            [['Curso']],
+            [
+              "#{@plano.offer_discipline.grid_discipline.grid.course.sigla} - #{@plano.offer_discipline.grid_discipline.grid.course.name}"
+            ]
+          ),
+          [540],
+          { header:true },
+          { borders: [:top, :bottom, :left, :right], borders_length: 0, columns_bold: [[1,0..0]], columns_background: [1 => [[0, "ffffcc"]]] }
+        )
+
+        display_event_table(
+          table_data(
             [['Componente curricular', 'Professor', 'Turma']],
             [
               @plano.offer_discipline.grid_discipline.discipline.title,
@@ -60,15 +72,36 @@ class PlanPdf < PdfReport
             [
               "#{ano_semestre}",
               @plano.offer_discipline.grid_discipline.grid.course.course_modality.description,
-              "#{@plano.offer_discipline.grid_discipline.grid.course.sigla} - #{@plano.offer_discipline.grid_discipline.grid.course.course_format.name}",
-              @plano.offer_discipline.grid_discipline.carga_horaria,
-              @plano.offer_discipline.grid_discipline.decorate.carga_horaria_aula
+              @plano.offer_discipline.grid_discipline.grid.course.course_format.name,
+              @plano.offer_discipline.grid_discipline.decorate.carga_horaria_hora_text,
+              @plano.offer_discipline.grid_discipline.decorate.carga_horaria_aula_text
             ]
           ),
-          [108, 108, 108, 108, 108],
+          [134, 134, 134, 69, 69],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
+
+        distancia = !@plano.offer_discipline.ead_percentual_maximo.nil? &&
+              !@plano.offer_discipline.ead_percentual_maximo.eql?(0) &&
+              !@plano.ead_percentual_definido.nil?
+
+        if distancia
+          horarios = @plano.decorate.carga_horaria_presencial_distancia
+
+          display_event_table(
+            table_data(
+              [['Carga horária (Hora)', 'Carga horária (Hora/Aula)']],
+              [
+                "Presencial: #{horarios[:presencial]} - À distância: #{horarios[:distancia]}",
+                "Presencial: #{horarios[:presencial_aula]} - À distância: #{horarios[:distancia_aula]}"
+              ]
+            ),
+            [270, 270],
+            { header:true },
+            { borders: [:top, :bottom, :left, :right], borders_length: 0 }
+          )
+        end
 
         move_down 10
         bounding_box [bleft, cursor + 5], :width  => TABLE_WIDTHS_2 do

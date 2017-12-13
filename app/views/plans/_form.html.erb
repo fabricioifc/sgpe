@@ -110,7 +110,7 @@
           <li class="list-group-item list-group-item-info">(%) EAD</li>
           <li class="list-group-item">
             <%= f.select :ead_percentual_definido,
-                options_for_select((0..@plan.offer_discipline.ead_percentual_maximo).to_a.collect {|a| "#{a} %"}, ead_definido ),
+                options_for_select((0..@plan.offer_discipline.ead_percentual_maximo).step(5).collect {|a| "#{a} %"}, ead_definido ),
                 { hide_label:true, include_blank: 'Percentual de C.H à distância' },
                 { class: 'form-control input-sm', wrapper: { style: 'margin-bottom: 0;'} } %>
           </li>

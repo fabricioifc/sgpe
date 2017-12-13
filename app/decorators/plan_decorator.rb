@@ -15,8 +15,8 @@ class PlanDecorator < ApplicationDecorator
       horarios[:presencial] = carga_horaria
 
       if !component.ead_percentual_definido.nil? && !component.ead_percentual_definido.eql?(0)
-        horarios[:distancia] = (component.offer_discipline.grid_discipline.carga_horaria * component.ead_percentual_definido).to_f / 100
-        horarios[:presencial] = (carga_horaria - horarios[:distancia])
+        horarios[:distancia] = ((carga_horaria * component.ead_percentual_definido).to_f / 100).round(2)
+        horarios[:presencial] = (carga_horaria - horarios[:distancia]).round(2)
       end
 
       minutos_aula = component.offer_discipline.grid_discipline.grid.course.course_format.minutos_aula
