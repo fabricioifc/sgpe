@@ -8,6 +8,7 @@ class Course < ApplicationRecord
   validates :sigla, :name, :active, :course_modality_id, :course_format_id, :course_offer_id, presence:true
   validates :sigla, :name, :active, :course_modality_id, :course_format_id, :course_offer_id,
     uniqueness: {scope: [:sigla, :name, :active, :course_modality_id, :course_format_id, :course_offer_id]}
+  validates :sigla, length: { in: 3..10}
 
   def decorate
     @decorate ||= CourseDecorator.new self

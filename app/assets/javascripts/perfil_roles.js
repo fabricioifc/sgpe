@@ -9,7 +9,7 @@ document.addEventListener("turbolinks:before-cache", function() {
 
 document.addEventListener("turbolinks:load", function() {
 
-  var dataTableId = "table[id='disciplines_datatable']";
+  var dataTableId = "table[id='perfil_roles_datatable']";
 
   $(dataTableId).each(function(){
     dataTable = $(this).DataTable({
@@ -24,26 +24,14 @@ document.addEventListener("turbolinks:load", function() {
 
       columns: [
         {
-          width: "50%",
+          width: "45%",
           className: "",
           searchable: true,
           orderable: true
         },
         {
-          width: "15%",
+          width: "40%",
           className: "",
-          searchable: true,
-          orderable: true
-        },
-        {
-          width: "10%",
-          className: "text-center",
-          searchable: true,
-          orderable: true
-        },
-        {
-          width: "10%",
-          className: "text-center",
           searchable: true,
           orderable: true
         },

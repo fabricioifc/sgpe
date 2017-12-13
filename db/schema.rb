@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20171213163212) do
 
   create_table "courses", force: :cascade do |t|
     t.string "name", limit: 100, null: false
-    t.string "sigla", limit: 5, null: false
+    t.string "sigla", limit: 10, null: false
     t.boolean "active", default: true
     t.bigint "course_modality_id"
     t.bigint "course_format_id"

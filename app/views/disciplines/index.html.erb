@@ -13,12 +13,13 @@
       <%= content_tag :table, id: 'disciplines_datatable', class: 'table table-striped table-bordered', data: { url: disciplines_path(format: :json)} do %>
         <thead>
           <tr>
-            <th>#</th>
             <th><%= model.human_attribute_name(:title) %></th>
             <th><%= model.human_attribute_name(:sigla) %></th>
             <th><%= model.human_attribute_name(:active) %></th>
             <th><%= model.human_attribute_name(:especial) %></th>
-            <th><%= t('helpers.actions') %></th>
+            <!-- <th></th> -->
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody></tbody>

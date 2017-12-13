@@ -56,6 +56,6 @@ class TurmaDatatable < ApplicationDatatable
 
   # The columns needs to be the same list of searchable items and IN ORDER that they will appear in Data.
   def columns
-    %w(id name year active)
+    %w(name year active)
   end
 end

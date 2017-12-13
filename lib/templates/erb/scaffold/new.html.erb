@@ -1,9 +1,9 @@
-<%%- model = <%= singular_table_name.capitalize %> %>
+<%%- model = <%= singular_table_name.camelize %> %>
 
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">
-      <%%= t('helpers.titles.new', model: model) %>
+      <%%= t('helpers.titles.new', model: model.model_name.human.downcase) %>
     </h3>
   </div>
   <div class="panel-body">

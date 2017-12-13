@@ -30,8 +30,8 @@ class DisciplinesController < ApplicationController
 
   # GET /disciplines/1
   # GET /disciplines/1.json
-  def show
-  end
+  # def show
+  # end
 
   # GET /disciplines/new
   def new
@@ -50,8 +50,8 @@ class DisciplinesController < ApplicationController
 
     respond_to do |format|
       if @discipline.save
-        format.html { redirect_to @discipline, notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
-        format.json { render :show, status: :created, location: @discipline }
+        format.html { redirect_to disciplines_url, notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
+        format.json { render :index, status: :created, location: @discipline }
       else
         format.html { render :new }
         format.json { render json: @discipline.errors, status: :unprocessable_entity }
@@ -65,8 +65,8 @@ class DisciplinesController < ApplicationController
     respond_to do |format|
       @discipline.user = current_user
       if @discipline.update(discipline_params)
-        format.html { redirect_to @discipline, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
-        format.json { render :show, status: :ok, location: @discipline }
+        format.html { redirect_to disciplines_url, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
+        format.json { render :index, status: :ok, location: @discipline }
       else
         format.html { render :edit }
         format.json { render json: @discipline.errors, status: :unprocessable_entity }

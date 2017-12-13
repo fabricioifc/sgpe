@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+
   resources :offers do
     collection do
       patch :load_grid
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
   get 'planos', to: 'plans#planos_professor', as: 'planos_professor'
   # put 'update_perfils/:users', to: 'user#update_perfils', as: 'update_perfils_users'
   get 'aprovacao', to: 'plans#get_planos_aprovar', as: 'get_planos_aprovar'
+  # get 'aprovacao_user', to: 'plans#get_planos_user_aprovar', as: 'get_planos_user_aprovar'
   # put 'aprovacao/:plan', to: 'plans#aprovar', as: 'aprovar_plano'
 
   # Área pública para planos
@@ -52,10 +54,13 @@ Rails.application.routes.draw do
   resources :courses
   resources :course_modalities
   resources :course_formats
-  resources :disciplines, path: 'disciplinas'
+  resources :disciplines, except: [:show], path: 'disciplinas'
   resources :permissao_telas
   resources :permissaos
   resources :perfils
+  resources :roles
+  resources :perfil_roles, except: [:show]
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   root to: 'visitors#index'

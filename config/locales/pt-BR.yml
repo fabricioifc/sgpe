@@ -24,6 +24,9 @@ pt-BR:
       offer_disciplines: Disciplinas
       plan: Plano
       plans: Planos
+      role: Papel
+      perfil: Perfil
+      perfil_role: Perfil/Papel
     attributes:
       user:
         title: Usuários
@@ -105,6 +108,16 @@ pt-BR:
         analise: Em análise
         aprovado: Aprovado
         reprovado: Reprovado
+      role:
+        name: Nome
+        resource_type: Recurso
+        resource_id: Ação
+      perfil:
+        name: Nome
+        idativo: Ativo
+      perfil_role:
+        perfil_id: Perfil
+        role_id: Papél
     # errors:
     #   models:
     #     course:
@@ -363,6 +376,8 @@ pt-BR:
       pdf: 'Relatório'
       duplicate: Duplicar %{model}
       perfis: Perfis
+      roles: Papéis
+      perfil_roles: Perfil/Papéis
       pages:
         about: 'Sobre'
         disciplines: 'Disciplinas'
@@ -378,6 +393,8 @@ pt-BR:
         turmas: Turmas
         offers: Ofertar grades
         perfils: Perfis
+        roles: Papéis
+        perfil_roles: Papéis por perfil
         users: Usuários
     titles:
       edit: "Editar %{model}"
