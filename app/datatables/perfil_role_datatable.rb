@@ -17,7 +17,7 @@ class PerfilRoleDatatable < ApplicationDatatable
         column << perfil_role.role.name
 
         links = []
-        column << link_to("<i class='fa fa-list fa-2 text-info'></i>".html_safe, perfil_role)
+        # column << link_to("<i class='fa fa-list fa-2 text-info'></i>".html_safe, perfil_role)
         column << link_to("<i class='fa fa-pencil-square-o fa-2 text-warning'></i>".html_safe, edit_perfil_role_path(perfil_role))
         column << link_to("<i class='fa fa-trash-o fa-2 text-danger'></i>".html_safe, perfil_role, method: :delete, data: { confirm: 'Tem certeza?' })
         # column << links.join(" <span style='padding-right: 5px;'></span> ")

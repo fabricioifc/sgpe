@@ -36,13 +36,6 @@ document.addEventListener("turbolinks:load", function() {
           orderable: true
         },
 
-
-        {
-          width: "5%",
-          className: "text-center",
-          searchable: false,
-          orderable: false
-        },
         {
           width: "5%",
           className: "text-center",

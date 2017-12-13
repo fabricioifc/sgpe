@@ -60,12 +60,6 @@ document.addEventListener("turbolinks:load", function() {
           searchable: false,
           orderable: false
         },
-        {
-          width: "5%",
-          className: "text-center",
-          searchable: false,
-          orderable: false
-        },
       ],
       // order: [[1, 'asc']]
 
