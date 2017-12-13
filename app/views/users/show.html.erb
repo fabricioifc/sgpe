@@ -65,13 +65,13 @@
     </div>
 
   </div>
-  <% if is_admin? && !@user.eql?(current_user) %>
+  <!-- < if is_admin? && !@user.eql?(current_user) %>
     <div class="panel-footer">
-      <%= link_to registration_path(@user), :data => { :confirm => t("devise.registrations.edit.cancel.confirm") }, :method => :delete, class: 'btn btn-xs btn-danger' do %>
-      <%= t "devise.registrations.edit.cancel_my_account" %>
-      <% end %>
+      <= link_to registration_path(@user), :data => { :confirm => t("devise.registrations.edit.cancel.confirm") }, :method => :delete, class: 'btn btn-xs btn-danger' do %>
+      <= t "devise.registrations.edit.cancel_my_account" %>
+      < end %>
     </div>
-  <% end %>
+  < end %> -->
 </div>
 
 <% if current_user.try(:admin) %>
