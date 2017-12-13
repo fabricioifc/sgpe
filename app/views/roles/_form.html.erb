@@ -1,0 +1,11 @@
+<%= bootstrap_form_for(role, local:true) do |form| %>
+  <!-- <= render partial: 'shared/error_messages', locals: {obj: @role} %> -->
+  <%= error_messages_for(role) %>
+
+  <%= form.text_field :name, id: :role_name, autofocus:true %>
+  <%= form.text_field :resource_type, id: :role_resource_type %>
+  <%= form.text_field :resource_id, id: :role_resource_id %>
+
+  <%= form.submit %>
+
+<% end %>

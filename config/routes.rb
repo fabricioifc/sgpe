@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+
   resources :offers do
     collection do
       patch :load_grid
@@ -57,6 +58,7 @@ Rails.application.routes.draw do
   resources :permissao_telas
   resources :permissaos
   resources :perfils
+  resources :roles
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   root to: 'visitors#index'
