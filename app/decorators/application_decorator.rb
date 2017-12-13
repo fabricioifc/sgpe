@@ -57,4 +57,8 @@ class ApplicationDecorator < Draper::Decorator
   def show_textarea_text value
     h.content_tag :span, value, style: 'white-space: pre-wrap;'
   end
+
+  def carga_horaria_aula_generic minutos_aula, carga_horaria
+    (carga_horaria / (minutos_aula.to_f / 60)).ceil  unless carga_horaria.nil? || minutos_aula.nil?
+  end
 end

@@ -12,6 +12,10 @@ class Plan < ApplicationRecord
     html: { presence: true },
     if: Proc.new { |a| a.analise? }
 
+  validates :ead_percentual_definido, presence:true, if: Proc.new { |a| a.analise? &&
+    !a.offer_discipline.ead_percentual_maximo.nil? && !a.offer_discipline.ead_percentual_maximo.eql?(0)
+  }
+
   # validates :ementa, presence:true, if: Proc.new { |a| a.analise? && a.offer_discipline.grid_discipline.discipline.especial? }
   # validates :objetivo_geral, presence:true, if: Proc.new { |a| a.analise? && a.offer_discipline.grid_discipline.discipline.especial? }
   # validates :bib_geral, presence:true, if: Proc.new { |a| a.analise? && a.offer_discipline.grid_discipline.discipline.especial? }

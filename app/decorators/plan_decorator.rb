@@ -7,6 +7,27 @@ class PlanDecorator < ApplicationDecorator
     @component = component
   end
 
+  def carga_horaria_presencial_distancia
+    horarios = { presencial: 0, distancia: 0 }
+
+    if !component.offer_discipline.grid_discipline.carga_horaria.nil?
+      carga_horaria = component.offer_discipline.grid_discipline.carga_horaria
+      horarios[:presencial] = carga_horaria
+
+      if !component.ead_percentual_definido.nil? && !component.ead_percentual_definido.eql?(0)
+        horarios[:distancia] = (component.offer_discipline.grid_discipline.carga_horaria * component.ead_percentual_definido).to_f / 100
+        horarios[:presencial] = (carga_horaria - horarios[:distancia])
+      end
+
+      minutos_aula = component.offer_discipline.grid_discipline.grid.course.course_format.minutos_aula
+      horarios[:presencial_aula] = carga_horaria_aula_generic(minutos_aula, horarios[:presencial]).to_s << ' H/A'
+      horarios[:distancia_aula] = carga_horaria_aula_generic(minutos_aula, horarios[:distancia]).to_s << ' H/A'
+      horarios[:presencial] = horarios[:presencial].to_s << ' H'
+      horarios[:distancia] = horarios[:distancia].to_s << ' H'
+    end
+    horarios
+  end
+
   def obj_espe pdf = false
     formatar_texto component.obj_espe, pdf
   end

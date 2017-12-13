@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171212175519) do
+ActiveRecord::Schema.define(version: 20171213163212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 20171212175519) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "offer_id"
+    t.integer "ead_percentual_maximo"
     t.index ["grid_discipline_id"], name: "index_offer_disciplines_on_grid_discipline_id"
     t.index ["offer_id"], name: "index_offer_disciplines_on_offer_id"
     t.index ["user_id"], name: "index_offer_disciplines_on_user_id"
@@ -184,6 +185,7 @@ ActiveRecord::Schema.define(version: 20171212175519) do
     t.boolean "reprovado", default: false, null: false
     t.text "parecer"
     t.bigint "user_parecer_id"
+    t.integer "ead_percentual_definido"
     t.index ["offer_discipline_id"], name: "index_plans_on_offer_discipline_id"
     t.index ["user_id"], name: "index_plans_on_user_id"
     t.index ["user_parecer_id"], name: "index_plans_on_user_parecer_id"

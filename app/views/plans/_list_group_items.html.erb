@@ -20,12 +20,7 @@
       <span class="badge"><%= "Semestre: #{plan.offer_discipline.offer.semestre}" %></span>
     <% end %>
   </p>
-  <p>
-    <span class="badge">
-      <%= plan.offer_discipline.grid_discipline.decorate.carga_horaria_hora_text %> /
-      <%= plan.offer_discipline.grid_discipline.decorate.carga_horaria_aula_text %>
-    </span>
-  </p>
 </li>
 
+<%= render 'list_group_items_horarios', plan: plan unless plan.id.nil? %>
 <%= render 'list_group_items_plano', plan: plan unless plan.id.nil? %>

@@ -86,6 +86,7 @@
               <th><%= modelGridDiscipline.human_attribute_name(:year) %></th>
               <th><%= modelGridDiscipline.human_attribute_name(:semestre) %></th>
               <th><%= modelGridDiscipline.human_attribute_name(:carga_horaria) %></th>
+              <th><%= modelOfferDiscipline.human_attribute_name(:ead_percentual_maximo) %></th>
               <th><%= modelOfferDiscipline.human_attribute_name(:user_id) %></th>
               <th class="text-center" colspan="2"><%= t('helpers.actions') %></th>
             </tr>
@@ -94,10 +95,11 @@
             <% @offer.offer_disciplines.each do |d| %>
               <% ultimo_plano_aprovado = ultimo_plano_aprovado_por_disciplina(d.id) %>
               <tr>
-                <td><%= "#{d.grid_discipline.discipline.sigla} - #{d.grid_discipline.discipline.title}" %></td>
-                <td><%= d.grid_discipline.year %></td>
-                <td><%= d.grid_discipline.semestre || 'Sem informação' %></td>
+                <td style="width: 40%;"><%= "#{d.grid_discipline.discipline.sigla} - #{d.grid_discipline.discipline.title}" %></td>
+                <td class="text-center"><%= d.grid_discipline.year %></td>
+                <td class="text-center"><%= d.grid_discipline.semestre || 'Sem informação' %></td>
                 <td><%= "#{d.grid_discipline.decorate.carga_horaria_hora_text} - #{d.grid_discipline.decorate.carga_horaria_aula_text}" %></td>
+                <td class="text-center"><%= "#{d.ead_percentual_maximo}" %></td>
                 <td><%= d.user.name unless d.user.nil? %></td>
                 <td><%= ultimo_plano_aprovado.decorate.link_pdf('btn-xs btn-block') unless ultimo_plano_aprovado.nil? %></td>
                 <td class="text-center"><%= d.grid_discipline.decorate.link_show %></td>

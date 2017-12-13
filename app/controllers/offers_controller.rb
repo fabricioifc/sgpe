@@ -174,7 +174,7 @@ class OffersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def offer_params
       params.require(:offer).permit(:year, :semestre, :type_offer, :grid_id, :turma_id,
-        offer_disciplines_attributes: [:id, :grid_discipline_id, :user_id, :active, :offer_id, :_destroy
+        offer_disciplines_attributes: [:id, :grid_discipline_id, :user_id, :active, :offer_id, :ead_percentual_maximo, :_destroy
         ]
       )
     end

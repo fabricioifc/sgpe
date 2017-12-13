@@ -1,25 +1,27 @@
 <% if !offer.offer_disciplines.empty? %>
   <% first = 0 %>
-  <% por_grupo = offer.offer_disciplines.count >= 3 ? offer.offer_disciplines.count / 1 : 1 %>
-  <% ofertas = offer.offer_disciplines.in_groups_of(por_grupo, false) %>
+  <!-- < por_grupo = offer.offer_disciplines.count >= 3 ? offer.offer_disciplines.count / 1 : 1 %>
+  < ofertas = offer.offer_disciplines.in_groups_of(por_grupo, false) %> -->
 
-  <% ofertas.each do |a| %>
+  <!-- < ofertas.each do |a| %> -->
       <div class="table-responsive">
         <table class='table table-striped table-bordered'>
           <thead>
             <tr>
               <th>Disciplina</th>
               <!-- <th>Turmas</th> -->
+              <th>(%) EAD</th>
               <th>Professor</th>
             </tr>
           </thead>
           <tbody>
-            <%= f.fields_for :offer_disciplines, offer.offer_disciplines[first, por_grupo] do |b| %>
+            <!-- <= f.fields_for :offer_disciplines, offer.offer_disciplines[first, por_grupo] do |b| %> -->
+            <%= f.fields_for :offer_disciplines do |b| %>
               <%= render partial: 'offer_discipline_item', locals: {g: b} %>
             <% end %>
           </tbody>
         </table>
       </div>
-    <% first = first + a.count %>
-  <% end %>
+    <!-- < first = first + a.count %> -->
+  <!-- < end %> -->
 <% end %>

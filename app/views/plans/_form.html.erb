@@ -1,5 +1,4 @@
-<%= bootstrap_form_for(plan, url: url,
-    local:true, html: { class: "", role: "form" }) do |f| %>
+<%= bootstrap_form_for(plan, url: url, local:true, html: { class: "", role: "form" }) do |f| %>
   <%= error_messages_for(plan) %>
 
   <%= f.hidden_field :versao %>
@@ -105,6 +104,18 @@
 
     </div>
     <div class="col-md-3 col-ld-3">
+      <% if !@plan.offer_discipline.ead_percentual_maximo.nil? && @plan.offer_discipline.ead_percentual_maximo > 0 %>
+        <% ead_definido = @plan.ead_percentual_definido.nil? ? nil : "#{@plan.ead_percentual_definido} %" %>
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-info">(%) EAD</li>
+          <li class="list-group-item">
+            <%= f.select :ead_percentual_definido,
+                options_for_select((0..@plan.offer_discipline.ead_percentual_maximo).to_a.collect {|a| "#{a} %"}, ead_definido ),
+                { hide_label:true, include_blank: 'Percentual de C.H à distância' },
+                { class: 'form-control input-sm', wrapper: { style: 'margin-bottom: 0;'} } %>
+          </li>
+        </ul>
+      <% end %>
       <ul class="list-group">
         <%= render 'list_group_items', plan: @plan %>
       </ul>

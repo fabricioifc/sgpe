@@ -43,8 +43,7 @@ class GridDisciplineDecorator < ApplicationDecorator
   end
 
   def carga_horaria_aula
-    minutos_aula = component.grid.course.course_format.minutos_aula
-    (component.carga_horaria / (minutos_aula.to_f / 60)).to_i  unless component.carga_horaria.nil? || minutos_aula.nil?
+    carga_horaria_aula_generic(component.grid.course.course_format.minutos_aula, component.carga_horaria)
   end
 
   def carga_horaria_aula_text

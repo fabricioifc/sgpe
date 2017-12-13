@@ -7,6 +7,15 @@
         { hide_label:true },
         { multiple:true, class: 'form-control input-sm select2', wrapper: { style: 'margin-bottom: 0;'} } %>
   </td> -->
+  <td style="width: 15%; vertical-align: middle;" class="text-center">
+    <% if !g.object.grid_discipline.grid.course.course_modality.sigla.eql?('PRE') %>
+      <%= g.select :ead_percentual_maximo, options_for_select(0..100, g.object.ead_percentual_maximo || 0),
+            { hide_label:true, prompt: false },
+            { class: 'form-control input-sm', wrapper: { style: 'margin-bottom: 0;'} } %>
+    <% else %>
+      <strong><%= g.object.grid_discipline.grid.course.course_modality.description %></strong>
+    <% end %>
+  </td>
 
   <td style="width: 30%;"><%= g.select :user_id, options_for_select(@professores.collect { |c| [c.name, c.id ]}, g.object.user_id),
         { hide_label:true, include_blank: 'Por favor selecione' },

@@ -1,0 +1,21 @@
+<li class="list-group-item list-group-item-info">Carga horária</li>
+<li class="list-group-item">
+  <% if !plan.offer_discipline.ead_percentual_maximo.nil? &&
+        plan.offer_discipline.ead_percentual_maximo > 0 &&
+        !plan.ead_percentual_definido.nil? %>
+
+      <% horarios = plan.decorate.carga_horaria_presencial_distancia %>
+
+      <dl class="dl-vertical">
+        <dt>Presencial</dt>
+        <dd><span class="badge"><%= "#{horarios[:presencial]} - #{horarios[:presencial_aula]}" %></span></dt>
+        <dt>À distância</dt>
+        <dd><span class="badge"><%= "#{horarios[:distancia]} - #{horarios[:distancia_aula]}" %></span></dt>
+      </dl>
+  <% else %>
+    <p>
+      <span class="badge"><%= plan.offer_discipline.grid_discipline.decorate.carga_horaria_hora_text %></span>
+      <span class="badge"><%= plan.offer_discipline.grid_discipline.decorate.carga_horaria_aula_text %></span>
+    </p>
+  <% end %>
+</li>
