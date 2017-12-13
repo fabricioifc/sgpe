@@ -50,8 +50,8 @@ document.addEventListener("turbolinks:load", function() {
         {
           width: "10%",
           className: "",
-          searchable: false,
-          orderable: false
+          searchable: true,
+          orderable: true
         },
         {
           width: "10%",

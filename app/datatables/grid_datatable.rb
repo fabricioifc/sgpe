@@ -52,13 +52,13 @@ class GridDatatable < ApplicationDatatable
 
     # will_paginate
     # grids = Grid.page(page).per_page(per_page)
-    grids = Grid.order("#{sort_column} #{sort_direction}")
+    grids = Grid.joins(:course).order("#{sort_column} #{sort_direction}")
     grids = grids.page(page).per(per_page)
     grids = grids.where(search_string.join(' or '), search: "%#{params[:search][:value]}%")
   end
 
   # The columns needs to be the same list of searchable items and IN ORDER that they will appear in Data.
   def columns
-    %w(year active course_id)
+    %w(grids.year grids.active courses.name courses.sigla)
   end
 end
