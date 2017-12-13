@@ -6,17 +6,16 @@ class DisciplineDatatable < ApplicationDatatable
     def data
       disciplines.map do |discipline|
         [].tap do |column|
-          column << discipline.id
           column << discipline.title
           column << discipline.sigla
           column << discipline.decorate.active
           column << discipline.decorate.especial
 
           links = []
-          links << link_to("<i class='fa fa-list fa-2 text-info'></i>".html_safe, discipline)
-          links << link_to("<i class='fa fa-pencil-square-o fa-2 text-warning'></i>".html_safe, edit_discipline_path(discipline))
-          links << link_to("<i class='fa fa-trash-o fa-2 text-danger'></i>".html_safe, discipline, method: :delete, data: { confirm: 'Tem certeza?' })
-          column << links.join(" <span style='padding-right: 5px;'></span> ")
+          column << link_to("<i class='fa fa-list fa-2 text-info'></i>".html_safe, discipline)
+          column << link_to("<i class='fa fa-pencil-square-o fa-2 text-warning'></i>".html_safe, edit_discipline_path(discipline))
+          column << link_to("<i class='fa fa-trash-o fa-2 text-danger'></i>".html_safe, discipline, method: :delete, data: { confirm: 'Tem certeza?' })
+          # column << links.join(" <span style='padding-right: 5px;'></span> ")
         end
       end
     end
@@ -51,6 +50,6 @@ class DisciplineDatatable < ApplicationDatatable
 
     def columns
       # (title last_name email phone_number)
-      %w(id title sigla active especial)
+      %w(title sigla active especial)
     end
 end

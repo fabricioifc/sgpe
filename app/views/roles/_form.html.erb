@@ -1,11 +1,11 @@
-<%= bootstrap_form_for(role, local:true) do |form| %>
+<%= bootstrap_form_for(role, local:true) do |f| %>
   <!-- <= render partial: 'shared/error_messages', locals: {obj: @role} %> -->
   <%= error_messages_for(role) %>
 
-  <%= form.text_field :name, id: :role_name, autofocus:true %>
-  <%= form.text_field :resource_type, id: :role_resource_type %>
-  <%= form.text_field :resource_id, id: :role_resource_id %>
+  <%= f.text_field :name, id: :role_name, autofocus:true %>
+  <%= f.select :resource_type, get_models.collect { |c| [c, c] }, {id: :role_resource_type, prompt: true} %>
+  <%= f.select :resource_id, Role::ACTIONS.collect { |c| [c.first, c.last] }, {id: :role_resource_id, prompt: true} %>
 
-  <%= form.submit %>
+  <%= f.submit %>
 
 <% end %>

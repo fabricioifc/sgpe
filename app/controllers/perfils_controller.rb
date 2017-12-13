@@ -1,6 +1,7 @@
 class PerfilsController < ApplicationController
   before_action :set_perfil, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :admin_only
   load_and_authorize_resource
   responders :flash
 
@@ -79,5 +80,11 @@ class PerfilsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def perfil_params
       params.require(:perfil).permit(:name, :idativo)
+    end
+
+    def admin_only
+      unless current_user.admin?
+        redirect_to root_path, :alert => "Acesso negado. Você não tem permissão para acessar este recurso."
+      end
     end
 end

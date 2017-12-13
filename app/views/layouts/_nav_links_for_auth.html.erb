@@ -18,10 +18,23 @@
             <%= t('helpers.links.users') %>
           <% end %>
         </li>
+        <li role="presentation" class="divider"></li>
+        <li>
+          <%= link_to roles_path do %>
+            <i class="fa fa-user-md" aria-hidden="true"></i>
+            <%= t('helpers.links.roles') %>
+          <% end %>
+        </li>
         <li>
           <%= link_to perfils_path do %>
             <i class="fa fa-user-md" aria-hidden="true"></i>
             <%= t('helpers.links.perfis') %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to perfil_roles_path do %>
+            <i class="fa fa-user-md" aria-hidden="true"></i>
+            <%= t('helpers.links.perfil_roles') %>
           <% end %>
         </li>
       </ul>

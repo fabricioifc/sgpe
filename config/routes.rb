@@ -54,11 +54,13 @@ Rails.application.routes.draw do
   resources :courses
   resources :course_modalities
   resources :course_formats
-  resources :disciplines, path: 'disciplinas'
+  resources :disciplines, except: [:show], path: 'disciplinas'
   resources :permissao_telas
   resources :permissaos
   resources :perfils
   resources :roles
+  resources :perfil_roles, except: [:show]
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   root to: 'visitors#index'

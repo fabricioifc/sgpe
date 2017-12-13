@@ -1,4 +1,5 @@
 class Role < ApplicationRecord
+  include PermissaosHelper
   # has_and_belongs_to_many :users, :join_table => :users_roles
   # has_and_belongs_to_many :perfils, :join_table => :users_perfils
 
@@ -36,11 +37,7 @@ class Role < ApplicationRecord
     end
     field :resource_type, :enum do
       enum do
-        models ||= []
-          ActiveRecord::Base.connection.tables.each do |v|
-            models << v.singularize.camelize unless ['ArInternalMetadatum', 'SchemaMigration'].include?(v.singularize.camelize)
-          end
-        models.sort
+        get_models
       end
     end
     include_all_fields

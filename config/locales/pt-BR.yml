@@ -361,6 +361,8 @@ pt-BR:
       pdf: 'Relatório'
       duplicate: Duplicar %{model}
       perfis: Perfis
+      roles: Papéis
+      perfil_roles: Papéis por perfil
       pages:
         about: 'Sobre'
         disciplines: 'Disciplinas'
@@ -376,6 +378,8 @@ pt-BR:
         turmas: Turmas
         offers: Ofertar grades
         perfils: Perfis
+        roles: Papéis
+        perfil_roles: Papéis por perfil
         users: Usuários
     titles:
       edit: "Editar %{model}"

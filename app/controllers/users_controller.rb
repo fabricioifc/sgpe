@@ -65,7 +65,7 @@ class UsersController < ApplicationController
     redirect_to users_path, notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human)
   end
 
-  private
+private
 
   def admin_only
     unless current_user.admin?
