@@ -99,6 +99,12 @@
           </div>
 
         </div>
+
+        <%= f.submit class: "btn btn-primary" %>
+        <%= button_tag type: "submit", class: "btn btn-success", name: 'commit_analise' do %>
+          <i class="fa fa-2 fa-check pull-left"></i>
+          Salvar e enviar para análise
+        <% end %>
       </div>
 
 
@@ -121,16 +127,6 @@
       </ul>
     </div>
 
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <%= f.submit class: "btn btn-primary" %>
-      <%= button_tag type: "submit", class: "btn btn-success", name: 'commit_analise' do %>
-        <i class="fa fa-2 fa-check pull-left"></i>
-        Salvar e enviar para análise
-      <% end %>
-    </div>
   </div>
 
 <% end %>

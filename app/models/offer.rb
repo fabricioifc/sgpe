@@ -4,7 +4,7 @@ class Offer < ApplicationRecord
   has_many :offer_disciplines, dependent: :destroy
   accepts_nested_attributes_for :offer_disciplines
 
-  enum offer_types: ['Regular', 'Não Regular']
+  enum offer_types: ['Regular', 'Não Regular', 'Exercício domiciliar']
 
   validates :type_offer, :grid_id, presence:true
   validates :semestre, presence: { if: -> { self.grid.course.course_offer.description.eql?("semestral") } }

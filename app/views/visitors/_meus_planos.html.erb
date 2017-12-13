@@ -9,7 +9,7 @@
           <thead>
             <tr>
               <th class="text-center">Aprovados</th>
-              <th class="text-center">Pendências</th>
+              <th class="text-center">Com pendências</th>
               <th class="text-center">Em análise</th>
               <th class="text-center">Editando</th>
               <th class="text-center">Total</th>
@@ -26,7 +26,9 @@
           </tbody>
         </table>
       </div>
-      <%= link_to 'Mais Detalhes', planos_professor_path, class: "btn btn-info" %>
+      <%= link_to planos_professor_path, class: "btn btn-sm btn-primary" do %>
+        <i class="fa fa-bars"></i> Mais Detalhes
+      <% end %>
     </div>
     <div class="panel-footer clearfix">
       <% total_ofertado_sem_plano = ofertas_sem_plano_por_professor.count %>
