@@ -39,7 +39,7 @@ namespace :db do
   desc 'Mostrar o último backups efetuado'
   task last_backup: :environment do
       backup_dir = backup_directory
-      puts "#{backup_dir}"
+      # puts "#{backup_dir}"
       exec "/bin/ls -1t #{backup_dir} | head -1"
   end
 
