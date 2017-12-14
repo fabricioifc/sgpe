@@ -36,6 +36,16 @@ namespace :db do
       exec "/bin/ls -lt #{backup_dir}"
   end
 
+  desc 'Mostrar o último backups efetuado'
+  task last_backup: :environment do
+      backup_dir = backup_directory
+      puts "#{backup_dir}"
+      exec "/bin/ls -1t #{backup_dir} | head -1"
+  end
+
+  # ls -1t | head -5
+
+  # Comando: RAILS_ENV=staging bundle exec rake db:sql_restore[20171214084630_sgpe_production.tar]
   desc 'Restaurar a base de dados do backup usando PATTERN'
   task :sql_restore, [:pat] => :environment do |task,args|
       if args.pat.present?
