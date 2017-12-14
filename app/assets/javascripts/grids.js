@@ -105,7 +105,7 @@ $.ajustarGridDisciplinasCocoon = function(event){
   });
   $(lastPanel).find('div.panel-collapse').collapse('show');
 
-  $.addSummernote();
+  // $.addSummernote();
 
   event.preventDefault();
   return false;

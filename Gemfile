@@ -43,6 +43,8 @@ gem 'rails_admin_rollincode', '~> 1.0' # Painel de administração do sistema
 gem 'cancancan', '~> 2.0'# controle de permissões
 gem "rolify" # controle de papéis
 gem "select2-rails"
+# gem 'chosen-rails'
+gem 'multi-select-rails'
 gem 'bootstrap_form'
 gem 'font-awesome-sass', '~> 4.7.0'
 # gem 'bootstrap-generators', '~> 3.3.4'
@@ -119,3 +121,5 @@ gem "breadcrumbs_on_rails" # breadcrumb
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'roo' # Importar arquivos CSV
+# gem 'simple_form'
+# gem 'effective_form_inputs'

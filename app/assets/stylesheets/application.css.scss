@@ -13,8 +13,12 @@
  *= require rails_bootstrap_forms
  *= require select2
  *= require select2-bootstrap
+ * require chosen
  *= require datatables
  *= require datatables/dataTables.bootstrap
+ * require effective_form_inputs
+ * require effective_select/input
+ *= require multi-select
  *= require_tree .
  *= require_self
  */

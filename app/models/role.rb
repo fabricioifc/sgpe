@@ -1,5 +1,4 @@
 class Role < ApplicationRecord
-  include PermissaosHelper
   # has_and_belongs_to_many :users, :join_table => :users_roles
   # has_and_belongs_to_many :perfils, :join_table => :users_perfils
 
@@ -10,6 +9,8 @@ class Role < ApplicationRecord
   # validates :resource_type,
   #           :inclusion => { :in => Rolify.resource_types },
   #           :allow_nil => true
+
+  scope :papeis_ordenados , -> { order('roles.resource_type') }
 
   scopify
 
@@ -37,7 +38,11 @@ class Role < ApplicationRecord
     end
     field :resource_type, :enum do
       enum do
-        get_models
+        models ||= []
+          ActiveRecord::Base.connection.tables.each do |v|
+            models << v.singularize.camelize unless ['ArInternalMetadatum', 'SchemaMigration'].include?(v.singularize.camelize)
+          end
+        models.sort
       end
     end
     include_all_fields

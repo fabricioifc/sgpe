@@ -2,11 +2,19 @@
   <!-- <= render partial: 'shared/error_messages', locals: {obj: @perfil} %> -->
   <%= error_messages_for(perfil) %>
 
-    <%= form.text_field :name, id: :perfil_title, autofocus:true %>
-    <div class="form-group">
-      <%= form.check_box :idativo, id: :perfil_idativo %>
-    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <%= form.text_field :name, id: :perfil_title, autofocus:true %>
+        <div class="form-group">
+          <%= form.check_box :idativo, id: :perfil_idativo %>
+        </div>
 
-    <%= form.submit %>
+        <%= form.submit %>
+      </div>
+
+      <div class="col-md-6">
+        <%= form.collection_select :role_ids, Role.papeis_ordenados, :id, :name, {id: :role_ids },  { class: 'multiselect', multiple:true } %>
+      </div>
+    </div>
 
 <% end %>

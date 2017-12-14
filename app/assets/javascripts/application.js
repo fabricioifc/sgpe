@@ -22,8 +22,12 @@
 //= require datatables/dataTables.bootstrap
 //= require tinymce
 //= require cocoon
-//= require summernote
-//= require summernote/locales/pt-BR
+// require summernote
+// require summernote/locales/pt-BR
+// require effective_form_inputs
+// require effective_select/input
+// require chosen-jquery
+//= require multi-select
 //= require_tree .
 
 $(function() {
@@ -37,25 +41,39 @@ $(function() {
 });
 
 // Função utilizada para adicionar editor HTML em textarea com data-provider = summernote
-$.addSummernote = function(){
-  // $('[data-provider="summernote"]').each(function() {
-    $('[data-provider="summernote"]').summernote({
-      lang: 'pt-BR',
-      height: 200,
-      toolbar: [
-        // ['insert', ['link']], // no insert buttons
-        // ["style", ["style"]],
-        // ["color", ["color"]],
-        ["style", ["bold", "italic", "clear"]],
-        // ["para", ["ul"]],
-        // ["height", ["height"]],
-        ["help", ["help"]]
-     ]
-    });
-  // });
-};
+// $.addSummernote = function(){
+//   // $('[data-provider="summernote"]').each(function() {
+//     $('[data-provider="summernote"]').summernote({
+//       lang: 'pt-BR',
+//       height: 200,
+//       toolbar: [
+//         // ['insert', ['link']], // no insert buttons
+//         // ["style", ["style"]],
+//         // ["color", ["color"]],
+//         ["style", ["bold", "italic", "clear"]],
+//         // ["para", ["ul"]],
+//         // ["height", ["height"]],
+//         ["help", ["help"]]
+//      ]
+//     });
+//   // });
+// };
 
 document.addEventListener("turbolinks:load", function() {
+  $.fixedOnScroll();
+  $.addMultipleSelect();
+});
+
+$.addMultipleSelect = function(){
+  $('select.multiselect').multiSelect({
+    selectableHeader: "<div class='well-sm alert-info'>Itens disponíveis</div>",
+    selectionHeader: "<div class='well-sm alert-success'>Itens selecionados</div>"
+    // selectableFooter: "<div class='custom-header'>Selectable footer</div>",
+    // selectionFooter: "<div class='custom-header'>Selection footer</div>"
+  });
+};
+
+$.fixedOnScroll = function () {
 
   var $cache = $('.fixed-on-scroll');
 
@@ -77,5 +95,4 @@ document.addEventListener("turbolinks:load", function() {
     });
 
   }
-
-});
+};

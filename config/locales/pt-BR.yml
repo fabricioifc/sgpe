@@ -40,6 +40,7 @@ pt-BR:
         current_password: "Senha Atual"
         remember_me: "Lembre-se de mim"
         bio: Biografia
+        perfil_ids: Perfis
       turma:
         name: Nome
         year: Ano
@@ -109,12 +110,14 @@ pt-BR:
         aprovado: Aprovado
         reprovado: Reprovado
       role:
+        title: Papéis
         name: Nome
         resource_type: Recurso
         resource_id: Ação
       perfil:
         name: Nome
         idativo: Ativo
+        role_ids: Papéis
       perfil_role:
         perfil_id: Perfil
         role_id: Papél
