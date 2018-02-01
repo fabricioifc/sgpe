@@ -62,4 +62,3 @@ Backup
 
 Para realizar o backup automatizado foi criado um script utilizando o comando rake.
 - mais detalhes em lib/tasks/db.rake
-
