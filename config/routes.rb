@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   resources :courses
   resources :course_modalities
   resources :course_formats
-  resources :disciplines, except: [:show], path: 'disciplinas'
+  resources :disciplines, path: 'disciplinas'
   resources :permissao_telas
   resources :permissaos
   resources :perfils
