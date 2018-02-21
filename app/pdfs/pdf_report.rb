@@ -58,8 +58,8 @@ class PdfReport < Prawn::Document
       end
     end
 
-    def footer
-      go_to_page(page_count)
+    def footer(pagina = null)
+      go_to_page(pagina || page_count)
       creation_date = Time.now.strftime('%d/%m/%Y')
       canvas do
         bounding_box [bleft + 25, bbottom + 25], :width  => 510 do

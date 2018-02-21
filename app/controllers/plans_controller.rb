@@ -217,9 +217,10 @@ class PlansController < ApplicationController
       }
       format.json
       format.pdf {
-          pdf = PlanPdf.new(@plan, current_user).generate
+          planos = Array(@plan)
+          pdf = PlanPdf.new(planos, current_user).generate
           send_data pdf.render,
-            filename: "#{@plan.created_at.strftime("%Y%m%d")}_plano#{@plan.id}.pdf",
+            filename: "#{Date.today.strftime("%Y%m%d")}_plano#{planos.count}.pdf",
             type: "application/pdf",
             disposition: :inline
       }
