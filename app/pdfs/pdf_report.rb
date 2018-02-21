@@ -113,7 +113,7 @@ class PdfReport < Prawn::Document
             # send("cells.#{k}=", v)
           # end
 
-          cells.padding = 3
+          cells.padding = cells_options[:padding] || 3
           cells.borders = []
           row(0).font_style = :bold
           row(0).background_color = "f5f5f5"
@@ -124,7 +124,7 @@ class PdfReport < Prawn::Document
           cells_options[:columns_background].each do |a|
             a.each do |b,c|
               c.each do |k, v|
-                row(b).columns(k).background_color = v
+                row(b).columns(k).background_color = v unless v.nil?
               end
             end
           end

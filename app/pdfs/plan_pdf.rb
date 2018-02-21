@@ -181,6 +181,18 @@ class PlanPdf < PdfReport
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
+        display_event_table(
+          table_data([['Atendimento ao aluno']], [@plano.decorate.atendimento(true)]),
+          [TABLE_WIDTHS_2],
+          { header:true },
+          { borders: [:top, :bottom, :left, :right], borders_length: 0 }
+        )
+        display_event_table(
+          table_data([['Informações adicionais']], [@plano.decorate.observacoes(true)]),
+          [TABLE_WIDTHS_2],
+          { header:true },
+          { borders: [:top, :bottom, :left, :right], borders_length: 0 }
+        )
 
         move_down 10
         bounding_box [bleft, cursor + 5], :width  => TABLE_WIDTHS_2 do
@@ -219,6 +231,50 @@ class PlanPdf < PdfReport
               { borders: [:top, :bottom, :left, :right], borders_length: 0 }
             )
           end
+
+          move_down 10
+
+          display_event_table(
+            table_data([["Professor: #{@plano.offer_discipline.user.name}"]], ['Assinatura: ']),
+            [TABLE_WIDTHS_2],
+            { header:false },
+            { borders: [:top, :bottom, :left, :right],
+              borders_length: 0,
+              columns_bold: [[0,0..0]],
+              columns_background: [0 => [[0, "ffffff"]], 1 => [[0, "ffffff"]]],
+              padding: [10,0,10,5]
+            }
+          )
+
+          move_down 10
+
+          display_event_table(
+            table_data([['Coordenador: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx']], ['Assinatura: ']),
+            [TABLE_WIDTHS_2],
+            { header:false },
+            { borders: [:top, :bottom, :left, :right],
+              borders_length: 0,
+              columns_bold: [[0,0..0]],
+              columns_background: [0 => [[0, "ffffff"]], 1 => [[0, "ffffff"]]],
+              padding: [10,0,10,5]
+            }
+          )
+
+          move_down 10
+
+          display_event_table(
+            table_data([['NUPE: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx']], ['Assinatura: ']),
+            [TABLE_WIDTHS_2],
+            { header:false },
+            { borders: [:top, :bottom, :left, :right],
+              borders_length: 0,
+              columns_bold: [[0,0..0]],
+              columns_background: [0 => [[0, "ffffff"]], 1 => [[0, "ffffff"]]],
+              padding: [10,0,10,5]
+            }
+          )
+
+
         end
       footer
     end

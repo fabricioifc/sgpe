@@ -331,7 +331,7 @@ class PlansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plan_params
-      params.require(:plan).permit(:offer_discipline_id, :obj_espe, :conteudo_prog, :prat_prof, :interdisc, :met_tec, :met_met, :avaliacao, :cronograma, :atendimento, :versao, :active, :user_id, :analise, :aprovado, :reprovado, :parecer, :user_parecer_id, :ead_percentual_definido,
+      params.require(:plan).permit(:offer_discipline_id, :obj_espe, :conteudo_prog, :prat_prof, :interdisc, :met_tec, :met_met, :avaliacao, :cronograma, :atendimento, :versao, :active, :user_id, :analise, :aprovado, :reprovado, :parecer, :user_parecer_id, :ead_percentual_definido, :observacoes,
         offer_discipline_attributes: [grid_discipline_attributes: [:ementa, :objetivo_geral, :bib_geral, :bib_espec]]
       )
     end

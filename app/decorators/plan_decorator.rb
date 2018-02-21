@@ -64,6 +64,10 @@ class PlanDecorator < ApplicationDecorator
     formatar_texto component.atendimento, pdf
   end
 
+  def observacoes pdf = false
+    formatar_texto component.observacoes, pdf
+  end
+
   def versao
     component.versao.to_f unless component.versao.nil?
   end

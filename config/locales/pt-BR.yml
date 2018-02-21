@@ -79,8 +79,8 @@ pt-BR:
         grid: Grade
         grid_id: Grade
         type: Tipo
-        semestre: Semestre
-        year: Ano
+        semestre: Semestre de Oferta
+        year: Ano de Oferta
         course: Curso
         turma: Turma
         type_offer: Tipo
@@ -102,10 +102,11 @@ pt-BR:
         met_met: Recursos metodológicos
         avaliacao: Sistema de avaliação
         cronograma: Cronograma
-        atendimento: Atendimento
+        atendimento: Atendimento aos alunos
         versao: Versão
         active: Ativo
         user_id: Usuário
+        observacoes: Informações adicionais
         analise: Em análise
         aprovado: Aprovado
         reprovado: Reprovado
