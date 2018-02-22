@@ -2,6 +2,7 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
 
+  resources :coordenadors, path: :coordenadores
   resources :offers do
     collection do
       patch :load_grid

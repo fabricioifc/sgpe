@@ -124,3 +124,4 @@ gem 'wkhtmltopdf-binary'
 gem 'roo' # Importar arquivos CSV
 # gem 'simple_form'
 # gem 'effective_form_inputs'
+gem 'date_validator'

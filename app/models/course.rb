@@ -4,6 +4,7 @@ class Course < ApplicationRecord
   belongs_to :course_offer
   belongs_to :user
   has_many :grids
+  has_many :coordenadors
 
   validates :sigla, :name, :active, :course_modality_id, :course_format_id, :course_offer_id, presence:true
   validates :sigla, :name, :active, :course_modality_id, :course_format_id, :course_offer_id,

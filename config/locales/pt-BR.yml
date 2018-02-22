@@ -27,7 +27,18 @@ pt-BR:
       role: Papel
       perfil: Perfil
       perfil_role: Perfil/Papel
+      coordenador: Coordenador
     attributes:
+      coordenador:
+        title: Coordenadores
+        name: Nome
+        funcao: Função
+        email: E-mail
+        dtinicio: Data inicial
+        dtfim: Data final
+        responsavel: Responsável
+        course_id: Curso
+        course: Curso
       user:
         title: Usuários
         new: Usuário
@@ -383,6 +394,7 @@ pt-BR:
       roles: Papéis
       perfil_roles: Perfil/Papéis
       pages:
+        coordenadors: Coordenadores
         about: 'Sobre'
         disciplines: 'Disciplinas'
         cursos: 'Cursos'

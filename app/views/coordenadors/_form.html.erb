@@ -1,0 +1,42 @@
+<%= bootstrap_form_for(coordenador, local:true, html: { class: "", role: "form" }) do |f| %>
+  <%= error_messages_for(coordenador) %>
+
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.text_field :name, id: :coordenador_name, placeholder:true, autofocus:true %>
+    </div>
+    <div class="col-md-3">
+      <%= f.text_field :funcao, id: :coordenador_funcao, placeholder:true %>
+    </div>
+    <div class="col-md-2">
+      <%= f.text_field :siape, id: :coordenador_siape, placeholder:true %>
+    </div>
+    <div class="col-md-3">
+      <%= f.text_field :email, id: :coordenador_email, placeholder:true %>
+    </div>
+
+    <div class="col-md-6">
+      <%= f.select :course_id, Course.where(active:true).order(:name).collect { |c| [c.name, c.id] }, id: :coordenador_course, prompt:true %>
+    </div>
+    <div class="col-md-3">
+      <%= f.date_select :dtinicio, id: :coordenador_dtinicio, prompt: { day: 'Dia', month: 'Mês', year: 'Ano' } %>
+    </div>
+    <div class="col-md-3">
+      <%= f.date_select :dtfim, id: :coordenador_dtfim, prompt: { day: 'Dia', month: 'Mês', year: 'Ano' } %>
+    </div>
+    <div class="col-md-12">
+      <%= f.check_box :titular, id: :coordenador_titular %>
+      <%= f.check_box :responsavel, id: :coordenador_responsavel %>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.submit class: 'btn btn-primary' %>
+    </div>
+  </div>
+
+<% end %>

@@ -1,0 +1,38 @@
+<div class="page-header">
+  <%= link_to coordenadors_path, class: 'btn btn-default' do %>
+    <i class='fa fa-list fa-2'></i>
+    <%= t('helpers.links.back') %>
+  <% end %>
+  <%= link_to edit_coordenador_path(@coordenador), class: 'btn btn-primary' do %>
+    <i class='fa fa-pencil-square-o fa-2'></i>
+    <%= t('helpers.links.edit') %>
+  <% end %>
+  <h1>Detalhes coordenador</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Name:</dt>
+  <dd><%= @coordenador.name %></dd>
+
+  <dt>Funcao:</dt>
+  <dd><%= @coordenador.funcao %></dd>
+
+  <dt>Siape:</dt>
+  <dd><%= @coordenador.siape %></dd>
+
+  <dt>Titular:</dt>
+  <dd><%= @coordenador.titular %></dd>
+
+  <dt>Email:</dt>
+  <dd><%= @coordenador.email %></dd>
+
+  <dt>Dtinicio:</dt>
+  <dd><%= @coordenador.dtinicio %></dd>
+
+  <dt>Dtfim:</dt>
+  <dd><%= @coordenador.dtfim %></dd>
+
+  <dt>Responsavel:</dt>
+  <dd><%= @coordenador.responsavel %></dd>
+
+</dl>
