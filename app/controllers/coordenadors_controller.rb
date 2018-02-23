@@ -38,6 +38,8 @@ class CoordenadorsController < ApplicationController
 
     respond_to do |format|
       if @coordenador.save
+        # verificar_titular
+        # verificar_responsavel
         format.html { redirect_to @coordenador, notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :index, status: :created, location: @coordenador }
       else
@@ -50,8 +52,11 @@ class CoordenadorsController < ApplicationController
   # PATCH/PUT /coordenadors/1
   # PATCH/PUT /coordenadors/1.json
   def update
+
     respond_to do |format|
       if @coordenador.update(coordenador_params)
+        # verificar_titular
+        # verificar_responsavel
         # format.html { redirect_to @coordenador, notice: 'Coordenador was successfully updated.' }
         format.html { redirect_to coordenadors_path, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :index, status: :ok, location: @coordenador }
@@ -81,6 +86,26 @@ class CoordenadorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def coordenador_params
-      params.require(:coordenador).permit(:name, :funcao, :siape, :titular, :email, :dtinicio, :dtfim, :responsavel, :course_id)
+      params.require(:coordenador).permit(:name, :funcao, :siape, :titular, :email, :responsavel, :course_id)
+    end
+
+    def verificar_responsavel
+      if @coordenador.responsavel?
+        if @coordenador.id.nil?
+          Coordenador.where(course_id: @coordenador.course_id).update(responsavel:false)
+        else
+          Coordenador.where(course_id: @coordenador.course_id).where.not(id: @coordenador.id).update(responsavel:false)
+        end
+      end
+    end
+
+    def verificar_titular
+      if @coordenador.titular?
+        if @coordenador.id.nil?
+          Coordenador.where(course_id: @coordenador.course_id).update(titular:false)
+        else
+          Coordenador.where(course_id: @coordenador.course_id).where.not(id: @coordenador.id).update(titular:false)
+        end
+      end
     end
 end

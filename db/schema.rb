@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180222121923) do
+ActiveRecord::Schema.define(version: 20180223194634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,8 +29,6 @@ ActiveRecord::Schema.define(version: 20180222121923) do
     t.string "siape", null: false
     t.boolean "titular", default: true
     t.string "email", null: false
-    t.date "dtinicio"
-    t.date "dtfim"
     t.boolean "responsavel", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -202,6 +200,8 @@ ActiveRecord::Schema.define(version: 20180222121923) do
     t.bigint "user_parecer_id"
     t.integer "ead_percentual_definido"
     t.text "observacoes"
+    t.bigint "coordenador_id"
+    t.index ["coordenador_id"], name: "index_plans_on_coordenador_id"
     t.index ["offer_discipline_id"], name: "index_plans_on_offer_discipline_id"
     t.index ["user_id"], name: "index_plans_on_user_id"
     t.index ["user_parecer_id"], name: "index_plans_on_user_parecer_id"
@@ -307,6 +307,7 @@ ActiveRecord::Schema.define(version: 20180222121923) do
   add_foreign_key "offers", "turmas"
   add_foreign_key "perfil_roles", "perfils"
   add_foreign_key "perfil_roles", "roles"
+  add_foreign_key "plans", "coordenadors"
   add_foreign_key "plans", "offer_disciplines"
   add_foreign_key "plans", "users"
   add_foreign_key "users_perfils", "perfils"

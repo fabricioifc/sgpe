@@ -42,18 +42,6 @@ document.addEventListener("turbolinks:load", function() {
           orderable: true
         },
         {
-          width: "7%",
-          className: "",
-          searchable: false,
-          orderable: false
-        },
-        {
-          width: "7%",
-          className: "",
-          searchable: false,
-          orderable: false
-        },
-        {
           width: "5%",
           className: "text-center",
           searchable: true,

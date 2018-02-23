@@ -16,8 +16,8 @@ class CoordenadorDatatable < ApplicationDatatable
         column << coordenador.name
         column << coordenador.course.name
         column << coordenador.siape
-        column << coordenador.dtinicio
-        column << coordenador.dtfim
+        # column << coordenador.dtinicio
+        # column << coordenador.dtfim
         column << coordenador.decorate.titular
         column << coordenador.decorate.responsavel
 
@@ -60,6 +60,6 @@ class CoordenadorDatatable < ApplicationDatatable
 
   # The columns needs to be the same list of searchable items and IN ORDER that they will appear in Data.
   def columns
-    %w(coordenadors.name funcao siape titular email dtinicio dtfim responsavel courses.name)
+    %w(coordenadors.name funcao siape titular email responsavel courses.name)
   end
 end
