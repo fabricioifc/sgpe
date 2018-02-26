@@ -1,32 +1,15 @@
-<div id="email-wrapper">
-  <div id="header">
-    <table>
-      <tbody>
-        <tr>
-          <td width="40px"><%= email_image_tag "logo.png", :class => "logo" %></td>
-          <td>
-            <h3><%= t("devise.mailer.invitation_instructions.hello", email: @resource.email) %></h3>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div id="body">
-    <h3 class="alert alert-success">
-      <strong><%= t("devise.mailer.invitation_instructions.someone_invited_you", url: root_url) %></strong>
-    </h3>
+<%= content_for :title, t("devise.mailer.invitation_instructions.hello", email: @resource.email) %>
 
-    <%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, :invitation_token => @token), class: 'btn btn-primary' %>
+<h3 class="alert alert-info">
+  <strong><%= t("devise.mailer.invitation_instructions.someone_invited_you", url: root_url) %></strong>
+</h3>
 
-    <% if @resource.invitation_due_at %>
-      <p><%= t("devise.mailer.invitation_instructions.accept_until", due_date: l(@resource.invitation_due_at, format: :'devise.mailer.invitation_instructions.accept_until_format')) %></p>
-    <% end %>
+<h3><%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, :invitation_token => @token), class: '' %></h3>
 
-    <hr>
+<% if @resource.invitation_due_at %>
+  <p><%= t("devise.mailer.invitation_instructions.accept_until", due_date: l(@resource.invitation_due_at, format: :'devise.mailer.invitation_instructions.accept_until_format')) %></p>
+<% end %>
 
-    <p><%= t("devise.mailer.invitation_instructions.ignore").html_safe %></p>
+<hr>
 
-    <img src="http://www.fraiburgo.ifc.edu.br/wp-content/themes/ifc-v2/assets/images/logo-ifc.png" alt="">
-
-  </div>
-</div>
+<p><%= t("devise.mailer.invitation_instructions.ignore").html_safe %></p>
