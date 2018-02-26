@@ -262,7 +262,8 @@ class PlansController < ApplicationController
       @plan.active = true
       ultima_versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
       @plan.versao = ultima_versao.nil? ? 1 : ultima_versao + 1
-      @plan.coordenador = Coordenador.find_by(course_id: @plan.offer_discipline.grid_discipline.grid.course_id, responsavel:true)
+      coordenador = Coordenador.find_by(course_id: @plan.offer_discipline.grid_discipline.grid.course_id, responsavel:true)
+      @plan.coordenador = coordenador unless coordenador.nil?
 
       if @plan.offer_discipline.grid_discipline.discipline.especial?
         @plan.offer_discipline.grid_discipline.ementa = params[:ementa]
@@ -306,7 +307,8 @@ class PlansController < ApplicationController
         @plan.offer_discipline.grid_discipline.bib_geral = params[:bib_geral]
         @plan.offer_discipline.grid_discipline.bib_espec = params[:bib_espec]
       end
-      @plan.coordenador = Coordenador.find_by(course_id: @plan.offer_discipline.grid_discipline.grid.course_id, responsavel:true)
+      coordenador = Coordenador.find_by(course_id: @plan.offer_discipline.grid_discipline.grid.course_id, responsavel:true)
+      @plan.coordenador = coordenador unless coordenador.nil?
 
       adicionar_breadcrumb_curso @plan.offer_discipline.grid_discipline.grid.course
       adicionar_breadcrumb_planos @plan
