@@ -218,12 +218,13 @@ class PlansController < ApplicationController
       format.json
       format.pdf {
           pdf = PlanPdf.new(@plan, current_user).generate
-          zip = ZipPdfGenerator.new(@plan, pdf).comprimir
-          send_data zip.ler, filename: 'PLANOS_DE_ENSINO.zip'
-          # send_data pdf.render,
-          #   filename: "#{Date.today.strftime("%Y%m%d")}_plano#{@plan.id}.pdf",
-          #   type: "application/pdf",
-          #   disposition: :inline
+          filename = "#{@plan.offer_discipline.user.name}_#{@plan.offer_discipline.grid_discipline.discipline.title}.pdf"
+          filename = filename.gsub!(/( )/, '_').upcase!
+
+          send_data pdf.render,
+            filename: filename,
+            type: "application/pdf",
+            disposition: "attachment"
       }
     end
   end

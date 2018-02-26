@@ -1,5 +1,6 @@
-require 'open-uri'
-
+# pdf = PlanPdf.new(@plan, current_user).generate
+# zip = ZipPdfGenerator.new(@plan, pdf).comprimir
+# send_data zip.ler, filename: 'PLANOS_DE_ENSINO.zip'
 class ZipPdfGenerator
 
   def initialize plan, pdf
