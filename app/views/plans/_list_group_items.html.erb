@@ -14,7 +14,7 @@
 <li class="list-group-item">
   <p><span><%= "#{plan.offer_discipline.grid_discipline.discipline.sigla} - #{plan.offer_discipline.grid_discipline.discipline.title}" %></span></p>
   <p>
-    <span class="badge"><%= "Turma: #{plan.offer_discipline.offer.turma.name}" %></span>
+    <span class="badge"><%= "Turma: #{plan.offer_discipline.offer.turma}" %></span>
     <span class="badge"><%= "Ano: #{plan.offer_discipline.offer.year}" %></span>
     <% if plan.offer_discipline.offer.semestre %>
       <span class="badge"><%= "Semestre: #{plan.offer_discipline.offer.semestre}" %></span>

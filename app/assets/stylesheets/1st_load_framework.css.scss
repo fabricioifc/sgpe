@@ -257,3 +257,7 @@ table tbody tr td.text-middle {
 .ms-container {
   width: 100%;
 }
+
+label.required:after {
+  content:" *";
+}

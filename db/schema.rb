@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180223194634) do
+ActiveRecord::Schema.define(version: 20180226162533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,9 +140,8 @@ ActiveRecord::Schema.define(version: 20180223194634) do
     t.bigint "grid_id"
     t.integer "year_base"
     t.integer "semestre_base"
-    t.bigint "turma_id"
+    t.string "turma"
     t.index ["grid_id"], name: "index_offers_on_grid_id"
-    t.index ["turma_id"], name: "index_offers_on_turma_id"
   end
 
   create_table "perfil_roles", force: :cascade do |t|
@@ -294,7 +293,6 @@ ActiveRecord::Schema.define(version: 20180223194634) do
   add_foreign_key "offer_disciplines", "offers"
   add_foreign_key "offer_disciplines", "users"
   add_foreign_key "offers", "grids"
-  add_foreign_key "offers", "turmas"
   add_foreign_key "perfil_roles", "perfils"
   add_foreign_key "perfil_roles", "roles"
   add_foreign_key "plans", "coordenadors"

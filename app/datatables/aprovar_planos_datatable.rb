@@ -15,7 +15,7 @@ private
 
         column << "#{plano.offer_discipline.grid_discipline.grid.year} - #{plano.offer_discipline.grid_discipline.grid.course.name}"
         column << "#{plano.offer_discipline.grid_discipline.discipline.sigla} - #{plano.offer_discipline.grid_discipline.discipline.title}"
-        column << "#{plano.offer_discipline.offer.turma.year} - #{plano.offer_discipline.offer.turma.name}"
+        column << "#{plano.offer_discipline.offer.turma}"
         column << plano.user.name
         column << plano.offer_discipline.offer.decorate.ano_semestre
         column << (plano.user_parecer.nil? ? nil : plano.user_parecer.name)

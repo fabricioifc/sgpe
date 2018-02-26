@@ -29,7 +29,7 @@ class PlanPdf < PdfReport
   def generate options = [header:true, pagination:true, footer:true]
     begin
       @plano.update(coordenador: Coordenador.find_by(course_id: @plano.offer_discipline.grid_discipline.grid.course_id, responsavel:true))
-      
+
       bounding_box [35, cursor], width: 540 do
         bounding_box [0, cursor], width: 540 do
           repeat :all, :dynamic => true do
@@ -61,7 +61,7 @@ class PlanPdf < PdfReport
               [
                 @plano.offer_discipline.grid_discipline.discipline.title,
                 @plano.offer_discipline.user.name || @plano.offer_discipline.user.email,
-                "#{@plano.offer_discipline.offer.turma.year}.#{@plano.offer_discipline.offer.turma.name}",
+                "#{@plano.offer_discipline.offer.turma}",
               ]
             ),
             [240, 240, 60],
