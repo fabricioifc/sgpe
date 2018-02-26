@@ -4,9 +4,10 @@
   <div class="col-md-offset-1 col-md-6 col-sm-offset-0 col-sm-6">
     <div class="panel panel-primary">
       <div class="panel-heading">
-          <div class="panel-title"><%= t(".title") %></div>
+          <div class="panel-title">Convidando novos usuários</div>
       </div>
       <div class="panel-body">
+        <div class="alert alert-info">Precisamos saber o e-mail e o perfil do usuário que está sendo convidado.</div>
 
         <% resource.class.invite_key_fields.each do |field| -%>
           <div class="form-group">
