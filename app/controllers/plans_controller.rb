@@ -217,6 +217,8 @@ class PlansController < ApplicationController
       }
       format.json
       format.pdf {
+        begin
+          coordenador = Coordenador.find_by!(course_id: @plan.offer_discipline.grid_discipline.grid.course_id, responsavel:true)
           pdf = PlanPdf.new(@plan, current_user).generate
           filename = "#{@plan.offer_discipline.user.name}_#{@plan.offer_discipline.grid_discipline.discipline.title}.pdf"
           filename = filename.gsub!(/( )/, '_').upcase!
@@ -225,6 +227,12 @@ class PlansController < ApplicationController
             filename: filename,
             type: "application/pdf",
             disposition: "attachment"
+        rescue Exception => error
+          message = "Ocorreu um erro interno. Favor entrar em contato com o suporte."
+          logger.error error
+          ExceptionNotifier.notify_exception(error)
+          redirect_to offer_offer_discipline_plans_path(@plan), alert: message
+        end
       }
     end
   end
