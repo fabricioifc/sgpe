@@ -125,3 +125,7 @@ gem 'roo' # Importar arquivos CSV
 # gem 'simple_form'
 # gem 'effective_form_inputs'
 gem 'date_validator'
+
+# Email template custom
+gem 'nokogiri'
+gem 'premailer-rails'
