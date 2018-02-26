@@ -291,7 +291,7 @@ class PlansController < ApplicationController
       end
     rescue Exception => error
       message = "Ocorreu um erro interno. Favor entrar em contato com o suporte."
-      logger.error message
+      # logger.error message
       puts error
       redirect_to root_path, notice: message
     end
@@ -328,7 +328,7 @@ class PlansController < ApplicationController
       end
     rescue Exception => error
       message = "Ocorreu um erro interno. Favor entrar em contato com o suporte."
-      logger.error message
+      # logger.error message
       puts error
       redirect_to root_path, notice: message
     end
