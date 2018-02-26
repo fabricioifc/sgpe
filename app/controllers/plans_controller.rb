@@ -217,12 +217,13 @@ class PlansController < ApplicationController
       }
       format.json
       format.pdf {
-          planos = Array(@plan)
-          pdf = PlanPdf.new(planos, current_user).generate
-          send_data pdf.render,
-            filename: "#{Date.today.strftime("%Y%m%d")}_plano#{planos.count}.pdf",
-            type: "application/pdf",
-            disposition: :inline
+          pdf = PlanPdf.new(@plan, current_user).generate
+          zip = ZipPdfGenerator.new(@plan, pdf).comprimir
+          send_data zip.ler, filename: 'PLANOS_DE_ENSINO.zip'
+          # send_data pdf.render,
+          #   filename: "#{Date.today.strftime("%Y%m%d")}_plano#{@plan.id}.pdf",
+          #   type: "application/pdf",
+          #   disposition: :inline
       }
     end
   end
@@ -253,64 +254,80 @@ class PlansController < ApplicationController
   # POST /plans
   # POST /plans.json
   def create
-    @plan = Plan.new(plan_params)
-    @plan.offer_discipline_id = params[:offer_discipline_id]
-    @plan.user = current_user
-    @plan.active = true
-    ultima_versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
-    @plan.versao = ultima_versao.nil? ? 1 : ultima_versao + 1
+    begin
+      @plan = Plan.new(plan_params)
+      @plan.offer_discipline_id = params[:offer_discipline_id]
+      @plan.user = current_user
+      @plan.active = true
+      ultima_versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
+      @plan.versao = ultima_versao.nil? ? 1 : ultima_versao + 1
+      @plan.coordenador = Coordenador.find_by(course_id: @plan.offer_discipline.grid_discipline.grid.course_id, responsavel:true)
 
-    if @plan.offer_discipline.grid_discipline.discipline.especial?
-      @plan.offer_discipline.grid_discipline.ementa = params[:ementa]
-      @plan.offer_discipline.grid_discipline.objetivo_geral = params[:objetivo_geral]
-      @plan.offer_discipline.grid_discipline.bib_geral = params[:bib_geral]
-      @plan.offer_discipline.grid_discipline.bib_espec = params[:bib_espec]
-    end
+      if @plan.offer_discipline.grid_discipline.discipline.especial?
+        @plan.offer_discipline.grid_discipline.ementa = params[:ementa]
+        @plan.offer_discipline.grid_discipline.objetivo_geral = params[:objetivo_geral]
+        @plan.offer_discipline.grid_discipline.bib_geral = params[:bib_geral]
+        @plan.offer_discipline.grid_discipline.bib_espec = params[:bib_espec]
+      end
 
-    adicionar_breadcrumb_curso @plan.offer_discipline.grid_discipline.grid.course
-    adicionar_breadcrumb_planos @plan
+      adicionar_breadcrumb_curso @plan.offer_discipline.grid_discipline.grid.course
+      adicionar_breadcrumb_planos @plan
 
-    respond_to do |format|
-      ActiveRecord::Base.transaction do
-        if params[:commit_analise]
-          @plan.analise = true
-        end
-        if @plan.save
-          format.html { redirect_to offer_offer_discipline_plans_path(@plan), notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
-          format.json { render :show, status: :created, location: @plan }
-        else
-          format.html { render :new }
-          format.json { render json: @plan.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        ActiveRecord::Base.transaction do
+          if params[:commit_analise]
+            @plan.analise = true
+          end
+          if @plan.save
+            format.html { redirect_to offer_offer_discipline_plans_path(@plan), notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
+            format.json { render :show, status: :created, location: @plan }
+          else
+            format.html { render :new }
+            format.json { render json: @plan.errors, status: :unprocessable_entity }
+          end
         end
       end
+    rescue Exception => error
+      message = "Ocorreu um erro interno. Favor entrar em contato com o suporte."
+      logger.error message
+      puts error
+      redirect_to root_path, notice: message
     end
   end
 
   # PATCH/PUT /plans/1
   # PATCH/PUT /plans/1.json
   def update
-    if @plan.offer_discipline.grid_discipline.discipline.especial?
-      @plan.offer_discipline.grid_discipline.ementa = params[:ementa]
-      @plan.offer_discipline.grid_discipline.objetivo_geral = params[:objetivo_geral]
-      @plan.offer_discipline.grid_discipline.bib_geral = params[:bib_geral]
-      @plan.offer_discipline.grid_discipline.bib_espec = params[:bib_espec]
-    end
+    begin
+      if @plan.offer_discipline.grid_discipline.discipline.especial?
+        @plan.offer_discipline.grid_discipline.ementa = params[:ementa]
+        @plan.offer_discipline.grid_discipline.objetivo_geral = params[:objetivo_geral]
+        @plan.offer_discipline.grid_discipline.bib_geral = params[:bib_geral]
+        @plan.offer_discipline.grid_discipline.bib_espec = params[:bib_espec]
+      end
+      @plan.coordenador = Coordenador.find_by(course_id: @plan.offer_discipline.grid_discipline.grid.course_id, responsavel:true)
 
-    adicionar_breadcrumb_curso @plan.offer_discipline.grid_discipline.grid.course
-    adicionar_breadcrumb_planos @plan
-    respond_to do |format|
-      ActiveRecord::Base.transaction do
-        if params[:commit_analise]
-          @plan.update(:analise => true)
-        end
-        if @plan.update(plan_params)
-          format.html { redirect_to offer_offer_discipline_plans_path(@plan), notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
-          format.json { render :show, status: :ok, location: @plan }
-        else
-          format.html { render :edit }
-          format.json { render json: @plan.errors, status: :unprocessable_entity }
+      adicionar_breadcrumb_curso @plan.offer_discipline.grid_discipline.grid.course
+      adicionar_breadcrumb_planos @plan
+      respond_to do |format|
+        ActiveRecord::Base.transaction do
+          if params[:commit_analise]
+            @plan.update(:analise => true)
+          end
+          if @plan.update(plan_params)
+            format.html { redirect_to offer_offer_discipline_plans_path(@plan), notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
+            format.json { render :show, status: :ok, location: @plan }
+          else
+            format.html { render :edit }
+            format.json { render json: @plan.errors, status: :unprocessable_entity }
+          end
         end
       end
+    rescue Exception => error
+      message = "Ocorreu um erro interno. Favor entrar em contato com o suporte."
+      logger.error message
+      puts error
+      redirect_to root_path, notice: message
     end
   end
 

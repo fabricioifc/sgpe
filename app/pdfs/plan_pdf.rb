@@ -6,10 +6,10 @@ class PlanPdf < PdfReport
 
   TABLE_WIDTHS_2 = 540
 
-  def initialize(plans, user)
-    @planos = plans
+  def initialize(plan, user)
+    @plano = plan
     super({
-      id: @planos.count,
+      id: @plano.id,
       title: 'Plano de Ensino',
       user: user,
       company: {
@@ -27,8 +27,9 @@ class PlanPdf < PdfReport
   end
 
   def generate options = [header:true, pagination:true, footer:true]
-    @planos.each_with_index do |plano, index|
-      @plano = plano
+    begin
+      @plano.update(coordenador: Coordenador.find_by(course_id: @plano.offer_discipline.grid_discipline.grid.course_id, responsavel:true))
+      
       bounding_box [35, cursor], width: 540 do
         bounding_box [0, cursor], width: 540 do
           repeat :all, :dynamic => true do
@@ -238,7 +239,7 @@ class PlanPdf < PdfReport
           move_down 10
 
           display_event_table(
-            table_data([["Professor: #{@plano.offer_discipline.user.name}"]], ['Assinatura: ']),
+            table_data([["Ass: "]], ["Professor: #{@plano.offer_discipline.user.name}"]),
             [TABLE_WIDTHS_2],
             { header:false },
             { borders: [:top, :bottom, :left, :right],
@@ -252,7 +253,7 @@ class PlanPdf < PdfReport
           move_down 10
 
           display_event_table(
-            table_data([['Coordenador: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx']], ['Assinatura: ']),
+            table_data([['Ass: ']], ["#{@plano.coordenador.funcao}: #{@plano.coordenador.name}"]),
             [TABLE_WIDTHS_2],
             { header:false },
             { borders: [:top, :bottom, :left, :right],
@@ -263,33 +264,41 @@ class PlanPdf < PdfReport
             }
           )
 
-          move_down 10
+          # Se foi analisado
+          if !@plano.user_parecer.nil?
+            move_down 10
 
-          display_event_table(
-            table_data([['NUPE: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx']], ['Assinatura: ']),
-            [TABLE_WIDTHS_2],
-            { header:false },
-            { borders: [:top, :bottom, :left, :right],
-              borders_length: 0,
-              columns_bold: [[0,0..0]],
-              columns_background: [0 => [[0, "ffffff"]], 1 => [[0, "ffffff"]]],
-              padding: [10,0,10,5]
-            }
-          )
+            display_event_table(
+              table_data([['Ass: ']], ["Analisado por: #{@plano.user_parecer.name}"]),
+              [TABLE_WIDTHS_2],
+              { header:false },
+              { borders: [:top, :bottom, :left, :right],
+                borders_length: 0,
+                columns_bold: [[0,0..0]],
+                columns_background: [0 => [[0, "ffffff"]], 1 => [[0, "ffffff"]]],
+                padding: [10,0,10,5]
+              }
+            )
+          end
 
 
-        end
+          end
+
+        # Adiciona informações adicionais ao final da página de cada plano
+        footer(page_number)
+
+        # Inicia uma nova página para cada novo plano do lote
+        # if index + 1 != @plano.count
+        #   start_new_page
+        # end
       end
-
-      # Adiciona informações adicionais ao final da página de cada plano
-      footer(page_number)
-
-      # Inicia uma nova página para cada novo plano do lote
-      if index + 1 != @planos.count
-        start_new_page
-      end
+      self
+    rescue Exception => error
+      message = "Ocorreu um erro interno. Favor entrar em contato com o suporte."
+      logger.error message
+      puts error
+      redirect_to root_path, notice: message
     end
-    self
   end
 
   private

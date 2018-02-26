@@ -38,10 +38,10 @@ class CoordenadorsController < ApplicationController
 
     respond_to do |format|
       if @coordenador.save
-        # verificar_titular
-        # verificar_responsavel
+        verificar_titular
+        verificar_responsavel
         format.html { redirect_to @coordenador, notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
-        format.json { render :index, status: :created, location: @coordenador }
+        format.json { render :index, status: :created }
       else
         format.html { render :new }
         format.json { render json: @coordenador.errors, status: :unprocessable_entity }
@@ -55,11 +55,11 @@ class CoordenadorsController < ApplicationController
 
     respond_to do |format|
       if @coordenador.update(coordenador_params)
-        # verificar_titular
-        # verificar_responsavel
+        verificar_titular
+        verificar_responsavel
         # format.html { redirect_to @coordenador, notice: 'Coordenador was successfully updated.' }
         format.html { redirect_to coordenadors_path, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
-        format.json { render :index, status: :ok, location: @coordenador }
+        format.json { render :index, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @coordenador.errors, status: :unprocessable_entity }

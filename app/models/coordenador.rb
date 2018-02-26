@@ -1,11 +1,12 @@
 class Coordenador < ApplicationRecord
   belongs_to :course
+  has_many :plans
 
   validates :name, :course_id, :funcao, :siape, :email, presence:true
   # validates :course_id, :titular,
   #   uniqueness: {scope: [:course_id, :titular]}
 
-  # validate :verificar_titular
+  validate :verificar_titular
   validate :verificar_responsavel
 
   # validates :dtinicio, date: { before_or_equal_to: :dtfim }
@@ -28,20 +29,20 @@ class Coordenador < ApplicationRecord
   private
 
   def verificar_titular
-    titulares = Coordenador.where(course_id: self.course_id, titular:true).count
+    titulares = Coordenador.where(course_id: self.course_id, titular:true).where.not(id: self.id).count
     if titulares == 0 && !self.titular?
       errors.add(:titular, "Marque como coordenador titular para este curso.")
-    elsif titulares > 0 && self.titular?
-      errors.add(:titular, "Já existe um coordenador titular para este curso.")
+    # elsif titulares > 0 && self.titular?
+    #   errors.add(:titular, "Já existe um coordenador titular para este curso.")
     end
   end
 
   def verificar_responsavel
-    responsaveis = Coordenador.where(course_id: self.course_id, responsavel:true).count
+    responsaveis = Coordenador.where(course_id: self.course_id, responsavel:true).where.not(id: self.id).count
     if responsaveis == 0 && !self.responsavel?
       errors.add(:responsavel, "Nenhum coordenador marcado como responsável para este curso.")
-    elsif responsaveis > 0 && self.responsavel?
-      errors.add(:responsável, "Já existe um coordenador responsavel por este curso.")
+    # elsif responsaveis > 0 && self.responsavel?
+      # errors.add(:responsável, "Já existe um coordenador responsavel por este curso.")
     end
   end
 

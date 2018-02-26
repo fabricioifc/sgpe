@@ -2,6 +2,7 @@ class Plan < ApplicationRecord
   belongs_to :offer_discipline
   belongs_to :user, :class_name => 'User'
   belongs_to :user_parecer, :class_name => 'User', optional:true
+  belongs_to :coordenador
 
   # attr_accessor :ementa, :objetivo_geral, :bib_geral, :bib_espec
 
