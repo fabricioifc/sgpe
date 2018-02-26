@@ -1,11 +1,26 @@
-<p><%= t("devise.mailer.invitation_instructions.hello", email: @resource.email) %></p>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<p><%= t("devise.mailer.invitation_instructions.someone_invited_you", url: root_url) %></p>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <%= t("devise.mailer.invitation_instructions.hello", email: @resource.email) %>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <h5 class="alert alert-success">
+      <strong><%= t("devise.mailer.invitation_instructions.someone_invited_you", url: root_url) %></strong>
+    </h5>
 
-<p><%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, :invitation_token => @token) %></p>
+    <%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, :invitation_token => @token), class: 'btn btn-primary' %>
 
-<% if @resource.invitation_due_at %>
-  <p><%= t("devise.mailer.invitation_instructions.accept_until", due_date: l(@resource.invitation_due_at, format: :'devise.mailer.invitation_instructions.accept_until_format')) %></p>
-<% end %>
+    <% if @resource.invitation_due_at %>
+      <p><%= t("devise.mailer.invitation_instructions.accept_until", due_date: l(@resource.invitation_due_at, format: :'devise.mailer.invitation_instructions.accept_until_format')) %></p>
+    <% end %>
 
-<p><%= t("devise.mailer.invitation_instructions.ignore").html_safe %></p>
+    <hr>
+
+    <p><%= t("devise.mailer.invitation_instructions.ignore").html_safe %></p>
+
+    <img src="http://www.fraiburgo.ifc.edu.br/wp-content/themes/ifc-v2/assets/images/logo-ifc.png" alt="">
+  </div>
+</div>
