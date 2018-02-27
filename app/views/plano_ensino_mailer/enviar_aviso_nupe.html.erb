@@ -1,0 +1,29 @@
+<%= content_for :title, 'Analisar plano de ensino' %>
+
+<h4>Um plano de ensino foi recebido para ser analisado.</h4>
+
+<h3>
+  <%= link_to "Analisar plano", offer_offer_discipline_plan_url(
+      id: @plan.id,
+      offer_discipline_id: @plan.offer_discipline_id,
+      offer_id: @plan.offer_discipline.offer_id
+    ) %>
+</h3>
+
+<hr>
+
+<h3>Detalhes</h3>
+<dl class="dl-horizontal">
+  <dt>Curso</dt>
+  <dd><%= "#{@plan.offer_discipline.grid_discipline.grid.course.sigla} - #{@plan.offer_discipline.grid_discipline.grid.course.decorate.name}" %></dd>
+  <dt>Disciplina</dt>
+  <dd><%= @plan.offer_discipline.grid_discipline.discipline.decorate.title %></dd>
+  <dt>Turma</dt>
+  <dd><%= @plan.offer_discipline.offer.turma %></dd>
+  <dt>Professor</dt>
+  <dd><%= @plan.user.name %></dd>
+  <dt>Versão</dt>
+  <dd><%= @plan.decorate.versao %></dd>
+  <dt>Dt. Criação</dt>
+  <dd><%= @plan.created_at.strftime('%d/%m/%Y') %></dd>
+</dl>
