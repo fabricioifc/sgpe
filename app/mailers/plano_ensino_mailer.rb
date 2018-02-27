@@ -7,6 +7,7 @@ class PlanoEnsinoMailer < ApplicationMailer
   def enviar_aviso_nupe(**args)
     @args = args
     # @plan = plan
+    puts "NUPE: #{Rails.application.secrets.email_nupe}"
     mail(to: Rails.application.secrets.email_nupe, subject: "Um plano de ensino foi recebido para ser analisado.")
   end
 
