@@ -365,7 +365,15 @@ class PlansController < ApplicationController
 
   def enviar_aviso_nupe
     PlanoEnsinoMailer.enviar_aviso_nupe(get_options_email).deliver_later!
-    redirect_to offer_offer_discipline_plan_path(id: @plan.id)
+    respond_to do |format|
+      format.html {
+        redirect_to offer_offer_discipline_plan_path(
+          id: @plan.id,
+          offer_discipline_id: @plan.offer_discipline_id,
+          offer_id: @plan.offer_discipline.offer_id
+        ), notice: 'E-mail enviado ao setor responsável.'
+      }
+    end
   end
 
   private
