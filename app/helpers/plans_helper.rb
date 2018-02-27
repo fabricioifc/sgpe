@@ -98,4 +98,20 @@ module PlansHelper
     end
   end
 
+  # Utilizado para passar parâmetros ao enviar por e-mail
+  # Ex: PlanoEnsinoMailer.enviar_aviso_nupe(get_options_email).deliver_later!
+  def get_options_email
+    options = {
+      id: @plan.id,
+      offer_id: @plan.offer_discipline.offer_id,
+      offer_discipline_id: @plan.offer_discipline_id,
+      curso: "#{@plan.offer_discipline.grid_discipline.grid.course.sigla} - #{@plan.offer_discipline.grid_discipline.grid.course.decorate.name}",
+      disciplina: @plan.offer_discipline.grid_discipline.discipline.decorate.title,
+      turma: @plan.offer_discipline.offer.turma,
+      professor: @plan.user.name,
+      versao: @plan.decorate.versao,
+      dtcreated: @plan.created_at.strftime('%d/%m/%Y')
+    }
+  end
+
 end

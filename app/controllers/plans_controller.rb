@@ -294,7 +294,7 @@ class PlansController < ApplicationController
           if @plan.save
             # Se foi enviado para análise então enviar aviso ao nupe
             if params[:commit_analise]
-              PlanoEnsinoMailer.enviar_aviso_nupe(@plan).deliver_later!
+              PlanoEnsinoMailer.enviar_aviso_nupe(get_options_email).deliver_later!
             end
             format.html { redirect_to offer_offer_discipline_plans_path(@plan), notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
             format.json { render :show, status: :created, location: @plan }
@@ -335,7 +335,7 @@ class PlansController < ApplicationController
           if @plan.update(plan_params)
             # Se foi enviado para análise então enviar aviso ao nupe
             if params[:commit_analise]
-              PlanoEnsinoMailer.enviar_aviso_nupe(@plan).deliver_later!
+              PlanoEnsinoMailer.enviar_aviso_nupe(get_options_email).deliver_later!
             end
             format.html { redirect_to offer_offer_discipline_plans_path(@plan), notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
             format.json { render :show, status: :ok, location: @plan }
