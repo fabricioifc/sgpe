@@ -366,7 +366,7 @@ class PlansController < ApplicationController
   def enviar_aviso_nupe
     if is_admin?
       @plan = Plan.find(params[:plan_id])
-      PlanoEnsinoMailer.enviar_aviso_nupe(get_options_email).deliver_now!
+      PlanoEnsinoMailer.enviar_aviso_nupe(get_options_email).deliver_later
       respond_to do |format|
         format.html {
           redirect_to offer_offer_discipline_plan_path(
