@@ -363,6 +363,11 @@ class PlansController < ApplicationController
     end
   end
 
+  def enviar_aviso_nupe
+    PlanoEnsinoMailer.enviar_aviso_nupe(get_options_email).deliver_later!
+    redirect_to offer_offer_discipline_plan_path(id: @plan.id)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_plan

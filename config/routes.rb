@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         member do
           get 'copy'
           post 'aprovar'
+          get 'enviar_aviso_nupe'
         end
       end
     end
