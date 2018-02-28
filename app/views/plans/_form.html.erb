@@ -101,8 +101,12 @@
 
         </div>
 
-        <%= f.submit class: "btn btn-primary" %>
-        <%= button_tag type: "submit", class: "btn btn-success", name: 'commit_analise' do %>
+        <!-- <= f.submit class: "btn btn-primary" %> -->
+        <%= button_tag type: "submit", class: "btn btn-primary", name: 'commit', title: 'Salvar como rascunho para editar mais tarde.' do %>
+        <i class="fa fa-envelope-o pull-left" aria-hidden="true"></i>
+          Salvar e continuar depois
+        <% end %>
+        <%= button_tag type: "submit", class: "btn btn-success", name: 'commit_analise', title: "Uma nova versão somente poderá ser criada após o plano ser analisado." do %>
           <i class="fa fa-2 fa-check pull-left"></i>
           Salvar e enviar para análise
         <% end %>
@@ -125,6 +129,11 @@
       <% end %>
       <ul class="list-group">
         <%= render 'list_group_items', plan: @plan %>
+        <hr>
+        <div class="alert alert-warning well-sm">
+          <u><p><strong>Observações</strong></p></u>
+          Ao <code>Salvar e enviar para analise</code>, uma nova versão somente poderá ser criada após o plano ser analisado.
+        </div>
       </ul>
     </div>
 
