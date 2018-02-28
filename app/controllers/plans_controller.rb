@@ -128,8 +128,7 @@ class PlansController < ApplicationController
     reprovado = !params[:commit_reprovar].nil?
 
     respond_to do |format|
-      # Se alguém já aprovou o plano então somente ele poderá analisar novamente
-      if @plan.user_parecer.nil? || @plan.user_parecer.eql?(current_user)
+      # if @plan.user_parecer.nil? || @plan.user_parecer.eql?(current_user)
         ActiveRecord::Base.transaction do
           if @plan.update(aprovado:aprovado, reprovado:reprovado, parecer: plan_params[:parecer], user_parecer: current_user)
             flash[:notice] = "Plano #{aprovado == true ? 'aprovado' : 'com pendências'}."
@@ -141,10 +140,10 @@ class PlansController < ApplicationController
             format.json { render json: @plan.errors, status: :unprocessable_entity }
           end
         end
-      else
-        flash[:warning] = "Não foi possível efetuar a operação. Este plano já foi analisado por outro usuário."
-        format.html { render :show }
-      end
+      # else
+      #   flash[:warning] = "Não foi possível efetuar a operação. Este plano já foi analisado por outro usuário."
+      #   format.html { render :show }
+      # end
     end
   end
 

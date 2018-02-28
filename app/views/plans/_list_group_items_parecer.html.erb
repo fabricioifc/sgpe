@@ -16,7 +16,7 @@
   <% end %>
   <hr>
   <% if @plan.analise? %>
-    <% if ((can? :aprovar_reprovar, Plan) && (@plan.user_parecer.nil? || @plan.user_parecer.eql?(current_user))) %>
+    <% if (can? :aprovar_reprovar, Plan) %>
       <%= form_for(@plan, url: aprovar_offer_offer_discipline_plan_path, method: :post) do |f| %>
         <div class="form-group">
           <%= f.label :parecer, class: 'control-label' %>
