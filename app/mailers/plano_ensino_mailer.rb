@@ -13,8 +13,8 @@ class PlanoEnsinoMailer < ApplicationMailer
   def enviar_parecer_professor(plan)
     @plan = plan
     from =  Rails.application.secrets.email_nupe
-    # to =    @plan.user.email
-    to =    'fabricio.bizotto@ifc.edu.br'
+    to =    @plan.user.email
+    # to =    'fabricio.bizotto@ifc.edu.br'
 
     mail(from: from, to: to, subject: "[#{@plan.id}] Plano de ensino analisado.")
   end
