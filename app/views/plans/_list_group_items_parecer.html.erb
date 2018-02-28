@@ -22,17 +22,13 @@
           <%= f.label :parecer, class: 'control-label' %>
           <%= f.text_area :parecer, class: 'form-control', rows: 10, autofocus:true %>
         </div>
-        <% if !@plan.aprovado? %>
-          <%= button_tag type: "submit", class: "btn btn-success btn-block" do %>
-            <i class="fa fa-2 fa-check pull-left"></i>
-            Aprovar
-          <% end %>
+        <%= button_tag type: "submit", class: "btn btn-success btn-block" do %>
+          <i class="fa fa-2 fa-check pull-left"></i>
+          Aprovar
         <% end %>
-        <% if !@plan.reprovado? %>
-          <%= button_tag type: "submit", class: "btn btn-danger btn-block", name: 'commit_reprovar' do %>
-            <i class="fa fa-2 fa-window-close pull-left"></i>
-            Com pendências
-          <% end %>
+        <%= button_tag type: "submit", class: "btn btn-danger btn-block", name: 'commit_reprovar' do %>
+          <i class="fa fa-2 fa-window-close pull-left"></i>
+          Com pendências
         <% end %>
       <% end %>
     <% else %>
