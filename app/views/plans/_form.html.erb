@@ -14,7 +14,7 @@
           <li><a href="#metodologias" data-toggle="tab">Metodologias</a></li>
           <li><a href="#avaliacao" data-toggle="tab">Avaliação</a></li>
           <li><a href="#outros" data-toggle="tab">Outros</a></li>
-          <li><a href="#bibliografias" data-toggle="tab">Bibliografias</a></li>
+          <li><a href="#referencias" data-toggle="tab">Referências</a></li>
         </ul>
       </div>
 
@@ -48,7 +48,7 @@
               <div class="form-group">
                 <div class="html_safe_div">
                   <p class="header"><%= label_tag :objetivo_geral, t('activerecord.attributes.grid_discipline.objetivo_geral'), class: 'control-label' %></p>
-                  <%= plan.offer_discipline.grid_discipline.objetivo_geral.html_safe %>
+                  <%= plan.offer_discipline.grid_discipline.decorate.objetivo_geral.html_safe %>
                 </div>
               </div>
             <% end %>
@@ -77,23 +77,23 @@
             <%= f.text_area :atendimento, id: :plan_atendimento, rows: 1, data: {provider: :none} %>
           </div>
 
-          <div id="bibliografias" class="tab-pane fade in">
+          <div id="referencias" class="tab-pane fade in">
             <% if plan.offer_discipline.grid_discipline.discipline.especial? %>
               <%= label_tag :bib_geral, t('activerecord.attributes.grid_discipline.bib_geral'), class: 'control-label' %>
-              <%= text_area_tag :bib_geral, params[:bib_geral] || plan.offer_discipline.grid_discipline.bib_geral, id: :plan_bib_geral, rows: 8, data: {provider: :none}, class: 'form-control', placeholder: 'Bibliografia básica', autofocus:true %>
+              <%= text_area_tag :bib_geral, params[:bib_geral] || plan.offer_discipline.grid_discipline.bib_geral, id: :plan_bib_geral, rows: 8, data: {provider: :none}, class: 'form-control', placeholder: 'Referências básicas', autofocus:true %>
               <%= label_tag :bib_espec, t('activerecord.attributes.grid_discipline.bib_espec'), class: 'control-label' %>
-              <%= text_area_tag :bib_espec, params[:bib_espec] || plan.offer_discipline.grid_discipline.bib_espec, id: :plan_bib_geral, rows: 8, data: {provider: :none}, class: 'form-control', placeholder: 'Bibliografia complementar', autofocus:true %>
+              <%= text_area_tag :bib_espec, params[:bib_espec] || plan.offer_discipline.grid_discipline.bib_espec, id: :plan_bib_geral, rows: 8, data: {provider: :none}, class: 'form-control', placeholder: 'Referências complementares', autofocus:true %>
             <% else %>
               <div class="form-group">
                 <div class="html_safe_div">
                   <p class="header"><%= label_tag :bib_geral, t('activerecord.attributes.grid_discipline.bib_geral'), class: 'control-label' %></p>
-                  <%= plan.offer_discipline.grid_discipline.bib_geral %>
+                  <%= plan.offer_discipline.grid_discipline.decorate.bib_geral %>
                 </div>
               </div>
               <div class="form-group">
                 <div class="html_safe_div">
                   <p class="header"><%= label_tag :bib_espec, t('activerecord.attributes.grid_discipline.bib_espec'), class: 'control-label' %></p>
-                  <%= plan.offer_discipline.grid_discipline.bib_espec %>
+                  <%= plan.offer_discipline.grid_discipline.decorate.bib_espec %>
                 </div>
               </div>
             <% end %>
@@ -132,7 +132,7 @@
         <hr>
         <div class="alert alert-warning well-sm">
           <u><p><strong>Observações</strong></p></u>
-          Ao <code>Salvar e enviar para analise</code>, uma nova versão somente poderá ser criada após o plano ser analisado.
+          Ao <code>Salvar e enviar para análise</code>, uma nova versão somente poderá ser criada após o plano ser analisado.
         </div>
       </ul>
     </div>

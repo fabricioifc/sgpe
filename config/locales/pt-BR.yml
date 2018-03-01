@@ -84,8 +84,8 @@ pt-BR:
         discipline_id: Disciplina
         ementa: Ementa
         objetivo_geral: Objetivo geral
-        bib_geral: Bibliografia básica
-        bib_espec: Bigliografia complementar
+        bib_geral: Referências básicas
+        bib_espec: Referências complementares
       offer:
         grid: Grade
         grid_id: Grade
@@ -388,7 +388,7 @@ pt-BR:
       home: 'Página inicial'
       users: 'Usuários'
       admin: 'Administração'
-      pdf: 'Relatório'
+      pdf: 'Gerar PDF'
       duplicate: Duplicar %{model}
       perfis: Perfis
       roles: Papéis

@@ -173,13 +173,13 @@ class PlanPdf < PdfReport
             { borders: [:top, :bottom, :left, :right], borders_length: 0 }
           )
           display_event_table(
-            table_data([['Bibliografia Básica']], [@plano.offer_discipline.grid_discipline.decorate.bib_geral(true)]),
+            table_data([['Referências Básicas']], [@plano.offer_discipline.grid_discipline.decorate.bib_geral(true)]),
             [TABLE_WIDTHS_2],
             { header:true },
             { borders: [:top, :bottom, :left, :right], borders_length: 0 }
           )
           display_event_table(
-            table_data([['Bibliografia Complementar']], [@plano.offer_discipline.grid_discipline.decorate.bib_espec(true)]),
+            table_data([['Referências Complementares']], [@plano.offer_discipline.grid_discipline.decorate.bib_espec(true)]),
             [TABLE_WIDTHS_2],
             { header:true },
             { borders: [:top, :bottom, :left, :right], borders_length: 0 }
