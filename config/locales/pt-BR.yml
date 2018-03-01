@@ -42,7 +42,7 @@ pt-BR:
       user:
         title: Usuários
         new: Usuário
-        name: "Nome"
+        name: "Nome completo"
         email: "E-mail"
         username: Usuário
         login: "Usuário or E-mail"

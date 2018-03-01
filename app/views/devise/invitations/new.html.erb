@@ -1,38 +1,61 @@
 <%= form_for(resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :class => "form-horizontal", :method => :post } )  do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="col-md-offset-1 col-md-6 col-sm-offset-0 col-sm-6">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-          <div class="panel-title">Convidando novos usuários</div>
-      </div>
-      <div class="panel-body">
-        <div class="alert alert-info">Precisamos saber o e-mail e o perfil do usuário que está sendo convidado.</div>
-
-        <% resource.class.invite_key_fields.each do |field| -%>
-          <div class="form-group">
-            <%= f.label field, :class => 'col-md-3 control-label' %>
-            <div class="col-md-9">
-              <%= f.text_field field, :class => 'form-control', placeholder: true, autofocus:true %>
-            </div>
-          </div>
-        <% end -%>
-
-        <div class="form-group">
-          <%= f.label :perfil_ids, :class => 'col-md-3 control-label' %>
-          <div class="col-md-9">
-            <%= f.select(:perfil_ids, Perfil.all.collect {|a| [a.name, a.id]}, {}, class: "select2 form-control", :multiple => true) %>
-          </div>
+  <div class="row">
+    <div class="col-md-9">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="panel-title">Convidando novos usuários</div>
         </div>
+        <div class="panel-body">
+          <div class="alert alert-info">Precisamos saber o e-mail e o perfil do usuário que está sendo convidado.</div>
 
-        <div class="form-group">
-            <div class="col-md-offset-3 col-md-9">
-              <%= f.submit :class => 'btn btn-primary' do |b| %>
-                <i class="icon-hand-right"></i> <%= t(".submit") %>
-                <!-- <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button> -->
-              <% end %>
-              <!-- <span style="margin-left:8px;">or</span>   -->
+          <% resource.class.invite_key_fields.each do |field| -%>
+            <div class="form-group">
+              <%= f.label field, :class => 'col-md-3 control-label' %>
+              <div class="col-md-9">
+                <%= f.text_field field, :class => 'form-control', placeholder: true, autofocus:true %>
+              </div>
             </div>
+          <% end -%>
+
+          <div class="form-group">
+            <%= f.label :name, :class => 'col-md-3 control-label' %>
+            <div class="col-md-9">
+              <%= f.text_field :name, :class => 'form-control', placeholder:true %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :username, :class => 'col-md-3 control-label' %>
+            <div class="col-md-9">
+              <%= f.text_field :username, :class => 'form-control', placeholder:true %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :siape, :class => 'col-md-3 control-label' %>
+            <div class="col-md-9">
+              <%= f.text_field :siape, :class => 'form-control', placeholder: 'Número siape, caso possua' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :perfil_ids, :class => 'col-md-3 control-label' %>
+            <div class="col-md-9">
+              <%= f.select(:perfil_ids, Perfil.all.collect {|a| [a.name, a.id]}, {}, class: "select2 form-control", :multiple => true) %>
+            </div>
+          </div>
+
+          <div class="form-group">
+              <div class="col-md-offset-3 col-md-9">
+                <%= f.submit :class => 'btn btn-primary' do |b| %>
+                  <i class="icon-hand-right"></i> <%= t(".submit") %>
+                  <!-- <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button> -->
+                <% end %>
+                <!-- <span style="margin-left:8px;">or</span>   -->
+              </div>
+          </div>
         </div>
       </div>
     </div>

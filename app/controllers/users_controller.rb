@@ -76,11 +76,11 @@ private
   end
 
   def secure_params
-    params.require(:user).permit(:name, :perfils, :avatar, :avatar_cache, :perfil_ids => [])
+    params.require(:user).permit(:name, :siape, :perfils, :avatar, :avatar_cache, :perfil_ids => [])
   end
 
   def user_params
-    params.require(:user).permit(:name, :perfils, :avatar, :avatar_cache, :perfil_ids => [])
+    params.require(:user).permit(:name, :siape, :perfils, :avatar, :avatar_cache, :perfil_ids => [])
   end
 
 end

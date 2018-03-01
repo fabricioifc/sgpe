@@ -239,7 +239,7 @@ class PlanPdf < PdfReport
           move_down 10
 
           display_event_table(
-            table_data([["Ass: "]], ["Professor: #{@plano.offer_discipline.user.name}"]),
+            table_data([["Ass: "]], ["Professor: #{@plano.offer_discipline.user.name}\nSiape: #{@plano.offer_discipline.user.siape}"]),
             [TABLE_WIDTHS_2],
             { header:false },
             { borders: [:top, :bottom, :left, :right],
@@ -253,7 +253,7 @@ class PlanPdf < PdfReport
           move_down 10
 
           display_event_table(
-            table_data([['Ass: ']], ["#{@plano.coordenador.funcao}: #{@plano.coordenador.name}"]),
+            table_data([['Ass: ']], ["#{@plano.coordenador.funcao}: #{@plano.coordenador.name}\nSiape: #{@plano.coordenador.siape}"]),
             [TABLE_WIDTHS_2],
             { header:false },
             { borders: [:top, :bottom, :left, :right],
@@ -269,7 +269,7 @@ class PlanPdf < PdfReport
             move_down 10
 
             display_event_table(
-              table_data([['Ass: ']], ["Analisado por: #{@plano.user_parecer.name}"]),
+              table_data([['Ass: ']], ["#{@plano.user_parecer.name}\nResponsável pela Conferência - Núcleo Pedagógico (NUPE)"]),
               [TABLE_WIDTHS_2],
               { header:false },
               { borders: [:top, :bottom, :left, :right],

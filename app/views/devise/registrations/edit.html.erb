@@ -30,6 +30,13 @@
           </div>
 
           <div class="form-group">
+            <%= f.label :siape, :class => 'col-md-2 control-label' %>
+            <div class="col-md-10">
+              <%= f.text_field :siape, :class => 'form-control', placeholder:'Número siape, caso possua' %>
+            </div>
+          </div>
+
+          <div class="form-group">
             <%= f.label :bio, :class => 'col-md-2 control-label' %>
             <div class="col-md-10">
               <%= f.text_area :bio, :class => 'form-control', placeholder:true, rows: 5 %>

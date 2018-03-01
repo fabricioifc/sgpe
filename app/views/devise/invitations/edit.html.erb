@@ -5,7 +5,8 @@
     <div class="col-md-8 col-sm-8">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <div class="panel-title"><%= t ".title", resource: (t "activerecord.models.#{resource_name.to_s}") %></div>
+          <!-- <div class="panel-title"><= t ".title", resource: (t "activerecord.models.#{resource_name.to_s}") %></div> -->
+          <div class="panel-title">Efetuar cadastro</div>
         </div>
         <div class="panel-body">
 
@@ -20,6 +21,13 @@
             <%= f.label :name, :class => 'col-md-2 control-label' %>
             <div class="col-md-10">
               <%= f.text_field :name, :class => 'form-control', autofocus:true, placeholder:true %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :siape, :class => 'col-md-2 control-label' %>
+            <div class="col-md-10">
+              <%= f.text_field :siape, :class => 'form-control', placeholder: 'Número siape, caso possua' %>
             </div>
           </div>
 

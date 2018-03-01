@@ -30,6 +30,13 @@
         </div>
 
         <div class="form-group">
+          <%= f.label :siape, :class => 'col-md-3 control-label' %>
+          <div class="col-md-9">
+            <%= f.text_field :siape, :class => 'form-control', placeholder:'Número siape, caso possua' %>
+          </div>
+        </div>
+
+        <div class="form-group">
           <%= f.label :password, :class => 'col-md-3 control-label' %>
           <div class="col-md-9">
             <%= f.password_field :password, :class => 'form-control', placeholder:'Senha' %>
