@@ -379,6 +379,22 @@ class PlansController < ApplicationController
     end
   end
 
+  def pesquisar
+    @plan = Plan.new(analise:true, aprovado:true, reprovado:true) if params[:plan].nil?
+    @plan = Plan.new(params[:plan]) unless params[:plan].nil?
+
+    # @resultado = Plan.joins(:offer_discipline => :offer).where(:offers => { :year => params[:year] })
+    @resultado = Plan.search_coordenador(
+      @plan.analise?, @plan.aprovado?, @plan.reprovado?,
+      params[:year]
+    )
+
+    respond_to do |format|
+      format.html { render 'plans/coordenador/index' }
+      format.json
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_plan

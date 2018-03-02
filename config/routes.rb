@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   get 'plans/publico/index', to: 'plans#publico_index', as: 'publico_index'
   post 'plans/publico/index', to: 'plans#publico_index_planos', as: 'publico_index_planos'
   get 'plans/admin/enviar_aviso_nupe', to: 'plans#enviar_aviso_nupe', as: 'admin_enviar_aviso_nupe'
+  get 'plans/coordenador', to: 'plans#pesquisar', as: 'planos_pesquisar'
 
   resources :grid_disciplines
   resources :grids, except: [:destroy] do

@@ -28,4 +28,34 @@ class Plan < ApplicationRecord
     @decorate ||= PlanDecorator.new self
   end
 
+  def self.em_analise
+    where(analise: true, aprovado:false, reprovado:false)
+  end
+
+  def self.aprovados
+    where(analise: true, aprovado:true, reprovado:false)
+  end
+
+  def self.reprovados
+    where(analise: true, aprovado:false, reprovado:true)
+  end
+
+  def self.search_coordenador(analise, aprovado, reprovado, ano_oferta)
+    joins(:offer_discipline => :offer).
+      where(:offers => { :year => ano_oferta })
+      where(analise && aprovado && reprovado ? 'analise is true OR aprovado is true OR reprovado is true' : '').
+      where(!analise && !aprovado && !reprovado ? 'analise is true OR aprovado is true OR reprovado is true' : '').
+      where(analise && !aprovado && !reprovado ? 'analise is true AND aprovado is false and reprovado is false' : '').
+      where(analise && aprovado && !reprovado ? '(analise is true OR aprovado is true) and reprovado is false' : '').
+      where(analise && !aprovado && reprovado ? '(analise is true OR reprovado is true) and aprovado is false' : '').
+      where(!analise && aprovado && !reprovado ? 'analise is false AND (aprovado is true AND reprovado is false)' : '').
+      where(!analise && !aprovado && reprovado ? 'analise is false AND (aprovado is false AND reprovado is true)' : '')
+  end
+
+  # scope :search_coordenador, ->(analise, aprovado, reprovado, ano_oferta) {
+  #   contition = joins(:offer_discipline => :offer).
+  #     where(:offers => { :year => ano_oferta })
+  #   condition = Plan.em_analise if analise?
+  # }
+
 end
