@@ -1,8 +1,12 @@
 class Coordenador < ApplicationRecord
   belongs_to :course
+  belongs_to :user
   has_many :plans
 
-  validates :name, :course_id, :funcao, :siape, :email, presence:true
+  validates :user_id, :course_id, :funcao, :email, presence:true
+  validates :course_id, :user_id,
+    uniqueness: {scope: [:course_id, :user_id]}
+
   # validates :course_id, :titular,
   #   uniqueness: {scope: [:course_id, :titular]}
 

@@ -13,9 +13,9 @@ class CoordenadorDatatable < ApplicationDatatable
     coordenadors.map do |coordenador|
       [].tap do |column|
 
-        column << coordenador.name
+        column << coordenador.user.name
         column << coordenador.course.name
-        column << coordenador.siape
+        column << coordenador.user.siape
         # column << coordenador.dtinicio
         # column << coordenador.dtfim
         column << coordenador.decorate.titular
@@ -53,13 +53,13 @@ class CoordenadorDatatable < ApplicationDatatable
 
     # will_paginate
     # coordenadors = Coordenador.page(page).per_page(per_page)
-    coordenadors = Coordenador.joins(:course).order("#{sort_column} #{sort_direction}")
+    coordenadors = Coordenador.joins(:course).joins(:user).order("#{sort_column} #{sort_direction}")
     coordenadors = coordenadors.page(page).per(per_page)
     coordenadors = coordenadors.where(search_string.join(' or '), search: "%#{params[:search][:value]}%")
   end
 
   # The columns needs to be the same list of searchable items and IN ORDER that they will appear in Data.
   def columns
-    %w(coordenadors.name funcao siape titular email responsavel courses.name)
+    %w(users.name funcao users.siape titular coordenadors.email responsavel courses.name)
   end
 end

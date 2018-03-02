@@ -31,9 +31,9 @@ pt-BR:
     attributes:
       coordenador:
         title: Coordenadores
-        name: Nome
+        user_id: Coordenador
         funcao: Função
-        email: E-mail
+        # email: E-mail
         dtinicio: Data inicial
         dtfim: Data final
         responsavel: Responsável

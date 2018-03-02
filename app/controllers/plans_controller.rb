@@ -379,15 +379,26 @@ class PlansController < ApplicationController
     end
   end
 
+  # Parâmetros: ano, semestre, oferta
+  # @plan = Plan.new(analise:true, aprovado:true, reprovado:true) if params[:plan].nil?
+  # @plan = Plan.new(params[:plan]) unless params[:plan].nil?
   def pesquisar
-    @plan = Plan.new(analise:true, aprovado:true, reprovado:true) if params[:plan].nil?
-    @plan = Plan.new(params[:plan]) unless params[:plan].nil?
+    cursos_coordenador = Coordenador.where(user: current_user).pluck(:course_id)
+    if !cursos_coordenador.empty?
 
-    # @resultado = Plan.joins(:offer_discipline => :offer).where(:offers => { :year => params[:year] })
-    @resultado = Plan.search_coordenador(
-      @plan.analise?, @plan.aprovado?, @plan.reprovado?,
-      params[:year]
-    )
+      @ofertas = Offer.joins(:grid).where(:grids => { course_id: cursos_coordenador})
+      @anos = @ofertas.order(year: :desc).pluck(:year)
+      # @semestres = @ofertas.order(semestre: :desc).pluck(:semestre)
+      @semestres = [1,2]
+      @cursos = Course.where(id: cursos_coordenador)
+
+      if params[:commit]
+        @resultado = Plan.search_coordenador(params[:ano], params[:semestre], params[:curso])
+        binding.pry
+        # @resultado = OfferDiscipline.joins(:grid_disciplines => :discipline).
+        #   joins(:offers)
+      end
+    end
 
     respond_to do |format|
       format.html { render 'plans/coordenador/index' }

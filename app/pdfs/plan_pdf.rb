@@ -253,7 +253,7 @@ class PlanPdf < PdfReport
           move_down 10
 
           display_event_table(
-            table_data([['Ass: ']], ["#{@plano.coordenador.funcao}: #{@plano.coordenador.name}\nSiape: #{@plano.coordenador.siape}"]),
+            table_data([['Ass: ']], ["#{@plano.coordenador.funcao}: #{@plano.coordenador.user.name}\nSiape: #{@plano.coordenador.user.siape}"]),
             [TABLE_WIDTHS_2],
             { header:false },
             { borders: [:top, :bottom, :left, :right],

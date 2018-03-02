@@ -40,17 +40,30 @@ class Plan < ApplicationRecord
     where(analise: true, aprovado:false, reprovado:true)
   end
 
-  def self.search_coordenador(analise, aprovado, reprovado, ano_oferta)
-    joins(:offer_discipline => :offer).
-      where(:offers => { :year => ano_oferta })
-      where(analise && aprovado && reprovado ? 'analise is true OR aprovado is true OR reprovado is true' : '').
-      where(!analise && !aprovado && !reprovado ? 'analise is true OR aprovado is true OR reprovado is true' : '').
-      where(analise && !aprovado && !reprovado ? 'analise is true AND aprovado is false and reprovado is false' : '').
-      where(analise && aprovado && !reprovado ? '(analise is true OR aprovado is true) and reprovado is false' : '').
-      where(analise && !aprovado && reprovado ? '(analise is true OR reprovado is true) and aprovado is false' : '').
-      where(!analise && aprovado && !reprovado ? 'analise is false AND (aprovado is true AND reprovado is false)' : '').
-      where(!analise && !aprovado && reprovado ? 'analise is false AND (aprovado is false AND reprovado is true)' : '')
+  # joins(:offer_discipline => { :offer => { :grid => :course}}).
+  def self.search_coordenador(ano_oferta, semestre_oferta, curso_id)
+    joins('RIGHT OUTER JOIN "offer_disciplines" ON "offer_disciplines"."id" = "plans"."offer_discipline_id"').
+      joins('RIGHT OUTER JOIN "grid_disciplines" ON "grid_disciplines"."id" = "offer_disciplines"."grid_discipline_id"').
+      joins('RIGHT OUTER JOIN "disciplines" ON "disciplines"."id" = "grid_disciplines"."discipline_id"').
+      joins('RIGHT OUTER JOIN "offers" ON "offers"."id" = "offer_disciplines"."offer_id"').
+      joins('RIGHT OUTER JOIN "grids" ON "grids"."id" = "grid_disciplines"."grid_id"').
+      joins('RIGHT OUTER JOIN "courses" ON "courses"."id" = "grids"."course_id"').
+      where('courses.id = ?', curso_id)
   end
+  # where(:offer_disciplines => { :offers => { :grids => { :course_id => curso_id }}})
+
+
+  # def self.search_coordenador(analise, aprovado, reprovado, ano_oferta)
+  #   joins(:offer_discipline => :offer).
+  #     where(:offers => { :year => ano_oferta })
+  #     where(analise && aprovado && reprovado ? 'analise is true OR aprovado is true OR reprovado is true' : '').
+  #     where(!analise && !aprovado && !reprovado ? 'analise is true OR aprovado is true OR reprovado is true' : '').
+  #     where(analise && !aprovado && !reprovado ? 'analise is true AND aprovado is false and reprovado is false' : '').
+  #     where(analise && aprovado && !reprovado ? '(analise is true OR aprovado is true) and reprovado is false' : '').
+  #     where(analise && !aprovado && reprovado ? '(analise is true OR reprovado is true) and aprovado is false' : '').
+  #     where(!analise && aprovado && !reprovado ? 'analise is false AND (aprovado is true AND reprovado is false)' : '').
+  #     where(!analise && !aprovado && reprovado ? 'analise is false AND (aprovado is false AND reprovado is true)' : '')
+  # end
 
   # scope :search_coordenador, ->(analise, aprovado, reprovado, ano_oferta) {
   #   contition = joins(:offer_discipline => :offer).

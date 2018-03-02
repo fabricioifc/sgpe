@@ -8,7 +8,7 @@
   <div class="col-md-9 col-lg-9">
 
     <div class="row">
-      <ul class="list-group col-md-6 col-lg-6">
+      <ul class="list-group">
         <li class="list-group-item list-group-item-info">
           <%= model.human_attribute_name(:objetivo_geral) %>
         </li>
@@ -18,10 +18,7 @@
           <%= model.human_attribute_name(:ementa) %>
         </li>
         <li class="list-group-item"><%= @plan.offer_discipline.grid_discipline.decorate.ementa %></li>
-      </ul>
 
-
-      <ul class="list-group col-md-6 col-lg-6">
         <li class="list-group-item list-group-item-info">
           <%= model.human_attribute_name(:bib_geral) %>
         </li>

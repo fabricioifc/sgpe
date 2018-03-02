@@ -86,7 +86,7 @@ class CoordenadorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def coordenador_params
-      params.require(:coordenador).permit(:name, :funcao, :siape, :titular, :email, :responsavel, :course_id)
+      params.require(:coordenador).permit(:user_id, :email, :funcao, :titular, :responsavel, :course_id)
     end
 
     def verificar_responsavel
