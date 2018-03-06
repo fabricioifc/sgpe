@@ -30,6 +30,12 @@ class Ability
         end
       end
 
+      # Usuários vinculados a Coordenador podem pesquisar as disciplinas ofertadas
+      alias_action :pesquisar, :enviar_aviso_plano_pendente, :to => :coordenar
+      if !user.nil? && !Coordenador.where(user:user).empty?
+        can :coordenar, Offer
+      end
+
       # @papeis = user.roles
       # @papeis.each do |papel|
       #   can papel.resource_id.present? ? papel.resource_id.to_sym : "all".to_sym, papel.resource_type.constantize

@@ -229,7 +229,7 @@ class PlansController < ApplicationController
           send_data pdf.render,
             filename: filename,
             type: "application/pdf",
-            disposition: "attachment"
+            disposition: "#{Rails.env.development? ? 'inline' : 'attachment'}"
         rescue StandardError => error
           message = "Ocorreu um erro interno. Favor entrar em contato com o suporte."
           logger.error error
@@ -376,33 +376,6 @@ class PlansController < ApplicationController
           ), notice: 'E-mail enviado ao setor responsável.'
         }
       end
-    end
-  end
-
-  # Parâmetros: ano, semestre, oferta
-  # @plan = Plan.new(analise:true, aprovado:true, reprovado:true) if params[:plan].nil?
-  # @plan = Plan.new(params[:plan]) unless params[:plan].nil?
-  def pesquisar
-    cursos_coordenador = Coordenador.where(user: current_user).pluck(:course_id)
-    if !cursos_coordenador.empty?
-
-      @ofertas = Offer.joins(:grid).where(:grids => { course_id: cursos_coordenador})
-      @anos = @ofertas.order(year: :desc).pluck(:year)
-      # @semestres = @ofertas.order(semestre: :desc).pluck(:semestre)
-      @semestres = [1,2]
-      @cursos = Course.where(id: cursos_coordenador)
-
-      if params[:commit]
-        @resultado = Plan.search_coordenador(params[:ano], params[:semestre], params[:curso])
-        binding.pry
-        # @resultado = OfferDiscipline.joins(:grid_disciplines => :discipline).
-        #   joins(:offers)
-      end
-    end
-
-    respond_to do |format|
-      format.html { render 'plans/coordenador/index' }
-      format.json
     end
   end
 

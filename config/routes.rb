@@ -40,7 +40,11 @@ Rails.application.routes.draw do
   get 'plans/publico/index', to: 'plans#publico_index', as: 'publico_index'
   post 'plans/publico/index', to: 'plans#publico_index_planos', as: 'publico_index_planos'
   get 'plans/admin/enviar_aviso_nupe', to: 'plans#enviar_aviso_nupe', as: 'admin_enviar_aviso_nupe'
-  get 'plans/coordenador', to: 'plans#pesquisar', as: 'planos_pesquisar'
+
+  # Coordenação de curso
+  match '/ofertas_coordenador' => 'offers#pesquisar', as: 'ofertas_coordenador', via: [:get, :post]
+  match '/ofertas_coordenador/enviar_aviso_plano_pendente' => 'offers#enviar_aviso_plano_pendente', as: 'coor_enviar_aviso_plano_pendente', via: [:get]
+  match '/ofertas_coordenador/enviar_aviso_planos_pendentes' => 'offers#enviar_aviso_plano_pendente', as: 'coor_enviar_aviso_planos_pendentes', via: [:get]
 
   resources :grid_disciplines
   resources :grids, except: [:destroy] do

@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Filtros</h3>
+      </div>
+      <div class="panel-body">
+        <%= render 'offers/coordenador/form', cursos_coordenador: @cursos_coordenador %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-9" id="resultado">
+    <%= render 'offers/coordenador/resultado', resultado: @resultado %>
+  </div>
+</div>

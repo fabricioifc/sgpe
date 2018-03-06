@@ -18,4 +18,13 @@ class PlanoEnsinoMailer < ApplicationMailer
 
     mail(from: from, to: to, subject: "[#{@plan.id}] Plano de ensino analisado.")
   end
+
+  # Enviar um aviso ao professor para que crie/finalize o plano de ensino
+  # Geralmente será utilizado pelo coordenador
+  def enviar_aviso_plano_pendente from, offer_discipline
+    @offer_discipline = offer_discipline
+    to =    @offer_discipline.user.email
+
+    mail(from: from, to: to, subject: "[#{@offer_discipline.grid_discipline.discipline.decorate.title}] Plano de ensino pendente.")
+  end
 end

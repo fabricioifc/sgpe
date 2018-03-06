@@ -131,7 +131,9 @@ class PlanDecorator < ApplicationDecorator
   end
 
   def link_show classes = 'btn-sm'
-    h.link_to h.offer_offer_discipline_plan_path(id: component.id),
+    h.link_to h.offer_offer_discipline_plan_path(id: component.id,
+                                               offer_discipline_id: component.offer_discipline_id,
+                                               offer_id: component.offer_discipline.offer_id),
       class: "btn btn-info #{classes}" do
         h.content_tag :i, nil, class: 'fa fa-info-circle' do
           h.content_tag :span, " #{I18n.t 'helpers.links.show'}"

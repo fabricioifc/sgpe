@@ -1,10 +1,11 @@
 class OffersController < ApplicationController
+
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   load_and_authorize_resource
   responders :flash
 
-  add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :offers_path
+  add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :offers_path, :except => %w(pesquisar)
 
   before_action :load_cursos
   before_action :load_professores
@@ -165,6 +166,72 @@ class OffersController < ApplicationController
     end
   end
 
+  def pesquisar
+    @cursos_coordenador = Coordenador.where(user: current_user).pluck(:course_id) if !current_user.admin?
+    @cursos_coordenador = Offer.joins(:grid => :course).pluck('courses.id')
+    if !@cursos_coordenador.empty?
+
+      @ofertas = Offer.joins(:grid).where(:grids => { course_id: @cursos_coordenador})
+      @anos = @ofertas.order(year: :desc).pluck(:year).uniq
+      @semestres = @ofertas.where.not(semestre: nil).order(semestre: :desc).pluck(:semestre).uniq
+      # @semestres = [1,2]
+      @cursos = Course.where(id: @cursos_coordenador)
+
+      if params[:commit]
+        if !params[:ano].blank? && !params[:semestre].blank?
+          @resultado = Offer.joins(:grid).includes(:offer_disciplines => :plans).
+          where('grids.course_id = ? AND offers.year = ? AND offers.semestre = ?',
+            params[:curso].to_i, params[:ano].to_i, params[:semestre].to_i
+          ).order(semestre: :desc)
+        elsif !params[:ano].blank? && params[:semestre].blank?
+          @resultado = Offer.joins(:grid).includes(:offer_disciplines => :plans).
+          where('grids.course_id = ? AND offers.year = ?',
+            params[:curso].to_i, params[:ano].to_i
+          ).order(semestre: :desc)
+        elsif params[:ano].blank? && !params[:semestre].blank?
+          @resultado = Offer.joins(:grid).includes(:offer_disciplines => :plans).
+          where('grids.course_id = ? AND offers.semestre = ?',
+            params[:curso].to_i, params[:semestre].to_i
+          ).order(semestre: :desc)
+        else
+          @resultado = Offer.joins(:grid).includes(:offer_disciplines => :plans).
+          where('grids.course_id = ?', params[:curso].to_i
+          ).order(semestre: :desc)
+        end
+      end
+    end
+
+    respond_to do |format|
+      format.html { render 'offers/coordenador/index' }
+      format.json
+    end
+  end
+
+  # Avisar o professor da existência de planos pendentes
+  def enviar_aviso_plano_pendente
+    if !params[:offer_id].nil?
+      Offer.includes(:offer_disciplines => :plans).find(params[:offer_id]).offer_disciplines.each do |x|
+        # Enviar aviso por e-mail para disciplinas sem plano ou com plano não aprovado ainda
+        if x.plans.empty? || (!x.plans.empty? && !x.plans.order(versao: :desc).first.user.nil? && !x.plans.order(versao: :desc).first.aprovado?)
+          PlanoEnsinoMailer.enviar_aviso_plano_pendente(current_user.email, x).deliver_later!
+        end
+      end
+    end
+    if !params[:offer_discipline_id].nil?
+      @offer_discipline = OfferDiscipline.find(params[:offer_discipline_id])
+      PlanoEnsinoMailer.enviar_aviso_plano_pendente(current_user.email, @offer_discipline).deliver_later!
+    end
+
+    respond_to do |format|
+      # format.html { render 'offers/coordenador/index' }
+      format.html { redirect_to ofertas_coordenador_path }
+      format.json
+      format.js {
+        flash[:notice] = "Um aviso foi enviado ao professor."
+      }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_offer
@@ -250,43 +317,4 @@ class OffersController < ApplicationController
       end
     end
 
-    # def salvar_atualizar(novo = true)
-    #   @offer.grid_id = params[:grid_id]
-    #   @offer.year_base = params[:grid_year]
-    #   @offer.semestre_base = params[:grid_semestre]
-    #
-    #   @grade_anos = load_grade_anos(params[:grid_id])
-    #   @grade_semestres = load_grade_semestres(params[:grid_id])
-    #
-    #   respond_to do |format|
-    #     if !@offer.nil? && @offer.valid?
-    #       if @offer.offer_disciplines.empty?
-    #         @grid_disciplines = carregar_disciplinas_grade
-    #         @offer.offer_disciplines = []
-    #         @grid_disciplines.each do |g|
-    #           @offer.offer_disciplines << OfferDiscipline.new(grid_discipline: g, user:nil)
-    #         end
-    #         format.html { render :new } if novo
-    #         format.html { render :edit } unless novo
-    #       elsif novo && @offer.save
-    #           format.html { redirect_to @offer, notice: 'Offer was successfully created.' }
-    #           format.json { render :show, status: :created, location: @offer }
-    #       elsif !novo && @offer.update(offer_params)
-    #         format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
-    #         format.json { render :show, status: :ok, location: @offer }
-    #       else
-    #         format.html { render :new } if novo
-    #         format.html { render :edit } unless novo
-    #         format.json { render json: @offer.errors, status: :unprocessable_entity }
-    #       end
-    #     else
-    #       @grid_disciplines = carregar_disciplinas_grade
-    #
-    #       format.html { render :new } if novo
-    #       format.html { render :edit } unless novo
-    #       format.json { render json: @offer.errors, status: :unprocessable_entity }
-    #     end
-    #   end
-    #
-    # end
 end
