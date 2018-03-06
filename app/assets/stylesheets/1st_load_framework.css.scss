@@ -261,3 +261,7 @@ table tbody tr td.text-middle {
 label.required:after {
   content:" *";
 }
+
+.label.label-block {
+  display: block;
+}

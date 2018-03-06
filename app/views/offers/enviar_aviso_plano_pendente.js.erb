@@ -1,2 +1,4 @@
 // <= ajax_flash %>
 $(".flash_messages").html('<%= j render partial: "layouts/messages", flash: flash %>');
+$('#avisar_professores_<%= params[:offer_id] %>').attr('disabled','true');
+$('#avisar_professor_<%= params[:offer_discipline_id] %>').attr('disabled','true');

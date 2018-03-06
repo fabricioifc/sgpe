@@ -168,7 +168,7 @@ class OffersController < ApplicationController
 
   def pesquisar
     @cursos_coordenador = Coordenador.where(user: current_user).pluck(:course_id) if !current_user.admin?
-    @cursos_coordenador = Offer.joins(:grid => :course).pluck('courses.id')
+    @cursos_coordenador = Offer.joins(:grid => :course).pluck('courses.id') if current_user.admin?
     if !@cursos_coordenador.empty?
 
       @ofertas = Offer.joins(:grid).where(:grids => { course_id: @cursos_coordenador})
@@ -212,7 +212,8 @@ class OffersController < ApplicationController
     if !params[:offer_id].nil?
       Offer.includes(:offer_disciplines => :plans).find(params[:offer_id]).offer_disciplines.each do |x|
         # Enviar aviso por e-mail para disciplinas sem plano ou com plano não aprovado ainda
-        if x.plans.empty? || (!x.plans.empty? && !x.plans.order(versao: :desc).first.user.nil? && !x.plans.order(versao: :desc).first.aprovado?)
+        ultimo_plano = x.plans.order(versao: :desc).first
+        if x.plans.empty? || (!x.plans.empty? && !ultimo_plano.user.nil? && !ultimo_plano.aprovado? && !ultimo_plano.analise?)
           PlanoEnsinoMailer.enviar_aviso_plano_pendente(current_user.email, x).deliver_later!
         end
       end

@@ -72,16 +72,16 @@ class PlanDecorator < ApplicationDecorator
     component.versao.to_f unless component.versao.nil?
   end
 
-  def situacao
+  def situacao classes = ''
     # active_tag component.active?, 'fa-2'
     if component.aprovado?
-      h.content_tag :span, 'Aprovado', class: 'label label-success', style: 'font-size: 14px;'
+      h.content_tag :span, 'Aprovado', class: "label #{classes} label-success", style: 'font-size: 14px;'
     elsif component.reprovado?
-      h.content_tag :span, 'Pendências', class: 'label label-danger', style: 'font-size: 14px;'
+      h.content_tag :span, 'Pendências', class: "label #{classes} label-danger", style: 'font-size: 14px;'
     elsif component.analise?
-      h.content_tag :span, 'Em análise', class: 'label label-warning', style: 'font-size: 14px;'
+      h.content_tag :span, 'Em análise', class: "label #{classes} label-warning", style: 'font-size: 14px;'
     else
-      h.content_tag :span, 'Editando', class: 'label label-primary', style: 'font-size: 14px;'
+      h.content_tag :span, 'Editando', class: "label #{classes} label-primary", style: 'font-size: 14px;'
     end
   end
 

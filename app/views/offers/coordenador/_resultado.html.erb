@@ -7,7 +7,7 @@
         <h3 class="panel-title">
           <strong><%= oferta.grid.course.name %></strong>
           <span class="pull-right">
-            <%= link_to coor_enviar_aviso_planos_pendentes_path(offer_id: oferta), class: "btn btn-warning btn-xs", remote:true do %>
+            <%= link_to coor_enviar_aviso_planos_pendentes_path(offer_id: oferta), class: "btn btn-warning btn-xs", remote:true, id: "avisar_professores_#{oferta.id}" do %>
               <span title="Apenas para disciplinas pendentes">Avisar professores</span>
               <i class="fa fa-send"></i>
             <% end %>
@@ -22,7 +22,9 @@
               <th>Disciplina</th>
               <th>Professor</th>
               <th class="text-center">Situação do plano</th>
-              <th>Ações</th>
+              <th class="text-center">Detalhes</th>
+              <th class="text-center">PDF</th>
+              <th class="text-center">Aviso</th>
             </tr>
           </thead>
           <tbody>
