@@ -27,6 +27,15 @@ module PlansHelper
       order(versao: :desc).first if !offer_discipline_id.nil?
   end
 
+  def ultimo_plano_por_disciplina offer_discipline_id
+    Plan.joins(offer_discipline: {offer: { grid: :course }}).
+      where('plans.active is true').
+      where('plans.user_id is not null').
+      where('offer_disciplines.user_id is not null').
+      where('offer_disciplines.id = ?', offer_discipline_id).
+      order(versao: :desc).first if !offer_discipline_id.nil?
+  end
+
   def aprovados_por_disciplina planos
     planos.where(aprovado:true).count
   end

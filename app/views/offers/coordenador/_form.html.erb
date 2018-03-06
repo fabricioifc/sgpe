@@ -1,13 +1,13 @@
 <%= form_with(url: ofertas_coordenador_path, local:true, method: :post) do |f| %>
 
   <div class="form-group">
-    <%= label_tag :curso, 'Curso' %>
-    <%= select_tag :curso, options_from_collection_for_select(@cursos, "id", "name", params[:curso] || @cursos.last.id), id: :curso, class: 'form-control', prompt:'Selecione o curso', required:true, autofocus:true %>
+    <%= label_tag :curso, '* Curso' %>
+    <%= select_tag :curso, options_from_collection_for_select(@cursos, "id", "name", params[:curso]), id: :curso, class: 'form-control', prompt:'Selecione o curso', required:true, autofocus:true %>
   </div>
 
   <div class="form-group">
     <%= label_tag :ano, 'Ano da oferta' %>
-    <%= select_tag :ano, options_for_select(@anos, params[:ano] || Date.today.year), id: :ano, class: 'form-control', prompt:'Ano' %>
+    <%= select_tag :ano, options_for_select(@anos, params[:ano]), id: :ano, class: 'form-control', prompt:'Ano' %>
   </div>
 
   <div class="form-group">

@@ -1,4 +1,5 @@
 class OffersController < ApplicationController
+  include PlansHelper
 
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
@@ -177,25 +178,28 @@ class OffersController < ApplicationController
       # @semestres = [1,2]
       @cursos = Course.where(id: @cursos_coordenador)
 
-      if params[:commit]
+      params[:curso] = @cursos.last.id if params[:curso].nil?
+      params[:ano] = Date.today.year if params[:ano].nil?
+
+      if !params[:curso].nil? && !params[:curso].blank?
         if !params[:ano].blank? && !params[:semestre].blank?
           @resultado = Offer.joins(:grid).includes(:offer_disciplines => :plans).
           where('grids.course_id = ? AND offers.year = ? AND offers.semestre = ?',
-            params[:curso].to_i, params[:ano].to_i, params[:semestre].to_i
+            params[:curso], params[:ano].to_i, params[:semestre].to_i
           ).order(semestre: :desc)
         elsif !params[:ano].blank? && params[:semestre].blank?
           @resultado = Offer.joins(:grid).includes(:offer_disciplines => :plans).
           where('grids.course_id = ? AND offers.year = ?',
-            params[:curso].to_i, params[:ano].to_i
+            params[:curso], params[:ano].to_i
           ).order(semestre: :desc)
         elsif params[:ano].blank? && !params[:semestre].blank?
           @resultado = Offer.joins(:grid).includes(:offer_disciplines => :plans).
           where('grids.course_id = ? AND offers.semestre = ?',
-            params[:curso].to_i, params[:semestre].to_i
+            params[:curso], params[:semestre].to_i
           ).order(semestre: :desc)
         else
-          @resultado = Offer.joins(:grid).includes(:offer_disciplines => :plans).
-          where('grids.course_id = ?', params[:curso].to_i
+          @resultado = Offer.joins(:grid).joins(:offer_disciplines => {:grid_discipline => :discipline}).includes(:offer_disciplines => :plans).
+          where('grids.course_id = ?', params[:curso]
           ).order(semestre: :desc)
         end
       end
@@ -230,6 +234,41 @@ class OffersController < ApplicationController
       format.js {
         flash[:notice] = "Um aviso foi enviado ao professor."
       }
+    end
+  end
+
+  def gerar_planos_lote
+    if !@offer.nil?
+      respond_to do |format|
+        format.pdf {
+          begin
+            coordenador = Coordenador.find_by(course_id: @offer.grid.course_id, responsavel:true)
+            if coordenador.nil?
+              raise StandardError, "Coordenador não cadastrado para o curso #{@offer.grid.course.name}"
+            end
+
+            planos = []
+            @offer.offer_disciplines.each do |od|
+              plano_oferta = ultimo_plano_por_disciplina(od.id)
+              if !plano_oferta.nil?
+                pdf = PlanPdf.new(plano_oferta, current_user).generate
+                planos << [plano: plano_oferta, pdf: pdf]
+              end
+            end
+            zip = ZipPdfGenerator.new(planos).comprimir
+
+            if !zip.nil?
+              send_data zip.ler, filename: 'PLANOS_DE_ENSINO.zip'
+            end
+
+          rescue StandardError => error
+            message = "Ocorreu um erro interno. Favor entrar em contato com o suporte."
+            logger.error error
+            ExceptionNotifier.notify_exception(error)
+            redirect_to ofertas_coordenador_path, alert: message
+          end
+        }
+      end
     end
   end
 
@@ -289,7 +328,6 @@ class OffersController < ApplicationController
       end
 
       @grid_disciplines
-
     end
 
     def load_grades

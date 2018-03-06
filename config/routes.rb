@@ -9,6 +9,9 @@ Rails.application.routes.draw do
       # get '/course_plans/:user_id', to: 'plans#course_plans'
       # patch :load_grid_disciplines
     end
+    member do
+      post :gerar_planos_lote
+    end
     resources :offer_disciplines do
       resources :plans do
         member do

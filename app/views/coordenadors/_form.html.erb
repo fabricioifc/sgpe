@@ -5,8 +5,8 @@
     <div class="col-md-4">
       <%= f.select :user_id,
           User.where.not(confirmed_at: nil).order(:name).collect { |c| ["#{c.name} - #{c.siape}", c.id] },
-          { id: :coordenador_user, autofocus:true, prompt:true },
-          { class: 'form-control select2' } %>
+          { id: :coordenador_user, prompt:true },
+          { class: 'form-control select2', autofocus:true } %>
     </div>
     <div class="col-md-4">
       <%= f.text_field :funcao, id: :coordenador_funcao, placeholder:true %>

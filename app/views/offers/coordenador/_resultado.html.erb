@@ -12,6 +12,12 @@
               <i class="fa fa-send"></i>
             <% end %>
           </span>
+          <span class="pull-right">
+            <%= link_to gerar_planos_lote_offer_path(oferta, format: :pdf), method: :post, class: "btn btn-default btn-xs" do %>
+              Gerar todos os planos
+              <i class="fa fa-gear"></i>
+            <% end %>
+          </span>
         </h3>
         <small><%= "Ano/Semestre: #{oferta.decorate.ano_semestre}" %></small>
       </div>
