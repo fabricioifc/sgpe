@@ -247,6 +247,8 @@ class OffersController < ApplicationController
               raise StandardError, "Coordenador não cadastrado para o curso #{@offer.grid.course.name}"
             end
 
+            # ZipNotifierJob.perform_later(@offer, current_user)
+
             planos = []
             @offer.offer_disciplines.each do |od|
               plano_oferta = ultimo_plano_por_disciplina(od.id)
