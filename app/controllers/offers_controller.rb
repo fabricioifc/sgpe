@@ -181,6 +181,7 @@ class OffersController < ApplicationController
       params[:curso] = @cursos.last.id if params[:curso].nil?
       params[:ano] = Date.today.year if params[:ano].nil?
 
+
       if !params[:curso].nil? && !params[:curso].blank?
         if !params[:ano].blank? && !params[:semestre].blank?
           @resultado = Offer.joins(:grid).includes(:offer_disciplines => :plans).
@@ -198,7 +199,7 @@ class OffersController < ApplicationController
             params[:curso], params[:semestre].to_i
           ).order(semestre: :desc)
         else
-          @resultado = Offer.joins(:grid).joins(:offer_disciplines => {:grid_discipline => :discipline}).includes(:offer_disciplines => :plans).
+          @resultado = Offer.joins(:grid).includes(:offer_disciplines => :plans).
           where('grids.course_id = ?', params[:curso]
           ).order(semestre: :desc)
         end

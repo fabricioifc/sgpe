@@ -7,15 +7,13 @@
         <h3 class="panel-title">
           <strong><%= oferta.grid.course.name %></strong>
           <span class="pull-right">
-            <%= link_to coor_enviar_aviso_planos_pendentes_path(offer_id: oferta), class: "btn btn-warning btn-xs", remote:true, id: "avisar_professores_#{oferta.id}" do %>
-              <span title="Apenas para disciplinas pendentes">Avisar professores</span>
-              <i class="fa fa-send"></i>
-            <% end %>
-          </span>
-          <span class="pull-right">
-            <%= link_to gerar_planos_lote_offer_path(oferta, format: :pdf), method: :post, class: "btn btn-default btn-xs" do %>
-              Gerar todos os planos
+            <%= link_to gerar_planos_lote_offer_path(oferta, format: :pdf), method: :post, class: "btn btn-primary btn-xs" do %>
               <i class="fa fa-gear"></i>
+              Gerar todos os planos
+            <% end %>
+            <%= link_to coor_enviar_aviso_planos_pendentes_path(offer_id: oferta), class: "btn btn-warning btn-xs", remote:true, id: "avisar_professores_#{oferta.id}" do %>
+              <i class="fa fa-send"></i>
+              <span title="Apenas para disciplinas pendentes">Avisar professores</span>
             <% end %>
           </span>
         </h3>
