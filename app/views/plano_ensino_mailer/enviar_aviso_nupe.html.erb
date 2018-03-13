@@ -4,9 +4,9 @@
 
 <h3>
   <%= link_to "Analisar plano", offer_offer_discipline_plan_url(
-      id: @args[:id],
-      offer_discipline_id: @args[:offer_discipline_id],
-      offer_id: @args[:offer_id]
+      id: @plan.id,
+      offer_discipline_id: @plan.offer_discipline_id,
+      offer_id: @plan.offer_discipline.offer_id
     ) %>
 </h3>
 
@@ -15,15 +15,15 @@
 <h3>Resumo</h3>
 <dl class="dl-horizontal">
   <dt>Curso</dt>
-  <dd><%= @args[:curso] %></dd>
+  <dd><%= "#{@plan.offer_discipline.grid_discipline.grid.course.sigla} - #{@plan.offer_discipline.grid_discipline.grid.course.decorate.name}" %></dd>
   <dt>Disciplina</dt>
-  <dd><%= @args[:disciplina] %></dd>
+  <dd><%= @plan.offer_discipline.grid_discipline.discipline.decorate.title %></dd>
   <dt>Turma</dt>
-  <dd><%= @args[:turma] %></dd>
+  <dd><%= @plan.offer_discipline.offer.turma %></dd>
   <dt>Professor</dt>
-  <dd><%= @args[:professor] %></dd>
+  <dd><%= @plan.user.name %></dd>
   <dt>Versão</dt>
-  <dd><%= @args[:versao] %></dd>
+  <dd><%= @plan.decorate.versao %></dd>
   <dt>Dt. Criação</dt>
-  <dd><%= @args[:dtcreated] %></dd>
+  <dd><%= @plan.created_at.strftime('%d/%m/%Y') %></dd>
 </dl>

@@ -4,10 +4,10 @@ class PlanoEnsinoMailer < ApplicationMailer
   add_template_helper EmailHelper
   add_template_helper ApplicationHelper
 
-  def enviar_aviso_nupe(**args)
-    @args = args
-    # @plan = plan
-    mail(to: Rails.application.secrets.email_nupe, subject: "[#{@args[:id]}] Plano de ensino aguardando análise.")
+  def enviar_aviso_nupe(plan)
+    # @args = args
+    @plan = plan
+    mail(to: Rails.application.secrets.email_nupe, subject: "[#{@plan.id}] Plano de ensino aguardando análise.")
   end
 
   def enviar_parecer_professor(plan)

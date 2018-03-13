@@ -1,6 +1,41 @@
 <% content_for :title do %><%= t('helpers.links.pages.about') %><% end %>
-<h3>Informações sobre o sistema</h3>
-<p>Gerenciamento de planos de ensino</p>
 
-<hr>
-<p><%= "Versão: #{Rails.application.secrets.sistema_versao}" %></p>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <strong>Nosso time</strong>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <div class="col-lg-6 col-sm-6 text-center">
+      <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
+      <h3>Tiago Lopes Gonçalves
+        <p>
+          <small>Gerente de projeto</small> <br />
+          <!-- <small>siape: <span class="badge">1087004</span></small> -->
+        </p>
+      </h3>
+    </div>
+    <div class="col-lg-6 col-sm-6 text-center">
+      <img class="img-circle img-responsive img-center" src="https://lh6.googleusercontent.com/-VTwNBnI3BXI/AAAAAAAAAAI/AAAAAAAAAQw/-EiATobdKac/photo.jpg" alt="">
+      <h3>Fabricio Bizotto
+        <p>
+          <small>Gerente de projeto | Desenvolvedor</small> <br />
+          <!-- <small>siape: <span class="badge">1087004</span></small> -->
+        </p>
+      </h3>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <strong>Informações sobre o sistema</strong>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <p>Gerenciamento de planos de ensino</p>
+    <span class="badge"><%= "Versão: #{Rails.application.secrets.sistema_versao}" %></span>
+  </div>
+</div>
