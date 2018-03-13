@@ -129,7 +129,7 @@ module PlansHelper
   end
 
   # Utilizado para passar parâmetros ao enviar por e-mail
-  # Ex: PlanoEnsinoMailer.enviar_aviso_nupe(get_options_email).deliver_later!
+  # Ex: PlanoEnsinoMailer.enviar_email_aviso_nupe(get_options_email).deliver_later!
   # def get_options_email
   #   options = {
   #     id: @plan.id,
