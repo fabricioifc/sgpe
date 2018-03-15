@@ -102,8 +102,12 @@
         </div>
 
         <!-- <= f.submit class: "btn btn-primary" %> -->
-        <%= button_tag type: "submit", class: "btn btn-primary", name: 'commit', title: 'Salvar como rascunho para editar mais tarde.' do %>
-        <i class="fa fa-envelope-o pull-left" aria-hidden="true"></i>
+        <%= button_tag type: "submit", class: "btn btn-primary", name: 'commit', title: 'Salvar como rascunho.' do %>
+          <i class="fa fa-envelope-o pull-left" aria-hidden="true"></i>
+          Salvar
+        <% end %>
+        <%= button_tag type: "submit", class: "btn btn-warning", name: 'commit_depois', title: 'Salvar como rascunho para editar mais tarde.' do %>
+          <i class="fa fa-envelope-o pull-left" aria-hidden="true"></i>
           Salvar e continuar depois
         <% end %>
         <%= button_tag type: "submit", class: "btn btn-success", name: 'commit_analise', title: "Uma nova versão somente poderá ser criada após o plano ser analisado." do %>

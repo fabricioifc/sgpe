@@ -296,8 +296,14 @@ class PlansController < ApplicationController
             if params[:commit_analise]
               PlanoEnsinoMailer.enviar_email_aviso_nupe(@plan).deliver_later!
             end
-            format.html { redirect_to offer_offer_discipline_plans_path(@plan), notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
-            format.json { render :show, status: :created, location: @plan }
+
+            if params[:commit]
+              format.html { redirect_to edit_offer_offer_discipline_plan_path(@plan), notice: 'Plano salvo.' }
+              format.json { render :edit, status: :created, location: @plan }
+            else
+              format.html { redirect_to offer_offer_discipline_plans_path(@plan), notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
+              format.json { render :show, status: :created, location: @plan }
+            end
           else
             format.html { render :new }
             format.json { render json: @plan.errors, status: :unprocessable_entity }
@@ -337,8 +343,13 @@ class PlansController < ApplicationController
             if params[:commit_analise]
               PlanoEnsinoMailer.enviar_email_aviso_nupe(@plan).deliver_later!
             end
-            format.html { redirect_to offer_offer_discipline_plans_path(@plan), notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
-            format.json { render :show, status: :ok, location: @plan }
+            if params[:commit]
+              format.html { redirect_to edit_offer_offer_discipline_plan_path(@plan), notice: 'Plano salvo.' }
+              format.json { render :edit, status: :created, location: @plan }
+            else
+              format.html { redirect_to offer_offer_discipline_plans_path(@plan), notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
+              format.json { render :show, status: :created, location: @plan }
+            end
           else
             format.html { render :edit }
             format.json { render json: @plan.errors, status: :unprocessable_entity }
