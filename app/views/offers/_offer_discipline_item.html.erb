@@ -2,13 +2,19 @@
   <%= g.hidden_field :grid_discipline_id %>
   <td class="text-middle"><%= g.object.grid_discipline.discipline.title unless g.object.grid_discipline.nil? %></td>
 
-  <!-- <td style="width: 30%;"><= g.select :turmas_id, options_for_select(Turma.all.collect { |c| [c.name, c.id ]},
-        OfferDisciplineTurma.where(offer_discipline_id: g.object.id).pluck(:turma_id)),
-        { hide_label:true },
-        { multiple:true, class: 'form-control input-sm select2', wrapper: { style: 'margin-bottom: 0;'} } %>
-  </td> -->
+  <td class="text-middle text-center">
+    <% unless (['regular']).include?(g.object.offer.type_offer) %>
+      <%= g.number_field :carga_horaria,
+          value: (g.object.carga_horaria.nil? ? g.object.grid_discipline.carga_horaria : g.object.carga_horaria),
+          max: g.object.grid_discipline.carga_horaria, min: (g.object.grid_discipline.carga_horaria * 0.2),
+          hide_label:true, class: 'form-control input-sm', wrapper: { style: 'margin-bottom: 0;'} %>
+    <% else %>
+      <strong><%= (g.object.carga_horaria.nil? ? g.object.grid_discipline.carga_horaria : g.object.carga_horaria) %></strong>
+    <% end %>
+  </td>
   <td style="width: 15%; vertical-align: middle;" class="text-center">
-    <% if !g.object.grid_discipline.grid.course.course_modality.sigla.eql?('PRE') %>
+    <!-- < if !g.object.grid_discipline.grid.course.course_modality.sigla.eql?('PRE') %> -->
+    <% unless (['regular']).include?(g.object.offer.type_offer) %>
       <%= g.select :ead_percentual_maximo,
           options_for_select((0..100).step(5).collect {|a| "#{a} %"}, "#{g.object.ead_percentual_maximo} %" || "0 %" ),
           { hide_label:true, prompt: false },

@@ -6,6 +6,10 @@ class OfferDiscipline < ApplicationRecord
 
   accepts_nested_attributes_for :grid_discipline
 
+  def decorate
+    @decorate ||= OfferDisciplineDecorator.new self
+  end
+
   # validates :user_id, presence:true
 
   # attr_accessor :offer_discipline_turmas_attributes

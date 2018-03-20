@@ -15,7 +15,7 @@ class OfferDatatable < ApplicationDatatable
 
         column << offer.year
         column << offer.semestre
-        column << offer.type_offer
+        column << offer.decorate.type_offer
         column << offer.grid.course.name
         # column << "#{offer.turma.year}.#{offer.turma.name}"
         column << offer.turma

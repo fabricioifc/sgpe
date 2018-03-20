@@ -7,13 +7,17 @@
     <div class="col-md-9 col-lg-9">
 
       <div class="col-md-12">
-        <ul class="nav nav-tabs nav-justified">
+        <ul class="nav nav-tabs">
           <li class="active"><a href="#ementa" data-toggle="tab">Ementa</a></li>
           <li><a href="#objetivos" data-toggle="tab">Objetivos</a></li>
-          <li><a href="#conteudos" data-toggle="tab">Conteúdos</a></li>
+          <li><a href="#conteudos" data-toggle="tab">Conteúdo</a></li>
+          <li><a href="#pratica" data-toggle="tab">Prática</a></li>
           <li><a href="#metodologias" data-toggle="tab">Metodologias</a></li>
           <li><a href="#avaliacao" data-toggle="tab">Avaliação</a></li>
-          <li><a href="#outros" data-toggle="tab">Outros</a></li>
+          <li><a href="#interdisci" data-toggle="tab">Interdisciplinariedade</a></li>
+          <li><a href="#cronograma" data-toggle="tab">Cronograma</a></li>
+          <li><a href="#info_adicionais" data-toggle="tab">Info. Adicionais</a></li>
+          <li><a href="#atendimento" data-toggle="tab">Atendimento AA</a></li>
           <li><a href="#referencias" data-toggle="tab">Referências</a></li>
         </ul>
       </div>
@@ -58,6 +62,9 @@
 
           <div id="conteudos" class="tab-pane fade in">
             <%= f.text_area :conteudo_prog, id: :plan_conteudo_prog, rows: 5, data: {provider: :none} %>
+          </div>
+
+          <div id="pratica" class="tab-pane fade in">
             <%= f.text_area :prat_prof, id: :plan_prat_prof, rows: 5, data: {provider: :none} %>
           </div>
 
@@ -70,11 +77,20 @@
             <%= f.text_area :avaliacao, id: :plan_avaliacao, data: {provider: :none}, rows: 15 %>
           </div>
 
-          <div id="outros" class="tab-pane fade in">
-            <%= f.text_area :interdisc, id: :plan_interdisc, rows: 4, data: {provider: :none} %>
+          <div id="interdisci" class="tab-pane fade in">
+            <%= f.text_area :interdisc, id: :plan_interdisc, rows: 5, data: {provider: :none} %>
+          </div>
+
+          <div id="cronograma" class="tab-pane fade in">
             <%= f.text_area :cronograma, id: :plan_cronograma, rows: 5, data: {provider: :none} %>
-            <%= f.text_area :observacoes, id: :plan_observacoes, rows: 4, data: {provider: :none} %>
-            <%= f.text_area :atendimento, id: :plan_atendimento, rows: 1, data: {provider: :none} %>
+          </div>
+
+          <div id="info_adicionais" class="tab-pane fade in">
+            <%= f.text_area :observacoes, id: :plan_observacoes, rows: 5, data: {provider: :none} %>
+          </div>
+
+          <div id="atendimento" class="tab-pane fade in">
+            <%= f.text_area :atendimento, id: :plan_atendimento, rows: 2, data: {provider: :none} %>
           </div>
 
           <div id="referencias" class="tab-pane fade in">
@@ -102,16 +118,16 @@
         </div>
 
         <!-- <= f.submit class: "btn btn-primary" %> -->
-        <%= button_tag type: "submit", class: "btn btn-primary", name: 'commit', title: 'Salvar como rascunho.' do %>
+        <%= button_tag type: "submit", class: "btn btn-primary", name: 'commit', title: 'Salvar e continuar na tela' do %>
           <i class="fa fa-envelope-o pull-left" aria-hidden="true"></i>
           Salvar
         <% end %>
-        <%= button_tag type: "submit", class: "btn btn-warning", name: 'commit_depois', title: 'Salvar como rascunho para editar mais tarde.' do %>
+        <%= button_tag type: "submit", class: "btn btn-warning", name: 'commit_depois', title: 'Salvar e editar mais tarde.' do %>
           <i class="fa fa-envelope-o pull-left" aria-hidden="true"></i>
-          Salvar e continuar depois
+          Salvar e editar depois
         <% end %>
-        <%= button_tag type: "submit", class: "btn btn-success", name: 'commit_analise', title: "Uma nova versão somente poderá ser criada após o plano ser analisado." do %>
-          <i class="fa fa-2 fa-check pull-left"></i>
+        <%= button_tag type: "submit", class: "btn btn-success", name: 'commit_analise', title: "Salvar, fechar plano, enviar para análise." do %>
+        <i class="fa fa-2 fa-check pull-left"></i>
           Salvar e enviar para análise
         <% end %>
       </div>

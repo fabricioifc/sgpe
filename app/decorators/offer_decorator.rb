@@ -10,4 +10,8 @@ class OfferDecorator < ApplicationDecorator
     component.semestre.nil? ? "#{component.year}" : "#{component.year}/#{component.semestre}"
   end
 
+  def type_offer
+    Offer.offer_types[component.type_offer] || component.type_offer
+  end
+
 end

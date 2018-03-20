@@ -78,11 +78,11 @@ class PlanPdf < PdfReport
           table_data(
             [['Oferta', 'Modalidade', 'Forma', 'Qtd. Horas', 'Qtd. H/A']],
             [
-              "#{ano_semestre} - #{@plano.offer_discipline.offer.type_offer}",
+              "#{ano_semestre} - #{@plano.offer_discipline.offer.decorate.type_offer}",
               @plano.offer_discipline.grid_discipline.grid.course.course_modality.description,
               @plano.offer_discipline.grid_discipline.grid.course.course_format.name,
-              @plano.offer_discipline.grid_discipline.decorate.carga_horaria_hora_text,
-              @plano.offer_discipline.grid_discipline.decorate.carga_horaria_aula_text
+              @plano.offer_discipline.decorate.carga_horaria_hora_text,
+              @plano.offer_discipline.decorate.carga_horaria_aula_text
             ]
           ),
           [144, 126, 132, 69, 69],

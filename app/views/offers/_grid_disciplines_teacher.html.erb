@@ -9,15 +9,15 @@
           <thead>
             <tr>
               <th>Disciplina</th>
-              <!-- <th>Turmas</th> -->
-              <th>(%) EAD máximo</th>
+              <th class="text-center" style="width: 8%;">C.H.</th>
+              <th class="text-center">(%) EAD máximo</th>
               <th>Professor</th>
             </tr>
           </thead>
           <tbody>
             <!-- <= f.fields_for :offer_disciplines, offer.offer_disciplines[first, por_grupo] do |b| %> -->
             <%= f.fields_for :offer_disciplines do |b| %>
-              <%= render partial: 'offer_discipline_item', locals: {g: b} %>
+              <%= render partial: 'offer_discipline_item', locals: {g: b, offer: offer} %>
             <% end %>
           </tbody>
         </table>

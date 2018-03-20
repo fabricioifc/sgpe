@@ -11,7 +11,7 @@ class PlanDecorator < ApplicationDecorator
     horarios = { presencial: 0, distancia: 0 }
 
     if !component.offer_discipline.grid_discipline.carga_horaria.nil?
-      carga_horaria = component.offer_discipline.grid_discipline.carga_horaria
+      carga_horaria = component.offer_discipline.carga_horaria || component.offer_discipline.grid_discipline.carga_horaria
       horarios[:presencial] = carga_horaria
 
       if !component.ead_percentual_definido.nil? && !component.ead_percentual_definido.eql?(0)
@@ -20,8 +20,15 @@ class PlanDecorator < ApplicationDecorator
       end
 
       minutos_aula = component.offer_discipline.grid_discipline.grid.course.course_format.minutos_aula
-      horarios[:presencial_aula] = carga_horaria_aula_generic(minutos_aula, horarios[:presencial]).to_s << ' H/A'
-      horarios[:distancia_aula] = carga_horaria_aula_generic(minutos_aula, horarios[:distancia]).to_s << ' H/A'
+
+      # carga horária aula total
+      caraga_horaria_aula_total = carga_horaria_aula_generic(minutos_aula, carga_horaria)
+      # carga horaria aula presencial
+      distancia_aula = carga_horaria_aula_generic(minutos_aula, horarios[:distancia])
+
+      horarios[:distancia_aula] = distancia_aula.to_s << ' H/A'
+      horarios[:presencial_aula] = (caraga_horaria_aula_total - distancia_aula).to_s << ' H/A'
+      # horarios[:distancia_aula] = carga_horaria_aula_generic(minutos_aula, horarios[:distancia]).to_s << ' H/A'
       horarios[:presencial] = horarios[:presencial].to_s << ' H'
       horarios[:distancia] = horarios[:distancia].to_s << ' H'
     end

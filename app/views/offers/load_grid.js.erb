@@ -1,11 +1,11 @@
 
 <% if !params[:grid_id].nil? && !params[:grid_id].blank? %>
 
-    <% if params[:tipo_oferta] == "semestral" %>
-      $('#offer_semestre').attr("disabled", false);
-    <% else %>
-      $('#offer_semestre').attr("disabled", true);
-    <% end %>
+  <% if params[:tipo_oferta] == "semestral" %>
+    $('#offer_semestre').attr("disabled", false);
+  <% else %>
+    $('#offer_semestre').attr("disabled", true);
+  <% end %>
 
   <% if params[:grid_year].nil? && params[:grid_semestre].nil? %>
     $("#grid_disciplines_partial").html('');

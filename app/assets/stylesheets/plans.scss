@@ -22,3 +22,14 @@ div.html_safe_div > p.header {
   padding-left: 5px;
   padding-top: 5px;
 }
+
+.nav-tabs {
+  display: table;
+  table-layout: fixed;
+  width : 100%;
+}
+
+.nav-tabs li {
+  display: table-cell;
+  width: 150px; // constant width
+}

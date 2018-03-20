@@ -22,7 +22,7 @@
     <div class="row">
 
       <div class="col-md-3">
-        <%= f.select :type_offer, Offer.offer_types.keys, {id: :type_offer, prompt: true} %>
+        <%= f.select :type_offer, Offer.offer_types.collect { |c| [c.last, c.first] }, {id: :type_offer, prompt: true} %>
       </div>
       <div class="col-md-3">
         <%= f.text_field :turma, id: :offer_turma, placeholder: 'Ex: 2018.A', label: "<span title='Ex: 2018.A'>Turma <i class='fa fa-info-circle'></i></span>".html_safe %>

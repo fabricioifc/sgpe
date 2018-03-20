@@ -45,7 +45,7 @@
 
         <li class="list-group-item">
           <%= model.human_attribute_name(:type_offer) %>
-          <span class="badge"><%= @offer.type_offer %></span>
+          <span class="badge"><%= @offer.decorate.type_offer %></span>
         </li>
       </ul>
 
@@ -98,7 +98,7 @@
                 <td style="width: 40%;"><%= "#{d.grid_discipline.discipline.sigla} - #{d.grid_discipline.discipline.title}" %></td>
                 <td class="text-center"><%= d.grid_discipline.year %></td>
                 <td class="text-center"><%= d.grid_discipline.semestre || 'Sem informação' %></td>
-                <td><%= "#{d.grid_discipline.decorate.carga_horaria_hora_text} - #{d.grid_discipline.decorate.carga_horaria_aula_text}" %></td>
+                <td><%= "#{d.decorate.carga_horaria_hora_text} - #{d.decorate.carga_horaria_aula_text}" %></td>
                 <td class="text-center"><%= "#{d.ead_percentual_maximo}" %></td>
                 <td><%= d.user.name unless d.user.nil? %></td>
                 <td><%= ultimo_plano_aprovado.decorate.link_pdf('btn-xs btn-block') unless ultimo_plano_aprovado.nil? %></td>
