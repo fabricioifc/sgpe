@@ -229,7 +229,7 @@ class PlansController < ApplicationController
           send_data pdf.render,
             filename: filename,
             type: "application/pdf",
-            disposition: "#{Rails.env.development?} ? 'inline' : 'attachment'"
+            disposition: "attachment"
         rescue StandardError => error
           message = "Ocorreu um erro interno. Favor entrar em contato com o suporte."
           logger.error error
