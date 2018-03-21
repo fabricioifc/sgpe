@@ -242,6 +242,20 @@ table tbody tr td.text-middle {
     @extend .bg-primary
 }
 
+div.fixed-on-bottom {
+  position:fixed;
+  bottom:0px;
+  left: 0;
+  width: 100%;
+  // padding: 20px 10px 20px 10px;
+  padding: 12px;
+  margin: 0px;
+  z-index: 1; //posição do elemento, ou seja, acima dos outros
+
+  @extend .well;
+  // @extend .well-sm;
+}
+
 .select2 {
   width: 100% !important;
 }
