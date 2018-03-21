@@ -57,20 +57,20 @@
               </div>
             <% end %>
 
-            <%= f.text_area :obj_espe, id: :plan_obj_espe, rows: 6, data: {provider: :none} %>
+            <%= f.text_area :obj_espe, id: :plan_obj_espe, rows: 8, data: {provider: :none} %>
           </div>
 
           <div id="conteudos" class="tab-pane fade in">
-            <%= f.text_area :conteudo_prog, id: :plan_conteudo_prog, rows: 5, data: {provider: :none} %>
+            <%= f.text_area :conteudo_prog, id: :plan_conteudo_prog, rows: 10, data: {provider: :none} %>
           </div>
 
           <div id="pratica" class="tab-pane fade in">
-            <%= f.text_area :prat_prof, id: :plan_prat_prof, rows: 5, data: {provider: :none} %>
+            <%= f.text_area :prat_prof, id: :plan_prat_prof, rows: 10, data: {provider: :none} %>
           </div>
 
           <div id="metodologias" class="tab-pane fade in">
-            <%= f.text_area :met_tec, id: :plan_met_tec, rows: 5, data: {provider: :none} %>
-            <%= f.text_area :met_met, id: :plan_met_met, rows: 5, data: {provider: :none} %>
+            <%= f.text_area :met_tec, id: :plan_met_tec, rows: 6, data: {provider: :none} %>
+            <%= f.text_area :met_met, id: :plan_met_met, rows: 6, data: {provider: :none} %>
           </div>
 
           <div id="avaliacao" class="tab-pane fade in">
@@ -78,19 +78,19 @@
           </div>
 
           <div id="interdisci" class="tab-pane fade in">
-            <%= f.text_area :interdisc, id: :plan_interdisc, rows: 5, data: {provider: :none} %>
+            <%= f.text_area :interdisc, id: :plan_interdisc, rows: 10, data: {provider: :none} %>
           </div>
 
           <div id="cronograma" class="tab-pane fade in">
-            <%= f.text_area :cronograma, id: :plan_cronograma, rows: 5, data: {provider: :none} %>
+            <%= f.text_area :cronograma, id: :plan_cronograma, rows: 10, data: {provider: :none} %>
           </div>
 
           <div id="info_adicionais" class="tab-pane fade in">
-            <%= f.text_area :observacoes, id: :plan_observacoes, rows: 5, data: {provider: :none} %>
+            <%= f.text_area :observacoes, id: :plan_observacoes, rows: 6, data: {provider: :none} %>
           </div>
 
           <div id="atendimento" class="tab-pane fade in">
-            <%= f.text_area :atendimento, id: :plan_atendimento, rows: 2, data: {provider: :none} %>
+            <%= f.text_area :atendimento, id: :plan_atendimento, rows: 1, data: {provider: :none} %>
           </div>
 
           <div id="referencias" class="tab-pane fade in">
@@ -116,24 +116,10 @@
           </div>
 
         </div>
-
-        <!-- <= f.submit class: "btn btn-primary" %> -->
-        <%= button_tag type: "submit", class: "btn btn-primary", name: 'commit', title: 'Salvar e continuar na tela' do %>
-          <i class="fa fa-envelope-o pull-left" aria-hidden="true"></i>
-          Salvar
-        <% end %>
-        <%= button_tag type: "submit", class: "btn btn-warning", name: 'commit_depois', title: 'Salvar e editar mais tarde.' do %>
-          <i class="fa fa-envelope-o pull-left" aria-hidden="true"></i>
-          Salvar e editar depois
-        <% end %>
-        <%= button_tag type: "submit", class: "btn btn-success", name: 'commit_analise', title: "Salvar, fechar plano, enviar para análise." do %>
-        <i class="fa fa-2 fa-check pull-left"></i>
-          Salvar e enviar para análise
-        <% end %>
       </div>
 
-
     </div>
+
     <div class="col-md-3 col-ld-3">
       <% if !@plan.offer_discipline.ead_percentual_maximo.nil? && @plan.offer_discipline.ead_percentual_maximo > 0 %>
         <% ead_definido = @plan.ead_percentual_definido.nil? ? nil : "#{@plan.ead_percentual_definido} %" %>
@@ -149,13 +135,32 @@
       <% end %>
       <ul class="list-group">
         <%= render 'list_group_items', plan: @plan %>
-        <hr>
         <div class="alert alert-warning well-sm">
           <u><p><strong>Observações</strong></p></u>
           Ao <code>Salvar e enviar para análise</code>, uma nova versão somente poderá ser criada após o plano ser analisado.
         </div>
       </ul>
     </div>
+
+  </div>
+
+  <div class="fixed-on-bottom">
+    <%= button_tag type: "submit", class: "btn btn-primary", name: 'commit', title: 'Salvar e continuar na tela' do %>
+      <i class="fa fa-envelope-o pull-left" aria-hidden="true"></i>
+      Salvar
+    <% end %>
+    <%= button_tag type: "submit", class: "btn btn-warning", name: 'commit_depois', title: 'Salvar e editar mais tarde.' do %>
+      <i class="fa fa-envelope-o pull-left" aria-hidden="true"></i>
+      Salvar e editar depois
+    <% end %>
+    <%= button_tag type: "submit", class: "btn btn-success", name: 'commit_analise', title: "Salvar, fechar plano, enviar para análise." do %>
+      <i class="fa fa-2 fa-check pull-left"></i>
+      Salvar e enviar para análise
+    <% end %>
+    <%= link_to offer_offer_discipline_plans_path(offer_discipline_id: @plan.offer_discipline_id), class: 'btn btn-default pull-right' do %>
+      <i class="fa fa-2 fa-arrow-circle-left"></i>
+      Voltar sem salvar
+    <% end %>
 
   </div>
 

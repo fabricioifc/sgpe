@@ -33,3 +33,7 @@ div.html_safe_div > p.header {
   display: table-cell;
   width: 150px; // constant width
 }
+
+textarea {
+  resize: vertical;
+}
