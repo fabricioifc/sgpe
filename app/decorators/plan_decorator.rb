@@ -10,7 +10,7 @@ class PlanDecorator < ApplicationDecorator
   def carga_horaria_presencial_distancia
     horarios = { presencial: 0, distancia: 0 }
 
-    carga_horaria = component.offer_discipline.carga_horaria || component.offer_discipline.grid_discipline.carga_horaria
+    carga_horaria = component.offer_discipline.carga_horaria.nil? || component.offer_discipline.carga_horaria.eql?(0) ? component.offer_discipline.grid_discipline.carga_horaria : component.offer_discipline.carga_horaria
     if !carga_horaria.nil?
       horarios[:presencial] = carga_horaria
 
