@@ -29,6 +29,8 @@
 // require chosen-jquery
 //= require multi-select
 //= require_tree .
+//= require bootstrap-modal
+//= require bootstrap-modalmanager
 
 $(function() {
   $(document.body).off('click', 'nav.pagination a');

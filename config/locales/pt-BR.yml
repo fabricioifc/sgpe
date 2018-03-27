@@ -5,10 +5,10 @@ pt-BR:
       user: Usuário
       turma: Turma
       curso: Curso
-      discipline: Disciplina
+      discipline: Componente curricular
       grid: Grade
-      grid_discipline: Disciplina da grade
-      griddiscipline: Disciplina da grade
+      grid_discipline: Componente curricular da grade
+      griddiscipline: Componente curricular da grade
       course_format: Formato de curso
       courseformat: Formato de curso
       course_modality: Modalidade de curso
@@ -18,10 +18,10 @@ pt-BR:
       course: Curso
       offer: Oferta
       offers: Ofertas
-      offerdiscipline: Disciplina
-      offer_discipline: Disciplina
-      offerdisciplines: Disciplinas
-      offer_disciplines: Disciplinas
+      offerdiscipline: Componente curricular
+      offer_discipline: Componente curricular
+      offerdisciplines: Componente curricular
+      offer_disciplines: Componente curricular
       plan: Plano
       plans: Planos
       role: Papel
@@ -81,7 +81,7 @@ pt-BR:
         active: Ativo
       grid_discipline:
         year: Ano
-        discipline_id: Disciplina
+        discipline_id: Componente curricular
         ementa: Ementa
         objetivo_geral: Objetivo geral
         bib_geral: Referências básicas
@@ -104,7 +104,7 @@ pt-BR:
         user: Professor
         user_id: Professor
       plan:
-        offer_discipline_id: Disciplina
+        offer_discipline_id: Componente curricular
         obj_espe: Objetivos Específicos
         conteudo_prog: Conteúdo Programático
         prat_prof: Prática profissional
@@ -398,12 +398,12 @@ pt-BR:
         coordenadors: Coordenadores
         coordenar: Coordenar cursos
         about: 'Sobre'
-        disciplines: 'Disciplinas'
+        disciplines: 'Componente curricular'
         cursos: 'Cursos'
         tests: 'Testes'
         posts: 'Posts'
         grids: 'Grades'
-        grid_disciplines: 'Disciplinas da grade'
+        grid_disciplines: 'Componente curricular da grade'
         course_modalities: Modalidades de curso
         course_formats: Formatos de curso
         course_offers: Ofertas de curso
@@ -423,7 +423,7 @@ pt-BR:
       listing: "Listando %{model}"
       welcome: "Bem Vindo(a)"
       admin: "Administração"
-      add_discipline: Adicionar disciplina
+      add_discipline: Adicionar componente curricular
       expand_all: Expandir
       collapse_all: Contrair
     page_entries_info:

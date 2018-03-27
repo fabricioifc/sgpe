@@ -10,7 +10,7 @@
     </div>
     <div class="panel-body" id="accordion">
       <% if @ofertasCursoProfessor.empty? %>
-        <p class="well well-sm">Nenhuma disciplina encontrada.</p>
+        <p class="well well-sm">Nenhum componente curricular encontrado.</p>
       <% else %>
         <% @ofertasCursoProfessor.each do |ano_semestre, ofertas| %>
           <% div_id = "collapse#{ano_semestre[0]}#{ano_semestre[1] || ''}" %>

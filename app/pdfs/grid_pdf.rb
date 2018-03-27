@@ -1,7 +1,7 @@
 class GridPdf < PdfReport
 
   TABLE_WIDTHS = [70, 490]
-  TABLE_HEADERS = [["Ano/semestre", "Disciplina"]]
+  TABLE_HEADERS = [["Ano/semestre", "Componente curricular"]]
 
   def initialize(grid, user)
     @grade = grid

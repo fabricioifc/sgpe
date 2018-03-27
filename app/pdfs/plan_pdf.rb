@@ -2,7 +2,7 @@ class PlanPdf < PdfReport
   include ApplicationHelper
 
   TABLE_WIDTHS = [70, 470]
-  TABLE_HEADERS = [["Ano/semestre", "Disciplina"]]
+  TABLE_HEADERS = [["Ano/semestre", "Componente curricular"]]
 
   TABLE_WIDTHS_2 = 540
 

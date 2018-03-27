@@ -152,11 +152,15 @@ class PlansController < ApplicationController
     if is_professor?
       @source = Plan.find(params[:id])
       @plan = @source.dup
+      # @plan = initialize_plano
+
       # @plan.versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
       # params[:versao] = @plan.versao
 
       @curso = @plan.offer_discipline.grid_discipline.grid.course
-      adicionar_breadcrumb_curso @curso
+      adicionar_breadcrumb_cursos
+      adicionar_breadcrumb_planos @plan.offer_discipline_id
+      add_breadcrumb 'Criando o plano', nil
       render 'new'
     end
   end
@@ -178,18 +182,24 @@ class PlansController < ApplicationController
         order('offers.year desc, offers.semestre desc, disciplines.title').
         group_by{ |c| [c.offer.year, c.offer.semestre] }
 
-      adicionar_breadcrumb_curso @curso
+      adicionar_breadcrumb_cursos
+      add_breadcrumb 'Planos por curso', nil
     end
   end
 
   def planos_professor
     if is_professor?
 
-      curso_ids = current_user.offer_disciplines.joins(:offer => :grid).
-        where(active:true).where('offers.active = ?', true).
-        pluck('grids.course_id').uniq
-
+      curso_ids = get_cursos_professor
       @cursos = Course.where(id: curso_ids)
+
+      if !curso_ids.nil? && curso_ids.size == 1
+        redirect_to planos_curso_path(curso_ids.last)
+      else
+        adicionar_breadcrumb_cursos
+        add_breadcrumb 'Cursos', nil
+      end
+
     end
   end
 
@@ -202,7 +212,8 @@ class PlansController < ApplicationController
       @plans = get_planos_disciplina params[:offer_discipline_id]
 
       @curso = @offer_discipline.grid_discipline.grid.course
-      adicionar_breadcrumb_curso @curso
+      adicionar_breadcrumb_cursos
+      # adicionar_breadcrumb_planos params[:offer_discipline_id]
     end
   end
 
@@ -211,9 +222,8 @@ class PlansController < ApplicationController
   def show
     respond_to do |format|
       format.html {
-        @curso = @plan.offer_discipline.grid_discipline.grid.course
-        adicionar_breadcrumb_curso @curso
-        adicionar_breadcrumb_planos @plan
+        adicionar_breadcrumb_cursos
+        adicionar_breadcrumb_planos @plan.offer_discipline_id
       }
       format.json
       format.pdf {
@@ -244,12 +254,14 @@ class PlansController < ApplicationController
   def new
     # @plan = Plan.new(offer_discipline_id: params[:offer_discipline_id])
     @plan = Plan.new(offer_discipline_id: params[:offer_discipline_id])
+    @plan = initialize_plano
     # @plan.versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
     # params[:versao] = @plan.versao
 
     @curso = @plan.offer_discipline.grid_discipline.grid.course
-    adicionar_breadcrumb_curso @curso
-    adicionar_breadcrumb_planos @plan
+    adicionar_breadcrumb_cursos
+    adicionar_breadcrumb_planos @plan.offer_discipline_id
+    add_breadcrumb 'Criando o plano', nil
     @plan
   end
 
@@ -259,8 +271,9 @@ class PlansController < ApplicationController
     params[:objetivo_geral] = @plan.offer_discipline.grid_discipline.objetivo_geral
     params[:bib_geral] = @plan.offer_discipline.grid_discipline.bib_geral
     params[:bib_espec] = @plan.offer_discipline.grid_discipline.bib_espec
-    adicionar_breadcrumb_curso @plan.offer_discipline.grid_discipline.grid.course
-    adicionar_breadcrumb_planos @plan
+    adicionar_breadcrumb_cursos
+    adicionar_breadcrumb_planos @plan.offer_discipline_id
+    add_breadcrumb 'Editando o plano', nil
   end
 
   # POST /plans
@@ -284,7 +297,7 @@ class PlansController < ApplicationController
       end
 
       adicionar_breadcrumb_curso @plan.offer_discipline.grid_discipline.grid.course
-      adicionar_breadcrumb_planos @plan
+      adicionar_breadcrumb_planos @plan.offer_discipline_id
 
       respond_to do |format|
         ActiveRecord::Base.transaction do
@@ -332,12 +345,13 @@ class PlansController < ApplicationController
       @plan.coordenador = coordenador unless coordenador.nil?
 
       adicionar_breadcrumb_curso @plan.offer_discipline.grid_discipline.grid.course
-      adicionar_breadcrumb_planos @plan
+      adicionar_breadcrumb_planos @plan.offer_discipline_id
       respond_to do |format|
         ActiveRecord::Base.transaction do
           if params[:commit_analise]
             @plan.update(:analise => true)
           end
+          binding.pry
           if @plan.update(plan_params)
             # Se foi enviado para análise então enviar aviso ao nupe
             if params[:commit_analise]
@@ -390,6 +404,14 @@ class PlansController < ApplicationController
     end
   end
 
+  def plano_parecer
+    @plano = Plan.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_plan
@@ -437,10 +459,19 @@ class PlansController < ApplicationController
 
     def adicionar_breadcrumb_curso curso
       add_breadcrumb curso.sigla, planos_curso_path(curso.id)
+      add_breadcrumb 'Planos por curso', nil
     end
 
-    def adicionar_breadcrumb_planos plano
-      add_breadcrumb 'Meus planos', offer_offer_discipline_plans_path(offer_discipline_id: plano.offer_discipline_id)
+    def adicionar_breadcrumb_cursos
+      curso_ids = get_cursos_professor
+      cursos = Course.where(id: curso_ids)
+      cursos.each do |curso|
+        add_breadcrumb curso.sigla, planos_curso_path(curso.id)
+      end
+    end
+
+    def adicionar_breadcrumb_planos offer_discipline_id
+      add_breadcrumb 'Meus planos', offer_offer_discipline_plans_path(offer_discipline_id: offer_discipline_id)
     end
 
     def checar_professor_plano
@@ -456,6 +487,31 @@ class PlansController < ApplicationController
 
     def set_public_index
       @curso = Course.last
+    end
+
+    def get_cursos_professor
+      current_user.offer_disciplines.joins(:offer => :grid).
+        where(active:true).where('offers.active = ?', true).
+        pluck('grids.course_id').uniq
+    end
+
+    def initialize_plano
+      @plan.analise = false
+      @plan.aprovado = false
+      @plan.reprovado = false
+      @plan.user = current_user
+      @plan.parecer = nil
+      @plan.user_parecer = nil
+      @plan.active = true
+      @plan.coordenador = nil
+
+      ultima_versao = Plan.where(active:true, offer_discipline_id: @plan.offer_discipline_id).pluck(:versao).max
+      @plan.versao = ultima_versao.nil? ? 1 : ultima_versao + 1
+      coordenador = Coordenador.find_by(course_id: @plan.offer_discipline.grid_discipline.grid.course_id, responsavel:true)
+      @plan.coordenador = coordenador unless coordenador.nil?
+
+      # @plan.save
+      @plan
     end
 
 end

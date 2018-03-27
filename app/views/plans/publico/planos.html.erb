@@ -2,7 +2,7 @@
 <hr>
 <% if @planos.nil? || @planos.empty? %>
 
-  <p>Nenhuma disciplina encontrada para o curso selecionado.</p>
+  <p>Nenhuma componente curricular encontrado para o curso selecionado.</p>
 
 <% else %>
 
@@ -13,7 +13,7 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">Disciplinas</h3>
+      <h3 class="panel-title">Componente curriculars</h3>
     </div>
     <div class="panel-body">
       <% @planos.each do |plano| %>
