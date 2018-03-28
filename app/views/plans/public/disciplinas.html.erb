@@ -1,7 +1,7 @@
 <%= form_for public_disciplina_planos_path, url: public_disciplina_planos_path do |f| %>
   <div class="form-group">
     <%= label_tag :discipline_id %>
-    <%= select_tag :discipline_id, options_from_collection_for_select(@disciplinas, :id, :title), include_blank: "Selecione uma disciplina", class: 'form-control' %>
+    <%= select_tag :discipline_id, options_from_collection_for_select(@disciplinas, :id, :title), include_blank: "Selecione um componente curricular", class: 'form-control' %>
   </div>
     <%= submit_tag 'Próximo', class: 'btn btn-primary' %>
 

@@ -33,7 +33,7 @@
                 < end %>
               < end %> -->
               <%= label_tag :ementa, t('activerecord.attributes.grid_discipline.ementa'), class: 'control-label' %>
-              <%= text_area_tag :ementa, params[:ementa] || plan.offer_discipline.grid_discipline.ementa, id: :plan_ementa, rows: 8, data: {provider: :none}, class: 'form-control', placeholder: 'Ementa da disciplina', autofocus:true %>
+              <%= text_area_tag :ementa, params[:ementa] || plan.offer_discipline.grid_discipline.ementa, id: :plan_ementa, rows: 8, data: {provider: :none}, class: 'form-control', placeholder: 'Ementa do componente curricular', autofocus:true %>
             <% else %>
               <div class="form-group">
                 <div class="html_safe_div">
@@ -47,7 +47,7 @@
           <div id="objetivos" class="tab-pane fade in">
             <% if plan.offer_discipline.grid_discipline.discipline.especial? %>
               <%= label_tag :objetivo_geral, t('activerecord.attributes.grid_discipline.objetivo_geral'), class: 'control-label' %>
-              <%= text_area_tag :objetivo_geral, params[:objetivo_geral] || plan.offer_discipline.grid_discipline.objetivo_geral, id: :plan_objetivo_geral, rows: 8, data: {provider: :none}, class: 'form-control', placeholder: 'Objetivo geral da disciplina', autofocus:true %>
+              <%= text_area_tag :objetivo_geral, params[:objetivo_geral] || plan.offer_discipline.grid_discipline.objetivo_geral, id: :plan_objetivo_geral, rows: 8, data: {provider: :none}, class: 'form-control', placeholder: 'Objetivo geral do componente curricular', autofocus:true %>
             <% else %>
               <div class="form-group">
                 <div class="html_safe_div">

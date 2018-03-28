@@ -40,16 +40,14 @@
         <% end %>
       </div>
 
-      <div class="form-group col-md-12">
-        <%= f.submit class: "btn btn-primary" %>
-      </div>
-
-  </div>
-
-  <hr>
+    </div>
 
   <div id="grid_disciplines_partial">
     <%= render partial: 'grid_disciplines_teacher', locals: {f: f, offer: offer} %>
+  </div>
+
+  <div class="fixed-on-bottom">
+    <%= f.submit class: "btn btn-primary" %>
   </div>
 
 <% end %>

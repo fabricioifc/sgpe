@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get "planos/:id/parecer" => 'plans#plano_parecer', :as => :plano_parecer
   get 'planos/:course_id', to: 'plans#planos_curso', as: 'planos_curso'
   get 'planos', to: 'plans#planos_professor', as: 'planos_professor'
   # put 'update_perfils/:users', to: 'user#update_perfils', as: 'update_perfils_users'

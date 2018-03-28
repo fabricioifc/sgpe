@@ -13,17 +13,18 @@
             <% end %>
             <%= link_to coor_enviar_aviso_planos_pendentes_path(offer_id: oferta), class: "btn btn-warning btn-xs", remote:true, id: "avisar_professores_#{oferta.id}" do %>
               <i class="fa fa-send"></i>
-              <span title="Apenas para disciplinas pendentes">Avisar professores</span>
+              <span title="Apenas para componente curricular pendente">Avisar professores</span>
             <% end %>
           </span>
         </h3>
-        <small><%= "Ano/Semestre: #{oferta.decorate.ano_semestre}" %></small>
+        <small class="badge"><%= "Turma: #{oferta.turma}" %></small>
+        <small class="badge"><%= "Ano/Semestre: #{oferta.decorate.ano_semestre}" %></small>
       </div>
       <div class="panel-body">
         <table class='table table-striped table-bordered table-condensed'>
           <thead class="alert alert-info">
             <tr>
-              <th>Disciplina</th>
+              <th>Componente curricular</th>
               <th>Professor</th>
               <th class="text-center">Situação do plano</th>
               <th class="text-center">Detalhes</th>

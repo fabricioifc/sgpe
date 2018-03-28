@@ -113,3 +113,10 @@ $.abrirPainel = function(painel) {
   $(painel).click();
   // $(painel).parent().parent().find('div.panel-collapse').collapse('show');
 };
+
+// seta o foco no primeiro textarea da tela
+$(document).on('shown.bs.tab', 'ul.nav-tabs li a', function(event){
+  var target = event.target.attributes.href.value;
+  $(target +' textarea').eq(0).focus();
+
+});

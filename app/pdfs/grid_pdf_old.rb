@@ -2,10 +2,10 @@ class GridPdfOld < PdfReport
 
   TABLE_ROW_COLORS = ['FFFFFF', 'DDDDDD']
   TABLE_WIDTHS = [30, 510] # Tamanho total: 540
-  TABLE_HEADERS = [["Ano", "Disciplina"]]
+  TABLE_HEADERS = [["Ano", "Componente curricular"]]
 
   TABLE_WIDTHS_EMENTA = [540]
-  TABLE_HEADERS_EMENTA = [["Disciplina"]]
+  TABLE_HEADERS_EMENTA = [["Componente curricular"]]
 
   def initialize(grid)
     super()
@@ -27,7 +27,7 @@ class GridPdfOld < PdfReport
 
   def display_event_table
     if @grade.grid_disciplines.empty?
-      text "Nenhuma disciplina encontrada"
+      text "Nenhuma componente curricular encontrado"
     else
       # indent(10) do
       #   text "Some indentation inside an indent block."

@@ -6,6 +6,11 @@
   </div>
 
   <div class="form-group">
+    <%= label_tag :turma, 'Turma' %>
+    <%= select_tag :turma, options_for_select(@turmas, params[:turma]), id: :turma, class: 'form-control', prompt:'Turma' %>
+  </div>
+
+  <div class="form-group">
     <%= label_tag :ano, 'Ano da oferta' %>
     <%= select_tag :ano, options_for_select(@anos, params[:ano]), id: :ano, class: 'form-control', prompt:'Ano' %>
   </div>

@@ -61,10 +61,10 @@
 
         <div id="configuracoes" class="tab-pane">
           <div class="row">
-            <div class="alert alert-info">Defina aqui o cabeçalho das colunas presentes no arquivo (xls, xlsx, ods) e a linha inicial com informações sobre disciplinas.</div>
+            <div class="alert alert-info">Defina aqui o cabeçalho das colunas presentes no arquivo (xls, xlsx, ods) e a linha inicial com informações sobre o componente curricular.</div>
             <div class="form-group col-md-3">
-              <%= label_tag :column_discipline, 'Coluna disciplina' %>
-              <%= text_field_tag :column_discipline, params[:column_discipline], placeholder: 'Título da coluna disciplina', class: 'form-control', required:true %>
+              <%= label_tag :column_discipline, 'Coluna componente curricular' %>
+              <%= text_field_tag :column_discipline, params[:column_discipline], placeholder: 'Título da coluna componente curricular', class: 'form-control', required:true %>
             </div>
             <div class="form-group col-md-3">
               <%= label_tag :column_ementa, 'Coluna ementa' %>
@@ -92,7 +92,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="alert alert-info">Defina aqui a linha inicial com informações sobre disciplinas.</div>
+            <div class="alert alert-info">Defina aqui a linha inicial com informações sobre o componente curricular.</div>
             <div class="form-group col-md-3">
               <%= label_tag :linha_inicial, 'Linha inicial' %>
               <%= text_field_tag :linha_inicial, params[:linha_inicial], placeholder: 'Informe a linha inicial', class: 'form-control', required:true %>
