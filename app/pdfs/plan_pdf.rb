@@ -196,7 +196,7 @@ class PlanPdf < PdfReport
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Informações Adicionais']], [@plano.decorate.observacoes(true)]),
+          table_data([['Observações']], [@plano.decorate.observacoes(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
