@@ -5,20 +5,23 @@
 <%- modelCourse = Course %>
 <%- modelDiscipline = Discipline %>
 
-<div class="well well-sm">
-  <%= link_to offers_path, class: 'btn btn-xs btn-default' do %>
-    <i class='fa fa-list fa-2'></i>
-    <%= t('helpers.links.back') %>
-  <% end %>
-  <%= link_to edit_offer_path(@offer), class: 'btn btn-xs btn-primary' do %>
-    <i class='fa fa-pencil-square-o fa-2'></i>
-    <%= t('helpers.links.edit') %>
-  <% end %>
-</div>
+<!-- <div class="well well-sm">
+
+</div> -->
 
 <div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">#<%= @offer.id %> Detalhes da oferta</h3>
+  <div class="panel-heading text-center">
+    <h3 class="panel-title">
+      <%= link_to offers_path, class: 'btn btn-xs btn-default pull-left' do %>
+        <i class='fa fa-list fa-2'></i>
+        <%= t('helpers.links.back') %>
+      <% end %>
+      <%= link_to edit_offer_path(@offer), class: 'btn btn-xs btn-primary pull-left' do %>
+        <i class='fa fa-pencil-square-o fa-2'></i>
+        <%= t('helpers.links.edit') %>
+      <% end %>
+      Detalhes da oferta
+    </h3>
   </div>
   <div class="panel-body">
 
@@ -29,13 +32,8 @@
           Detalhes da oferta
         </li>
         <li class="list-group-item">
-          <%= model.human_attribute_name(:year) %>
-          <span class="badge"><%= @offer.year %></span>
-        </li>
-
-        <li class="list-group-item">
-          <%= model.human_attribute_name(:semestre) %>
-          <span class="badge"><%= "#{@offer.semestre || 'Sem informação'}" %></span>
+          Ano/Semestre
+          <span class="badge"><%= @offer.decorate.ano_semestre %></span>
         </li>
 
         <li class="list-group-item">
@@ -84,7 +82,6 @@
             <tr class="alert-warning">
               <th><%= modelGridDiscipline.human_attribute_name(:discipline_id) %></th>
               <th><%= modelGridDiscipline.human_attribute_name(:year) %></th>
-              <th><%= modelGridDiscipline.human_attribute_name(:semestre) %></th>
               <th><%= modelGridDiscipline.human_attribute_name(:carga_horaria) %></th>
               <th><%= modelOfferDiscipline.human_attribute_name(:ead_percentual_maximo) %></th>
               <th><%= modelOfferDiscipline.human_attribute_name(:user_id) %></th>
@@ -96,8 +93,7 @@
               <% ultimo_plano_aprovado = ultimo_plano_aprovado_por_disciplina(d.id) %>
               <tr>
                 <td style="width: 40%;"><%= "#{d.grid_discipline.discipline.sigla} - #{d.grid_discipline.discipline.title}" %></td>
-                <td class="text-center"><%= d.grid_discipline.year %></td>
-                <td class="text-center"><%= d.grid_discipline.semestre || 'Sem informação' %></td>
+                <td class="text-center"><%= d.grid_discipline.decorate.ano_semestre %></td>
                 <td><%= "#{d.decorate.carga_horaria_hora_text} - #{d.decorate.carga_horaria_aula_text}" %></td>
                 <td class="text-center"><%= "#{d.ead_percentual_maximo}" %></td>
                 <td><%= d.user.name unless d.user.nil? %></td>

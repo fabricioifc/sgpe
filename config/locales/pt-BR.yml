@@ -5,10 +5,10 @@ pt-BR:
       user: Usuário
       turma: Turma
       curso: Curso
-      discipline: Componente curricular
+      discipline: Componente Curricular
       grid: Grade
-      grid_discipline: Componente curricular da grade
-      griddiscipline: Componente curricular da grade
+      grid_discipline: Componente Curricular da grade
+      griddiscipline: Componente Curricular da grade
       course_format: Formato de curso
       courseformat: Formato de curso
       course_modality: Modalidade de curso
@@ -18,10 +18,10 @@ pt-BR:
       course: Curso
       offer: Oferta
       offers: Ofertas
-      offerdiscipline: Componente curricular
-      offer_discipline: Componente curricular
-      offerdisciplines: Componente curricular
-      offer_disciplines: Componente curricular
+      offerdiscipline: Componente Curricular
+      offer_discipline: Componente Curricular
+      offerdisciplines: Componente Curricular
+      offer_disciplines: Componente Curricular
       plan: Plano
       plans: Planos
       role: Papel
@@ -70,7 +70,7 @@ pt-BR:
         course_modality_id: Modalidade
         course_format_id: Formato
         course_offer_id: Oferta
-        carga_horaria: Carga horária
+        carga_horaria: Carga Horária
       discipline:
         title: Título
         description: Descrição
@@ -81,11 +81,11 @@ pt-BR:
         active: Ativo
       grid_discipline:
         year: Ano
-        discipline_id: Componente curricular
+        discipline_id: Componente Curricular
         ementa: Ementa
-        objetivo_geral: Objetivo geral
-        bib_geral: Referências básicas
-        bib_espec: Referências complementares
+        objetivo_geral: Objetivo Geral
+        bib_geral: Referências Básicas
+        bib_espec: Referências Complementares
       offer:
         grid: Grade
         grid_id: Grade
@@ -104,7 +104,7 @@ pt-BR:
         user: Professor
         user_id: Professor
       plan:
-        offer_discipline_id: Componente curricular
+        offer_discipline_id: Componente Curricular
         obj_espe: Objetivos Específicos
         conteudo_prog: Conteúdo Programático
         prat_prof: Prática profissional
@@ -117,7 +117,7 @@ pt-BR:
         versao: Versão
         active: Ativo
         user_id: Usuário
-        observacoes: Informações adicionais
+        observacoes: Informações Adicionais
         analise: Em análise
         aprovado: Aprovado
         reprovado: Reprovado
@@ -395,21 +395,19 @@ pt-BR:
       perfil_roles: Perfil/Papéis
       coordenadors: Coordenadores
       pages:
-        coordenadors: Coordenadores
-        coordenar: Coordenar cursos
+        coordenadors: Gerenciar Coordenadores
+        coordenar: Gerenciar Planos de Ensino
         about: 'Sobre'
-        disciplines: 'Componente curricular'
-        cursos: 'Cursos'
-        tests: 'Testes'
-        posts: 'Posts'
-        grids: 'Grades'
-        grid_disciplines: 'Componente curricular da grade'
+        disciplines: 'Componentes Curriculares'
+        cursos: 'Gerenciar Cursos'
+        grids: 'Gerenciar Grades'
+        grid_disciplines: 'Componente Curricular da grade'
         course_modalities: Modalidades de curso
         course_formats: Formatos de curso
         course_offers: Ofertas de curso
         courses: Cursos
         turmas: Turmas
-        offers: Ofertar grades
+        offers: Ofertar Grades
         perfils: Perfis
         roles: Papéis
         perfil_roles: Papéis por perfil
@@ -423,7 +421,7 @@ pt-BR:
       listing: "Listando %{model}"
       welcome: "Bem Vindo(a)"
       admin: "Administração"
-      add_discipline: Adicionar componente curricular
+      add_discipline: Adicionar Componente Curricular
       expand_all: Expandir
       collapse_all: Contrair
     page_entries_info:

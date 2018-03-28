@@ -76,8 +76,15 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
-  root to: 'visitors#index'
+  # devise_for :users do
+  #   get "/", :to => "devise/sessions#new"
+  # end
+  # root :to => "devise/sessions#new"
   devise_for :users
+  root to: 'visitors#index'
+
+
+
   resources :users do
     collection do
       put 'update_perfils'

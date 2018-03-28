@@ -69,7 +69,7 @@
         <li class="list-group-item list-group-item-success clearfix">
           <h4 class="text-center">
             <%= @plans.first.decorate.link_new 'btn-sm pull-left' %>
-            Planos por versão
+            Planos de ensino (por versão)
             <%= link_to planos_curso_path(@plans.first.offer_discipline.grid_discipline.grid.course.id), class: "btn btn-sm btn-default pull-right" do %>
               <i class="fa fa-bars" aria-hidden="true"></i>
               Voltar

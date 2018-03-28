@@ -1,4 +1,5 @@
 <%- model = Plan %>
+<%- modelGridDiscipline = GridDiscipline %>
 
 <div class="row">
   <div class="col-md-3 col-lg-3">
@@ -10,24 +11,24 @@
     <div class="row">
       <ul class="list-group">
         <li class="list-group-item list-group-item-info">
-          <%= model.human_attribute_name(:objetivo_geral) %>
+          <%= modelGridDiscipline.human_attribute_name(:objetivo_geral) %>
         </li>
-        <li class="list-group-item"><%= @plan.offer_discipline.grid_discipline.decorate.objetivo_geral %></li>
+        <li class="list-group-item text-justify"><%= @plan.offer_discipline.grid_discipline.decorate.objetivo_geral %></li>
 
         <li class="list-group-item list-group-item-info">
-          <%= model.human_attribute_name(:ementa) %>
+          <%= modelGridDiscipline.human_attribute_name(:ementa) %>
         </li>
-        <li class="list-group-item"><%= @plan.offer_discipline.grid_discipline.decorate.ementa %></li>
+        <li class="list-group-item text-justify"><%= @plan.offer_discipline.grid_discipline.decorate.ementa %></li>
 
         <li class="list-group-item list-group-item-info">
-          <%= model.human_attribute_name(:bib_geral) %>
+          <%= t modelGridDiscipline.human_attribute_name(:bib_geral) %>
         </li>
-        <li class="list-group-item"><%= @plan.offer_discipline.grid_discipline.decorate.bib_geral %></li>
+        <li class="list-group-item text-justify"><%= @plan.offer_discipline.grid_discipline.decorate.bib_geral %></li>
 
         <li class="list-group-item list-group-item-info">
-          <%= model.human_attribute_name(:bib_espec) %>
+          <%= modelGridDiscipline.human_attribute_name(:bib_espec) %>
         </li>
-        <li class="list-group-item"><%= @plan.offer_discipline.grid_discipline.decorate.bib_espec %></li>
+        <li class="list-group-item text-justify"><%= @plan.offer_discipline.grid_discipline.decorate.bib_espec %></li>
       </ul>
     </div>
 

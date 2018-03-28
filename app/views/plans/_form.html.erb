@@ -145,22 +145,22 @@
   </div>
 
   <div class="fixed-on-bottom">
-    <%= button_tag type: "submit", class: "btn btn-primary", name: 'commit', title: 'Salvar e continuar na tela' do %>
+    <%= button_tag type: "submit", class: "btn btn-sm btn-primary", name: 'commit', title: 'Salvar e continuar na tela' do %>
       <i class="fa fa-envelope-o pull-left" aria-hidden="true"></i>
       Salvar
     <% end %>
-    <%= button_tag type: "submit", class: "btn btn-warning", name: 'commit_depois', title: 'Salvar e editar mais tarde.' do %>
+    <%= button_tag type: "submit", class: "btn btn-sm btn-warning", name: 'commit_depois', title: 'Salvar e editar mais tarde.' do %>
       <i class="fa fa-envelope-o pull-left" aria-hidden="true"></i>
       Salvar e editar depois
     <% end %>
-    <%= button_tag type: "submit", class: "btn btn-success", name: 'commit_analise', title: "Salvar, fechar plano, enviar para análise." do %>
+    <%= button_tag type: "submit", class: "btn btn-sm btn-success", name: 'commit_analise', title: "Salvar, fechar plano, enviar para análise." do %>
       <i class="fa fa-2 fa-check pull-left"></i>
       Salvar e enviar para análise
     <% end %>
-    <%= link_to offer_offer_discipline_plans_path(offer_discipline_id: @plan.offer_discipline_id), class: 'btn btn-default pull-right' do %>
+    <!-- <= link_to offer_offer_discipline_plans_path(offer_discipline_id: @plan.offer_discipline_id), class: 'btn btn-default' do %>
       <i class="fa fa-2 fa-arrow-circle-left"></i>
       Voltar sem salvar
-    <% end %>
+    < end %> -->
 
   </div>
 

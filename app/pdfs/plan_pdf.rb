@@ -244,7 +244,7 @@ class PlanPdf < PdfReport
         move_down 10
 
         simple_table [
-          "\n\n\n#{"_"*46}\nProfessor\n#{@plano.offer_discipline.user.name}\nSiape: #{@plano.offer_discipline.user.siape}",
+          "\n\n\n#{"_"*46}\nProfessor(a)\n#{@plano.offer_discipline.user.name}\nSiape: #{@plano.offer_discipline.user.siape}",
           "\n\n\n#{"_"*46}\n#{@plano.coordenador.funcao}\n#{@plano.coordenador.user.name}\nSiape: #{@plano.coordenador.user.siape}"
           ], [270,270]
 
