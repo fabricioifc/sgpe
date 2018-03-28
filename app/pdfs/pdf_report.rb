@@ -36,11 +36,11 @@ class PdfReport < Prawn::Document
 
     def header
       if company.has_key? :logo
-        bounding_box [bleft + 20, btop + 50], :width => 100 do
+        bounding_box [bleft + 40, btop + 50], :width => 100 do
           image open(company.fetch(:logo)), height: 32, align: :left
         end
       elsif company.has_key? :name
-        bounding_box [bleft + 25, btop + 40], :width => 100 do
+        bounding_box [bleft + 45, btop + 40], :width => 100 do
           text "#{company.fetch(:name)}", size: 14, style: :bold, align: :left
         end
       end

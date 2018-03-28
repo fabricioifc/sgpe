@@ -52,7 +52,7 @@ class PlanPdf < PdfReport
           table_data(
             [['Curso']],
             [
-              "#{@plano.offer_discipline.grid_discipline.grid.course.sigla} - #{@plano.offer_discipline.grid_discipline.grid.course.name}"
+              "#{@plano.offer_discipline.grid_discipline.grid.course.name}"
             ]
           ),
           [540],
@@ -62,7 +62,7 @@ class PlanPdf < PdfReport
 
         display_event_table(
           table_data(
-            [['Componente curricular', 'Professor', 'Turma']],
+            [['Componente Curricular', 'Professor', 'Turma']],
             [
               @plano.offer_discipline.grid_discipline.discipline.title,
               @plano.offer_discipline.user.name || @plano.offer_discipline.user.email,
@@ -99,7 +99,7 @@ class PlanPdf < PdfReport
 
           display_event_table(
             table_data(
-              [['Carga horária (Hora)', 'Carga horária (Hora/Aula)']],
+              [['Carga Horária (Hora)', 'Carga Horária (Hora/Aula)']],
               [
                 "Presencial: #{horarios[:presencial]} - À distância: #{horarios[:distancia]}",
                 "Presencial: #{horarios[:presencial_aula]} - À distância: #{horarios[:distancia_aula]}"
@@ -136,13 +136,13 @@ class PlanPdf < PdfReport
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Conteúdo programático']], [@plano.decorate.conteudo_prog(true)]),
+          table_data([['Conteúdo Programático']], [@plano.decorate.conteudo_prog(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Práticas profissionais']], [@plano.decorate.prat_prof(true)]),
+          table_data([['Práticas Profissionais']], [@plano.decorate.prat_prof(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
@@ -154,25 +154,25 @@ class PlanPdf < PdfReport
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Metodologia Técnica']], [@plano.decorate.met_tec(true)]),
+          table_data([['Metodologia: Técnica']], [@plano.decorate.met_tec(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Recursos metodológicos']], [@plano.decorate.met_met(true)]),
+          table_data([['Metodologia: Recursos']], [@plano.decorate.met_met(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Sistema de avaliação e recuperação']], [@plano.decorate.avaliacao(true)]),
+          table_data([['Sistema de Avaliação e Recuperação']], [@plano.decorate.avaliacao(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Cronograma de atividades']], [@plano.decorate.cronograma(true)]),
+          table_data([['Cronograma de Atividades']], [@plano.decorate.cronograma(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
@@ -190,13 +190,13 @@ class PlanPdf < PdfReport
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Atendimento ao aluno']], [@plano.decorate.atendimento(true)]),
+          table_data([['Atendimento ao Aluno']], [@plano.decorate.atendimento(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Informações adicionais']], [@plano.decorate.observacoes(true)]),
+          table_data([['Informações Adicionais']], [@plano.decorate.observacoes(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
@@ -217,7 +217,7 @@ class PlanPdf < PdfReport
 
         display_event_table(
           table_data(
-            [['Informações complementares']],
+            [['Informações Complementares']],
             [
               "Versão: #{@plano.versao.to_f} - #{@plano.decorate.situacao_texto}"
             ]
