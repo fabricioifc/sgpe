@@ -12,13 +12,52 @@
 
       <ul class="list-group">
         <li class="list-group-item list-group-item-danger">Nenhum plano de ensino encontrado/ofertado para este componente curricular</li>
+        <li class="list-group-item">
+          <%= link_to new_offer_offer_discipline_plan_path(offer_discipline_id: params[:offer_discipline_id]),
+            class: 'btn btn-primary' do %>
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            <%= t('.new', :default => t("helpers.titles.new", model: model.model_name.human.downcase )) %>
+          <% end %>
+        </li>
       </ul>
 
-      <%= link_to new_offer_offer_discipline_plan_path(offer_discipline_id: params[:offer_discipline_id]),
-          class: 'btn btn-primary' do %>
-          <i class="fa fa-plus" aria-hidden="true"></i>
-          <%= t('.new', :default => t("helpers.titles.new", model: model.model_name.human.downcase )) %>
-      <% end %>
+      <div class="table-responsive">
+        <table class="table table-condensed table-striped">
+          <caption>
+            <div class="well-sm alert-info">
+              <i class="fa fa-info-circle"></i>
+              Caso ache necessário, importe os dados de planos aprovados anteriormente.
+            </div>
+          </caption>
+          <thread>
+            <tr>
+              <th class="text-center">Versão</th>
+              <th class="">Situação</th>
+              <th class="text-center">Turma</th>
+              <th>Oferta</th>
+              <th class="">Ações</th>
+              <th class="">Gerar PDF</th>
+            </tr>
+          </thread>
+          <tbody>
+            <% @planos_aprovados_anteriormente.each do |plan| %>
+              <tr>
+                <td class="text-center" style="vertical-align: middle;">
+                  <span class="badge"><%= "v#{plan.versao}" unless plan.versao.nil? %></span>
+                </td>
+                <td class="" style="vertical-align: middle;"><%= plan.decorate.situacao %></td>
+                <td class="text-center"><%= plan.offer_discipline.offer.turma %></td>
+                <td><%= "#{plan.offer_discipline.offer.decorate.type_offer} - #{plan.offer_discipline.offer.decorate.ano_semestre}" %></td>
+                <td>
+                  <%= plan.decorate.link_show %>
+                  <%= plan.decorate.link_duplicate_outra_oferta(@offer_discipline.id) %>
+                </td>
+                <td><%= plan.decorate.link_pdf 'btn-sm btn-block' %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
 
     </div>
 
@@ -28,9 +67,13 @@
 
       <ul class="list-group">
         <li class="list-group-item list-group-item-success clearfix">
-          <h4>
-            <%= @plans.first.decorate.link_new '' %>
+          <h4 class="text-center">
+            <%= @plans.first.decorate.link_new 'btn-sm pull-left' %>
             Planos por versão
+            <%= link_to planos_curso_path(@plans.first.offer_discipline.grid_discipline.grid.course.id), class: "btn btn-sm btn-default pull-right" do %>
+              <i class="fa fa-bars" aria-hidden="true"></i>
+              Voltar
+            <% end %>
           </h4>
         </li>
         <li class="list-group-item">
@@ -52,11 +95,14 @@
                     </td>
                     <td class="" style="vertical-align: middle;"><%= plan.decorate.situacao %></td>
                     <td>
-                      <%= link_to 'Parecer', plano_parecer_path(plan.id),
-                        {
-                          :remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-parecer',
-                          class: 'btn btn-sm btn-default'
-                        } unless plan.parecer.nil? || plan.parecer.blank? %>
+                      <% unless plan.parecer.nil? || plan.parecer.blank? %>
+                        <%= link_to plano_parecer_path(plan.id),
+                          { :remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-parecer',
+                            class: 'btn btn-sm btn-default'} do  %>
+                            <i class="fa fa-info-circle"></i>
+                            Parecer
+                        <% end %>
+                      <% end %>
                       <%= plan.decorate.link_show %>
                       <%= plan.decorate.link_editar %>
                       <%= plan.decorate.link_duplicate %>
@@ -69,11 +115,6 @@
           </div>
         </li>
       </ul>
-
-      <%= link_to planos_curso_path(@plans.first.offer_discipline.grid_discipline.grid.course.id), class: "btn btn-default" do %>
-        <i class="fa fa-bars" aria-hidden="true"></i>
-        Voltar
-      <% end %>
 
     </div>
 

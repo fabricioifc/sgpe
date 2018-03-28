@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       resources :plans do
         member do
           get 'copy'
+          get 'copy_outra_oferta'
           post 'aprovar'
           get 'enviar_aviso_nupe'
         end

@@ -199,6 +199,26 @@ class PlanDecorator < ApplicationDecorator
     end
   end
 
+  def link_duplicate_outra_oferta nova_offer_discipline_id, classes = 'btn-sm'
+    if pode_novo?
+      h.link_to h.copy_outra_oferta_offer_offer_discipline_plan_path(
+          offer_discipline_id: component.offer_discipline_id, id: component.id,
+          nova_offer_discipline_id: nova_offer_discipline_id
+        ),
+        class: "btn btn-primary #{classes}" do
+        h.content_tag :i, nil, class: 'fa fa-plus' do
+          h.content_tag :span, " #{I18n.t('helpers.links.duplicate', model: component.model_name.human)}"
+        end
+      end
+    else
+      h.button_tag nil, class: "btn btn-primary #{classes}", disabled:true do
+        h.content_tag :i, nil, class: 'fa fa-plus' do
+          h.content_tag :span, " #{I18n.t('helpers.links.duplicate', model: component.model_name.human)}"
+        end
+      end
+    end
+  end
+
   def pode_novo?
     # component.aprovado? || component.reprovado?
     !plano_sendo_editado?(component.offer_discipline_id) && nenhum_plano_em_analise?(component.offer_discipline_id)
