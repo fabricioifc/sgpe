@@ -169,6 +169,22 @@ class PlansController < ApplicationController
     end
   end
 
+  def copy_outra_oferta
+    if is_professor?
+      respond_to do |format|
+        @source = Plan.find(params[:id])
+        @plan = @source.dup
+        @plan.offer_discipline_id = params[:nova_offer_discipline_id]
+        @plan = initialize_plano
+
+
+        format.html { redirect_to edit_offer_offer_discipline_plan_path(
+          offer_discipline_id: @plan.offer_discipline_id, id: @plan.id), notice: 'Plano salvo.' }
+        format.json { render :edit, status: :created, location: @plan }
+      end
+    end
+  end
+
   def planos_curso
     if is_professor?
       # Pode ser que o parâmetro venha de um form de pesquisa (course_tag_id)
@@ -210,10 +226,14 @@ class PlansController < ApplicationController
   # GET /plans
   # GET /plans.json
   def index
+
     if !params[:offer_discipline_id].nil?
       # @disciplina = Discipline.joins(:grid_disciplines => :offer_disciplines).find_by('offer_disciplines.id = ?', params[:offer_discipline_id])
       @offer_discipline = OfferDiscipline.find(params[:offer_discipline_id])
       @plans = get_planos_disciplina params[:offer_discipline_id]
+
+      # Encontrar planos já aprovados para que seja possível importar em outro ano letivo
+      @planos_aprovados_anteriormente = get_planos_aprovados_anteriormente(@offer_discipline, @plans)
 
       @curso = @offer_discipline.grid_discipline.grid.course
       adicionar_breadcrumb_cursos
@@ -524,4 +544,25 @@ class PlansController < ApplicationController
       @plan
     end
 
+    def get_planos_aprovados_anteriormente offer_discipline, plans
+      if plans.empty?
+        outros = Plan.select('MAX(plans.id) AS idplano, plans.offer_discipline_id').joins(:offer_discipline => {:grid_discipline => :grid}).
+          where('grids.id = ?', offer_discipline.grid_discipline.grid_id).
+          where('grid_disciplines.discipline_id = ?', offer_discipline.grid_discipline.discipline_id).
+          where(aprovado:true).group(:offer_discipline_id)
+      else
+        outros = Plan.select('MAX(plans.id) AS idplano, plans.offer_discipline_id').joins(:offer_discipline => {:grid_discipline => :grid}).
+          where.not(id: plans.pluck(:id)).
+          where('grids.id = ?', offer_discipline.grid_discipline.grid_id).
+          where('grid_disciplines.discipline_id = ?', offer_discipline.grid_discipline.discipline_id).
+          where(aprovado:true).group(:offer_discipline_id)
+      end
+
+      planos_aprovados_anteriormente = nil
+      if !outros.empty?
+        planos_aprovados_anteriormente = Plan.where(id: outros.map(&:idplano))
+      end
+
+      planos_aprovados_anteriormente
+    end
 end
