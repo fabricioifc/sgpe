@@ -150,18 +150,22 @@ class PlansController < ApplicationController
 
   def copy
     if is_professor?
-      @source = Plan.find(params[:id])
-      @plan = @source.dup
-      # @plan = initialize_plano
+      respond_to do |format|
+        @source = Plan.find(params[:id])
+        @plan = @source.dup
+        @plan = initialize_plano
 
-      # @plan.versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
-      # params[:versao] = @plan.versao
+        # @plan.versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
+        # params[:versao] = @plan.versao
 
-      @curso = @plan.offer_discipline.grid_discipline.grid.course
-      adicionar_breadcrumb_cursos
-      adicionar_breadcrumb_planos @plan.offer_discipline_id
-      add_breadcrumb 'Criando o plano', nil
-      render 'new'
+        # @curso = @plan.offer_discipline.grid_discipline.grid.course
+        # adicionar_breadcrumb_cursos
+        # adicionar_breadcrumb_planos @plan.offer_discipline_id
+        # add_breadcrumb 'Criando o plano', nil
+        format.html { redirect_to edit_offer_offer_discipline_plan_path(
+          offer_discipline_id: @plan.offer_discipline_id, id: @plan.id), notice: 'Plano salvo.' }
+        format.json { render :edit, status: :created, location: @plan }
+      end
     end
   end
 
@@ -213,7 +217,7 @@ class PlansController < ApplicationController
 
       @curso = @offer_discipline.grid_discipline.grid.course
       adicionar_breadcrumb_cursos
-      # adicionar_breadcrumb_planos params[:offer_discipline_id]
+
     end
   end
 
@@ -253,16 +257,21 @@ class PlansController < ApplicationController
   # GET /plans/new
   def new
     # @plan = Plan.new(offer_discipline_id: params[:offer_discipline_id])
-    @plan = Plan.new(offer_discipline_id: params[:offer_discipline_id])
-    @plan = initialize_plano
-    # @plan.versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
-    # params[:versao] = @plan.versao
+    respond_to do |format|
+      @plan = Plan.new(offer_discipline_id: params[:offer_discipline_id])
+      @plan = initialize_plano
+      # @plan.versao = Plan.where(active:true, offer_discipline_id: params[:offer_discipline_id]).pluck(:versao).max
+      # params[:versao] = @plan.versao
 
-    @curso = @plan.offer_discipline.grid_discipline.grid.course
-    adicionar_breadcrumb_cursos
-    adicionar_breadcrumb_planos @plan.offer_discipline_id
-    add_breadcrumb 'Criando o plano', nil
-    @plan
+      # @curso = @plan.offer_discipline.grid_discipline.grid.course
+      # adicionar_breadcrumb_cursos
+      # adicionar_breadcrumb_planos @plan.offer_discipline_id
+      # add_breadcrumb 'Criando o plano', nil
+      # @plan
+      format.html { redirect_to edit_offer_offer_discipline_plan_path(
+        offer_discipline_id: @plan.offer_discipline_id, id: @plan.id), notice: 'Plano salvo.' }
+      format.json { render :edit, status: :created, location: @plan }
+    end
   end
 
   # GET /plans/1/edit
@@ -311,7 +320,8 @@ class PlansController < ApplicationController
             end
 
             if params[:commit]
-              format.html { redirect_to edit_offer_offer_discipline_plan_path(@plan), notice: 'Plano salvo.' }
+              format.html { redirect_to edit_offer_offer_discipline_plan_path(
+                offer_discipline_id: @plan.offer_discipline_id, id: @plan.id), notice: 'Plano salvo.' }
               format.json { render :edit, status: :created, location: @plan }
             else
               format.html { redirect_to offer_offer_discipline_plans_path(@plan), notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
@@ -351,14 +361,14 @@ class PlansController < ApplicationController
           if params[:commit_analise]
             @plan.update(:analise => true)
           end
-          binding.pry
           if @plan.update(plan_params)
             # Se foi enviado para análise então enviar aviso ao nupe
             if params[:commit_analise]
               PlanoEnsinoMailer.enviar_email_aviso_nupe(@plan).deliver_later!
             end
             if params[:commit]
-              format.html { redirect_to edit_offer_offer_discipline_plan_path(@plan), notice: 'Plano salvo.' }
+              format.html { redirect_to edit_offer_offer_discipline_plan_path(
+                offer_discipline_id: @plan.offer_discipline_id, id: @plan.id), notice: 'Plano salvo.' }
               format.json { render :edit, status: :created, location: @plan }
             else
               format.html { redirect_to offer_offer_discipline_plans_path(@plan), notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
@@ -510,7 +520,7 @@ class PlansController < ApplicationController
       coordenador = Coordenador.find_by(course_id: @plan.offer_discipline.grid_discipline.grid.course_id, responsavel:true)
       @plan.coordenador = coordenador unless coordenador.nil?
 
-      # @plan.save
+      @plan.save
       @plan
     end
 
