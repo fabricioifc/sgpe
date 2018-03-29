@@ -76,15 +76,6 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
-  # devise_for :users do
-  #   get "/", :to => "devise/sessions#new"
-  # end
-  # root :to => "devise/sessions#new"
-  devise_for :users
-  root to: 'visitors#index'
-
-
-
   resources :users do
     collection do
       put 'update_perfils'
@@ -96,4 +87,19 @@ Rails.application.routes.draw do
   authenticate :user, lambda { |u| u.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
+
+# Configurar para que a tela inicial seja a tela de login, caso não esteja autenticado
+  devise_for :users, skip: [:sessions]
+    as :user do
+      get 'login', to: 'devise/sessions#new', as: :new_user_session
+      post 'login', to: 'devise/sessions#create', as: :user_session
+      match 'logout', to: 'devise/sessions#destroy', as: :destroy_user_session, via: Devise.mappings[:user].sign_out_via
+  end
+  unauthenticated do
+    as :user do
+      root to: 'devise/sessions#new'
+    end
+  end
+
+  root to: 'visitors#index'
 end

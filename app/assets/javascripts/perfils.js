@@ -9,6 +9,21 @@ document.addEventListener("turbolinks:before-cache", function() {
 
 document.addEventListener("turbolinks:load", function() {
 
+  $('#multi').multiselect({
+    includeSelectAllOption: true,
+    includeSelectAllIfMoreThan: 5,
+    maxHeight: 350,
+    buttonWidth: '100%',
+    enableFiltering: true,
+    dropLeft: true,
+    selectAllText: 'Selecionar todos',
+    nonSelectedText: 'Nenhum item selecionado',
+    nSelectedText: ' itens selecionados',
+    allSelectedText: ' Todos foram selecionados',
+    enableCaseInsensitiveFiltering: true,
+    filterBehavior: 'text'
+  });
+
   var dataTableId = "table[id='perfils_datatable']";
 
   $(dataTableId).each(function(){

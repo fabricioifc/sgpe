@@ -293,7 +293,7 @@ label.required:after {
 }
 
 .list-group {
-  
+
 }
 
 .list-group-item {
@@ -302,4 +302,10 @@ label.required:after {
 
 .panel-body {
   padding: 10px 5px;
+}
+
+body.bg {
+  background-image: image-url("bg-1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }

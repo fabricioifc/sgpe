@@ -1,20 +1,37 @@
-<div class="page-header">
-  <%= link_to perfils_path, class: 'btn btn-default' do %>
-    <i class='fa fa-list fa-2'></i>
-    Back
-  <% end %>
-  <%= link_to edit_perfil_path(@perfil), class: 'btn btn-primary' do %>
-    <i class='fa fa-pencil-square-o fa-2'></i>
-    Edit
-  <% end %>
-  <h1>Show perfil</h1>
+<%- model = Perfil %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title clearfix">
+      <%= @perfil.name %>
+      <span class="pull-right"><%= @perfil.decorate.idativo %></span>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <% grupos = @perfil.role.order(:name).in_groups_of(15, false) %>
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-success">Papéis para este perfil</li>
+    </ul>
+
+    <% grupos.each do |g| %>
+
+      <ul class="list-group col-md-4">
+        <% g.each do |role| %>
+          <li class="list-group-item"><%= role.name %></li>
+        <% end %>
+      </ul>
+
+    <% end %>
+
+  </div>
+  <div class="panel-footer">
+    <%= link_to perfils_path, class: 'btn btn-sm btn-default' do %>
+      <i class='fa fa-list fa-2'></i>
+      <%= t('helpers.links.back') %>
+    <% end %>
+    <%= link_to edit_perfil_path(@perfil), class: 'btn btn-sm btn-primary' do %>
+      <i class='fa fa-pencil-square-o fa-2'></i>
+      <%= t('helpers.links.edit') %>
+    <% end %>
+  </div>
 </div>
-
-<dl class="dl-horizontal">
-  <dt>Name:</dt>
-  <dd><%= @perfil.name %></dd>
-
-  <dt>Ativo:</dt>
-  <dd><%= @perfil.idativo %></dd>
-
-</dl>

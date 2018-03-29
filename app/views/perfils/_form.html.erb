@@ -1,20 +1,25 @@
-<%= bootstrap_form_for(perfil, local:true) do |form| %>
+<%= bootstrap_form_for(perfil, local:true, layout: :horizontal, label_col: "col-md-3", control_col: "col-md-9") do |form| %>
   <!-- <= render partial: 'shared/error_messages', locals: {obj: @perfil} %> -->
   <%= error_messages_for(perfil) %>
 
-    <div class="row">
-      <div class="col-md-6">
-        <%= form.text_field :name, id: :perfil_title, autofocus:true %>
-        <div class="form-group">
-          <%= form.check_box :idativo, id: :perfil_idativo %>
-        </div>
+  <%= form.text_field :name, id: :perfil_title, autofocus:true %>
+  <!-- <= form.collection_select :role_ids, Role.papeis_ordenados, :id, :name, {id: :role_ids },  { id: 'multi', class: 'multi', multiple:true } %> -->
+  <div class="form-group">
+    <%= form.label :role_ids, class: 'control-label col-md-3' %>
+    <%= form.select :role_ids, Role.papeis_ordenados.collect { |c| [c.name, c.id] }, {id: :role_ids, hide_label:true, control_col: "col-md-5" },
+      { id: 'multi', class: '', multiple:true } %>
+  </div>
+  <div class="form-group">
+    <%= form.label :idativo, class: 'control-label col-md-3' %>
+    <%= form.check_box :idativo, id: :perfil_idativo, hide_label:true, control_col: 'col-md-9' %>
+  </div>
 
-        <%= form.submit %>
-      </div>
-
-      <div class="col-md-6">
-        <%= form.collection_select :role_ids, Role.papeis_ordenados, :id, :name, {id: :role_ids },  { class: 'multiselect', multiple:true } %>
-      </div>
-    </div>
+  <div class="form-group col-md-push-3 col-md-9">
+    <%= form.submit %>
+  </div>
 
 <% end %>
+
+<!-- <div class="col-md-6">
+<= form.collection_select :role_ids, Role.papeis_ordenados, :id, :name, {id: :role_ids },  { class: 'multiselect', multiple:true } %>
+</div> -->

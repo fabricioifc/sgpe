@@ -18,6 +18,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap-sass'
 gem 'bootstrap-modal-rails'
+gem 'bootstrap-multiselect-rails'
 gem 'devise'
 gem 'devise_invitable', '~> 1.7.0'
 # gem "devise-async", :group => [:production, :staging]

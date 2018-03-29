@@ -14,6 +14,7 @@
 //= require rails-ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require bootstrap-multiselect
 //= require select2
 // require select2-full
 //= require dropdown

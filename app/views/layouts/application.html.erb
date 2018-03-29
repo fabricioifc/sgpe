@@ -10,11 +10,11 @@
     <%= csrf_meta_tags %>
     <%= favicon_link_tag 'favicon.ico' %>
   </head>
-  <body>
+  <body class="<%= user_signed_in? ? '' : 'bg' %>">
     <header>
       <%= render 'layouts/navigation' %>
     </header>
-    <main role="main">
+    <main role="main" class="<%= user_signed_in? ? '' : 'bg' %>">
       <%= render 'layouts/messages' %>
       <%= render 'layouts/breadcrumbs' %>
       <%= yield %>
