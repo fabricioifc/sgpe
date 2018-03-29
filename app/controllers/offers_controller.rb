@@ -168,8 +168,15 @@ class OffersController < ApplicationController
   end
 
   def pesquisar
-    @cursos_coordenador = Coordenador.where(user: current_user).pluck(:course_id) if !current_user.admin?
-    @cursos_coordenador = Offer.joins(:grid => :course).pluck('courses.id') if current_user.admin?
+    # @cursos_coordenador = Coordenador.where(user: current_user).pluck(:course_id) if !current_user.admin?
+    # @cursos_coordenador = Offer.joins(:grid => :course).pluck('courses.id') if current_user.admin?
+
+    # Se o usuário for um coordenador então mostra apenas os seus cursos
+    if Coordenador.find_by(user: current_user).nil?
+      @cursos_coordenador = Offer.joins(:grid => :course).pluck('courses.id')
+    else
+      @cursos_coordenador = Coordenador.where(user: current_user).pluck(:course_id)
+    end
     if !@cursos_coordenador.empty?
 
       @ofertas = Offer.joins(:grid).where(:grids => { course_id: @cursos_coordenador})
