@@ -110,7 +110,7 @@ class PlanDecorator < ApplicationDecorator
                                                  offer_discipline_id: component.offer_discipline_id,
                                                  offer_id: component.offer_discipline.offer_id,
                                                  format: :pdf),
-      class: "btn btn-primary #{classes}", target:'' do
+      class: "btn btn-danger #{classes}", target:'' do
         h.content_tag :i, nil, class: 'fa fa-file-pdf-o' do
           h.content_tag :span, " #{I18n.t 'helpers.links.pdf'}"
         end

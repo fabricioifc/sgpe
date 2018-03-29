@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   get 'plans/publico/index', to: 'plans#publico_index', as: 'publico_index'
   post 'plans/publico/index', to: 'plans#publico_index_planos', as: 'publico_index_planos'
   get 'plans/admin/enviar_aviso_nupe', to: 'plans#enviar_aviso_nupe', as: 'admin_enviar_aviso_nupe'
+  match '/pesquisar' => 'plans#pesquisar', as: 'pesquisar_planos', via: [:get, :post]
 
   # Coordenação de curso
   match '/ofertas_coordenador' => 'offers#pesquisar', as: 'ofertas_coordenador', via: [:get, :post]

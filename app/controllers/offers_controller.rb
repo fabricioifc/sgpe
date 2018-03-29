@@ -190,7 +190,6 @@ class OffersController < ApplicationController
       params[:ano] = Date.today.year if params[:ano].nil?
       # params[:turma] = Date.today.year if params[:turma].nil?
 
-
       if !params[:curso].nil? && !params[:curso].blank?
         if !params[:ano].blank? && !params[:semestre].blank? && !params[:turma].blank?
           @resultado = Offer.joins(:grid).includes(:offer_disciplines => :plans).

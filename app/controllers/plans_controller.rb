@@ -4,8 +4,9 @@ class PlansController < ApplicationController
   responders :flash
 
   before_action :set_plan, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:pesquisar, :show]
   load_and_authorize_resource
+  skip_authorize_resource :only => [:pesquisar, :show]
 
   before_action :load_professores
   before_action :pode_novo?, only: [:copy, :new, :create]
@@ -15,6 +16,25 @@ class PlansController < ApplicationController
   before_action :checar_professor_plano, except: [:show, :get_planos_aprovar, :aprovar]
   # before_action :get_planos_aprovar_search, only: [:get_planos_aprovar]
   before_action :set_public_index
+
+  def pesquisar
+    # @cursos = Course.where(active:true)
+    # if !params[:curso_id].nil?
+    #   offer_discipline_ids = Plan.select('plans.offer_discipline_id, MAX(versao) AS versao').joins(:offer_discipline => {:grid_discipline => {:grid => :course}}).
+    #     where('courses.id = ?', params[:curso_id]).
+    #     where(aprovado:true, active:true).group(:offer_discipline_id)
+    #
+    #   @planos = []
+    #   offer_discipline_ids.map { |od|
+    #     @planos << Plan.find_by(offer_discipline_id: od.offer_discipline_id, versao: od.versao)
+    #   }
+    #
+    # end
+    respond_to do |format|
+      format.html
+      format.json { render json: PlanosPesquisarDatatable.new(view_context, params[:curso_id])}
+    end
+  end
 
   def public_index
     # Cursos com algum plano aprovado

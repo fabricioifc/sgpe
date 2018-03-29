@@ -1,0 +1,46 @@
+<!-- <= form_with(url: pesquisar_planos_path, local:true, remote:false, method: :post) do |f| %>
+
+  <div class="form-group col-md-6">
+    <= label_tag :curso_id, '* Curso' %>
+    <= select_tag :curso_id, options_from_collection_for_select(Course.where(active:true).order(:name), "id", "name", params[:curso_id]), id: :curso_id, class: 'form-control', prompt:'Selecione o curso', required:true, autofocus:true %>
+  </div>
+
+  <div class="form-group col-md-2">
+    <= label_tag :turma, 'Turma' %>
+    <= text_field :turma, params[:turma], id: :turma, name: :turma, class: 'form-control', placeholder:'Turma' %>
+  </div>
+
+  <div class="form-group col-md-2">
+    <= label_tag :year, 'Ano da Oferta' %>
+    <= text_field :year, params[:year], id: :year, name: :year, class: 'form-control', placeholder:'Ano da Oferta' %>
+  </div>
+
+  <div class="form-group col-md-2">
+    <label for=""></label>
+    <= f.submit 'Pesquisar', class: 'btn btn-xs btn-search btn-primary form-control' %>
+  </div>
+
+< end %> -->
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Área Pública - Planos de Ensino</h3>
+    </div>
+    <div class="panel-body">
+      <%= content_tag :table, id: 'planos_pesquisar_datatable',
+          class: 'table table-striped table-condensed',
+          data: { url: pesquisar_planos_path(format: :json)} do %>
+        <!-- <caption>Lista de Planos de Ensino Aprovados por Curso</caption> -->
+        <thead class="bg-primary">
+          <tr>
+            <th>Curso</th>
+            <th>Oferta</th>
+            <th>Turma</th>
+            <th>Disciplina</th>
+            <!-- <th>Detalhes</th> -->
+            <th>Gerar PDF</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      <% end %>
+    </div>
+  </div>
