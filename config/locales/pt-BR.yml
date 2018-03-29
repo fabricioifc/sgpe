@@ -109,8 +109,8 @@ pt-BR:
         conteudo_prog: Conteúdo Programático
         prat_prof: Prática profissional
         interdisc: Interdisciplinariedade
-        met_tec: Metodologia: Técnica
-        met_met: Metodologia: Recursos
+        met_tec: 'Metodologia: Técnica'
+        met_met: 'Metodologia: Recursos'
         avaliacao: Sistema de avaliação
         cronograma: Cronograma
         atendimento: Atendimento aos alunos
