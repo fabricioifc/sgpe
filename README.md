@@ -53,7 +53,6 @@ Caso ocorra algum problema no sistema, existe a possibilidade de colocar o siste
 - mina staging maintenance:on: Coloca o ambiente de aprovação em modo manutenção.
 - mina production maintenance:off: Cancela modo manutenção
 - mina staging maintenance:off: Cancela modo manutenção
-
 - mais detalhes em lib/tasks/maintenance.rake
 
 -----------
