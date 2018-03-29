@@ -26,6 +26,7 @@ class ApplicationController < ActionController::Base
   end
 
   add_breadcrumb "Inicio", :root_path
+  before_action :adicionar_breadcrumb_show
 
   protected
 
@@ -81,5 +82,14 @@ class ApplicationController < ActionController::Base
     # add_breadcrumb "Inicio", :root_path
     # add_breadcrumb (t "helpers.links.pages.#{controller_name}", default: controller_name), "#{url_for(:only_path => false)}"
   # end
+
+  def adicionar_breadcrumb_show
+    unless ['plans'].include?(controller_name)
+      add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :coordenadors_path, :only => %w(index)
+      if ['edit', 'show'].include?(action_name)
+        add_breadcrumb 'Editar', "edit_#{controller_name.singularize}_path".to_sym, :only => %w(edit show)
+      end
+    end
+  end
 
 end

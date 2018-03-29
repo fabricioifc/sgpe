@@ -5,7 +5,7 @@ class RolesController < ApplicationController
   load_and_authorize_resource
   responders :flash
 
-  add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :roles_path
+  # add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :roles_path
 
   # GET /roles
   # GET /roles.json

@@ -104,7 +104,7 @@ class PlanDecorator < ApplicationDecorator
     end
   end
 
-  def link_pdf classes = 'btn-sm'
+  def link_pdf classes = 'btn-xs'
     if !component.id.nil?
       h.link_to h.offer_offer_discipline_plan_path(id: component.id,
                                                  offer_discipline_id: component.offer_discipline_id,
@@ -118,7 +118,7 @@ class PlanDecorator < ApplicationDecorator
     end
   end
 
-  def link_editar classes = 'btn-sm'
+  def link_editar classes = 'btn-xs'
     if !component.id.nil?
       if pode_editar?
         h.link_to h.edit_offer_offer_discipline_plan_path(offer_discipline_id: component.offer_discipline_id, id: component.id),
@@ -137,7 +137,7 @@ class PlanDecorator < ApplicationDecorator
     end
   end
 
-  def link_show classes = 'btn-sm'
+  def link_show classes = 'btn-xs'
     h.link_to h.offer_offer_discipline_plan_path(id: component.id,
                                                offer_discipline_id: component.offer_discipline_id,
                                                offer_id: component.offer_discipline.offer_id),
@@ -148,7 +148,7 @@ class PlanDecorator < ApplicationDecorator
     end
   end
 
-  def link_index classes = 'btn-sm'
+  def link_index classes = 'btn-xs'
     h.link_to h.offer_offer_discipline_plans_path(offer_discipline_id: component.offer_discipline_id),
       class: "btn btn-default #{classes}" do
         h.content_tag :i, nil, class: 'fa fa-list' do
@@ -157,7 +157,7 @@ class PlanDecorator < ApplicationDecorator
     end
   end
 
-  def link_new classes = 'btn-sm'
+  def link_new classes = 'btn-xs'
     if pode_novo?
       h.link_to h.new_offer_offer_discipline_plan_path(offer_discipline_id: component.offer_discipline_id),
         class: "btn btn-primary #{classes}" do
@@ -174,7 +174,7 @@ class PlanDecorator < ApplicationDecorator
     end
   end
 
-  def link_duplicate classes = 'btn-sm'
+  def link_duplicate classes = 'btn-xs'
     if pode_excluir?
       h.link_to h.offer_offer_discipline_plan_path(id: component.id),
         method: :delete, data: { confirm: 'Tem certeza?' },
@@ -199,7 +199,7 @@ class PlanDecorator < ApplicationDecorator
     end
   end
 
-  def link_duplicate_outra_oferta nova_offer_discipline_id, classes = 'btn-sm'
+  def link_duplicate_outra_oferta nova_offer_discipline_id, classes = 'btn-xs'
     if pode_novo?
       h.link_to h.copy_outra_oferta_offer_offer_discipline_plan_path(
           offer_discipline_id: component.offer_discipline_id, id: component.id,

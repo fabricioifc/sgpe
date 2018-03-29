@@ -5,8 +5,6 @@ class CoordenadorsController < ApplicationController
 
   responders :flash
 
-  add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :coordenadors_path
-
   # GET /coordenadors
   # GET /coordenadors.json
   def index

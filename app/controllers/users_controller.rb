@@ -71,7 +71,7 @@ private
     unless current_user.admin?
       redirect_to root_path, :alert => "Acesso negado. Você não tem permissão para acessar este recurso."
     else
-      add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :users_path
+      # add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :users_path
     end
   end
 

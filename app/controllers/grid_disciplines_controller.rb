@@ -4,7 +4,7 @@ class GridDisciplinesController < ApplicationController
   load_and_authorize_resource
   responders :flash
 
-  add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :grid_disciplines_path
+  # add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :grid_disciplines_path
 
   # GET /grid_disciplines
   # GET /grid_disciplines.json

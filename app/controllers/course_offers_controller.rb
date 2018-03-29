@@ -4,7 +4,7 @@ class CourseOffersController < ApplicationController
   load_and_authorize_resource
   responders :flash
 
-  add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :course_offers_path
+  # add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :course_offers_path
 
 
   # GET /course_offers

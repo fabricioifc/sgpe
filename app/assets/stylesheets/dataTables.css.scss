@@ -24,3 +24,17 @@ table.dataTable thead .sorting_desc {
 .pagination>.disabled>span, .pagination>.disabled>span:hover, .pagination>.disabled>span:focus, .pagination>.disabled>a, .pagination>.disabled>a:hover, .pagination>.disabled>a:focus {
   background-color: $brand-success;
 }
+
+.table > thead > tr > th, .table > thead > tr > td, .table > tbody > tr > th, .table > tbody > tr > td, .table > tfoot > tr > th, .table > tfoot > tr > td {
+  padding: 2px;
+  vertical-align: inherit;
+}
+
+div.dataTables_wrapper div.dataTables_length select {
+  height: 30px;
+}
+
+.input-sm, .input-group-sm > .form-control, .select2-container--bootstrap .input-group-sm > .select2-selection--single, .input-group-sm > .input-group-addon, .input-group-sm > .input-group-btn > .btn, .input-group-sm > .input-group-btn > .submit, .authform .input-group-sm > .input-group-btn > .button, .input-group-sm > .input-group-btn > .button-xs {
+  padding: 2px 9px;
+  height: 30px;
+}

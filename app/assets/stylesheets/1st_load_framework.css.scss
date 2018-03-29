@@ -20,6 +20,13 @@
 
 @import "summernote";
 
+body.bg {
+  background-image: image-url("bg-1.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+
 .navbar-brand {
   font-size: inherit;
   padding: 4.5px 5px;
@@ -302,10 +309,4 @@ label.required:after {
 
 .panel-body {
   padding: 10px 5px;
-}
-
-body.bg {
-  background-image: image-url("bg-1.jpg");
-  background-repeat: no-repeat;
-  background-size: 100%;
 }

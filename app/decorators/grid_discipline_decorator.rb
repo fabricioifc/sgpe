@@ -5,9 +5,15 @@ class GridDisciplineDecorator < ApplicationDecorator
   def initialize(component)
     @component = component
   end
-  
+
   def ano_semestre
-    component.semestre.nil? ? "#{component.year}" : "#{component.year}/#{component.semestre}"
+    if !component.year.nil? && !component.semestre.nil?
+      "#{component.year}/#{component.semestre}"
+    elsif !component.year.nil? && component.semestre.nil?
+      "Ano: #{component.year}"
+    else
+      "Semestre: #{component.semestre}"
+    end
   end
 
   def active

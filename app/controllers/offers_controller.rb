@@ -6,7 +6,7 @@ class OffersController < ApplicationController
   load_and_authorize_resource
   responders :flash
 
-  add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :offers_path, :except => %w(pesquisar)
+  # add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :offers_path, :except => %w(pesquisar)
 
   before_action :load_cursos
   before_action :load_professores

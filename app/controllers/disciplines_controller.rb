@@ -4,7 +4,7 @@ class DisciplinesController < ApplicationController
   load_and_authorize_resource
   responders :flash
 
-  add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :disciplines_path
+  # add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :disciplines_path
 
   # GET /disciplines
   # GET /disciplines.json
