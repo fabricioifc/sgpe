@@ -21,43 +21,45 @@
         </li>
       </ul>
 
-      <div class="table-responsive">
-        <table class="table table-condensed table-striped">
-          <caption>
-            <div class="well-sm alert-info">
-              <i class="fa fa-info-circle"></i>
-              Caso ache necessário, importe os dados de planos aprovados anteriormente.
-            </div>
-          </caption>
-          <thread>
-            <tr>
-              <th class="text-center">Versão</th>
-              <th class="">Situação</th>
-              <th class="text-center">Turma</th>
-              <th>Oferta</th>
-              <th class="">Ações</th>
-              <th class="">Gerar PDF</th>
-            </tr>
-          </thread>
-          <tbody>
-            <% @planos_aprovados_anteriormente.each do |plan| %>
+      <% if !@planos_aprovados_anteriormente.nil? %>
+        <div class="table-responsive">
+          <table class="table table-condensed table-striped">
+            <caption>
+              <div class="well-sm alert-info">
+                <i class="fa fa-info-circle"></i>
+                Caso ache necessário, importe os dados de planos aprovados anteriormente.
+              </div>
+            </caption>
+            <thread>
               <tr>
-                <td class="text-center" style="vertical-align: middle;">
-                  <span class="badge"><%= "v#{plan.versao}" unless plan.versao.nil? %></span>
-                </td>
-                <td class="" style="vertical-align: middle;"><%= plan.decorate.situacao %></td>
-                <td class="text-center"><%= plan.offer_discipline.offer.turma %></td>
-                <td><%= "#{plan.offer_discipline.offer.decorate.type_offer} - #{plan.offer_discipline.offer.decorate.ano_semestre}" %></td>
-                <td>
-                  <%= plan.decorate.link_show %>
-                  <%= plan.decorate.link_duplicate_outra_oferta(@offer_discipline.id) %>
-                </td>
-                <td><%= plan.decorate.link_pdf 'btn-xs btn-block' %></td>
+                <th class="text-center">Versão</th>
+                <th class="">Situação</th>
+                <th class="text-center">Turma</th>
+                <th>Oferta</th>
+                <th class="">Ações</th>
+                <th class="">Gerar PDF</th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
+            </thread>
+            <tbody>
+              <% @planos_aprovados_anteriormente.each do |plan| %>
+                <tr>
+                  <td class="text-center" style="vertical-align: middle;">
+                    <span class="badge"><%= "v#{plan.versao}" unless plan.versao.nil? %></span>
+                  </td>
+                  <td class="" style="vertical-align: middle;"><%= plan.decorate.situacao %></td>
+                  <td class="text-center"><%= plan.offer_discipline.offer.turma %></td>
+                  <td><%= "#{plan.offer_discipline.offer.decorate.type_offer} - #{plan.offer_discipline.offer.decorate.ano_semestre}" %></td>
+                  <td>
+                    <%= plan.decorate.link_show %>
+                    <%= plan.decorate.link_duplicate_outra_oferta(@offer_discipline.id) %>
+                  </td>
+                  <td><%= plan.decorate.link_pdf 'btn-xs btn-block' %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
 
     </div>
 

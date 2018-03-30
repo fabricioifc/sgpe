@@ -19,7 +19,7 @@ class Ability
       # end
 
       # new e copy mesma coisa
-      alias_action :new, :copy, :to => :novo
+      alias_action :new, :copy, :copy_outra_oferta, :plano_parecer, :to => :novo
       alias_action :get_planos_aprovar, :aprovar, :reprovar, :to => :aprovar_reprovar
 
       user.perfils.each do |perfil|

@@ -84,8 +84,9 @@ class ApplicationController < ActionController::Base
   # end
 
   def adicionar_breadcrumb_show
-    unless ['plans'].include?(controller_name)
-      add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :coordenadors_path, :only => %w(index)
+    # binding.pry
+    unless ['plans', 'registrations'].include?(controller_name)
+      add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), "#{controller_name.pluralize}_path".to_sym, :only => %w(index)
       if ['edit', 'show'].include?(action_name)
         add_breadcrumb 'Editar', "edit_#{controller_name.singularize}_path".to_sym, :only => %w(edit show)
       end

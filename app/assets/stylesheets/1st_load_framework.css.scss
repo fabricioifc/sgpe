@@ -45,6 +45,12 @@ body.bg {
   }
 }
 
+.navbar-inverse {
+  // filter: none;
+  background-color: $brand-primary;
+  background-image: linear-gradient(to bottom,$brand-primary,$brand-primary);
+}
+
 // THESE ARE EXAMPLES YOU CAN MODIFY
 // create your own classes
 // to make views framework-neutral
@@ -102,10 +108,13 @@ section {
 .authform fieldset {
   @extend .well;
 }
+.alert {
+  padding: 5px;
+  margin-bottom: 5px;
+}
 #error_explanation:not(:empty) {
   @extend .alert;
   @extend .alert-danger;
-  margin-bottom: 5px;
 }
 #error_explanation h2 {
   font-size: 16px;
@@ -242,8 +251,9 @@ table tbody tr td.text-middle {
 // Quando alguma DIV precisa ficar fixa no fundo ao fazer scroll na página
 .fixed-on-scroll.stuck, .fixed-on-scroll.well.stuck {
     position:fixed;
-    bottom:15px;
-    left: 0;
+    bottom:5px;
+    padding: 5px;
+    left: 0px;
     width: 100%;
     z-index: 1; //posição do elemento, ou seja, acima dos outros
 
@@ -268,11 +278,11 @@ div.fixed-on-bottom {
   width: 100% !important;
 }
 
-.select2-container--bootstrap .select2-selection--single {
+.form-control, .select2-container--bootstrap .select2-selection--single {
   @extend .form-control;
-  height: 45px;
+  height: 35px;
   line-height: 1.428571429;
-  padding: 10px 24px 6px 12px;
+  padding: 5px 5px 5px 10px;
 }
 
 // Multiselect gem
@@ -301,7 +311,7 @@ label.required:after {
 }
 
 .list-group {
-
+  margin-bottom: 10px;
 }
 
 .list-group-item {
@@ -310,4 +320,8 @@ label.required:after {
 
 .panel-body {
   padding: 10px 5px;
+}
+
+.btn-search {
+  border-radius: 4px;
 }

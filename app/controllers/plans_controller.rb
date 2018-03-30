@@ -32,7 +32,7 @@ class PlansController < ApplicationController
     # end
     respond_to do |format|
       format.html
-      format.json { render json: PlanosPesquisarDatatable.new(view_context, params[:curso_id])}
+      format.json { render json: PlanosPesquisarDatatable.new(view_context)}
     end
   end
 
@@ -278,7 +278,7 @@ class PlansController < ApplicationController
           end
           pdf = PlanPdf.new(@plan, current_user).generate
           filename = "#{@plan.offer_discipline.user.name}_#{@plan.offer_discipline.grid_discipline.discipline.title}.pdf"
-          filename = filename.gsub!(/( )/, '_').upcase!
+          filename = (filename.gsub!(/( )/, '_') || filename).upcase!
 
           send_data pdf.render,
             filename: filename,

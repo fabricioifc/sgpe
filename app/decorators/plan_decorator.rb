@@ -88,7 +88,7 @@ class PlanDecorator < ApplicationDecorator
     elsif component.analise?
       h.content_tag :span, 'Em análise', class: "label #{classes} label-warning", style: 'font-size: 14px;'
     else
-      h.content_tag :span, 'Editando', class: "label #{classes} label-primary", style: 'font-size: 14px;'
+      h.content_tag :span, 'Editando', class: "label #{classes} label-info", style: 'font-size: 14px;'
     end
   end
 

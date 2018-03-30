@@ -1,9 +1,8 @@
 class PlanosPesquisarDatatable < ApplicationDatatable
   delegate :offer_offer_discipline_plan_path, to: :@view
 
-  def initialize(view, curso_id)
+  def initialize(view)
     @view = view
-    @curso_id = curso_id
   end
 
 private
@@ -34,10 +33,10 @@ private
 
   # Returns the count of records.
   def count
-    if @planos.nil?
+    if planos.nil?
       0
     else
-      @planos.count
+      planos.count
     end
   end
 
@@ -71,12 +70,10 @@ private
     planos = Plan.joins(:offer_discipline => {:grid_discipline => {:grid => :course}}).
       joins(:offer_discipline => {:grid_discipline => :discipline}).
       joins(:offer_discipline => :offer).
-      where(id: offer_discipline_ids.map(&:idplano))
-    if !planos.empty?
-      planos.order("#{sort_column} #{sort_direction}")
+      where(id: offer_discipline_ids.map(&:idplano)).order("#{sort_column} #{sort_direction}")
+
       planos = planos.page(page).per(per_page)
       planos = planos.where(search_string.join(' or '), search: "%#{params[:search][:value]}%")
-    end
   end
   # where('plans.user_parecer_id is null OR plans.user_parecer_id != ?', @user.id).
 
