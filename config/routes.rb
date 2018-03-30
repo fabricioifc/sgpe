@@ -77,19 +77,7 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
-  resources :users do
-    collection do
-      put 'update_perfils'
-    end
-  end
-
-
-  # Interface para acessar as tarefas em background através do sidekiq
-  authenticate :user, lambda { |u| u.admin? } do
-    mount Sidekiq::Web => '/sidekiq'
-  end
-
-# Configurar para que a tela inicial seja a tela de login, caso não esteja autenticado
+  # Configurar para que a tela inicial seja a tela de login, caso não esteja autenticado
   devise_for :users, skip: [:sessions]
     as :user do
       get 'login', to: 'devise/sessions#new', as: :new_user_session
@@ -102,5 +90,17 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users do
+    collection do
+      put 'update_perfils'
+    end
+  end
+
+  # Interface para acessar as tarefas em background através do sidekiq
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   root to: 'visitors#index'
+
 end
