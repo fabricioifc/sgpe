@@ -17,8 +17,6 @@ class PlansController < ApplicationController
   # before_action :get_planos_aprovar_search, only: [:get_planos_aprovar]
   before_action :set_public_index
 
-  after_commit :send_mail_to_professor, on: :aprovar
-
   def pesquisar
     # @cursos = Course.where(active:true)
     # if !params[:curso_id].nil?
@@ -153,6 +151,7 @@ class PlansController < ApplicationController
       # if @plan.user_parecer.nil? || @plan.user_parecer.eql?(current_user)
         # ActiveRecord::Base.transaction do
           if @plan.update(aprovado:aprovado, reprovado:reprovado, parecer: plan_params[:parecer], user_parecer: current_user)
+            PlanoEnsinoMailer.enviar_parecer_professor(@plan).deliver_later!
             flash[:notice] = "Plano #{aprovado == true ? 'aprovado' : 'com pendências'}."
             # format.html { redirect_to aprovar_offer_offer_discipline_plan_path(@plan) }
             format.html { redirect_to get_planos_aprovar_path }
@@ -585,9 +584,5 @@ class PlansController < ApplicationController
       end
 
       planos_aprovados_anteriormente
-    end
-
-    def send_mail_to_professor
-      PlanoEnsinoMailer.enviar_parecer_professor(@plan).deliver_later!
     end
 end
