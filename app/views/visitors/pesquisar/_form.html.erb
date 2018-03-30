@@ -32,11 +32,10 @@
         <!-- <caption>Lista de Planos de Ensino Aprovados por Curso</caption> -->
         <thead class="bg-primary">
           <tr>
-            <th>Curso</th>
-            <th>Oferta</th>
-            <th>Turma</th>
-            <th>Disciplina</th>
-            <!-- <th>Detalhes</th> -->
+            <th><%= t Course.model_name.human %></th>
+            <th><%= t Offer.model_name.human %></th>
+            <th><%= t Offer.human_attribute_name(:turma) %></th>
+            <th><%= t Discipline.model_name.human %></th>
             <th>Gerar PDF</th>
           </tr>
         </thead>
