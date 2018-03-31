@@ -244,7 +244,7 @@ class OffersController < ApplicationController
       Offer.includes(:offer_disciplines => :plans).find(params[:offer_id]).offer_disciplines.each do |x|
         # Enviar aviso por e-mail para disciplinas sem plano ou com plano não aprovado ainda
         ultimo_plano = x.plans.order(versao: :desc).first
-        if x.plans.empty? || (!x.plans.empty? && !ultimo_plano.user.nil? && !ultimo_plano.aprovado? && !ultimo_plano.analise?)
+        if !x.user.nil? && (x.plans.empty? || (!x.plans.empty? && !ultimo_plano.user.nil? && !ultimo_plano.aprovado? && !ultimo_plano.analise?))
           PlanoEnsinoMailer.enviar_aviso_plano_pendente(current_user.email, x).deliver_later!
         end
       end
