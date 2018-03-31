@@ -240,18 +240,21 @@ class OffersController < ApplicationController
 
   # Avisar o professor da existência de planos pendentes
   def enviar_aviso_plano_pendente
+    enviou = false
     if !params[:offer_id].nil?
       Offer.includes(:offer_disciplines => :plans).find(params[:offer_id]).offer_disciplines.each do |x|
         # Enviar aviso por e-mail para disciplinas sem plano ou com plano não aprovado ainda
         ultimo_plano = x.plans.order(versao: :desc).first
         if !x.user.nil? && (x.plans.empty? || (!x.plans.empty? && !ultimo_plano.user.nil? && !ultimo_plano.aprovado? && !ultimo_plano.analise?))
           PlanoEnsinoMailer.enviar_aviso_plano_pendente(current_user.email, x).deliver_later!
+          enviou = true
         end
       end
     end
     if !params[:offer_discipline_id].nil?
       @offer_discipline = OfferDiscipline.find(params[:offer_discipline_id])
       PlanoEnsinoMailer.enviar_aviso_plano_pendente(current_user.email, @offer_discipline).deliver_later!
+      enviou = true
     end
 
     respond_to do |format|
@@ -259,7 +262,11 @@ class OffersController < ApplicationController
       format.html { redirect_to ofertas_coordenador_path }
       format.json
       format.js {
-        flash[:notice] = "Um aviso foi enviado ao professor."
+        if enviou
+          flash[:notice] = "Um aviso foi enviado ao professor."
+        else
+          flash[:warning] = "Nenhum plano de ensino pendente."
+        end
       }
     end
   end
