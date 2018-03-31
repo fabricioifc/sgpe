@@ -31,22 +31,21 @@
 							</div>
 						</div>
 
-						<div class="col-md-12">
-		            <div class="form-group">
-			            <% if devise_mapping.rememberable? -%>
-				            <div class="input-group">
-				                <label>
-				                  <%= f.check_box :remember_me, checked:true %> <%= f.label :remember_me %>
-				                </label>
-				            </div>
-			            <% end -%>
+						<div class="col-md-6">
+	            <% if devise_mapping.rememberable? -%>
+		            <div class="input-group">
+	                <label>
+	                  <%= f.check_box :remember_me, checked:true %> <%= f.label :remember_me %>
+	                </label>
 		            </div>
+	            <% end -%>
 						</div>
 
-						<div class="col-md-12">
-							<div class="form-group">
-									<%= f.submit t(".submit"), :class => 'btn btn-primary pull-right btn-block' %>
-		          </div>
+						<div class="col-md-6">
+							<%= button_tag(type: "submit", class: "btn btn-sm btn-primary pull-right") do %>
+						    <i class="fa fa-sign-in"></i>
+								<%= t '.submit' %>
+						<% end %>
 						</div>
 
 					<% end %>

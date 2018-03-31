@@ -9,9 +9,9 @@
     </div>
     <div class="form-group">
       <%= form.check_box :especial, id: :discipline_especial %>
-      <span class="help-block alert alert-success well-sm">Marque esta opção caso ementa, objetivo geral e referêcias bibliográficas sejam responsabilidade do professor.</span>
+      <span class="help-block">Marque a opção ESPECIAL caso ementa, objetivo geral e referêcias bibliográficas sejam responsabilidade do professor.</span>
     </div>
 
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-primary' %>
 
 <% end %>

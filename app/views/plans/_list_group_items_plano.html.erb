@@ -1,17 +1,16 @@
+<li class="list-group-item list-group-item-info">Ações</li>
 <li class="list-group-item">
-  <div class="btn-group btn-group-justified">
-    <% if is_professor_discipline? @plan.user %>
+  <!-- <div class="btn-group btn-group-justified"> -->
+    <!-- < if is_professor_discipline? @plan.user %> -->
       <!-- <div class="btn-group" role="group">
         <= @plan.decorate.link_index %>
       </div> -->
       <!-- <div class="btn-group" role="group">
         <= @plan.decorate.link_editar %>
       </div> -->
-    <% end %>
-    <div class="btn-group" role="group">
-      <%= @plan.decorate.link_pdf %>
-    </div>
-  </div>
+    <!-- < end %> -->
+  <!-- </div> -->
+  <%= @plan.decorate.link_pdf %>
 </li>
 
 <hr>

@@ -20,12 +20,24 @@
 
 @import "summernote";
 
-body.bg {
-  background-image: image-url("bg-1.jpg");
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
+// body.bg {
+//   background-image: image-url("bg-3.jpg");
+//   height: 100%;
+//   position: relative;
+//   // opacity: 0.8;
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+// }
 
+body.bg {
+  background: image-url("bg-4.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  opacity: 0.95;
+}
 
 .navbar-brand {
   font-size: inherit;
@@ -109,7 +121,7 @@ section {
   @extend .well;
 }
 .alert {
-  padding: 5px;
+  padding: 5px 35px 5px 5px;
   margin-bottom: 5px;
 }
 #error_explanation:not(:empty) {
@@ -123,6 +135,9 @@ section {
   @extend .btn;
   @extend .btn-primary;
   @extend .btn-xs;
+}
+.help-block {
+  color: $brand-primary;
 }
 
 // Ajusta a imagem do avatar no componente navbar
@@ -332,7 +347,11 @@ label.required:after {
 
 .btn-pdf {
   @extend .btn-danger;
-  background-color: #f67280;
-  border-color: darken(#f67280, 10%);
+  background-color: #ba3a0b;
+  border-color: darken(#ba3a0b, 5%);
   color: #fff;
+}
+
+.input-group-addon {
+  padding: 0px 15px;
 }

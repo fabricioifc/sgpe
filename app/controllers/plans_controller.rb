@@ -513,10 +513,12 @@ class PlansController < ApplicationController
     end
 
     def adicionar_breadcrumb_cursos
-      curso_ids = get_cursos_professor
-      cursos = Course.where(id: curso_ids)
-      cursos.each do |curso|
-        add_breadcrumb curso.sigla, planos_curso_path(curso.id)
+      if user_signed_in?
+        curso_ids = get_cursos_professor
+        cursos = Course.where(id: curso_ids)
+        cursos.each do |curso|
+          add_breadcrumb curso.sigla, planos_curso_path(curso.id)
+        end
       end
     end
 
