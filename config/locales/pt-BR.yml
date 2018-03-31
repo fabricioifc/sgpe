@@ -444,3 +444,42 @@ pt-BR:
   course_formats:
     index:
       title: Formatos de curso
+  app:
+    name: 'SGPE'
+  visitors:
+    title: Inicio
+  coordenadors:
+    title: Gerenciar Coordenadores
+  coordenar:
+    title: Gerenciar Planos de Ensino
+  disciplines:
+    title: Componentes Curriculares
+  cursos:
+    title: Gerenciar Cursos
+  grids:
+    title: Gerenciar Grades
+  grid_disciplines:
+    title: Componente Curricular da grade
+  course_modalities:
+    title: Modalidades de curso
+  course_formats:
+    title: Formatos de curso
+  course_offers:
+    title: Ofertas de curso
+  courses:
+    title: Cursos
+  turmas:
+    title: Turmas
+  offers:
+    title: Ofertar Grades
+  perfils:
+    title: Perfis
+  roles:
+    title: Papéis
+  perfil_roles:
+    title: Papéis por perfil
+  users:
+    title: Usuários
+  devise:
+    users:
+      title: Usuários

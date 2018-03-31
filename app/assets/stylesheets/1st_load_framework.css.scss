@@ -278,6 +278,10 @@ div.fixed-on-bottom {
   width: 100% !important;
 }
 
+.form-control {
+  color: #444;
+}
+
 .form-control, .select2-container--bootstrap .select2-selection--single {
   @extend .form-control;
   height: 35px;
@@ -324,4 +328,11 @@ label.required:after {
 
 .btn-search {
   border-radius: 4px;
+}
+
+.btn-pdf {
+  @extend .btn-danger;
+  background-color: #f67280;
+  border-color: darken(#f67280, 10%);
+  color: #fff;
 }

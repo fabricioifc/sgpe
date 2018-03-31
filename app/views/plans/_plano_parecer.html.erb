@@ -9,11 +9,13 @@
         <li class="list-group-item list-group-item-success">Parecer descritivo</li>
         <li class="list-group-item" style="max-height: 320px; overflow-y: auto;"><%= plano.parecer %></li>
       </ul>
+
     </div>
     <div class="modal-footer">
       <div class="text-info text-left" role="alert">
         Responsável pelo parecer: <strong><%= plano.user_parecer.name %></strong>
-        <button type="button" class="btn btn-xs btn-default pull-right" data-dismiss="modal" aria-label="Close">Fechar</button>
+        <br><small class="text-muted">Atualizado em: <strong><%= l plano.updated_at.to_date %></strong></small>
+        <button type="button" class="btn btn-xs btn-danger pull-right" data-dismiss="modal" aria-label="Close">Fechar</button>
       </div>
       <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
     </div>
