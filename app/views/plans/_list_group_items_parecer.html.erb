@@ -37,7 +37,7 @@
     <% end %>
   <% end %>
 </li>
-<% unless @plan.user_parecer.nil? %>
+<% unless !user_signed_in? && @plan.user_parecer.nil? %>
   <li class="list-group-item list-group-item-info">
     <p>Analisado por:</p>
     <p><strong><%= @plan.user_parecer.name %></strong></p>
