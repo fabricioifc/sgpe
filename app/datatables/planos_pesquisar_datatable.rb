@@ -17,11 +17,11 @@ private
         column << "#{plano.offer_discipline.grid_discipline.discipline.sigla} - #{plano.offer_discipline.grid_discipline.discipline.title}"
 
         # links = []
-        # column << link_to("<i class='fa fa-info-circle'></i> <span>#{I18n.t 'helpers.links.show'}</span>".html_safe,
-        #     offer_offer_discipline_plan_path(
-        #         offer_discipline_id: plano.offer_discipline_id,
-        #         offer_id: plano.offer_discipline.offer_id,
-        #         id: plano.id), class: "btn btn-xs btn-info btn-block")
+        column << link_to("<i class='fa fa-info-circle'></i> <span>#{I18n.t 'helpers.links.show'}</span>".html_safe,
+            offer_offer_discipline_plan_path(
+                offer_discipline_id: plano.offer_discipline_id,
+                offer_id: plano.offer_discipline.offer_id,
+                id: plano.id), class: "btn btn-xs btn-info btn-block")
        column << plano.decorate.link_pdf('btn-xs btn-block')
 
         # column << link_to("<i class='fa fa-pencil-square-o fa-2 text-warning'></i>".html_safe, edit_plano_path(plano))

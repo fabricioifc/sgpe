@@ -523,7 +523,12 @@ class PlansController < ApplicationController
     end
 
     def adicionar_breadcrumb_planos offer_discipline_id
-      add_breadcrumb 'Meus planos', offer_offer_discipline_plans_path(offer_discipline_id: offer_discipline_id)
+      # Se pode ver todos os seus planos de ensino desta disciplina ofertada
+      if can? :index, Plan
+        add_breadcrumb 'Meus planos', offer_offer_discipline_plans_path(offer_discipline_id: offer_discipline_id)
+      elsif can? :aprovar_reprovar, Plan
+        add_breadcrumb 'Planos de Ensino', get_planos_aprovar_path
+      end
     end
 
     def checar_professor_plano

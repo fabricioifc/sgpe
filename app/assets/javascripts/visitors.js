@@ -21,25 +21,31 @@ document.addEventListener("turbolinks:load", function(e) {
           orderable: true
         },
         {
-          width: "10%",
+          width: "8%",
           className: "",
           searchable: true,
           orderable: true
         },
         {
-          width: "10%",
+          width: "8%",
           className: "",
           searchable: true,
           orderable: true
         },
         {
-          width: "30%",
+          width: "34%",
           className: "",
           searchable: true,
           orderable: true
         },
         {
-          width: "10%",
+          width: "5%",
+          className: "",
+          searchable: true,
+          orderable: true
+        },
+        {
+          width: "5%",
           className: "",
           searchable: true,
           orderable: true
