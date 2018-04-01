@@ -15,7 +15,7 @@
       <% end %>
   <% end %>
   <hr>
-  <% if @plan.analise? %>
+  <% if user_signed_in? && @plan.analise? %>
     <% if (can? :aprovar_reprovar, Plan) %>
       <%= form_for(@plan, url: aprovar_offer_offer_discipline_plan_path, method: :post) do |f| %>
         <div class="form-group">
