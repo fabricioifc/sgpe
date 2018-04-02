@@ -32,10 +32,8 @@
     </div>
     <div class="panel-footer clearfix">
       <% total_ofertado_sem_plano = ofertas_sem_plano_por_professor.count %>
-      <% if total_ofertado_sem_plano.eql?(1) %>
-        <span class="badge alert-warning pull-right"><%= "Existe ainda #{total_ofertado_sem_plano} componente curricular sem plano de ensino." %></span>
-      <% elsif total_ofertado_sem_plano > 1 %>
-        <span class="badge alert-warning pull-right"><%= "Existem ainda #{total_ofertado_sem_plano} componentes curriculares sem plano de ensino." %></span>
+      <% if total_ofertado_sem_plano >= 1 %>
+        <small class="alert alert-warning btn-block"><%= raw "Existem ainda <span class='badge'>#{total_ofertado_sem_plano}</span> componente(s) curricular(es) sem plano de ensino." %></small>
       <% end %>
     </div>
   </div>

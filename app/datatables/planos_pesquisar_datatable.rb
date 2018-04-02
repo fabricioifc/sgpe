@@ -3,6 +3,7 @@ class PlanosPesquisarDatatable < ApplicationDatatable
 
   def initialize(view)
     @view = view
+    super
   end
 
 private
@@ -11,7 +12,7 @@ private
     planos.map do |plano|
       [].tap do |column|
 
-        column << plano.offer_discipline.grid_discipline.grid.course.name
+        column << "#{plano.offer_discipline.grid_discipline.grid.course.sigla} - #{plano.offer_discipline.grid_discipline.grid.course.name}"
         column << plano.offer_discipline.offer.decorate.ano_semestre
         column << plano.offer_discipline.offer.turma
         column << "#{plano.offer_discipline.grid_discipline.discipline.sigla} - #{plano.offer_discipline.grid_discipline.discipline.title}"

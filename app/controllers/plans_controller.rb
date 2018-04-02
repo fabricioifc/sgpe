@@ -30,10 +30,7 @@ class PlansController < ApplicationController
     #   }
     #
     # end
-    respond_to do |format|
-      format.html
-      format.json { render json: PlanosPesquisarDatatable.new(view_context)}
-    end
+    render json: PlanosPesquisarDatatable.new(view_context)
   end
 
   def public_index

@@ -1,7 +1,22 @@
+$(document).on('turbolinks:before-visit', function(e) {
+  if ($('form#plans_form').length > 0) {
+    if ($('form#plans_form').serialize() != $('form#plans_form').data('serialize')) {
+      console.log(e);
+      var message = "Existem alterações não salvas nesta página."
+      if (!confirm(message)) {
+        return e.preventDefault();
+      }
+    }
+  }
+});
+
 document.addEventListener("turbolinks:load", function(e) {
-  // $("#accordion").find('a.trigger:first').click();
-  // var link = "a[data-ano=" + new Date().getFullYear() + "]";
-  // $("#accordion").find('a[data-abrir="true"]').click();
+  if ($('form#plans_form').length > 0) {
+    $('form#plans_form').data('serialize', $('form#plans_form').serialize());
+    console.log($('form#plans_form').data('serialize'));
+  } else {
+    $('form#plans_form').data('serialize', null);
+  }
 
   $.checarPaineis();
 
