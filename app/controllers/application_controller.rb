@@ -72,7 +72,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_inviter!
-    unless user_signed_in? && current_user.try(:admin?)
+    unless user_signed_in? && (can? :manage, User)
       redirect_to root_url, :alert => "Acesso negado! Você não tem permissão para acessar este recurso."
     end
     super
@@ -85,7 +85,7 @@ class ApplicationController < ActionController::Base
 
   def adicionar_breadcrumb_show
     # binding.pry
-    unless ['plans', 'registrations', 'pages'].include?(controller_name)
+    unless ['plans', 'registrations', 'pages', 'invitations', 'users'].include?(controller_name)
       if ['offers'].include?(controller_name) && ['pesquisar'].include?(action_name)
         return
       end

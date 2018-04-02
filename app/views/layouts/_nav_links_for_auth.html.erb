@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
 
-  <% if is_admin? %>
+  <% if can? :manage, User %>
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
         <span class="badge">
@@ -9,13 +9,15 @@
         </span>
       </a>
       <ul class="dropdown-menu">
-        <li>
-          <%= link_to rails_admin.dashboard_path do %>
-            <i class="fa fa-dashboard" aria-hidden="true"></i>
-            <%= t('helpers.links.admin') %>
-            <i class="fa fa-lock" aria-hidden="true"></i>
-          <% end %>
-        </li>
+        <% if is_admin? %>
+          <li>
+            <%= link_to rails_admin.dashboard_path do %>
+              <i class="fa fa-dashboard" aria-hidden="true"></i>
+              <%= t('helpers.links.admin') %>
+              <i class="fa fa-lock" aria-hidden="true"></i>
+            <% end %>
+          </li>
+        <% end %>
         <li>
           <%= link_to users_path do %>
             <i class="fa fa-users" aria-hidden="true"></i>
@@ -61,7 +63,7 @@
         <% end %>
       </li>
       <li role="presentation" class="divider"></li>
-      <% if is_admin? %>
+      <% if can? :novo, User %>
         <li>
           <%= link_to new_user_invitation_path do %>
             <i class="fa fa-user-plus" aria-hidden="true"></i>

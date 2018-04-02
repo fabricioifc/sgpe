@@ -75,6 +75,7 @@
 </div>
 
 <% if current_user.try(:admin) %>
+<!-- < if can? :manage, User %> -->
   <%= bootstrap_form_for(@user, remote:false) do |f| %>
     <div class="panel panel-success">
       <div class="panel-heading">
