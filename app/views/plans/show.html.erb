@@ -6,85 +6,72 @@
     <%= render 'list_group_items', plan: @plan %>
     <%= render 'list_group_items_parecer', plan: @plan %>
   </div>
+
   <div class="col-md-9 col-lg-9">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        <%= modelGridDiscipline.human_attribute_name(:objetivo_geral) %>
+      </li>
+      <li class="list-group-item text-justify"><%= @plan.offer_discipline.grid_discipline.decorate.objetivo_geral %></li>
+      <li class="list-group-item list-group-item-info">
+        <%= modelGridDiscipline.human_attribute_name(:ementa) %>
+      </li>
+      <li class="list-group-item text-justify"><%= @plan.offer_discipline.grid_discipline.decorate.ementa %></li>
+      <li class="list-group-item list-group-item-info">
+        <%= t modelGridDiscipline.human_attribute_name(:bib_geral) %>
+      </li>
+      <li class="list-group-item text-justify"><%= @plan.offer_discipline.grid_discipline.decorate.bib_geral %></li>
+      <li class="list-group-item list-group-item-info">
+        <%= modelGridDiscipline.human_attribute_name(:bib_espec) %>
+      </li>
+      <li class="list-group-item text-justify"><%= @plan.offer_discipline.grid_discipline.decorate.bib_espec %></li>
+    </ul>
 
-    <div class="row">
-      <ul class="list-group">
-        <li class="list-group-item list-group-item-info">
-          <%= modelGridDiscipline.human_attribute_name(:objetivo_geral) %>
-        </li>
-        <li class="list-group-item text-justify"><%= @plan.offer_discipline.grid_discipline.decorate.objetivo_geral %></li>
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-success">
+        <%= model.human_attribute_name(:obj_espe) %>
+      </li>
+      <li class="list-group-item"><%= @plan.decorate.obj_espe %></li>
+      <li class="list-group-item list-group-item-success">
+        <%= model.human_attribute_name(:conteudo_prog) %>
+      </li>
+      <li class="list-group-item"><%= @plan.decorate.conteudo_prog %></li>
+      <li class="list-group-item list-group-item-success">
+        <%= model.human_attribute_name(:prat_prof) %>
+      </li>
+      <li class="list-group-item"><%= @plan.decorate.prat_prof %></li>
+      <li class="list-group-item list-group-item-success">
+        <%= model.human_attribute_name(:interdisc) %>
+      </li>
+      <li class="list-group-item"><%= @plan.decorate.interdisc %></li>
+      <li class="list-group-item list-group-item-success">
+        <%= model.human_attribute_name(:met_tec) %>
+      </li>
+      <li class="list-group-item"><%= @plan.decorate.met_tec %></li>
+    </ul>
 
-        <li class="list-group-item list-group-item-info">
-          <%= modelGridDiscipline.human_attribute_name(:ementa) %>
-        </li>
-        <li class="list-group-item text-justify"><%= @plan.offer_discipline.grid_discipline.decorate.ementa %></li>
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-success">
+        <%= model.human_attribute_name(:met_met) %>
+      </li>
+      <li class="list-group-item"><%= @plan.decorate.met_met %></li>
 
-        <li class="list-group-item list-group-item-info">
-          <%= t modelGridDiscipline.human_attribute_name(:bib_geral) %>
-        </li>
-        <li class="list-group-item text-justify"><%= @plan.offer_discipline.grid_discipline.decorate.bib_geral %></li>
+      <li class="list-group-item list-group-item-success">
+        <%= model.human_attribute_name(:avaliacao) %>
+      </li>
+      <li class="list-group-item"><%= @plan.decorate.avaliacao %></li>
 
-        <li class="list-group-item list-group-item-info">
-          <%= modelGridDiscipline.human_attribute_name(:bib_espec) %>
-        </li>
-        <li class="list-group-item text-justify"><%= @plan.offer_discipline.grid_discipline.decorate.bib_espec %></li>
-      </ul>
-    </div>
+      <li class="list-group-item list-group-item-success">
+        <%= model.human_attribute_name(:cronograma) %>
+      </li>
+      <li class="list-group-item"><%= @plan.decorate.cronograma %></li>
 
-    <div class="row">
-      <ul class="list-group">
-        <li class="list-group-item list-group-item-success">
-          <%= model.human_attribute_name(:obj_espe) %>
-        </li>
-        <li class="list-group-item"><%= @plan.decorate.obj_espe %></li>
+      <li class="list-group-item list-group-item-success">
+        <%= model.human_attribute_name(:atendimento) %>
+      </li>
+      <li class="list-group-item"><%= @plan.decorate.atendimento %></li>
 
-        <li class="list-group-item list-group-item-success">
-          <%= model.human_attribute_name(:conteudo_prog) %>
-        </li>
-        <li class="list-group-item"><%= @plan.decorate.conteudo_prog %></li>
-
-        <li class="list-group-item list-group-item-success">
-          <%= model.human_attribute_name(:prat_prof) %>
-        </li>
-        <li class="list-group-item"><%= @plan.decorate.prat_prof %></li>
-
-        <li class="list-group-item list-group-item-success">
-          <%= model.human_attribute_name(:interdisc) %>
-        </li>
-        <li class="list-group-item"><%= @plan.decorate.interdisc %></li>
-
-        <li class="list-group-item list-group-item-success">
-          <%= model.human_attribute_name(:met_tec) %>
-        </li>
-        <li class="list-group-item"><%= @plan.decorate.met_tec %></li>
-
-      </ul>
-
-      <ul class="list-group">
-
-        <li class="list-group-item list-group-item-success">
-          <%= model.human_attribute_name(:met_met) %>
-        </li>
-        <li class="list-group-item"><%= @plan.decorate.met_met %></li>
-
-        <li class="list-group-item list-group-item-success">
-          <%= model.human_attribute_name(:avaliacao) %>
-        </li>
-        <li class="list-group-item"><%= @plan.decorate.avaliacao %></li>
-
-        <li class="list-group-item list-group-item-success">
-          <%= model.human_attribute_name(:cronograma) %>
-        </li>
-        <li class="list-group-item"><%= @plan.decorate.cronograma %></li>
-
-        <li class="list-group-item list-group-item-success">
-          <%= model.human_attribute_name(:atendimento) %>
-        </li>
-        <li class="list-group-item"><%= @plan.decorate.atendimento %></li>
-
-      </ul>
-    </div>
+    </ul>
 
   </div>
 </div>

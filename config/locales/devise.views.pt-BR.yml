@@ -53,7 +53,7 @@ pt-BR:
         forgot_your_password: Esqueceu sua senha?
         send_me_reset_password_instructions: Enviar instruções para redefinição da senha
         title: Esqueceu sua senha?
-        submit: Reiniciar minha senha
+        submit: Enviar instruções
         signup: Registrar
         forgot: Esqueceu sua Senha?
       no_token: Você só pode acessra esta página através de um e-mail de redefinição de senha.
