@@ -110,7 +110,12 @@ end
 gem 'exception_notification'
 gem 'slack-notifier'
 gem 'sidekiq'
-gem "letter_opener"
+group :development do
+  gem "letter_opener"
+end
+group :staging do
+  gem 'letter_opener_web', '~> 1.0'
+end
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'redis-rails'
 gem 'tinymce-rails' #html editor
