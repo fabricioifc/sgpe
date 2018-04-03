@@ -86,34 +86,12 @@ group :development, :test do
   gem 'foreman'
   gem 'pry-rails'
   gem 'faker'
-  # gem 'guard-bundler'
-  # gem 'guard-rails'
-  # gem 'guard-rspec'
-  # gem 'rails_layout'
-  # gem 'rb-fchange', :require=>false
-  # gem 'rb-fsevent', :require=>false
-  # gem 'rb-inotify', :require=>false
-  # gem 'spring-commands-rspec'
-  # gem 'mailcatcher'
-  # gem 'shoulda-matchers'
-  # gem 'cucumber-rails', require: false
-  # gem 'coveralls', require: false
-  # gem 'factory_girl_rails'
-  # gem 'pry-rescue'
-  # gem 'pry-byebug'
-  # gem 'rspec-rails'
-  # gem 'rubocop'
-  # gem 'database_cleaner'
-  # gem 'launchy'
 end
 # Notificar admin caso ocorra algum erro na aplicação
 gem 'exception_notification'
 gem 'slack-notifier'
-gem 'sidekiq'
-group :development do
-  gem "letter_opener"
-end
-group :staging do
+gem 'sidekiq', group: :production
+group :development, :staging do
   gem 'letter_opener_web', '~> 1.0'
 end
 gem 'sinatra', '>= 1.3.0', :require => nil
