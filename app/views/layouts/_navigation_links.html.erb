@@ -28,7 +28,7 @@
     </li>
   <% end %>
 
-  <% if (dropdown_autorizacao Coordenador, Offer) || can? :coordenar, Offer %>
+  <% if (dropdown_autorizacao Coordenador, Offer) || (can? :coordenar, Offer) %>
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <span class="badge">Coordenação <span class="caret"></span></span>
