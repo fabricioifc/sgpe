@@ -4,5 +4,5 @@ require File.expand_path('../production.rb', __FILE__)
 Rails.application.configure do
   # Here override any defaults
   config.serve_static_files = true
-  config.active_job.queue_adapter = :resque
+  config.active_job.queue_adapter = :inline
 end
