@@ -101,6 +101,9 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
+  # endereço para ver os e-mails no ambiente de aprovação (staging)
+  mount LetterOpenerWeb::Engine, at: "/mails" if Rails.env.staging?
+
   root to: 'visitors#index'
 
 end
