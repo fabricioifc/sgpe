@@ -1,8 +1,6 @@
 class InviteUsersService
 
   def call
-    puts self.class_name
-
     # O admin envia o convite para os usuários
     admin = User.where(admin:true).first
     if admin.nil?
