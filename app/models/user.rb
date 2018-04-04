@@ -29,6 +29,7 @@ class User < ApplicationRecord
   # validates :username, presence:true, length: 5..100, uniqueness:true#, on: :create
   validates :username, length: 3..100, unless: Proc.new { |a| a.username.blank? }
   validates :username, uniqueness:true, unless: Proc.new { |a| a.username.blank? }
+  # validates :siape, uniqueness:true, presence:true, on: :update
 
   # Permitir apenas numetros, letras, underline e ponto. Não permitir apenas números
   validates_format_of :username, with: /^(?![0-9]*$)[a-zA-Z0-9_.]+$/, :multiline => true, unless: Proc.new { |a| a.username.blank? }
