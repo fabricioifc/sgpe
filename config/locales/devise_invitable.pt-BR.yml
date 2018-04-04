@@ -20,5 +20,5 @@ pt-BR:
         subject: 'Instruções do convite'
         hello: 'Olá %{email}'
         someone_invited_you: 'Alguém convidou você para acessar %{url}, você pode aceitar o convite através do link abaixo.'
-        accept: 'Aceitar convite'
+        accept: 'Clique aqui para aceitar o convite'
         ignore: "Se você não quer aceitar esse convite, por favor ignore esse e-mail.<br />Sua conta não será criada até você acessar o link abaixo e escolher sua senha."

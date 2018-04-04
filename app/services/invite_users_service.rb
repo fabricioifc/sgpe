@@ -1,6 +1,7 @@
 class InviteUsersService
 
   def call
+    puts self.class_name
 
     # O admin envia o convite para os usuários
     admin = User.where(admin:true).first
@@ -43,6 +44,7 @@ class InviteUsersService
     users << User.new( name: 'Dheime Romanatto Trevisol', siape: '2172977', email: 'dheime.trevisol@ifc.edu.br', perfils: [Perfil.find_by(name: 'NUPE')])
     users << User.new( name: 'Juceli Baldissera Felckilcker', siape: '1893151', email: 'juceli.felckilcker@ifc.edu.br', perfils: [Perfil.find_by(name: 'NUPE')])
 
+    # Será enviado e-mail para que o novo usuário possa completar seu cadastro.
     users.each do |u, v|
       if User.find_by(email: u.email).nil?
         u.username               = u.email.split('@')[0]

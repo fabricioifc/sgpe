@@ -9,3 +9,6 @@
 # CreatePerfilService.new.call
 # Criar usuários padrão
 # CreateUsersService.new.call
+
+# Cadastrar usuários através de convite
+InviteUsersService.new.call if Rails.env.production?
