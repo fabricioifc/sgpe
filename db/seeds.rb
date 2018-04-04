@@ -11,4 +11,4 @@
 # CreateUsersService.new.call
 
 # Cadastrar usuários através de convite
-InviteUsersService.new.call if Rails.env.production?
+# InviteUsersService.new.call if Rails.env.production?
