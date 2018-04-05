@@ -1,7 +1,7 @@
 class RolesController < ApplicationController
   before_action :set_role, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  before_action :admin_only
+  # before_action :admin_only
   load_and_authorize_resource
   responders :flash
 
