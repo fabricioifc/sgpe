@@ -23,6 +23,7 @@ class PlanoEnsinoMailer < ApplicationMailer
   # Geralmente será utilizado pelo coordenador
   def enviar_aviso_plano_pendente from, offer_discipline
     @offer_discipline = offer_discipline
+    # from = Rails.application.secrets.email_provider_username
     to =    @offer_discipline.user.email
 
     mail(from: from, to: to, subject: "[#{@offer_discipline.grid_discipline.discipline.decorate.title}] Plano de ensino pendente.")
