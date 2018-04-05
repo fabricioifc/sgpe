@@ -26,7 +26,7 @@ ExceptionNotification.configure do |config|
   # Notificar o admin caso ocorra algum erro no sistema - por e-mail
   config.add_notifier :email, {
       :email_prefix         => "[#{Rails.application.secrets.sistema_apelido}]",
-      :sender_address       => %{"#{Rails.application.secrets.sistema_apelido} ADMIN" <#{Rails.application.secrets.admin_email}>},
+      :sender_address       => %{"#{Rails.application.secrets.sistema_apelido} SGPE" <#{Rails.application.secrets.email_provider_username}>},
       :exception_recipients => %{#{Rails.application.secrets.admin_email}, #{Rails.application.secrets.email_provider_username}}
   }
 
