@@ -10,7 +10,7 @@ class GridDiscipline < ApplicationRecord
   validates :semestre, presence: { if: -> { year.blank? } }
 
   # validates :ementa, :objetivo_geral, :bib_geral, :bib_espec, html: { presence: true }
-  validates :ementa, :objetivo_geral, :bib_geral, :bib_espec, html: { presence: true }, if: Proc.new { |a| !a.discipline.especial? }
+  validates :ementa, :objetivo_geral, :bib_geral, :bib_espec, html: { presence: true }, if: Proc.new { |a| !a.discipline.nil? && !a.discipline.especial? }
 
   def decorate
     @decorate ||= GridDisciplineDecorator.new self
