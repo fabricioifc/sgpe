@@ -1,0 +1,11 @@
+<%= content_for :title, 'Uma disciplina foi ofertada para você' %>
+
+<h4>Disciplina ofertada para você.</h4>
+
+<h3>
+  <%= link_to "Mais detalhes", offer_offer_discipline_plans_url(
+      :offer_id => @offer_discipline.offer_id,
+      :offer_discipline_id => @offer_discipline.id) %>
+</h3>
+
+<hr>
