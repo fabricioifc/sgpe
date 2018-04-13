@@ -56,6 +56,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  protected
+
+  # def after_sign_in_path_for(resource)
+  #   # request.env['omniauth.origin'] || stored_location_for(resource) || root_path
+  #   # if is_professor?
+  #   #   planos_professor_path
+  #   # end
+  # end
+
   private
 
   def prepare_exception_notifier
@@ -94,6 +103,10 @@ class ApplicationController < ActionController::Base
         add_breadcrumb 'Editar', "edit_#{controller_name.singularize}_path".to_sym, :only => %w(edit show)
       end
     end
+  end
+
+  def is_professor?
+    user_signed_in? && (current_user.try(:teacher?) || current_user.perfils.pluck('UPPER(name)').include?('PROFESSOR') )
   end
 
 end

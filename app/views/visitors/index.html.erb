@@ -1,14 +1,22 @@
-<% if user_signed_in? %>
+<div class="row">
 
-  <div class="row">
+  <% if user_signed_in? %>
 
       <div class="<%= @class_panel1 %>">
         <%= render 'visitors/pesquisar/form' %>
       </div>
 
       <div class="<%= @class_panel2 %>">
-        <%= render 'meus_planos' %>
+        <!-- <= render 'meus_planos' %> -->
         <%= render 'planos_aprovar_status' %>
       </div>
-  </div>
-<% end %>
+
+  <% else %>
+
+    <div class="<%= @class_panel1 %>">
+      <%= render 'visitors/pesquisar/form' %>
+    </div>
+
+  <% end %>
+
+</div>
