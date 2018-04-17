@@ -16,9 +16,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'bootstrap-sass'
-gem 'bootstrap-modal-rails'
-gem 'bootstrap-multiselect-rails'
+gem 'bootstrap-sass', '~> 3.3.7'
+gem 'bootstrap-modal-rails', '~> 2.2.5'
+gem 'bootstrap-multiselect-rails', '~> 0.9.9'
 gem 'devise'
 gem 'devise_invitable', '~> 1.7.0'
 # gem "devise-async", :group => [:production, :staging]
@@ -36,11 +36,11 @@ group :development do
 end
 
 # Adicionadas depois
-gem 'bootswatch-rails'
+gem 'bootswatch-rails', '~> 3.3.5'
 gem 'carrierwave'
 gem 'mini_magick'; #precisa do RMagick instalado
 gem 'cloudinary'
-gem 'rails_admin', '~> 1.2' # Painel de administração do sistema
+gem 'rails_admin', '~> 1.3' # Painel de administração do sistema
 gem 'rails_admin-i18n' # Painel de administração do sistema
 gem 'rails_admin_rollincode', '~> 1.0' # Painel de administração do sistema
 gem 'cancancan', '~> 2.0'# controle de permissões
@@ -48,7 +48,7 @@ gem "rolify" # controle de papéis
 gem "select2-rails"
 # gem 'chosen-rails'
 gem 'multi-select-rails'
-gem 'bootstrap_form'
+gem 'bootstrap_form', '~> 2.7.0'
 gem 'font-awesome-sass', '~> 4.7.0'
 # gem 'bootstrap-generators', '~> 3.3.4'
 # gem 'will_paginate', '~> 3.1', '>= 3.1.6'
@@ -82,7 +82,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
-  gem 'better_errors'
+  gem 'better_errors', '~> 2.4.0'
   gem 'foreman'
   gem 'pry-rails'
   gem 'faker'
@@ -90,11 +90,11 @@ end
 # Notificar admin caso ocorra algum erro na aplicação
 gem 'exception_notification'
 gem 'slack-notifier'
-gem 'sidekiq', group: :production
+gem 'sidekiq', '~> 5.1.3', group: :production
 group :development, :staging do
   gem 'letter_opener_web', '~> 1.0'
 end
-gem 'sinatra', '>= 1.3.0', :require => nil
+gem 'sinatra', '>= 2.0.1', :require => nil
 gem 'redis-rails'
 gem 'tinymce-rails' #html editor
 gem 'tinymce-rails-langs'
@@ -103,7 +103,7 @@ gem 'cocoon'
 gem 'summernote-rails'
 gem 'page_title_helper'
 gem 'amoeba' # para duplicar registros e seus filhos
-gem "breadcrumbs_on_rails" # breadcrumb
+gem "breadcrumbs_on_rails", '~> 3.0.1' # breadcrumb
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'roo' # Importar arquivos CSV
