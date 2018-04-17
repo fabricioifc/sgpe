@@ -79,7 +79,7 @@ gem 'whenever', '~> 0.9.4'
 gem 'turnout'
 
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', '~> 10.0.2', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'better_errors', '~> 2.4.0'
@@ -102,7 +102,7 @@ gem 'tinymce-rails-langs'
 gem 'cocoon'
 gem 'summernote-rails'
 gem 'page_title_helper'
-gem 'amoeba' # para duplicar registros e seus filhos
+gem 'amoeba', '~> 3.1.0' # para duplicar registros e seus filhos
 gem "breadcrumbs_on_rails", '~> 3.0.1' # breadcrumb
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
