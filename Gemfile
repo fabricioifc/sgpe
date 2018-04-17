@@ -112,5 +112,5 @@ gem 'roo' # Importar arquivos CSV
 gem 'date_validator'
 
 # Email template custom
-gem 'nokogiri'
+gem 'nokogiri', '~> 1.8.2'
 gem 'premailer-rails'
