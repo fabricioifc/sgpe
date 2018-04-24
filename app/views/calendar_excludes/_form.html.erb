@@ -1,0 +1,9 @@
+<%= bootstrap_form_for(calendar_exclude, local:true, html: { class: "", role: "form" }) do |f| %>
+  <%= error_messages_for(calendar_exclude) %>
+
+
+      <%= f.text_field :calendar, id: :calendar_exclude_calendar %>
+      <%= f.date_select :dt_exclusao, id: :calendar_exclude_dt_exclusao %>
+  
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

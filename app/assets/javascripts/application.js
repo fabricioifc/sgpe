@@ -32,6 +32,9 @@
 //= require_tree .
 //= require bootstrap-modal
 //= require bootstrap-modalmanager
+//= require bootstrap-datepicker
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.js
 
 $(function() {
   $(document.body).off('click', 'nav.pagination a');
@@ -65,6 +68,33 @@ $(function() {
 document.addEventListener("turbolinks:load", function() {
   $.fixedOnScroll();
   $.addMultipleSelect();
+
+  $('[data-provider="datepicker"]').datepicker({
+    format: 'dd/mm/yyyy',
+    todayBtn: "linked",
+    multidate: false,
+    daysOfWeekDisabled: "0",
+    daysOfWeekHighlighted: "1,2,3,4,5",
+    calendarWeeks: true,
+    autoclose: true,
+    todayHighlight: true,
+    language: "pt-BR",
+    orientation: "top auto"
+  });
+
+  $('[data-provider="multipledatepicker"]').datepicker({
+    format: 'dd/mm/yyyy',
+    todayBtn: "linked",
+    multidate: false,
+    daysOfWeekDisabled: "0",
+    daysOfWeekHighlighted: "1,2,3,4,5",
+    calendarWeeks: true,
+    todayHighlight: true,
+    language: "pt-BR",
+    orientation: "top auto",
+    autoclose: false,
+     multidate: true
+  });
 });
 
 $.addMultipleSelect = function(){

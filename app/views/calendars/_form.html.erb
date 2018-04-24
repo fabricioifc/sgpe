@@ -1,0 +1,28 @@
+<%= bootstrap_form_for(calendar, local:true, html: { class: "", role: "form" }) do |f| %>
+  <%= error_messages_for(calendar) %>
+
+  <div class="form-group col-md-6">
+    <%= f.text_field :name, id: :calendar_name, autofocus:true %>
+  </div>
+  <div class="form-group col-md-6">
+    <%= f.select :offer_id,
+        Offer.joins(:grid => :course).where(active:true).order('offers.year DESC, courses.name ASC').collect { |c| ["#{c.year} - #{c.grid.course.name} - #{c.decorate.type_offer}", c.id] },
+        prompt:true,
+        id: :calendar_offer %>
+  </div>
+  <div class="form-group col-md-4">
+    <%= f.text_field :dt_inicio, id: :calendar_dt_inicio, data: {provider: :datepicker}, value: (l @calendar.dt_inicio) %>
+  </div>
+  <div class="form-group col-md-4">
+    <%= f.text_field :dt_fim, id: :calendar_dt_fim, data: {provider: :datepicker}, value: (l @calendar.dt_fim) %>
+  </div>
+  <div class="form-group col-md-4">
+    <%= f.text_field :dts_exclusao, id: :calendar_dts_exclusao, data: {provider: :multipledatepicker}, value: (@dts_exclusao) %>
+  </div>
+
+  <div class="form-group col-md-12">
+    <%= f.check_box :active, id: :calendar_active %>
+  </div>
+
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

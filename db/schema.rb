@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180424154112) do
+ActiveRecord::Schema.define(version: 20180424170827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "calendar_excludes", force: :cascade do |t|
+    t.bigint "calendar_id", null: false
+    t.date "dt_exclusao", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["calendar_id"], name: "index_calendar_excludes_on_calendar_id"
+  end
+
+  create_table "calendars", force: :cascade do |t|
+    t.string "name", limit: 150, null: false
+    t.bigint "offer_id", null: false
+    t.date "dt_inicio", null: false
+    t.date "dt_fim", null: false
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["offer_id"], name: "index_calendars_on_offer_id"
+  end
 
   create_table "coordenadors", force: :cascade do |t|
     t.string "funcao", null: false
@@ -263,6 +282,8 @@ ActiveRecord::Schema.define(version: 20180424154112) do
     t.index ["user_id"], name: "index_users_perfils_on_user_id"
   end
 
+  add_foreign_key "calendar_excludes", "calendars"
+  add_foreign_key "calendars", "offers"
   add_foreign_key "coordenadors", "courses"
   add_foreign_key "coordenadors", "users"
   add_foreign_key "courses", "course_formats"

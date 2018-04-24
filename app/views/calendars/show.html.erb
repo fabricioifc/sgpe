@@ -1,0 +1,45 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <%= link_to calendars_path, class: 'btn btn-xs btn-default' do %>
+        <i class='fa fa-list fa-2'></i>
+        <%= t('helpers.links.back') %>
+      <% end %>
+      <%= link_to edit_calendar_path(@calendar), class: 'btn btn-xs btn-default' do %>
+        <i class='fa fa-pencil-square-o fa-2'></i>
+        <%= t('helpers.links.edit') %>
+      <% end %>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <div class="col-md-9">
+      <legend>Detalhes do Calendário</legend>
+      <dl class="dl-horizontal">
+        <dt>Name:</dt>
+        <dd><%= @calendar.name %></dd>
+
+        <dt>Oferta:</dt>
+        <dd><%= "#{@calendar.offer.year} - #{@calendar.offer.grid.course.name}" %></dd>
+
+        <dt>Dt inicio:</dt>
+        <dd><%= l @calendar.dt_inicio %></dd>
+
+        <dt>Dt fim:</dt>
+        <dd><%= l @calendar.dt_fim %></dd>
+
+        <dt>Active:</dt>
+        <dd><%= @calendar.decorate.active %></dd>
+
+      </dl>
+    </div>
+    <div class="col-md-3">
+      <ul class="list-group" style="overflow-y:auto; max-height: 350px;">
+        <li class="list-group-item list-group-item-success">Exclusões</li>
+        <% @calendar.calendar_excludes.order(:dt_exclusao).each do |ex| %>
+          <li class="list-group-item"><%= l ex.dt_exclusao %></li>
+        <% end %>
+      </ul>
+    </div>
+
+  </div>
+</div>

@@ -2,6 +2,8 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
 
+  resources :calendar_excludes
+  resources :calendars
   resources :coordenadors, path: :coordenadores
   resources :offers do
     collection do
