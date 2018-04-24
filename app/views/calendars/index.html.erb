@@ -17,26 +17,17 @@
       <%= content_tag :table, id: "calendars_datatable", class: 'table table-striped table-bordered', role: :datatable, data: { url: calendars_path(format: :json)} do %>
         <thead>
           <tr>
-                        <th><%= model.human_attribute_name(:name) %></th>
-                        <th><%= model.human_attribute_name(:offer) %></th>
-                        <th><%= model.human_attribute_name(:dt_inicio) %></th>
-                        <th><%= model.human_attribute_name(:dt_fim) %></th>
-                        <th><%= model.human_attribute_name(:active) %></th>
-                        <th><%= t('helpers.actions') %></th>
+            <th><%= model.human_attribute_name(:name) %></th>
+            <th><%= model.human_attribute_name(:offer) %></th>
+            <th><%= model.human_attribute_name(:dt_inicio) %></th>
+            <th><%= model.human_attribute_name(:dt_fim) %></th>
+            <th><%= model.human_attribute_name(:active) %></th>
+            <th></th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
-        <tbody>
-          <%= content_tag_for(:tr, @calendars) do |calendar| %>
-                            <td><%= calendar.name %></td>
-                            <td><%= calendar.offer %></td>
-                            <td><%= calendar.dt_inicio %></td>
-                            <td><%= calendar.dt_fim %></td>
-                            <td><%= calendar.active %></td>
-                        <td><%= calendar.decorate.link_show %></td>
-            <td><%= calendar.decorate.link_edit %></td>
-            <td><%= calendar.decorate.link_destroy %></td>
-          <% end %>
-        </tbody>
+        <tbody></tbody>
       <% end %>
     </div>
   </div>

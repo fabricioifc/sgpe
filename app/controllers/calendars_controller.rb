@@ -4,7 +4,11 @@ class CalendarsController < ApplicationController
   # GET /calendars
   # GET /calendars.json
   def index
-    @calendars = Calendar.all
+    # @calendars = Calendar.all
+    respond_to do |format|
+      format.html
+      format.json { render json: CalendarDatatable.new(view_context)}
+    end
   end
 
   # GET /calendars/1
