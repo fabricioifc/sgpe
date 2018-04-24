@@ -5,7 +5,7 @@ class Offer < ApplicationRecord
   accepts_nested_attributes_for :offer_disciplines
 
   enum offer_types: {
-    regular: 'Regular', domiciliar: 'Exercício domiciliar', distancia: 'Distância',
+    regular: 'Regular', domiciliar: 'Exercício domiciliar', distancia: 'Atividades Não Presenciais',
     reoferta: 'Reoferta', dependencia: 'Dependência'
   }
 
