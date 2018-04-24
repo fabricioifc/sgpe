@@ -14,7 +14,6 @@ class TurmaDatatable < ApplicationDatatable
       [].tap do |column|
 
         column << turma.name
-        column << turma.year
         column << turma.decorate.active
 
         links = []
@@ -56,6 +55,6 @@ class TurmaDatatable < ApplicationDatatable
 
   # The columns needs to be the same list of searchable items and IN ORDER that they will appear in Data.
   def columns
-    %w(name year active)
+    %w(name active)
   end
 end
