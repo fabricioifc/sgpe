@@ -17,7 +17,7 @@ class InviteUsersService
     users << User.new( name: 'Elaine Ribeiro', siape: '2059166', email: 'elaine.ribeiro@ifc.edu.br', perfils: [Perfil.find_by(name: 'Professor')])
     users << User.new( name: 'Fábio José Rodrigues Pinheiro', siape: '1759928', email: 'fabio.pinheiro@ifc.edu.br', perfils: [Perfil.find_by(name: 'Professor')])
     users << User.new( name: 'Fabricio Bizotto', siape: '1087004', email: 'fabricio.bizotto@ifc.edu.br', perfils: [Perfil.find_by(name: 'Professor')])
-    users << User.new( name: 'Felipe de Oliveira Lamberg Henriques dos Santos', siape: '2187272', email: ' felipe.santos@ifc.edu.br', perfils: [Perfil.find_by(name: 'Professor')])
+    users << User.new( name: 'Felipe de Oliveira Lamberg Henriques dos Santos', siape: '2187272', email: 'felipe.santos@ifc.edu.br', perfils: [Perfil.find_by(name: 'Professor')])
     users << User.new( name: 'Genildo Nascimento dos Santos', siape: '2269654', email: 'genildo.santos@ifc.edu.br', perfils: [Perfil.find_by(name: 'Professor')])
     users << User.new( name: 'Gilberto Speggiorin de Oliveira', siape: '1924028', email: 'gilberto.oliveira@ifc.edu.br', perfils: [Perfil.find_by(name: 'Professor')])
     users << User.new( name: 'Itamar Antonio Rodrigues', siape: '1893292', email: 'itamar.rodrigues@ifc.edu.br', perfils: [Perfil.find_by(name: 'Professor')])

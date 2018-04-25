@@ -271,7 +271,7 @@ class PlansController < ApplicationController
         begin
           coordenador = Coordenador.find_by(course_id: @plan.offer_discipline.grid_discipline.grid.course_id, responsavel:true)
           if coordenador.nil?
-            raise StandardError, "Coordenador não cadastrado para o curso #{@plan.offer_discipline.grid_discipline.grid.course.name}"
+            # raise StandardError, "Coordenador não cadastrado para o curso #{@plan.offer_discipline.grid_discipline.grid.course.name}"
           end
           pdf = PlanPdf.new(@plan, current_user).generate
           filename = "#{@plan.offer_discipline.user.name}_#{@plan.offer_discipline.grid_discipline.discipline.title}.pdf"

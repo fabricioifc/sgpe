@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    binding.pry
+    # binding.pry
     respond_to do |format|
       @user = User.find(params[:id])
       if @user.update_attributes(secure_params)
