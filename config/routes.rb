@@ -2,6 +2,7 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
 
+  resources :lessons
   resources :lesson_recurrings do
     collection do
       patch :carregar_disciplinas

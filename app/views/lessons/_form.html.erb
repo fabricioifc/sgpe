@@ -1,0 +1,14 @@
+<%= bootstrap_form_for(lesson, local:true, html: { class: "", role: "form" }) do |f| %>
+  <%= error_messages_for(lesson) %>
+
+
+      <%= f.text_field :lesson_recurring, id: :lesson_lesson_recurring %>
+      <%= f.text_field :offer_discipline, id: :lesson_offer_discipline %>
+      <%= f.date_select :dtaula, id: :lesson_dtaula %>
+      <%= f.number_field :frequency, id: :lesson_frequency %>
+      <%= f.number_field :dia_semana, id: :lesson_dia_semana %>
+      <%= f.number_field :periodo, id: :lesson_periodo %>
+      <%= f.check_box :active, id: :lesson_active %>
+  
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

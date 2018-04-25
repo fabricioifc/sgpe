@@ -1,0 +1,35 @@
+<div class="page-header">
+  <%= link_to lessons_path, class: 'btn btn-default' do %>
+    <i class='fa fa-list fa-2'></i>
+    <%= t('helpers.links.back') %>
+  <% end %>
+  <%= link_to edit_lesson_path(@lesson), class: 'btn btn-primary' do %>
+    <i class='fa fa-pencil-square-o fa-2'></i>
+    <%= t('helpers.links.edit') %>
+  <% end %>
+  <h1>Detalhes lesson</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Lesson recurring:</dt>
+  <dd><%= @lesson.lesson_recurring %></dd>
+
+  <dt>Offer discipline:</dt>
+  <dd><%= @lesson.offer_discipline %></dd>
+
+  <dt>Dtaula:</dt>
+  <dd><%= @lesson.dtaula %></dd>
+
+  <dt>Frequency:</dt>
+  <dd><%= @lesson.frequency %></dd>
+
+  <dt>Dia semana:</dt>
+  <dd><%= @lesson.dia_semana %></dd>
+
+  <dt>Periodo:</dt>
+  <dd><%= @lesson.periodo %></dd>
+
+  <dt>Active:</dt>
+  <dd><%= @lesson.active %></dd>
+
+</dl>

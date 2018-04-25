@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180425123516) do
+ActiveRecord::Schema.define(version: 20180425160325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,24 +96,6 @@ ActiveRecord::Schema.define(version: 20180425123516) do
     t.index ["user_id"], name: "index_disciplines_on_user_id"
   end
 
-  create_table "event_occurrences", force: :cascade do |t|
-    t.string "schedulable_type"
-    t.bigint "schedulable_id"
-    t.datetime "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["schedulable_type", "schedulable_id"], name: "index_event_occurrences_on_schedulable_type_and_schedulable_id"
-  end
-
-  create_table "events", force: :cascade do |t|
-    t.string "title"
-    t.string "turma"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_events_on_user_id"
-  end
-
   create_table "grid_disciplines", force: :cascade do |t|
     t.integer "year"
     t.text "ementa"
@@ -155,6 +137,20 @@ ActiveRecord::Schema.define(version: 20180425123516) do
     t.index ["calendar_id"], name: "index_lesson_recurrings_on_calendar_id"
     t.index ["offer_id"], name: "index_lesson_recurrings_on_offer_id"
     t.index ["turma_id"], name: "index_lesson_recurrings_on_turma_id"
+  end
+
+  create_table "lessons", force: :cascade do |t|
+    t.bigint "lesson_recurring_id"
+    t.bigint "offer_discipline_id"
+    t.date "dtaula", null: false
+    t.integer "frequency", default: 0
+    t.integer "dia_semana"
+    t.integer "periodo"
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_recurring_id"], name: "index_lessons_on_lesson_recurring_id"
+    t.index ["offer_discipline_id"], name: "index_lessons_on_offer_discipline_id"
   end
 
   create_table "offer_disciplines", force: :cascade do |t|
@@ -247,22 +243,6 @@ ActiveRecord::Schema.define(version: 20180425123516) do
     t.index ["name"], name: "index_roles_on_name"
   end
 
-  create_table "schedules", force: :cascade do |t|
-    t.string "schedulable_type"
-    t.bigint "schedulable_id"
-    t.date "date"
-    t.time "time"
-    t.string "rule"
-    t.string "interval"
-    t.text "day"
-    t.text "day_of_week"
-    t.datetime "until"
-    t.integer "count"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["schedulable_type", "schedulable_id"], name: "index_schedules_on_schedulable_type_and_schedulable_id"
-  end
-
   create_table "tests", force: :cascade do |t|
     t.string "title"
     t.string "body"
@@ -336,7 +316,6 @@ ActiveRecord::Schema.define(version: 20180425123516) do
   add_foreign_key "courses", "course_offers"
   add_foreign_key "courses", "users"
   add_foreign_key "disciplines", "users"
-  add_foreign_key "events", "users"
   add_foreign_key "grid_disciplines", "disciplines"
   add_foreign_key "grid_disciplines", "grids"
   add_foreign_key "grids", "courses"
@@ -344,6 +323,8 @@ ActiveRecord::Schema.define(version: 20180425123516) do
   add_foreign_key "lesson_recurrings", "calendars"
   add_foreign_key "lesson_recurrings", "offers"
   add_foreign_key "lesson_recurrings", "turmas"
+  add_foreign_key "lessons", "lesson_recurrings"
+  add_foreign_key "lessons", "offer_disciplines"
   add_foreign_key "offer_disciplines", "grid_disciplines"
   add_foreign_key "offer_disciplines", "offers"
   add_foreign_key "offer_disciplines", "users"

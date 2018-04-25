@@ -26,6 +26,10 @@ class LessonRecurringsController < ApplicationController
   def create
     binding.pry
     @lesson_recurring = LessonRecurring.new(lesson_recurring_params)
+    # @lesson_recurring.lessons = []
+    # @offer_discipline.each do |od|
+    #   @lesson_recurring.lessons << Lesson.new(offer_discipline: od, lesson_recurring: @lesson_recurring)
+    # end
 
     respond_to do |format|
       # if @lesson_recurring.save
@@ -79,6 +83,6 @@ class LessonRecurringsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lesson_recurring_params
-      params.require(:lesson_recurring).permit(:dtinicio, :dtfim, :calendar_id, :turma_id, :offer_id, :active)
+      params.require(:lesson_recurring).permit(:dtinicio, :dtfim, :calendar_id, :turma_id, :offer_id, :active, :dias_selecionados => [], :periodos_selecionados => [])
     end
 end

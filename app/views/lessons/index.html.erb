@@ -1,0 +1,58 @@
+<%- model = Lesson %>
+
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+    <h3 class="panel-title pull-left">
+      <%= link_to new_lesson_path do %>
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        <%= t '.title', :default => model.model_name.human.pluralize.titleize %>
+      <% end %>
+    </h3>
+    <div class="pull-right">
+
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <%= content_tag :table, id: "lessons_datatable", class: 'table table-striped table-bordered', role: :datatable, data: { url: lessons_path(format: :json)} do %>
+        <thead>
+          <tr>
+                        <th><%= model.human_attribute_name(:lesson_recurring) %></th>
+                        <th><%= model.human_attribute_name(:offer_discipline) %></th>
+                        <th><%= model.human_attribute_name(:dtaula) %></th>
+                        <th><%= model.human_attribute_name(:frequency) %></th>
+                        <th><%= model.human_attribute_name(:dia_semana) %></th>
+                        <th><%= model.human_attribute_name(:periodo) %></th>
+                        <th><%= model.human_attribute_name(:active) %></th>
+                        <th><%= t('helpers.actions') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= content_tag_for(:tr, @lessons) do |lesson| %>
+                            <td><%= lesson.lesson_recurring %></td>
+                            <td><%= lesson.offer_discipline %></td>
+                            <td><%= lesson.dtaula %></td>
+                            <td><%= lesson.frequency %></td>
+                            <td><%= lesson.dia_semana %></td>
+                            <td><%= lesson.periodo %></td>
+                            <td><%= lesson.active %></td>
+                        <td><%= lesson.decorate.link_show %></td>
+            <td><%= lesson.decorate.link_edit %></td>
+            <td><%= lesson.decorate.link_destroy %></td>
+          <% end %>
+        </tbody>
+      <% end %>
+    </div>
+  </div>
+  <div class="panel-footer clearfix">
+    <div class="">
+      <%= link_to new_lesson_path do %>
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        <%= t('.new', :default => t("helpers.titles.new", model: model.model_name.human.downcase )) %>
+      <% end %>
+    </div>
+    <div class="pull-right">
+
+    </div>
+  </div>
+</div>
