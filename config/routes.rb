@@ -2,6 +2,11 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
 
+  resources :lesson_recurrings do
+    collection do
+      patch :carregar_disciplinas
+    end
+  end
   resources :calendar_excludes
   resources :calendars
   resources :coordenadors, path: :coordenadores

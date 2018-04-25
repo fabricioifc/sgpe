@@ -6,6 +6,10 @@ class UserDecorator < ApplicationDecorator
     @component = component
   end
 
+  def name
+    component.name || nil
+  end
+
   def bio
     formatar_texto component.bio
     # ActionView::Base.full_sanitizer.sanitize(component.ementa.html_safe) unless component.ementa.nil?

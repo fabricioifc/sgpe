@@ -1,0 +1,44 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= params[:offer_id] %></h3>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-striped table-condensed" id="offer_disciplines_table">
+        <thead>
+          <tr>
+            <th>Disciplina</th>
+            <th>Professor</th>
+            <th>Dias da Semana</th>
+            <th>Períodos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @offer_disciplines.each do |od| %>
+            <tr>
+              <td style="width: 10%;"><%= od.grid_discipline.discipline.decorate.title %></td>
+              <td style="width: 20%;"><%= od.user.decorate.name unless od.user.nil? %></td>
+              <td>
+                <div class="btn-group"  data-toggle="buttons">
+                  <!-- < LessonRecurring.dias.each do |a,b| %> -->
+                  <!-- <label class="btn btn-xs btn-default change-checked"> -->
+                    <%= collection_check_boxes(od.id, :dias_selecionados, LessonRecurring.dias.collect, :last, :first) %>
+                    <!-- <= check_box_tag 'dias_selecionados[]', b %> -->
+                    <!-- <= a %> -->
+                  <!-- </label> -->
+                  <!-- < end %> -->
+                </div>
+              </td>
+              <td>
+                <div class="btn-group"  data-toggle="buttons">
+                  <%= collection_check_boxes(od.id, :periodos_selecionados, LessonRecurring.periodos.collect, :last, :first) %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

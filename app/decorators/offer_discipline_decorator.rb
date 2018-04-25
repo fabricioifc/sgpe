@@ -6,7 +6,6 @@ class OfferDisciplineDecorator < ApplicationDecorator
     @component = component
   end
 
-
   def carga_horaria_hora_text
     value = component.carga_horaria || component.grid_discipline.carga_horaria
     value.to_s << ' H'

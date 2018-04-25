@@ -1,0 +1,52 @@
+<%= bootstrap_form_for(lesson_recurring, local:true, html: { class: "", role: "form" }) do |f| %>
+  <%= error_messages_for(lesson_recurring) %>
+
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.text_field :dtinicio, id: :lesson_recurring_dtinicio, data: {provider: :datepicker}, value: (l lesson_recurring.dtinicio unless lesson_recurring.new_record?) %>
+    </div>
+    <div class="col-md-4">
+      <%= f.text_field :dtfim, id: :lesson_recurring_dtfim, data: {provider: :datepicker}, value: (l lesson_recurring.dtfim unless lesson_recurring.new_record?) %>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.select :calendar_id,
+          Calendar.where(active:true).order(:name).collect { |c| [c.name, c.id] },
+          prompt:true,
+          id: :lesson_recurring_calendar %>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.select :turma_id,
+      Turma.where(active:true).order(:name).collect { |c| [c.name, c.id] },
+      prompt:true,
+      id: :lesson_recurring_turma %>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.label :offer_id %>
+      <%= select_tag :offer_id,
+          options_for_select(Offer.joins(:grid => :course).where(active:true).order('offers.year DESC, courses.name ASC').collect { |c| ["#{c.year} - #{c.grid.course.name} - #{c.decorate.type_offer}", c.id] }, lesson_recurring.offer_id),
+          data: { remote: true, url: carregar_disciplinas_lesson_recurrings_path, method: :patch }, prompt:'Selecione a Oferta',
+          id: :lesson_recurring_offer, class:' form-control', required:true %>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.check_box :active, id: :lesson_recurring_active %>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div id="carregar_disciplinas">
+
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+  </div>
+
+<% end %>
