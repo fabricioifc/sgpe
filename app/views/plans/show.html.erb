@@ -71,6 +71,11 @@
       </li>
       <li class="list-group-item"><%= @plan.decorate.atendimento %></li>
 
+      <li class="list-group-item list-group-item-success">
+        <%= model.human_attribute_name(:observacoes) %>
+      </li>
+      <li class="list-group-item"><%= @plan.decorate.observacoes %></li>
+
     </ul>
 
   </div>

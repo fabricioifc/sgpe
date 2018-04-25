@@ -7,14 +7,15 @@
       <span class="badge"><%= "#{offer_discipline.grid_discipline.grid.course.course_modality.description}" %></span>
     </p>
   </li>
-  <li class="list-group-item list-group-item-info">Componente curricular</li>
+  <li class="list-group-item list-group-item-info">Componente Curricular</li>
   <li class="list-group-item">
-    <p>
-      <%= "#{offer_discipline.grid_discipline.discipline.sigla} - #{offer_discipline.grid_discipline.discipline.title}" %>
-      <span class="badge pull-right"><%= "Turma: #{offer_discipline.offer.turma}" %></span>
-    </p>
+    <%= "#{offer_discipline.grid_discipline.discipline.sigla} - #{offer_discipline.grid_discipline.discipline.title}" %>
   </li>
-  <li class="list-group-item list-group-item-info">Carga horária</li>
+  <li class="list-group-item list-group-item-info">Turma</li>
+  <li class="list-group-item">
+    <%= offer_discipline.offer.turma %>
+  </li>
+  <li class="list-group-item list-group-item-info">Carga Horária</li>
   <li class="list-group-item clearfix">
     <span class="badge"><%= offer_discipline.decorate.carga_horaria_aula_text %></span>
     <span class="badge"><%= offer_discipline.decorate.carga_horaria_hora_text %></span>

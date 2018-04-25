@@ -4,7 +4,7 @@
   <% else %>
     <div class="row">
       <% @cursos.each do |c| %>
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title"><strong><%= c.name %></strong></h3>
@@ -33,19 +33,15 @@
                   </tbody>
                 </table>
               </div>
-              <div class="well well-sm">
-                <% if !disciplinas_sem_plano.nil? %>
-                  <span class="badge">
-                    <span class="badge alert-warning"><%= "#{disciplinas_sem_plano.count}" %></span>
-                    <%= " componentes curriculares sem plano de ensino." %>
-                  </span>
-                <% end %>
-              </div>
             </div>
             <div class="panel-footer clearfix">
               <%= link_to planos_curso_path(c.id), class: "btn btn-sm btn-success" do %>
                 <i class="fa fa-bars" aria-hidden="true"></i>
                 Meus planos
+              <% end %>
+
+              <% if !disciplinas_sem_plano.nil? && disciplinas_sem_plano.count > 0 %>
+                  <span style="padding: 5px; cursor: help;" title="componente(s) curriculare(s) sem plano de ensino." class="alert alert-warning pull-right"><%= "#{disciplinas_sem_plano.count}" %></span>
               <% end %>
             </div>
           </div>

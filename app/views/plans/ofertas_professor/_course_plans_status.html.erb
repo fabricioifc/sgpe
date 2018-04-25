@@ -1,15 +1,13 @@
-<div class="col-md-3">
-  <ul class="list-group">
-    <li class="list-group-item">
-      <%= link_to offer_offer_discipline_plans_path(
-        :offer_id => k.offer_id,
-        :offer_discipline_id => k.id), class: 'btn btn-default btn-block', style: 'text-align: left;' do %>
-          <i class="fa fa-bars" aria-hidden="true"></i>
-          <%= k.grid_discipline.discipline.title %>
-          <span class="pull-right"><%= get_ultimo_plano_disciplina(k.id).decorate.situacao unless get_ultimo_plano_disciplina(k.id).nil? %></span>
-        <% end %>
+<ul class="list-group col-md-6">
+  <li class="list-group-item">
+    <%= link_to offer_offer_discipline_plans_path(
+      :offer_id => k.offer_id,
+      :offer_discipline_id => k.id), class: 'btn btn-default btn-block', style: 'text-align: left;' do %>
+        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        <%= "#{k.offer.turma} - #{k.grid_discipline.discipline.title}" %>
+        <span class="pull-right"><%= get_ultimo_plano_disciplina(k.id).decorate.situacao unless get_ultimo_plano_disciplina(k.id).nil? %></span>
+      <% end %>
 
-      <!-- <span class="badge pull-right"><= "Turma - #{k.offer.turma}" %></span> -->
-    </li>
-  </ul>
-</div>
+    <!-- <span class="badge pull-right"><= "Turma - #{k.offer.turma}" %></span> -->
+  </li>
+</ul>

@@ -127,12 +127,12 @@ class PlanDecorator < ApplicationDecorator
               h.content_tag :span, " #{I18n.t 'helpers.links.edit'}"
             end
         end
-      else
-        h.button_tag nil, class: "btn btn-warning #{classes}", disabled:true do
-            h.content_tag :i, nil, class: 'fa fa-edit' do
-              h.content_tag :span, " #{I18n.t 'helpers.links.edit'}"
-            end
-        end
+      # else
+      #   h.button_tag nil, class: "btn btn-warning #{classes}", disabled:true do
+      #       h.content_tag :i, nil, class: 'fa fa-edit' do
+      #         h.content_tag :span, " #{I18n.t 'helpers.links.edit'}"
+      #       end
+      #   end
       end
     end
   end
@@ -191,7 +191,7 @@ class PlanDecorator < ApplicationDecorator
         end
       end
     else
-      h.button_tag nil, class: "btn btn-primary #{classes}", disabled:true do
+      h.button_tag nil, class: "btn btn-primary #{classes}", disabled:true, title: 'Não é permitido criar outro plano enquando o mesmo estiver sendo analisado.' do
         h.content_tag :i, nil, class: 'fa fa-plus' do
           h.content_tag :span, " #{I18n.t('helpers.links.duplicate', model: component.model_name.human)}"
         end
