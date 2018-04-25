@@ -79,7 +79,7 @@ document.addEventListener("turbolinks:load", function() {
     autoclose: true,
     todayHighlight: true,
     language: "pt-BR",
-    orientation: "top auto"
+    orientation: "auto right"
   });
 
   $('[data-provider="multipledatepicker"]').datepicker({
@@ -91,7 +91,7 @@ document.addEventListener("turbolinks:load", function() {
     calendarWeeks: true,
     todayHighlight: true,
     language: "pt-BR",
-    orientation: "top auto",
+    orientation: "auto right",
     autoclose: false,
      multidate: true
   });

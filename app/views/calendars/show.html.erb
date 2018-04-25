@@ -1,19 +1,9 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">
-      <%= link_to calendars_path, class: 'btn btn-xs btn-default' do %>
-        <i class='fa fa-list fa-2'></i>
-        <%= t('helpers.links.back') %>
-      <% end %>
-      <%= link_to edit_calendar_path(@calendar), class: 'btn btn-xs btn-default' do %>
-        <i class='fa fa-pencil-square-o fa-2'></i>
-        <%= t('helpers.links.edit') %>
-      <% end %>
-    </h3>
+    <h3 class="panel-title">Detalhes do Calendário</h3>
   </div>
   <div class="panel-body">
     <div class="col-md-9">
-      <legend>Detalhes do Calendário</legend>
       <dl class="dl-horizontal">
         <dt>Name:</dt>
         <dd><%= @calendar.name %></dd>

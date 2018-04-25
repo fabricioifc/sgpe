@@ -11,10 +11,10 @@
         id: :calendar_offer %>
   </div>
   <div class="form-group col-md-4">
-    <%= f.text_field :dt_inicio, id: :calendar_dt_inicio, data: {provider: :datepicker}, value: (l @calendar.dt_inicio) %>
+    <%= f.text_field :dt_inicio, id: :calendar_dt_inicio, data: {provider: :datepicker}, value: (l calendar.dt_inicio unless calendar.new_record?) %>
   </div>
   <div class="form-group col-md-4">
-    <%= f.text_field :dt_fim, id: :calendar_dt_fim, data: {provider: :datepicker}, value: (l @calendar.dt_fim) %>
+    <%= f.text_field :dt_fim, id: :calendar_dt_fim, data: {provider: :datepicker}, value: (l calendar.dt_fim unless calendar.new_record?) %>
   </div>
   <div class="form-group col-md-4">
     <%= f.text_field :dts_exclusao, id: :calendar_dts_exclusao, data: {provider: :multipledatepicker}, value: (@dts_exclusao) %>

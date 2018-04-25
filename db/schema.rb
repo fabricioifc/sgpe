@@ -98,6 +98,24 @@ ActiveRecord::Schema.define(version: 20180424170827) do
     t.index ["user_id"], name: "index_disciplines_on_user_id"
   end
 
+  create_table "event_occurrences", force: :cascade do |t|
+    t.string "schedulable_type"
+    t.bigint "schedulable_id"
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["schedulable_type", "schedulable_id"], name: "index_event_occurrences_on_schedulable_type_and_schedulable_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.string "turma"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
   create_table "grid_disciplines", force: :cascade do |t|
     t.integer "year"
     t.text "ementa"
@@ -217,6 +235,22 @@ ActiveRecord::Schema.define(version: 20180424170827) do
     t.index ["name"], name: "index_roles_on_name"
   end
 
+  create_table "schedules", force: :cascade do |t|
+    t.string "schedulable_type"
+    t.bigint "schedulable_id"
+    t.date "date"
+    t.time "time"
+    t.string "rule"
+    t.string "interval"
+    t.text "day"
+    t.text "day_of_week"
+    t.datetime "until"
+    t.integer "count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["schedulable_type", "schedulable_id"], name: "index_schedules_on_schedulable_type_and_schedulable_id"
+  end
+
   create_table "tests", force: :cascade do |t|
     t.string "title"
     t.string "body"
@@ -291,6 +325,7 @@ ActiveRecord::Schema.define(version: 20180424170827) do
   add_foreign_key "courses", "course_offers"
   add_foreign_key "courses", "users"
   add_foreign_key "disciplines", "users"
+  add_foreign_key "events", "users"
   add_foreign_key "grid_disciplines", "disciplines"
   add_foreign_key "grid_disciplines", "grids"
   add_foreign_key "grids", "courses"
