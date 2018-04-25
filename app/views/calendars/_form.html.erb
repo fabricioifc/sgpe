@@ -4,12 +4,12 @@
   <div class="form-group col-md-6">
     <%= f.text_field :name, id: :calendar_name, autofocus:true %>
   </div>
-  <div class="form-group col-md-6">
-    <%= f.select :offer_id,
+  <!-- <div class="form-group col-md-6">
+    <= f.select :offer_id,
         Offer.joins(:grid => :course).where(active:true).order('offers.year DESC, courses.name ASC').collect { |c| ["#{c.year} - #{c.grid.course.name} - #{c.decorate.type_offer}", c.id] },
         prompt:true,
         id: :calendar_offer %>
-  </div>
+  </div> -->
   <div class="form-group col-md-4">
     <%= f.text_field :dt_inicio, id: :calendar_dt_inicio, data: {provider: :datepicker}, value: (l calendar.dt_inicio unless calendar.new_record?) %>
   </div>

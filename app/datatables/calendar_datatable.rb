@@ -14,7 +14,7 @@ class CalendarDatatable < ApplicationDatatable
       [].tap do |column|
 
         column << calendar.decorate.name
-        column << calendar.decorate.offer_name
+        # column << calendar.decorate.offer_name
         column << calendar.decorate.dt_inicio
         column << calendar.decorate.dt_fim
         column << calendar.decorate.active
@@ -50,8 +50,8 @@ class CalendarDatatable < ApplicationDatatable
     end
 
     # will_paginate
-    # calendars = CourseFormat.page(page).per_page(per_page)
-    calendars = Calendar.joins(:offer => {:grid => :course}).order("#{sort_column} #{sort_direction}")
+    # calendars = Calendar.joins(:offer => {:grid => :course}).order("#{sort_column} #{sort_direction}")
+    calendars = Calendar.order("#{sort_column} #{sort_direction}")
     calendars = calendars.page(page).per(per_page)
     calendars = calendars.where(search_string.join(' or '), search: "%#{params[:search][:value]}%")
   end

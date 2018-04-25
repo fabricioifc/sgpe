@@ -24,13 +24,7 @@ document.addEventListener("turbolinks:load", function() {
 
       columns: [
         {
-          width: "20%",
-          className: "",
-          searchable: true,
-          orderable: true
-        },
-        {
-          width: "41%",
+          width: "61%",
           className: "",
           searchable: true,
           orderable: true

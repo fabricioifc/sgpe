@@ -1,5 +1,5 @@
 class Calendar < ApplicationRecord
-  belongs_to :offer
+  # belongs_to :offer
   has_many :calendar_excludes, dependent: :destroy
 
   accepts_nested_attributes_for :calendar_excludes
