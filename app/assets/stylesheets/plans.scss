@@ -45,3 +45,13 @@ textarea {
 ul.list-group > li.list-group-item {
   border: none;
 }
+
+.panel-heading.duas_linhas {
+  min-height: 78px;
+}
+
+.btn-wrap-text {
+  text-align: left;
+  white-space: normal !important;
+  word-wrap: break-word !important;
+}

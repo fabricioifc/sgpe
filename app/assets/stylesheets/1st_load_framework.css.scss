@@ -199,6 +199,10 @@ footer.page-footer p {
   border-color: $brand-primary;
 }
 
+.panel {
+  margin-bottom: 10px;
+}
+
 .panel-heading a[role="button"]:after {
     font-family:'Glyphicons Halflings';
     content:"\e114";

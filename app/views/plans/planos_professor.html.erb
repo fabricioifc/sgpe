@@ -4,13 +4,16 @@
   <% else %>
     <div class="row">
       <% @cursos.each do |c| %>
-        <div class="col-md-12">
+      <% disciplinas_sem_plano = disciplinas_sem_plano_por_curso(c.id) %>
+        <div class="col-md-4">
           <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title"><strong><%= c.name %></strong></h3>
+            <div class="panel-heading duas_linhas">
+              <%= link_to planos_curso_path(c.id), class: "btn btn-sm btn-primary btn-block btn-wrap-text" do %>
+                  <!-- <i class="fa fa-bars pull-left" aria-hidden="true"></i> -->
+                  <%= c.name %>
+              <% end %>
             </div>
             <div class="panel-body">
-              <% disciplinas_sem_plano = disciplinas_sem_plano_por_curso(c.id) %>
               <div class="table-responsive">
                 <table class="table table-striped table-condensed">
                   <thead>
@@ -33,16 +36,15 @@
                   </tbody>
                 </table>
               </div>
-            </div>
-            <div class="panel-footer clearfix">
-              <%= link_to planos_curso_path(c.id), class: "btn btn-sm btn-success" do %>
-                <i class="fa fa-bars" aria-hidden="true"></i>
-                Meus planos
-              <% end %>
-
-              <% if !disciplinas_sem_plano.nil? && disciplinas_sem_plano.count > 0 %>
-                  <span style="padding: 5px; cursor: help;" title="componente(s) curriculare(s) sem plano de ensino." class="alert alert-warning pull-right"><%= "#{disciplinas_sem_plano.count}" %></span>
-              <% end %>
+                <!-- <div class="col-md-12"> -->
+                  <!-- <= link_to planos_curso_path(c.id), class: "btn btn-sm btn-success" do %>
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    Meus planos
+                  < end %> -->
+                  <!-- < if !disciplinas_sem_plano.nil? && disciplinas_sem_plano.count > 0 %>
+                      <span style="padding: 5px; cursor: help;" title="componente(s) curriculare(s) sem plano de ensino." class="alert alert-warning pull-right"><%= "#{disciplinas_sem_plano.count}" %></span>
+                  < end %> -->
+              <!-- </div> -->
             </div>
           </div>
         </div>
