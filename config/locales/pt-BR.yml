@@ -98,8 +98,8 @@ pt-BR:
       offer_discipline:
         user: Professor
         user_id: Professor
-        ead_percentual_maximo: (%) EAD
-        ead_percentual_definido: (%) EAD
+        ead_percentual_maximo: (%) ANP
+        ead_percentual_definido: (%) ANP
       offer_disciplines:
         user: Professor
         user_id: Professor
