@@ -94,6 +94,7 @@ gem 'sidekiq', '~> 5.1.3', group: :production
 group :development, :staging do
   gem 'letter_opener_web', '~> 1.0'
 end
+gem "letter_opener", :group => :staging
 gem 'sinatra', '>= 2.0.1', :require => nil
 gem 'redis-rails'
 gem 'tinymce-rails' #html editor
