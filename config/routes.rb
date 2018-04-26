@@ -102,7 +102,7 @@ Rails.application.routes.draw do
   end
 
   # endereço para ver os e-mails no ambiente de aprovação (staging)
-  mount LetterOpenerWeb::Engine, at: "/mails" if Rails.env.staging? || Rails.env.development?
+  # mount LetterOpenerWeb::Engine, at: "/mails" if Rails.env.staging? || Rails.env.development?
 
   root to: 'visitors#index'
 
