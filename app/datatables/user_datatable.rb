@@ -14,9 +14,10 @@ class UserDatatable < ApplicationDatatable
     users.map do |user|
       [].tap do |column|
 
-        column << user.name
+        column << link_to(user.name.html_safe, user)
         column << user.username
         column << user.email
+        column << user.decorate.active
         # column << @view.render('users/user_perfis.html.erb', user: user)
 
         # if user == @current_user
@@ -25,11 +26,7 @@ class UserDatatable < ApplicationDatatable
         #   column << link_to("<i class='fa fa-trash-o fa-2 text-danger'></i>".html_safe, user, :data => { :confirm => "Tem certeza?" }, :method => :delete, :class => '')
         # end
 
-        # links = []
-        column << link_to("<i class='fa fa-list fa-2 text-info'></i>".html_safe, user)
-        # column << link_to("<i class='fa fa-pencil-square-o fa-2 text-warning'></i>".html_safe, edit_user_registration_path(user))
-        # column << link_to("<i class='fa fa-trash-o fa-2 text-danger'></i>".html_safe, user, method: :delete, data: { confirm: 'Tem certeza?' })
-        # column << links.join(" <span style='padding-right: 5px;'></span> ")
+        # column << link_to("<i class='fa fa-list fa-2 text-info'></i>".html_safe, user)
       end
     end
   end

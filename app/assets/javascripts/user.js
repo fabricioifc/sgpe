@@ -59,25 +59,25 @@ document.addEventListener("turbolinks:load", function() {
 
       columns: [
         {
+          width: "40%",
+          className: "",
+          searchable: true,
+          orderable: true
+        },
+        {
           width: "20%",
           className: "",
           searchable: true,
           orderable: true
         },
         {
-          width: "25%",
+          width: "30%",
           className: "",
           searchable: true,
           orderable: true
         },
         {
-          width: "50%",
-          className: "",
-          searchable: false,
-          orderable: false
-        },
-        {
-          width: "5%",
+          width: "10%",
           className: "text-center",
           searchable: false,
           orderable: false
