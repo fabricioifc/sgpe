@@ -37,21 +37,24 @@ class UsersController < ApplicationController
   end
 
   def update
-    # binding.pry
     respond_to do |format|
+      if params[:user][:password].blank?
+        params[:user].delete :password
+        params[:user].delete :password_confirmation
+      end
       @user = User.find(params[:id])
       if @user.update_attributes(secure_params)
-        if current_user.try(:admin?)
+        # if current_user.try(:admin?)
           if !params[:send_invite].nil? && params[:send_invite].eql?("true")
             @user.invite!(current_user)
           end
           format.html { redirect_to user_path(@user), notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
           format.json { render :show, status: :ok, location: @user }
           # redirect_to user_path(@user), notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human)
-        else
-          format.html { redirect_to users_path, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
-          format.json { render :index, status: :ok, location: @user }
-        end
+        # else
+        #   format.html { redirect_to users_path, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
+        #   format.json { render :index, status: :ok, location: @user }
+        # end
       else
         # redirect_to users_path, :alert => "Não foi possível atualizar o usuário."
         format.html { render :show }

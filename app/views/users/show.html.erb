@@ -95,6 +95,13 @@
             <%= f.select(:perfil_ids, Perfil.all.collect {|a| [a.name, a.id]}, {}, class: "select2 form-control", :multiple => true) %>
             <!-- <= f.collection_select :perfil_ids, Perfil.order(:name), :id, :name, {id: :role_ids },  { class: 'multiselect', multiple:true } %> -->
           </div>
+
+          <div class="form-group">
+            <% unless @user.invitation_token.nil? %>
+              <%= label_tag 'Reenviar convite por e-mail' %>
+              <%= check_box_tag :send_invite, true, false %>
+            <% end %>
+          </div>
         </div>
 
         <div class="col-md-6">
@@ -105,13 +112,6 @@
           <div class="form-group">
             <%= f.password_field :password_confirmation, :class => 'form-control', placeholder:true %>
           </div>
-        </div>
-
-        <div class="form-group">
-          <% unless @user.invitation_token.nil? %>
-            <%= label_tag 'Reenviar convite por e-mail' %>
-            <%= check_box_tag :send_invite, true, false %>
-          <% end %>
         </div>
 
       </div>
