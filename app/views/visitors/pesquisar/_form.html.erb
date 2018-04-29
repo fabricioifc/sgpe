@@ -21,28 +21,32 @@
   </div>
 
 < end %> -->
-  <div class="panel panel-primary">
+  <!-- <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title">Área Pública - Planos de Ensino</h3>
     </div>
     <div class="panel-body">
-      <div class="table-responsive">
-        <%= content_tag :table, id: 'planos_pesquisar_datatable',
-            class: 'table table-striped table-condensed',
-            data: { url: pesquisar_planos_path(format: :json)} do %>
-          <!-- <caption>Lista de Planos de Ensino Aprovados por Curso</caption> -->
-          <thead class="bg-primary">
-            <tr>
-              <th><%= t Course.model_name.human %></th>
-              <th><%= t Offer.model_name.human %></th>
-              <th><%= t Offer.human_attribute_name(:turma) %></th>
-              <th><%= t Discipline.model_name.human %></th>
-              <th>Detalhes</th>
-              <th>Gerar PDF</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        <% end %>
-      </div>
+
     </div>
+  </div> -->
+
+  <div class="table-responsive">
+    <%= content_tag :table, id: 'planos_pesquisar_datatable',
+        class: 'table table-striped table-condensed',
+        data: { url: pesquisar_planos_path(format: :json)} do %>
+      <caption class="well-sm text-center alert text-primary">
+        Área Pública - Planos de Ensino
+      </caption>
+      <thead class="bg-primary">
+        <tr>
+          <th><%= t Course.model_name.human %></th>
+          <th><%= t Offer.model_name.human %></th>
+          <!-- <th><= t Offer.human_attribute_name(:turma) %></th> -->
+          <th><%= t Discipline.model_name.human %></th>
+          <th>Detalhes</th>
+          <th>Gerar PDF</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    <% end %>
   </div>

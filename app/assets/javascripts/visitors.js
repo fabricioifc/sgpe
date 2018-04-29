@@ -31,20 +31,14 @@ document.addEventListener("turbolinks:load", function(e) {
           searchable: true,
           orderable: true
         },
+        // {
+        //   width: "8%",
+        //   className: "",
+        //   searchable: true,
+        //   orderable: true
+        // },
         {
-          width: "8%",
-          className: "",
-          searchable: true,
-          orderable: true
-        },
-        {
-          width: "24%",
-          className: "",
-          searchable: true,
-          orderable: true
-        },
-        {
-          width: "5%",
+          width: "32%",
           className: "",
           searchable: true,
           orderable: true
@@ -52,8 +46,14 @@ document.addEventListener("turbolinks:load", function(e) {
         {
           width: "5%",
           className: "",
-          searchable: true,
-          orderable: true
+          searchable: false,
+          orderable: false
+        },
+        {
+          width: "5%",
+          className: "",
+          searchable: false,
+          orderable: false
         },
       ],
       // order: [[1, 'asc']]

@@ -2,18 +2,20 @@
 
   <% if user_signed_in? %>
 
-      <div class="<%= @class_panel1 %>">
-        <%= render 'visitors/pesquisar/form' %>
-      </div>
+    <!-- <div class="<= @class_panel1 %>">
+      <= render 'visitors/pesquisar/form' %>
+    </div> -->
 
-      <div class="<%= @class_panel2 %>">
-        <!-- <= render 'meus_planos' %> -->
-        <%= render 'planos_aprovar_status' %>
-      </div>
+    <!-- <div class="<= @class_panel2 %>"> -->
+      <!-- <= render 'planos_aprovar_status' %> -->
+    <!-- </div> -->
+    <div class="col-md-12">
+      <%= render 'planos_aprovar_status' %>
+    </div>
 
   <% else %>
 
-    <div class="<%= @class_panel1 %>">
+    <div class="col-md-12">
       <%= render 'visitors/pesquisar/form' %>
     </div>
 
