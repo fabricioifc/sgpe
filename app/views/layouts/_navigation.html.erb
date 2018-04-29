@@ -20,6 +20,24 @@
       <ul class="nav navbar-nav navbar-right">
         <%= render 'layouts/nav_links_for_auth' %>
       </ul>
+      <% if !user_signed_in? && !current_page?('/login') %>
+        <%= form_for("user", :url => user_session_path, :html => { :class => "navbar-form navbar-right" })  do |f| %>
+
+          <div class="input-group input-group-sm">
+            <span class="input-group-addon"><i class="fa fa-user fa-2"></i></span>
+            <%= f.text_field :login, :class => 'form-control', autofocus:true, placeholder:true %>
+          </div>
+          <div class="input-group input-group-sm">
+            <span class="input-group-addon"><i class="fa fa-lock fa-2"></i></span>
+            <%= f.password_field :password, :class => 'form-control', :placeholder => 'Senha' %>
+          </div>
+          <%= button_tag(type: "submit", class: "btn btn-xs btn-default", style: 'line-height: 1.7;') do %>
+            <i class="fa fa-sign-in"></i>
+            Entrar
+          <% end %>
+
+        <% end %>
+      <% end %>
     </div>
   </div>
 </nav>

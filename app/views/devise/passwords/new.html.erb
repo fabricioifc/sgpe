@@ -1,24 +1,22 @@
-<div class="row">
-  <div class="col-md-6">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= t '.title' %></h3>
-      </div>
-      <div class="panel-body">
-        <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :role => 'form-horizontal'}) do |f| %>
-          <%= devise_error_messages! %>
+<div class="col-md-offset-1 col-md-10">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= t '.title' %></h3>
+    </div>
+    <div class="panel-body">
+      <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :role => 'form-horizontal'}) do |f| %>
+        <%= devise_error_messages! %>
 
-          <div class="form-group">
-            <%= f.label :login %>
-            <%= f.text_field :login, :autofocus => true, placeholder:true, class: 'form-control' %>
-          </div>
+        <div class="form-group">
+          <%= f.label :login %>
+          <%= f.text_field :login, autofocus:true, placeholder:true, class: 'form-control' %>
+        </div>
 
-           <%= f.submit t(".submit"), :class => 'btn btn-primary' %>
-        <% end %>
-      </div>
-      <div class="panel-footer">
-        <%= t '.send_me_reset_password_instructions' %>
-      </div>
+         <%= f.submit t(".submit"), :class => 'btn btn-primary' %>
+      <% end %>
+    </div>
+    <div class="panel-footer">
+      <%= t '.send_me_reset_password_instructions' %>
     </div>
   </div>
 
