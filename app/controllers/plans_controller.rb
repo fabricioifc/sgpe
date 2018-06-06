@@ -277,8 +277,6 @@ class PlansController < ApplicationController
           filename = "#{@plan.offer_discipline.user.name}_#{@plan.offer_discipline.grid_discipline.discipline.title}.pdf"
           filename = (filename.gsub!(/( )/, '_').gsub!("\n", '') || filename).upcase!
 
-          binding.pry
-
           send_data pdf.render,
             filename: filename,
             type: "application/pdf",
