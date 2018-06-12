@@ -20,7 +20,7 @@ class OfferDisciplineDecorator < ApplicationDecorator
   def carga_horaria_aula_text
     # value = component.carga_horaria || component.grid_discipline.carga_horaria
     carga_horaria_aula.to_s << ' H/A'
-  end
+  end  
 
 
 end
