@@ -308,6 +308,10 @@ div.fixed-on-bottom {
   padding: 5px 5px 5px 10px;
 }
 
+.form-control:focus, .select2-container--bootstrap .select2-selection--single:focus {
+  border-color: #fff;
+}
+
 // Multiselect gem
 .ms-container {
   width: 100%;
