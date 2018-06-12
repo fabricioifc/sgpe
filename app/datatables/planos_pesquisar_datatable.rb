@@ -62,6 +62,7 @@ private
     end
 
     offer_discipline_ids = Plan.select('plans.offer_discipline_id, MAX(plans.id) AS idplano').
+      where.not(user:nil).
       where(aprovado:true, active:true).group(:offer_discipline_id)
 
     # planos = []
