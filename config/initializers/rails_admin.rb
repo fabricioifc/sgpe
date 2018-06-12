@@ -40,4 +40,7 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+
+  # Necessário pois essa gem não funciona a partir do Rails 5.2
+  config.excluded_models = ['ActiveStorage::Blob', 'ActiveStorage::Attachment']
 end

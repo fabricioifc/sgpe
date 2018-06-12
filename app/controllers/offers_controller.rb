@@ -276,10 +276,10 @@ class OffersController < ApplicationController
       respond_to do |format|
         format.pdf {
           begin
-            coordenador = Coordenador.find_by(course_id: @offer.grid.course_id, responsavel:true)
-            if coordenador.nil?
-              raise StandardError, "Coordenador não cadastrado para o curso #{@offer.grid.course.name}"
-            end
+            # coordenador = Coordenador.find_by(course_id: @offer.grid.course_id, responsavel:true)
+            # if coordenador.nil?
+            #   raise StandardError, "Coordenador não cadastrado para o curso #{@offer.grid.course.name}"
+            # end
 
             # ZipNotifierJob.perform_later(@offer, current_user)
 

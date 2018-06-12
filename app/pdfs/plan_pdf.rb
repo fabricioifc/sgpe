@@ -28,12 +28,15 @@ class PlanPdf < PdfReport
 
   def generate options = [header:true, pagination:true, footer:true]
     begin
-      @plano.update(coordenador: Coordenador.find_by(course_id: @plano.offer_discipline.grid_discipline.grid.course_id, responsavel:true))
+      coordenador = Coordenador.find_by(course_id: @plan.offer_discipline.grid_discipline.grid.course_id, responsavel:true)
+      unless coordenador.nil?
+        @plano.update(coordenador: Coordenador.find_by(course_id: @plano.offer_discipline.grid_discipline.grid.course_id, responsavel:true))
+      end
     rescue Exception => error
       message = "Ocorreu um erro interno. Favor entrar em contato com o suporte."
       # logger.error message
       puts error
-      redirect_to root_path, notice: message
+      # redirect_to root_path, notice: message
     end
     bounding_box [35, cursor], width: 540 do
       bounding_box [0, cursor], width: 540 do
@@ -65,7 +68,7 @@ class PlanPdf < PdfReport
             [['Componente Curricular', 'Professor', 'Turma']],
             [
               @plano.offer_discipline.grid_discipline.discipline.title,
-              @plano.offer_discipline.user.name || @plano.offer_discipline.user.email,
+              @plano.offer_discipline.user.nil? ? "" : @plano.offer_discipline.user.name,
               "#{@plano.offer_discipline.offer.turma}",
             ]
           ),
@@ -242,9 +245,11 @@ class PlanPdf < PdfReport
         end
 
         move_down 10
+        
+        professor = "Professor(a)\n#{@plano.offer_discipline.user.nil? ? "" : @plano.offer_discipline.user.name}\nSiape: #{@plano.offer_discipline.user.nil? ? "" : @plano.offer_discipline.user.siape}"
 
         simple_table [
-          "\n\n\n#{"_"*46}\nProfessor(a)\n#{@plano.offer_discipline.user.name}\nSiape: #{@plano.offer_discipline.user.siape}",
+          "\n\n\n#{"_"*46}\n#{professor}",
           (@plano.coordenador.nil? ? '' : "\n\n\n#{"_"*46}\n#{@plano.coordenador.funcao}\n#{@plano.coordenador.user.name}\nSiape: #{@plano.coordenador.user.siape}")
           ], [270,270]
 
