@@ -279,7 +279,7 @@ class PlansController < ApplicationController
           else
             filename = "#{@plan.offer_discipline.user.name}_#{@plan.offer_discipline.grid_discipline.discipline.title}.pdf"
           end
-          filename = (filename.gsub!(/( )/, '_').gsub!("\n", '') || filename).upcase!
+          filename = (filename.gsub(/( )/, '_').gsub!("\n", '') || filename).upcase!
 
           send_data pdf.render,
             filename: filename,
