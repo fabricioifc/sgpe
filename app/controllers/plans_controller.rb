@@ -274,7 +274,11 @@ class PlansController < ApplicationController
             # raise StandardError, "Coordenador não cadastrado para o curso #{@plan.offer_discipline.grid_discipline.grid.course.name}"
           end
           pdf = PlanPdf.new(@plan, current_user).generate
-          filename = "#{@plan.offer_discipline.user.name}_#{@plan.offer_discipline.grid_discipline.discipline.title}.pdf"
+          if @plan.offer_discipline.user.nil?
+            filename = "#{@plan.offer_discipline.grid_discipline.discipline.title}.pdf"
+          else
+            filename = "#{@plan.offer_discipline.user.name}_#{@plan.offer_discipline.grid_discipline.discipline.title}.pdf"
+          end
           filename = (filename.gsub!(/( )/, '_').gsub!("\n", '') || filename).upcase!
 
           send_data pdf.render,
