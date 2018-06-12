@@ -41,7 +41,8 @@ class UsersController < ApplicationController
       if params[:user][:password].blank?
         params[:user].delete :password
         params[:user].delete :password_confirmation
-      end
+      end      
+      
       @user = User.find(params[:id])
       if @user.update_attributes(secure_params)
         # if current_user.try(:admin?)
@@ -80,11 +81,11 @@ private
   end
 
   def secure_params
-    params.require(:user).permit(:name, :siape, :perfils, :password, :password_confirmation, :avatar, :avatar_cache, :perfil_ids => [])
+    params.require(:user).permit(:name, :email, :login, :siape, :perfils, :password, :password_confirmation, :avatar, :avatar_cache, :perfil_ids => [])
   end
 
   def user_params
-    params.require(:user).permit(:name, :siape, :perfils, :avatar, :avatar_cache, :password, :password_confirmation, :perfil_ids => [])
+    params.require(:user).permit(:name, :email, :login, :siape, :perfils, :avatar, :avatar_cache, :password, :password_confirmation, :perfil_ids => [])
   end
 
 end
