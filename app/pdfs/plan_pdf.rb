@@ -28,12 +28,15 @@ class PlanPdf < PdfReport
 
   def generate options = [header:true, pagination:true, footer:true]
     begin
-      @plano.update(coordenador: Coordenador.find_by(course_id: @plano.offer_discipline.grid_discipline.grid.course_id, responsavel:true))
+      coordenador = Coordenador.find_by(course_id: @plan.offer_discipline.grid_discipline.grid.course_id, responsavel:true)
+      unless coordenador.nil?
+        @plano.update(coordenador: Coordenador.find_by(course_id: @plano.offer_discipline.grid_discipline.grid.course_id, responsavel:true))
+      end
     rescue Exception => error
       message = "Ocorreu um erro interno. Favor entrar em contato com o suporte."
       # logger.error message
       puts error
-      redirect_to root_path, notice: message
+      # redirect_to root_path, notice: message
     end
     bounding_box [35, cursor], width: 540 do
       bounding_box [0, cursor], width: 540 do

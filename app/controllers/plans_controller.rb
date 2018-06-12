@@ -269,10 +269,10 @@ class PlansController < ApplicationController
       format.json
       format.pdf {
         begin
-          coordenador = Coordenador.find_by(course_id: @plan.offer_discipline.grid_discipline.grid.course_id, responsavel:true)
-          if coordenador.nil?
-            # raise StandardError, "Coordenador não cadastrado para o curso #{@plan.offer_discipline.grid_discipline.grid.course.name}"
-          end
+          # coordenador = Coordenador.find_by(course_id: @plan.offer_discipline.grid_discipline.grid.course_id, responsavel:true)
+          # if coordenador.nil?
+          #   raise StandardError, "Coordenador não cadastrado para o curso #{@plan.offer_discipline.grid_discipline.grid.course.name}"
+          # end
           pdf = PlanPdf.new(@plan, current_user).generate
           if @plan.offer_discipline.user.nil?
             filename = "#{@plan.offer_discipline.grid_discipline.discipline.title}.pdf"
