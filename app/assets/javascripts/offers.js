@@ -7,7 +7,15 @@ document.addEventListener("turbolinks:before-cache", function() {
   }
 });
 
+$(document).on('click', '#add-second-teacher', function(){
+  $('.teacher_2').css('display', 'table-cell');
+  $('.teacher_1').css('width', '15%');
+  $(this).remove();
+});
+
 document.addEventListener("turbolinks:load", function() {
+
+  $('.teacher_2').css('display', 'none');
 
   var dataTableId = "table[id='offers_datatable']";
 

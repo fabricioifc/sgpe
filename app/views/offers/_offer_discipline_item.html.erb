@@ -24,8 +24,14 @@
     <% end %>
   </td>
 
-  <td style="width: 30%;"><%= g.select :user_id, options_for_select(@professores.collect { |c| [c.name, c.id ]}, g.object.user_id),
+  <td style="width: 30%;" class="teacher_1">
+    <%= g.select :user_id, options_for_select(@professores.collect { |c| [c.name, c.id ]}, g.object.user_id),
         { hide_label:true, include_blank: 'Por favor selecione' },
+        {class: 'form-control input-sm', wrapper: { style: 'margin-bottom: 0;'} } %>
+  </td>
+  <td style="width: 15%;" class="teacher_2">
+    <%= g.select :second_user_id, options_for_select(@professores.collect { |c| [c.name, c.id ]}, g.object.second_user_id),
+        { hide_label:true, include_blank: 'Segundo Professor' },
         {class: 'form-control input-sm', wrapper: { style: 'margin-bottom: 0;'} } %>
   </td>
 </tr>

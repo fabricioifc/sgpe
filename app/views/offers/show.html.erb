@@ -82,7 +82,7 @@
               <th><%= modelGridDiscipline.human_attribute_name(:year) %></th>
               <th><%= modelGridDiscipline.human_attribute_name(:carga_horaria) %></th>
               <th><%= modelOfferDiscipline.human_attribute_name(:ead_percentual_maximo) %></th>
-              <th><%= modelOfferDiscipline.human_attribute_name(:user_id) %></th>
+              <th>Professores</th>
               <th class="text-center" colspan="2"><%= t('helpers.actions') %></th>
             </tr>
           </thead>
@@ -94,7 +94,7 @@
                 <td class="text-center"><%= d.grid_discipline.decorate.ano_semestre %></td>
                 <td><%= "#{d.decorate.carga_horaria_hora_text} - #{d.decorate.carga_horaria_aula_text}" %></td>
                 <td class="text-center"><%= "#{d.ead_percentual_maximo}" %></td>
-                <td><%= d.user.name unless d.user.nil? %></td>
+                <td><%= d.decorate.professores %></td>
                 <td><%= ultimo_plano_aprovado.decorate.link_pdf('btn-xs btn-block') unless ultimo_plano_aprovado.nil? %></td>
                 <td class="text-center"><%= d.grid_discipline.decorate.link_show %></td>
               </tr>

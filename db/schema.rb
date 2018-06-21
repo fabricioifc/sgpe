@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_13_112547) do
+ActiveRecord::Schema.define(version: 2018_06_21_174802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,8 +117,10 @@ ActiveRecord::Schema.define(version: 2018_04_13_112547) do
     t.bigint "offer_id"
     t.integer "ead_percentual_maximo"
     t.integer "carga_horaria"
+    t.bigint "second_user_id"
     t.index ["grid_discipline_id"], name: "index_offer_disciplines_on_grid_discipline_id"
     t.index ["offer_id"], name: "index_offer_disciplines_on_offer_id"
+    t.index ["second_user_id"], name: "index_offer_disciplines_on_second_user_id"
     t.index ["user_id"], name: "index_offer_disciplines_on_user_id"
   end
 
@@ -278,6 +280,7 @@ ActiveRecord::Schema.define(version: 2018_04_13_112547) do
   add_foreign_key "offer_disciplines", "grid_disciplines"
   add_foreign_key "offer_disciplines", "offers"
   add_foreign_key "offer_disciplines", "users"
+  add_foreign_key "offer_disciplines", "users", column: "second_user_id"
   add_foreign_key "offers", "grids"
   add_foreign_key "perfil_roles", "perfils"
   add_foreign_key "perfil_roles", "roles"

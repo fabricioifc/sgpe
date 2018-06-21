@@ -22,5 +22,15 @@ class OfferDisciplineDecorator < ApplicationDecorator
     carga_horaria_aula.to_s << ' H/A'
   end  
 
+  def professores
+    professores = component.user.name unless component.user.nil?
+    if !component.second_user.nil?
+      professores = professores.nil? ? '' : professores.concat(', ')
+      professores = professores.concat(component.second_user.name)
+    end
+    
+  end
+  
+
 
 end

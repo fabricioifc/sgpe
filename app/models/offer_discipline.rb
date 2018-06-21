@@ -2,6 +2,8 @@ class OfferDiscipline < ApplicationRecord
   belongs_to :offer
   belongs_to :grid_discipline
   belongs_to :user, optional:true
+  # belongs_to :second_user, optional:true
+  belongs_to :second_user, class_name: 'User', foreign_key: :second_user_id, optional:true
   has_many :plans
 
   accepts_nested_attributes_for :grid_discipline
