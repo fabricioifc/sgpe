@@ -14,4 +14,8 @@ class OfferDecorator < ApplicationDecorator
     Offer.offer_types[component.type_offer] || component.type_offer
   end
 
+  def active
+    active_tag component.active?, 'fa-2'
+  end
+
 end

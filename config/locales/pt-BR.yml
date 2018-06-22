@@ -87,6 +87,7 @@ pt-BR:
         bib_geral: Referências Básicas
         bib_espec: Referências Complementares
       offer:
+        active: Ativo
         grid: Grade
         grid_id: Grade
         type: Tipo

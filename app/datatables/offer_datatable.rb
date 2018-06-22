@@ -19,7 +19,8 @@ class OfferDatatable < ApplicationDatatable
         column << offer.grid.course.name
         # column << "#{offer.turma.year}.#{offer.turma.name}"
         column << offer.turma
-        column << "<span class='badge'>#{offer.offer_disciplines.count}</span>"
+        # column << "<span class='badge'>#{offer.offer_disciplines.count}</span>"
+        column << offer.decorate.active
 
         links = []
         column << link_to("<i class='fa fa-list fa-2 text-info'></i>".html_safe, offer)
@@ -61,6 +62,6 @@ class OfferDatatable < ApplicationDatatable
 
   # The columns needs to be the same list of searchable items and IN ORDER that they will appear in Data.
   def columns
-    %w(offers.year offers.semestre offers.type_offer courses.name turma)
+    %w(offers.year offers.semestre offers.type_offer courses.name turma offers.active)
   end
 end

@@ -81,7 +81,7 @@ class OffersController < ApplicationController
       @offer.grid_id = params[:grid_id]
       @offer.year_base = params[:grid_year]
       @offer.semestre_base = params[:grid_semestre]
-
+      
       @grade_anos = load_grade_anos(params[:grid_id])
       @grade_semestres = load_grade_semestres(params[:grid_id])
 
@@ -316,7 +316,7 @@ class OffersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def offer_params
-      params.require(:offer).permit(:year, :semestre, :type_offer, :grid_id, :turma,
+      params.require(:offer).permit(:year, :semestre, :type_offer, :grid_id, :turma, :active,
         offer_disciplines_attributes: [:id, :grid_discipline_id, :user_id, :second_user_id, :active, :offer_id, :ead_percentual_maximo, :carga_horaria, :_destroy
         ]
       )
