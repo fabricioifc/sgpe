@@ -8,15 +8,14 @@ document.addEventListener("turbolinks:before-cache", function() {
 });
 
 $(document).on('click', '#add-second-teacher', function(){
-  $('.teacher_2').css('display', 'table-cell');
-  $('.teacher_1').css('width', '15%');
-  $(this).remove();
+  $.showSecondUser(true);
 });
 
 document.addEventListener("turbolinks:load", function() {
-
-  $('.teacher_2').css('display', 'none');
-
+  
+  // Habilitar ou não o segundo professor
+  $.showSecondUser($('#add-second-teacher').data('show'));
+  
   var dataTableId = "table[id='offers_datatable']";
 
   $(dataTableId).each(function(){
@@ -93,3 +92,14 @@ document.addEventListener("turbolinks:load", function() {
     });
   });
 });
+
+
+$.showSecondUser = function(show) {
+  if (show) {
+    $('.teacher_2').css('display', 'table-cell');
+    $('.teacher_1').css('width', '15%');
+    $('#add-second-teacher').remove();   
+  } else {
+    $('.teacher_2').css('display', 'none');
+  }
+}

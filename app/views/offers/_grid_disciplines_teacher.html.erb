@@ -13,7 +13,10 @@
               <th class="text-center" title="Atividade Não Presencial">(%) ANP máximo</th>
               <th colspan="2">
                 Professor
-                <span class="pull-right text-primary" id="add-second-teacher" style="cursor: pointer;">
+                <span class="pull-right text-primary" 
+                  id="add-second-teacher" style="cursor: pointer;"
+                  data-show="<%= params[:has_second_user] %>"
+                >
                   <i class="fa fa-plus" aria-hidden="true"></i>
                   Segundo Professor
                 </span>

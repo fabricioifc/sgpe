@@ -210,7 +210,7 @@ class PlansController < ApplicationController
       params[:ano] = params[:ano_tag]
 
       @curso = Course.find(params[:course_id])
-      @ofertasCursoProfessor = current_user.offer_disciplines.joins(:offer => :grid).
+      ofertas_curso_professor_1 = current_user.offer_disciplines.joins(:offer => :grid).
         joins(:grid_discipline => :discipline).
         where(active:true).where('offers.active = ?', true).
         where('grids.course_id = ?', params[:course_id]).
@@ -218,6 +218,17 @@ class PlansController < ApplicationController
         where(params[:ano].blank? ? 'offers.year is not null' : 'offers.year = ?', params[:ano]).
         order('offers.year desc, offers.semestre desc, disciplines.title').
         group_by{ |c| [c.offer.year, c.offer.semestre] }
+
+      ofertas_curso_professor_2 = current_user.offer_disciplines_second.joins(:offer => :grid).
+        joins(:grid_discipline => :discipline).
+        where(active:true).where('offers.active = ?', true).
+        where('grids.course_id = ?', params[:course_id]).
+        where(params[:discipline_id].blank? ? 'disciplines.id is not null' : 'disciplines.id = ?', params[:discipline_id]).
+        where(params[:ano].blank? ? 'offers.year is not null' : 'offers.year = ?', params[:ano]).
+        order('offers.year desc, offers.semestre desc, disciplines.title').
+        group_by{ |c| [c.offer.year, c.offer.semestre] }
+
+      @ofertasCursoProfessor = ofertas_curso_professor_1.merge(ofertas_curso_professor_2)
 
       adicionar_breadcrumb_cursos
       add_breadcrumb 'Planos por curso', nil
@@ -535,7 +546,7 @@ class PlansController < ApplicationController
     def checar_professor_plano
       if !params[:offer_discipline_id].nil?
         @offer_discipline = OfferDiscipline.find(params[:offer_discipline_id])
-        raise CanCan::AccessDenied if @offer_discipline.user != current_user
+        raise CanCan::AccessDenied if @offer_discipline.user != current_user && @offer_discipline.second_user != current_user
       end
     end
 
@@ -548,9 +559,16 @@ class PlansController < ApplicationController
     end
 
     def get_cursos_professor
-      current_user.offer_disciplines.joins(:offer => :grid).
+      ofertas_professor_1 = current_user.offer_disciplines.joins(:offer => :grid).
         where(active:true).where('offers.active = ?', true).
         pluck('grids.course_id').uniq
+      
+      ofertas_professor_2 = current_user.offer_disciplines_second.joins(:offer => :grid).
+        where(active:true).where('offers.active = ?', true).
+        pluck('grids.course_id').uniq
+      
+      # Unindo os dois resultados
+      ofertas_professor_1 | ofertas_professor_2
     end
 
     def initialize_plano

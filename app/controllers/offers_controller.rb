@@ -37,6 +37,8 @@ class OffersController < ApplicationController
     params[:grid_id] = @offer.grid_id
     params[:grid_year] = @offer.year_base
     params[:grid_semestre] = @offer.semestre_base
+    # parâmetro utilizado para mostrar ou não o segundo professor ao editar
+    params[:has_second_user] = @offer.offer_disciplines.where.not(second_user:nil).count > 0
 
     @grade_anos = load_grade_anos(params[:grid_id])
     @grade_semestres = load_grade_semestres(params[:grid_id])

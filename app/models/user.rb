@@ -1,9 +1,13 @@
 class User < ApplicationRecord
   # rolify
   has_and_belongs_to_many :perfils, :join_table => :users_perfils
-  has_many :offer_disciplines
   has_many :plans, :class_name => 'Plan'
   has_many :plans_parecer, :class_name => 'Plan', :foreign_key => 'user_parecer_id'
+
+  # Disciplinas como primeiro professor
+  has_many :offer_disciplines
+  # Disciplinas como segundo professor
+  has_many :offer_disciplines_second, :class_name => 'OfferDiscipline', :foreign_key => 'second_user_id'
 
   # before_create :set_default_role
 

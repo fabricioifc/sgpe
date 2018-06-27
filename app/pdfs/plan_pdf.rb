@@ -63,19 +63,37 @@ class PlanPdf < PdfReport
           { borders: [:top, :bottom, :left, :right], borders_length: 0, columns_bold: [[1,0..0]], columns_background: [1 => [[0, "ffffcc"]]] }
         )
 
-        display_event_table(
-          table_data(
-            [['Componente Curricular', 'Professor', 'Turma']],
-            [
-              @plano.offer_discipline.grid_discipline.discipline.title,
-              @plano.offer_discipline.user.nil? ? "" : @plano.offer_discipline.user.name,
-              "#{@plano.offer_discipline.offer.turma}",
-            ]
-          ),
-          [240, 240, 60],
-          { header:true },
-          { borders: [:top, :bottom, :left, :right], borders_length: 0, columns_bold: [[1,0..0]], columns_background: [1 => [[0, "ffffcc"]]] }
-        )
+        if @plano.offer_discipline.second_user.nil?
+
+          display_event_table(
+            table_data(
+              [['Componente Curricular', 'Professor', 'Turma']],
+              [
+                @plano.offer_discipline.grid_discipline.discipline.title,
+                @plano.offer_discipline.user.nil? ? "" : @plano.offer_discipline.user.name,
+                "#{@plano.offer_discipline.offer.turma}",
+              ]
+            ),
+            [240, 240, 60],
+            { header:true },
+            { borders: [:top, :bottom, :left, :right], borders_length: 0, columns_bold: [[1,0..0]], columns_background: [1 => [[0, "ffffcc"]]] }
+          )
+        else
+          display_event_table(
+            table_data(
+              [['Componente Curricular', 'Professor', 'Professor', 'Turma']],
+              [
+                @plano.offer_discipline.grid_discipline.discipline.title,
+                @plano.offer_discipline.user.nil? ? "" : @plano.offer_discipline.user.name,
+                @plano.offer_discipline.second_user.name,
+                "#{@plano.offer_discipline.offer.turma}",
+              ]
+            ),
+            [180, 150, 150, 60],
+            { header:true },
+            { borders: [:top, :bottom, :left, :right], borders_length: 0, columns_bold: [[1,0..0]], columns_background: [1 => [[0, "ffffcc"]]] }
+          )
+        end
 
         display_event_table(
           table_data(
@@ -245,21 +263,51 @@ class PlanPdf < PdfReport
         end
 
         move_down 10
+
+        professor = @plano.offer_discipline.user.nil? ? nil : ("Professor(a)\n#{@plano.offer_discipline.user.nil? ? "" : @plano.offer_discipline.user.name}\nSiape: #{@plano.offer_discipline.user.nil? ? "" : @plano.offer_discipline.user.siape}")
+        # Segundo professor, caso exista
+        professor2 = @plano.offer_discipline.second_user.nil? ? nil : ("Professor(a)\n#{@plano.offer_discipline.second_user.nil? ? "" : @plano.offer_discipline.second_user.name}\nSiape: #{@plano.offer_discipline.second_user.nil? ? "" : @plano.offer_discipline.second_user.siape}")
+        coordenador = @plano.coordenador.nil? ? nil : "#{@plano.coordenador.funcao}\n#{@plano.coordenador.user.name}\nSiape: #{@plano.coordenador.user.siape}"
+        parecer_user = @plano.user_parecer.nil? ? nil : "#{@plano.user_parecer.name}\nSiape: #{@plano.user_parecer.siape}"
         
-        professor = "Professor(a)\n#{@plano.offer_discipline.user.nil? ? "" : @plano.offer_discipline.user.name}\nSiape: #{@plano.offer_discipline.user.nil? ? "" : @plano.offer_discipline.user.siape}"
-
-        simple_table [
-          "\n\n\n#{"_"*46}\n#{professor}",
-          (@plano.coordenador.nil? ? '' : "\n\n\n#{"_"*46}\n#{@plano.coordenador.funcao}\n#{@plano.coordenador.user.name}\nSiape: #{@plano.coordenador.user.siape}")
-          ], [270,270]
-
+        case 
+          when !professor.nil? && !professor2.nil? && !coordenador.nil?
+            simple_table [
+              "\n\n\n#{"_"*30}\n#{professor}",
+              "\n\n\n#{"_"*30}\n#{professor2}",
+              "\n\n\n#{"_"*30}\n#{coordenador}",
+              ], [180,180,180]  
+          when !professor.nil? && !professor2.nil? && coordenador.nil?
+            simple_table [
+              "\n\n\n#{"_"*46}\n#{professor}",
+              "\n\n\n#{"_"*46}\n#{professor2}",
+              ], [270, 270]
+          when !professor.nil? && !coordenador.nil?
+            simple_table [
+              "\n\n\n#{"_"*46}\n#{professor}",
+              "\n\n\n#{"_"*46}\n#{coordenador}",
+              ], [270, 270] 
+          when !professor2.nil? && !coordenador.nil?
+            simple_table [
+              "\n\n\n#{"_"*46}\n#{professor2}",
+              "\n\n\n#{"_"*46}\n#{coordenador}",
+              ], [270, 270]
+          when !professor.nil?
+            simple_table [
+              "\n\n\n#{"_"*95}\n#{professor}",
+              ], [540]
+          when !professor2.nil?
+            simple_table [
+              "\n\n\n#{"_"*95}\n#{professor2}",
+              ], [540]
+        end
+  
         # Se foi analisado
-        if !@plano.user_parecer.nil?
+        unless parecer_user.nil?
           move_down 10
           simple_table [
-              "\n\n\n#{"_"*95}\nResponsável pela Conferência - Núcleo Pedagógico (NUPE)\n#{@plano.user_parecer.name}\nSiape: #{@plano.user_parecer.siape}",
-            ], [540]
-
+            "\n\n\n#{"_"*95}\nResponsável pela Conferência - Núcleo Pedagógico (NUPE)\n#{parecer_user}",
+          ], [540]
         end
 
       end
