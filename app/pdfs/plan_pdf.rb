@@ -63,37 +63,19 @@ class PlanPdf < PdfReport
           { borders: [:top, :bottom, :left, :right], borders_length: 0, columns_bold: [[1,0..0]], columns_background: [1 => [[0, "ffffcc"]]] }
         )
 
-        if @plano.offer_discipline.second_user.nil?
-
-          display_event_table(
-            table_data(
-              [['Componente Curricular', 'Professor', 'Turma']],
-              [
-                @plano.offer_discipline.grid_discipline.discipline.title,
-                @plano.offer_discipline.user.nil? ? "" : @plano.offer_discipline.user.name,
-                "#{@plano.offer_discipline.offer.turma}",
-              ]
-            ),
-            [240, 240, 60],
-            { header:true },
-            { borders: [:top, :bottom, :left, :right], borders_length: 0, columns_bold: [[1,0..0]], columns_background: [1 => [[0, "ffffcc"]]] }
-          )
-        else
-          display_event_table(
-            table_data(
-              [['Componente Curricular', 'Professor', 'Professor', 'Turma']],
-              [
-                @plano.offer_discipline.grid_discipline.discipline.title,
-                @plano.offer_discipline.user.nil? ? "" : @plano.offer_discipline.user.name,
-                @plano.offer_discipline.second_user.name,
-                "#{@plano.offer_discipline.offer.turma}",
-              ]
-            ),
-            [180, 150, 150, 60],
-            { header:true },
-            { borders: [:top, :bottom, :left, :right], borders_length: 0, columns_bold: [[1,0..0]], columns_background: [1 => [[0, "ffffcc"]]] }
-          )
-        end
+        display_event_table(
+          table_data(
+            [['Componente Curricular', 'Professor(a)', 'Turma']],
+            [
+              @plano.offer_discipline.grid_discipline.discipline.title,
+              @plano.offer_discipline.decorate.professores,
+              "#{@plano.offer_discipline.offer.turma}",
+            ]
+          ),
+          [200, 280, 60],
+          { header:true },
+          { borders: [:top, :bottom, :left, :right], borders_length: 0, columns_bold: [[1,0..0]], columns_background: [1 => [[0, "ffffcc"]]] }
+        )
 
         display_event_table(
           table_data(
