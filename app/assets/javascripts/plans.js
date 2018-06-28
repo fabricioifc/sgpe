@@ -36,41 +36,24 @@ document.addEventListener("turbolinks:load", function(e) {
 
       columns: [
         {
-          width: "28%",
-          className: "",
-          searchable: true,
-          orderable: true
-        },
-        {
-          width: "10%",
-          className: "",
-          searchable: true,
-          orderable: true
-        },
-        {
-          width: "7%",
-          className: "",
-          searchable: true,
-          orderable: true
-        },
-        {
-          width: "10%",
-          className: "",
-          searchable: true,
-          orderable: true
-        },
-        {
-          width: "5%",
+          width: "8%",
           className: "text-center",
           searchable: true,
           orderable: true
         },
         {
-          width: "15%",
-          className: "text-center",
+          width: "37%",
+          className: "",
           searchable: true,
           orderable: true
         },
+        {
+          width: "30%",
+          className: "",
+          searchable: true,
+          orderable: true
+        },
+        
         {
           width: "5%",
           className: "text-center",

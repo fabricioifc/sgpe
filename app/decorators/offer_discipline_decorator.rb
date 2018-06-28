@@ -28,6 +28,7 @@ class OfferDisciplineDecorator < ApplicationDecorator
       professores = professores.nil? ? '' : professores.concat(', ')
       professores = professores.concat(component.second_user.name)
     end
+    professores
     
   end
   

@@ -13,12 +13,12 @@ private
     planos.map do |plano|
       [].tap do |column|
 
-        column << "#{plano.offer_discipline.grid_discipline.grid.year} - #{plano.offer_discipline.grid_discipline.grid.course.name}"
-        column << "#{plano.offer_discipline.grid_discipline.discipline.sigla} - #{plano.offer_discipline.grid_discipline.discipline.title}"
-        column << "#{plano.offer_discipline.offer.turma}"
-        column << plano.user.name
         column << plano.offer_discipline.offer.decorate.ano_semestre
-        column << (plano.user_parecer.nil? ? nil : plano.user_parecer.name)
+        column << "#{plano.offer_discipline.grid_discipline.discipline.sigla} - #{plano.offer_discipline.grid_discipline.discipline.title}
+                  <br /><small class='label label-primary'>
+                  #{plano.offer_discipline.offer.turma} - #{plano.offer_discipline.grid_discipline.grid.course.name}
+                  </small>"
+        column << plano.offer_discipline.decorate.professores
         column << "<span class='badge text-center'>v.#{plano.decorate.versao}</span>"
         column << plano.decorate.situacao
 
