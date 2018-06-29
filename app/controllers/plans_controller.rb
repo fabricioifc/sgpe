@@ -210,26 +210,16 @@ class PlansController < ApplicationController
       params[:ano] = params[:ano_tag]
 
       @curso = Course.find(params[:course_id])
-      ofertas_curso_professor_1 = current_user.offer_disciplines.joins(:offer => :grid).
+      @ofertasCursoProfessor = OfferDiscipline.joins(:offer => :grid).
         joins(:grid_discipline => :discipline).
         where(active:true).where('offers.active = ?', true).
         where('grids.course_id = ?', params[:course_id]).
         where(params[:discipline_id].blank? ? 'disciplines.id is not null' : 'disciplines.id = ?', params[:discipline_id]).
         where(params[:ano].blank? ? 'offers.year is not null' : 'offers.year = ?', params[:ano]).
+        where('(offer_disciplines.user_id = ? OR offer_disciplines.second_user_id = ?)', current_user.id, current_user.id).
         order('offers.year desc, offers.semestre desc, disciplines.title').
         group_by{ |c| [c.offer.year, c.offer.semestre] }
-
-      ofertas_curso_professor_2 = current_user.offer_disciplines_second.joins(:offer => :grid).
-        joins(:grid_discipline => :discipline).
-        where(active:true).where('offers.active = ?', true).
-        where('grids.course_id = ?', params[:course_id]).
-        where(params[:discipline_id].blank? ? 'disciplines.id is not null' : 'disciplines.id = ?', params[:discipline_id]).
-        where(params[:ano].blank? ? 'offers.year is not null' : 'offers.year = ?', params[:ano]).
-        order('offers.year desc, offers.semestre desc, disciplines.title').
-        group_by{ |c| [c.offer.year, c.offer.semestre] }
-
-      @ofertasCursoProfessor = ofertas_curso_professor_1.merge(ofertas_curso_professor_2)
-
+      
       adicionar_breadcrumb_cursos
       add_breadcrumb 'Planos por curso', nil
     end
@@ -559,16 +549,10 @@ class PlansController < ApplicationController
     end
 
     def get_cursos_professor
-      ofertas_professor_1 = current_user.offer_disciplines.joins(:offer => :grid).
+      OfferDiscipline.joins(:offer => :grid).
         where(active:true).where('offers.active = ?', true).
+        where('(offer_disciplines.user_id = ? OR offer_disciplines.second_user_id = ?)', current_user.id, current_user.id).
         pluck('grids.course_id').uniq
-      
-      ofertas_professor_2 = current_user.offer_disciplines_second.joins(:offer => :grid).
-        where(active:true).where('offers.active = ?', true).
-        pluck('grids.course_id').uniq
-      
-      # Unindo os dois resultados
-      ofertas_professor_1 | ofertas_professor_2
     end
 
     def initialize_plano

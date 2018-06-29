@@ -62,18 +62,10 @@ module CoursesHelper
 
   def disciplinas_sem_plano_por_curso curso_id
     if user_signed_in? && !curso_id.nil?
-      lista_professor1 = current_user.offer_disciplines.
-        joins(offer: { grid: :course }).
+      OfferDiscipline.joins(offer: { grid: :course }).
         left_joins(:plans).
-        where('offer_disciplines.active is true and courses.id = ? and plans.id is null', curso_id)
-
-        lista_professor2 = current_user.offer_disciplines_second.
-        joins(offer: { grid: :course }).
-        left_joins(:plans).
-        where('offer_disciplines.active is true and courses.id = ? and plans.id is null', curso_id)
-
-        # Unindo os dois resultados
-        lista_professor1 | lista_professor2
+        where('offer_disciplines.active is true and courses.id = ? and plans.id is null', curso_id).
+        where('(offer_disciplines.user_id = ? OR offer_disciplines.second_user_id = ?)', current_user.id, current_user.id)
     end
   end
 
