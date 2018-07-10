@@ -15,7 +15,7 @@ class Plan < ApplicationRecord
 
   validates :ead_percentual_definido, presence:true, if: Proc.new { |a| a.analise? &&
     !a.offer_discipline.ead_percentual_maximo.nil? && !a.offer_discipline.ead_percentual_maximo.eql?(0)
-  }
+  }, :on => :create
 
   # validates :ementa, presence:true, if: Proc.new { |a| a.analise? && a.offer_discipline.grid_discipline.discipline.especial? }
   # validates :objetivo_geral, presence:true, if: Proc.new { |a| a.analise? && a.offer_discipline.grid_discipline.discipline.especial? }
