@@ -32,6 +32,7 @@
 //= require_tree .
 //= require bootstrap-modal
 //= require bootstrap-modalmanager
+//= require jquery-ui
 
 $(function() {
   $(document.body).off('click', 'nav.pagination a');
@@ -65,6 +66,13 @@ $(function() {
 document.addEventListener("turbolinks:load", function() {
   $.fixedOnScroll();
   $.addMultipleSelect();
+
+  $('[data-provider="datepicker"]').datepicker({
+    format: 'dd/mm/yyyy',                
+    language: 'pt-BR',
+    autoclose: true,
+    todayHighlight: true
+  });
 });
 
 $.addMultipleSelect = function(){

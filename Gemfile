@@ -26,6 +26,7 @@ gem "devise-async", :group => [:production]
 gem 'devise-i18n'
 gem 'high_voltage'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'pg'
 
 group :development do

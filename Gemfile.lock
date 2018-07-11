@@ -460,6 +460,7 @@ DEPENDENCIES
   high_voltage
   jbuilder (~> 2.5)
   jquery-rails
+  jquery-ui-rails
   kaminari
   letter_opener
   listen (>= 3.0.5, < 3.2)

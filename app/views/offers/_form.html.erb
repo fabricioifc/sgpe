@@ -4,7 +4,7 @@
 
     <div class="row">
       <div class="form-group">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
           <%= f.label :grid_id %>
           <%= select_tag :grid_id, options_for_select(@grades.collect { |c| ["#{c.course.name} - #{c.year}", c.id ]}, params[:grid_id]),
             data: { remote: true, url: load_grid_offers_path, method: :patch },
@@ -13,13 +13,19 @@
             data: { remote: true, url: load_grid_offers_path, method: :patch },
             id: :grid_id, class: 'form-control', prompt:'Selecione a grade', required:true %> -->
         </div>
-        <div class="form-group col-md-3" id="grid_ano_semestre_partial">
+        <div class="form-group col-md-2" id="grid_ano_semestre_partial">
           <%= render partial: 'grid_ano_semestre', locals: {} %>
+        </div>
+        <div class="form-group col-md-3">
+          <%= f.text_field :dtprevisao_entrega_plano, 
+              value: (@offer.dtprevisao_entrega_plano.strftime('%d/%m/%Y') unless @offer.dtprevisao_entrega_plano.nil?),
+              :data => {:provider => 'datepicker'} %>
         </div>
         <div class="form-group col-md-3">
           <%= f.label :active %>
           <%= f.check_box :active, id: :offer_active %>
         </div>
+        
       </div>
     </div>
 
@@ -51,7 +57,7 @@
   </div>
 
   <div class="fixed-on-bottom">
-    <%= f.submit class: "btn btn-primary" %>
+    <%= f.submit class: "btn btn-sm btn-primary" %>
   </div>
 
 <% end %>
