@@ -20,7 +20,7 @@
           <%= f.text_field :dtprevisao_entrega_plano, 
               value: (@offer.dtprevisao_entrega_plano.strftime('%d/%m/%Y') unless @offer.dtprevisao_entrega_plano.nil?),
               :data => {:provider => 'datepicker'}, autocomplete: 'off' %>
-        </'div>'
+        </div>
         <div class="form-group col-md-3">
           <%= f.label :active %>
           <%= f.check_box :active, id: :offer_active %>
