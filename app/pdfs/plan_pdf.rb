@@ -17,6 +17,12 @@ class PlanPdf < PdfReport
         email:  Rails.application.secrets.admin_email,
         logo:   Rails.root.join("app/assets/images/logo.png")
       },
+      font: {
+        :normal => Rails.root.join("app/assets/fonts/open-sans/OpenSans-Regular.ttf"),
+        :italic => Rails.root.join("app/assets/fonts/open-sans/OpenSans-Italic.ttf"),
+        :bold => Rails.root.join("app/assets/fonts/open-sans/OpenSans-Bold.ttf"),
+        :bold_italic => Rails.root.join("app/assets/fonts/open-sans/OpenSans-BoldItalic.ttf")
+      }
         # data: {
         #   table_data: table_data,
         #   table_widths: TABLE_WIDTHS

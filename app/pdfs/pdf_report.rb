@@ -23,7 +23,7 @@ class PdfReport < Prawn::Document
 
     super(margin: attributes.fetch(:margin, [70,0,50,0]))
 
-    setup_fonts if custom_font.any?
+    setup_fonts unless custom_font.nil?
   end
 
   private
