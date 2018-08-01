@@ -14,6 +14,11 @@ class OfferDecorator < ApplicationDecorator
     Offer.offer_types[component.type_offer] || component.type_offer
   end
 
+  def dtprevisao_entrega_plano
+    component.dtprevisao_entrega_plano.nil? ? nil : (l component.dtprevisao_entrega_plano)
+  end
+  
+
   def active
     active_tag component.active?, 'fa-2'
   end
