@@ -1,4 +1,4 @@
-<%= bootstrap_form_for(coordenador, local:true, html: { class: "", role: "form" }) do |f| %>
+<%= bootstrap_form_for(coordenador, local:true, inline_errors:false, html: { class: "", role: "form" }) do |f| %>
   <%= error_messages_for(coordenador) %>
 
   <div class="row">
@@ -32,7 +32,7 @@
     </div>
     <div class="col-md-12">
       <%= f.check_box :titular, id: :coordenador_titular %>
-      <%= f.check_box :responsavel, id: :coordenador_responsavel %>
+      <!--<= f.check_box :responsavel, id: :coordenador_responsavel %> -->
     </div>
 
   </div>

@@ -37,7 +37,7 @@ class CoordenadorsController < ApplicationController
     respond_to do |format|
       if @coordenador.save
         verificar_titular
-        verificar_responsavel
+        # verificar_responsavel
         format.html { redirect_to @coordenador, notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :index, status: :created }
       else
@@ -54,7 +54,7 @@ class CoordenadorsController < ApplicationController
     respond_to do |format|
       if @coordenador.update(coordenador_params)
         verificar_titular
-        verificar_responsavel
+        # verificar_responsavel
         # format.html { redirect_to @coordenador, notice: 'Coordenador was successfully updated.' }
         format.html { redirect_to coordenadors_path, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :index, status: :ok }
@@ -84,18 +84,18 @@ class CoordenadorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def coordenador_params
-      params.require(:coordenador).permit(:user_id, :email, :funcao, :titular, :responsavel, :course_id, :dtinicio, :dtfim)
+      params.require(:coordenador).permit(:user_id, :email, :funcao, :titular, :course_id, :dtinicio, :dtfim)
     end
 
-    def verificar_responsavel
-      if @coordenador.responsavel?
-        if @coordenador.id.nil?
-          Coordenador.where(course_id: @coordenador.course_id).update(responsavel:false)
-        else
-          Coordenador.where(course_id: @coordenador.course_id).where.not(id: @coordenador.id).update(responsavel:false)
-        end
-      end
-    end
+    # def verificar_responsavel
+    #   if @coordenador.responsavel?
+    #     if @coordenador.id.nil?
+    #       Coordenador.where(course_id: @coordenador.course_id).update(responsavel:false)
+    #     else
+    #       Coordenador.where(course_id: @coordenador.course_id).where.not(id: @coordenador.id).update(responsavel:false)
+    #     end
+    #   end
+    # end
 
     def verificar_titular
       if @coordenador.titular?

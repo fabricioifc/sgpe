@@ -24,13 +24,13 @@ document.addEventListener("turbolinks:load", function() {
 
       columns: [
         {
-          width: "15%",
+          width: "18%",
           className: "",
           searchable: true,
           orderable: true
         },
         {
-          width: "22%",
+          width: "30%",
           className: "",
           searchable: true,
           orderable: true
@@ -55,12 +55,6 @@ document.addEventListener("turbolinks:load", function() {
         },
         {
           width: "5%",
-          className: "text-center",
-          searchable: true,
-          orderable: true
-        },
-        {
-          width: "11%",
           className: "text-center",
           searchable: true,
           orderable: true
