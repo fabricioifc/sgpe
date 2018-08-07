@@ -15,15 +15,21 @@
       <%= f.text_field :email, id: :coordenador_email, placeholder:true %>
     </div>
 
-    <div class="col-md-12">
+    <div class="col-md-6">
       <%= f.select :course_id, Course.where(active:true).order(:name).collect { |c| [c.name, c.id] }, id: :coordenador_course, prompt:true %>
     </div>
-    <!-- <div class="col-md-3">
-      <= f.date_select :dtinicio, id: :coordenador_dtinicio, prompt: { day: 'Dia', month: 'Mês', year: 'Ano' }, end_year: Date.today.year + 100 %>
+    <div class="col-md-3">
+      <%= f.text_field :dtinicio, 
+        value: (@coordenador.dtinicio.strftime('%d/%m/%Y') unless @coordenador.dtinicio.nil?),
+        :data => {:provider => 'datepicker'}, autocomplete: 'off', 
+        id: :coordenador_dtinicio, prompt: true, placeholder: true %>
     </div>
     <div class="col-md-3">
-      <= f.date_select :dtfim, id: :coordenador_dtfim, prompt: { day: 'Dia', month: 'Mês', year: 'Ano' }, end_year: Date.today.year + 100 %>
-    </div> -->
+      <%= f.text_field :dtfim, 
+        value: (@coordenador.dtfim.strftime('%d/%m/%Y') unless @coordenador.dtfim.nil?),
+        :data => {:provider => 'datepicker'}, autocomplete: 'off', 
+        id: :coordenador_dtfim, prompt: true, placeholder: true %>
+    </div>
     <div class="col-md-12">
       <%= f.check_box :titular, id: :coordenador_titular %>
       <%= f.check_box :responsavel, id: :coordenador_responsavel %>

@@ -10,14 +10,15 @@ class CoordenadorDatatable < ApplicationDatatable
   # will need to create a separate variable and join them accordingly
   # when pushing to the column array
   def data
+    
     coordenadors.map do |coordenador|
       [].tap do |column|
 
         column << coordenador.user.name
         column << coordenador.course.name
         column << coordenador.user.siape
-        # column << coordenador.dtinicio
-        # column << coordenador.dtfim
+        column << (coordenador.dtinicio.nil? ? nil : coordenador.dtinicio.strftime('%d/%m/%Y'))
+        column << (coordenador.dtfim.nil? ? nil : coordenador.dtfim.strftime('%d/%m/%Y'))
         column << coordenador.decorate.titular
         column << coordenador.decorate.responsavel
 
@@ -60,6 +61,6 @@ class CoordenadorDatatable < ApplicationDatatable
 
   # The columns needs to be the same list of searchable items and IN ORDER that they will appear in Data.
   def columns
-    %w(users.name funcao users.siape titular coordenadors.email responsavel courses.name)
+    %w(users.name funcao users.siape titular coordenadors.email responsavel courses.name coordenadors.dtinicio coordenadors.dtfim)
   end
 end

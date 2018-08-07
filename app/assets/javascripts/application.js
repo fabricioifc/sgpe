@@ -33,6 +33,7 @@
 //= require bootstrap-modal
 //= require bootstrap-modalmanager
 //= require jquery-ui
+//= require jquery.mask
 
 $(function() {
   $(document.body).off('click', 'nav.pagination a');
@@ -72,6 +73,8 @@ document.addEventListener("turbolinks:load", function() {
     language: 'pt-BR',
     autoclose: true,
     todayHighlight: true
+  }).on('keyup', function(e){
+    $(this).mask('99/99/9999');
   });
 });
 

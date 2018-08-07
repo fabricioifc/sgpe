@@ -24,22 +24,34 @@ document.addEventListener("turbolinks:load", function() {
 
       columns: [
         {
-          width: "25%",
+          width: "15%",
           className: "",
           searchable: true,
           orderable: true
         },
         {
-          width: "19%",
+          width: "22%",
           className: "",
           searchable: true,
           orderable: true
         },
         {
-          width: "11%",
+          width: "7%",
           className: "",
           searchable: true,
           orderable: true
+        },
+        {
+          width: "5%",
+          className: "",
+          searchable: true,
+          orderable: false
+        },
+        {
+          width: "5%",
+          className: "",
+          searchable: true,
+          orderable: false
         },
         {
           width: "5%",

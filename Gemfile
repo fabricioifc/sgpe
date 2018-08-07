@@ -27,6 +27,7 @@ gem 'devise-i18n'
 gem 'high_voltage'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'jquery_mask_rails', '~> 0.1.0'
 gem 'pg'
 
 group :development do

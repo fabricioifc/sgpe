@@ -33,17 +33,19 @@ class PlanPdf < PdfReport
   end
 
   def generate options = [header:true, pagination:true, footer:true]
-    begin
-      coordenador = Coordenador.find_by(course_id: @plan.offer_discipline.grid_discipline.grid.course_id, responsavel:true)
-      unless coordenador.nil?
-        @plano.update(coordenador: Coordenador.find_by(course_id: @plano.offer_discipline.grid_discipline.grid.course_id, responsavel:true))
-      end
-    rescue Exception => error
-      message = "Ocorreu um erro interno. Favor entrar em contato com o suporte."
-      # logger.error message
-      puts error
-      # redirect_to root_path, notice: message
-    end
+    # begin
+    #   course_id = @plan.offer_discipline.grid_discipline.grid.course_id
+      
+    #   coordenador = Coordenador.por_curso(course_id).last
+    #   unless coordenador.nil?
+    #     @plano.update(coordenador: coordenador)
+    #   end
+    # rescue Exception => error
+    #   message = "Ocorreu um erro interno. Favor entrar em contato com o suporte."
+    #   # logger.error message
+    #   puts error
+    #   # redirect_to root_path, notice: message
+    # end
     bounding_box [35, cursor], width: 540 do
       bounding_box [0, cursor], width: 540 do
         repeat :all, :dynamic => true do
@@ -252,33 +254,37 @@ class PlanPdf < PdfReport
 
         move_down 10
 
+        # Buscando o coordenador do curso
+        course_id = @plano.offer_discipline.grid_discipline.grid.course_id
+        coordenador = Coordenador.por_curso(course_id).last
+        
         professor = @plano.offer_discipline.user.nil? ? nil : ("Professor(a)\n#{@plano.offer_discipline.user.nil? ? "" : @plano.offer_discipline.user.name}\nSiape: #{@plano.offer_discipline.user.nil? ? "" : @plano.offer_discipline.user.siape}")
         # Segundo professor, caso exista
         professor2 = @plano.offer_discipline.second_user.nil? ? nil : ("Professor(a)\n#{@plano.offer_discipline.second_user.nil? ? "" : @plano.offer_discipline.second_user.name}\nSiape: #{@plano.offer_discipline.second_user.nil? ? "" : @plano.offer_discipline.second_user.siape}")
-        coordenador = @plano.coordenador.nil? ? nil : "#{@plano.coordenador.funcao}\n#{@plano.coordenador.user.name}\nSiape: #{@plano.coordenador.user.siape}"
+        coordenador_texto = coordenador.nil? ? nil : "#{coordenador.funcao}\n#{coordenador.user.name}\nSiape: #{coordenador.user.siape}"
         parecer_user = @plano.user_parecer.nil? ? nil : "#{@plano.user_parecer.name}\nSiape: #{@plano.user_parecer.siape}"
-        
+
         case 
           when !professor.nil? && !professor2.nil? && !coordenador.nil?
             simple_table [
               "\n\n\n#{"_"*30}\n#{professor}",
               "\n\n\n#{"_"*30}\n#{professor2}",
-              "\n\n\n#{"_"*30}\n#{coordenador}",
+              "\n\n\n#{"_"*30}\n#{coordenador_texto}",
               ], [180,180,180]  
-          when !professor.nil? && !professor2.nil? && coordenador.nil?
+          when !professor.nil? && !professor2.nil? && coordenador_texto.nil?
             simple_table [
               "\n\n\n#{"_"*46}\n#{professor}",
               "\n\n\n#{"_"*46}\n#{professor2}",
               ], [270, 270]
-          when !professor.nil? && !coordenador.nil?
+          when !professor.nil? && !coordenador_texto.nil?
             simple_table [
               "\n\n\n#{"_"*46}\n#{professor}",
-              "\n\n\n#{"_"*46}\n#{coordenador}",
+              "\n\n\n#{"_"*46}\n#{coordenador_texto}",
               ], [270, 270] 
-          when !professor2.nil? && !coordenador.nil?
+          when !professor2.nil? && !coordenador_texto.nil?
             simple_table [
               "\n\n\n#{"_"*46}\n#{professor2}",
-              "\n\n\n#{"_"*46}\n#{coordenador}",
+              "\n\n\n#{"_"*46}\n#{coordenador_texto}",
               ], [270, 270]
           when !professor.nil?
             simple_table [

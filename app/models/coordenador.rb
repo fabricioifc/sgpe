@@ -13,8 +13,8 @@ class Coordenador < ApplicationRecord
   validate :verificar_titular
   validate :verificar_responsavel
 
-  # validates :dtinicio, date: { before_or_equal_to: :dtfim }
-  # validates :dtfim, date: { after_or_equal_to: :dtinicio }
+  validates :dtinicio, presence:true, date: { before_or_equal_to: :dtfim }
+  validates :dtfim, presence:true, date: { after_or_equal_to: :dtinicio }
 
   # validate :titular_datas
   # validates :course_id, :dtinicio, :titular,
@@ -29,6 +29,15 @@ class Coordenador < ApplicationRecord
   def decorate
     @decorate ||= CoordenadorDecorator.new self
   end
+
+  # Buscar os coordenadores por curso e com data atual entre datas de inicio e fim
+  scope :por_curso, -> (course_id) {
+    where(responsavel:true, course_id: course_id).
+                    where(
+                      Coordenador.arel_table[:dtinicio].lteq(Date.today).
+                      and(Coordenador.arel_table[:dtfim].gteq(Date.today))
+                    )
+  }
 
   private
 
