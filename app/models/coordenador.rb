@@ -7,18 +7,13 @@ class Coordenador < ApplicationRecord
   validates :course_id, :user_id,
     uniqueness: {scope: [:course_id, :user_id]}
 
-  # validates :course_id, :titular,
-  #   uniqueness: {scope: [:course_id, :titular]}
-
-  # validate :verificar_titular
-  validate :verificar_responsavel
+    # validate :verificar_titular
+  # validate :verificar_responsavel
+  validates_with CoordenadorValidator
 
   validates :dtinicio, presence:true, date: { before_or_equal_to: :dtfim }
   validates :dtfim, presence:true, date: { after_or_equal_to: :dtinicio }
 
-  # validates_with CoordenadorValidator
-
-  # validate :titular_datas
   # validates :course_id, :dtinicio, :titular,
   #   uniqueness: {
   #     scope: [:course_id, :dtinicio, :titular],

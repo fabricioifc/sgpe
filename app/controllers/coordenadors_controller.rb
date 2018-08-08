@@ -37,7 +37,7 @@ class CoordenadorsController < ApplicationController
     respond_to do |format|
       if @coordenador.save
         # verificar_titular
-        verificar_responsavel
+        # verificar_responsavel
         format.html { redirect_to @coordenador, notice: t('flash.actions.create.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :index, status: :created }
       else
@@ -54,7 +54,7 @@ class CoordenadorsController < ApplicationController
     respond_to do |format|
       if @coordenador.update(coordenador_params)
         # verificar_titular
-        verificar_responsavel
+        # verificar_responsavel
         # format.html { redirect_to @coordenador, notice: 'Coordenador was successfully updated.' }
         format.html { redirect_to coordenadors_path, notice: t('flash.actions.update.notice', resource_name: controller_name.classify.constantize.model_name.human) }
         format.json { render :index, status: :ok }
@@ -87,20 +87,20 @@ class CoordenadorsController < ApplicationController
       params.require(:coordenador).permit(:user_id, :email, :funcao, :titular, :responsavel, :course_id, :dtinicio, :dtfim)
     end
 
-    def verificar_responsavel
-      if @coordenador.responsavel?
-        if @coordenador.id.nil?
-          lista = Coordenador.where(course_id: @coordenador.course_id)
-        else
-          lista = Coordenador.where(course_id: @coordenador.course_id).where.not(id: @coordenador.id)
-        end
-        if lista
-          lista.each do |l|
-            l.update(responsavel:false)
-          end
-        end
-      end
-    end
+    # def verificar_responsavel
+    #   if @coordenador.responsavel?
+    #     if @coordenador.id.nil?
+    #       lista = Coordenador.where(course_id: @coordenador.course_id)
+    #     else
+    #       lista = Coordenador.where(course_id: @coordenador.course_id).where.not(id: @coordenador.id)
+    #     end
+    #     if lista
+    #       lista.each do |l|
+    #         l.update(responsavel:false)
+    #       end
+    #     end
+    #   end
+    # end
 
     # def verificar_titular
     #   if @coordenador.titular?

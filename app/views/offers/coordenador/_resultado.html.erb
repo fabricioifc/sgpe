@@ -34,7 +34,13 @@
           </thead>
           <tbody>
               <% oferta.offer_disciplines.each do |od| %>
-                <%= render 'offers/coordenador/resultado_item', od: od %>
+                <% if ['reoferta', 'dependencia'].include?(oferta.type_offer) %>
+                  <% if !od.user.nil? || !od.second_user.nil? %>
+                    <%= render 'offers/coordenador/resultado_item', od: od %>
+                  <% end %>
+                <% else %>
+                  <%= render 'offers/coordenador/resultado_item', od: od %>
+                <% end %>
               <% end %>
           </tbody>
         </table>
