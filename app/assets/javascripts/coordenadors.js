@@ -57,13 +57,13 @@ document.addEventListener("turbolinks:load", function() {
           // width: "7%",
           className: "text-center",
           searchable: false,
-          orderable: true
+          orderable: false
         },
         {
           // width: "7%",
           className: "text-center",
           searchable: false,
-          orderable: true
+          orderable: false
         },
 
         {

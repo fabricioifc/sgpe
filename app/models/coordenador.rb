@@ -10,7 +10,7 @@ class Coordenador < ApplicationRecord
   # validates :course_id, :titular,
   #   uniqueness: {scope: [:course_id, :titular]}
 
-  validate :verificar_titular
+  # validate :verificar_titular
   validate :verificar_responsavel
 
   validates :dtinicio, presence:true, date: { before_or_equal_to: :dtfim }
@@ -43,14 +43,14 @@ class Coordenador < ApplicationRecord
 
   private
 
-  def verificar_titular
-    titulares = Coordenador.where(course_id: self.course_id, titular:true).where.not(id: self.id).count
-    if titulares == 0 && !self.titular?
-      errors.add(:titular, "Marque como coordenador titular para este curso.")
-    # elsif titulares > 0 && self.titular?
-    #   errors.add(:titular, "Já existe um coordenador titular para este curso.")
-    end
-  end
+  # def verificar_titular
+  #   titulares = Coordenador.where(course_id: self.course_id, titular:true).where.not(id: self.id).count
+  #   if titulares == 0 && !self.titular?
+  #     errors.add(:titular, "Marque como coordenador titular para este curso.")
+  #   # elsif titulares > 0 && self.titular?
+  #   #   errors.add(:titular, "Já existe um coordenador titular para este curso.")
+  #   end
+  # end
 
   def verificar_responsavel
     responsaveis = Coordenador.where(course_id: self.course_id, responsavel:true).where.not(id: self.id).count
