@@ -24,56 +24,59 @@ document.addEventListener("turbolinks:load", function() {
 
       columns: [
         {
-          width: "18%",
+          // width: "20%",
           className: "",
           searchable: true,
           orderable: true
         },
         {
-          width: "30%",
+          // width: "37%",
           className: "",
           searchable: true,
           orderable: true
         },
         {
-          width: "7%",
+          // width: "7%",
           className: "",
           searchable: true,
           orderable: true
         },
         {
-          width: "5%",
+          // width: "7%",
           className: "",
           searchable: true,
           orderable: false
         },
         {
-          width: "5%",
+          // width: "7%",
           className: "",
           searchable: true,
           orderable: false
         },
         {
-          width: "5%",
+          // width: "7%",
           className: "text-center",
-          searchable: true,
+          searchable: false,
+          orderable: true
+        },
+        {
+          // width: "7%",
+          className: "text-center",
+          searchable: false,
           orderable: true
         },
 
         {
-          width: "5%",
           className: "text-center",
           searchable: false,
           orderable: false
         },
         {
-          width: "5%",
           className: "text-center",
           searchable: false,
           orderable: false
         },
         {
-          width: "5%",
           className: "text-center",
           searchable: false,
           orderable: false

@@ -10,9 +10,9 @@ class CoordenadorDecorator < ApplicationDecorator
     component.name.capitalize
   end
 
-  # def responsavel
-  #   active_tag component.responsavel?, 'fa-2'
-  # end
+  def responsavel
+    active_tag component.responsavel?, 'fa-2'
+  end
 
   def titular
     active_tag component.titular?, 'fa-2'

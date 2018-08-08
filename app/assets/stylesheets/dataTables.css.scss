@@ -21,6 +21,12 @@ table.dataTable thead .sorting_desc {
   background-image: none;
 }
 
+table.dataTable thead .sorting::after,
+table.dataTable thead .sorting_asc::after,
+table.dataTable thead .sorting_desc::after {
+  bottom: 0px;
+}
+
 .pagination>.disabled>span, .pagination>.disabled>span:hover, .pagination>.disabled>span:focus, .pagination>.disabled>a, .pagination>.disabled>a:hover, .pagination>.disabled>a:focus {
   background-color: $brand-success;
 }
