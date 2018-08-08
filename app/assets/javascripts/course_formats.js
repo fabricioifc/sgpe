@@ -13,6 +13,7 @@ document.addEventListener("turbolinks:load", function() {
 
   $(dataTableId).each(function(){
     dataTable = $(this).DataTable({
+      autoWidth: false,
       responsive: true,
       destroy: true,
       processing: true,
@@ -24,37 +25,37 @@ document.addEventListener("turbolinks:load", function() {
 
       columns: [
         {
-          width: "10%",
+          // width: "10%",
           className: "",
           searchable: true,
           orderable: true
         },
         {
-          width: "65%",
+          // width: "65%",
           className: "",
           searchable: true,
           orderable: true
         },
         {
-          width: "10%",
+          // width: "10%",
           className: "",
           searchable: true,
           orderable: true
         },
         {
-          width: "5%",
+          // width: "5%",
           className: "text-center",
           searchable: false,
           orderable: false
         },
         {
-          width: "5%",
+          // width: "5%",
           className: "text-center",
           searchable: false,
           orderable: false
         },
         {
-          width: "5%",
+          // width: "5%",
           className: "text-center",
           searchable: false,
           orderable: false

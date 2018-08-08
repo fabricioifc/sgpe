@@ -28,6 +28,7 @@ document.addEventListener("turbolinks:load", function() {
 
   $(dataTableId).each(function(){
     dataTable = $(this).DataTable({
+      autoWidth: false,
       responsive: true,
       destroy: true,
       processing: true,

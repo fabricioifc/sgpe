@@ -16,7 +16,7 @@ class CoordenadorDatatable < ApplicationDatatable
 
         column << coordenador.user.name
         column << coordenador.course.name
-        column << coordenador.user.siape
+        # column << coordenador.user.siape
         column << (coordenador.dtinicio.nil? ? nil : coordenador.dtinicio.strftime('%d/%m/%Y'))
         column << (coordenador.dtfim.nil? ? nil : coordenador.dtfim.strftime('%d/%m/%Y'))
         column << coordenador.decorate.titular

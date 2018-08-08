@@ -13,6 +13,7 @@ document.addEventListener("turbolinks:load", function() {
 
   $(dataTableId).each(function(){
     dataTable = $(this).DataTable({
+      autoWidth: false,
       responsive: true,
       destroy: true,
       processing: true,
@@ -40,12 +41,6 @@ document.addEventListener("turbolinks:load", function() {
           className: "",
           searchable: true,
           orderable: true
-        },
-        {
-          // width: "7%",
-          className: "",
-          searchable: true,
-          orderable: false
         },
         {
           // width: "7%",
