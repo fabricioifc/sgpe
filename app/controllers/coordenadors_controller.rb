@@ -90,9 +90,14 @@ class CoordenadorsController < ApplicationController
     def verificar_responsavel
       if @coordenador.responsavel?
         if @coordenador.id.nil?
-          Coordenador.where(course_id: @coordenador.course_id).update(responsavel:false)
+          lista = Coordenador.where(course_id: @coordenador.course_id)
         else
-          Coordenador.where(course_id: @coordenador.course_id).where.not(id: @coordenador.id).update(responsavel:false)
+          lista = Coordenador.where(course_id: @coordenador.course_id).where.not(id: @coordenador.id)
+        end
+        if lista
+          lista.each do |l|
+            l.update(responsavel:false)
+          end
         end
       end
     end
@@ -100,9 +105,14 @@ class CoordenadorsController < ApplicationController
     def verificar_titular
       if @coordenador.titular?
         if @coordenador.id.nil?
-          Coordenador.where(course_id: @coordenador.course_id).update(titular:false)
+          lista = Coordenador.where(course_id: @coordenador.course_id)
         else
-          Coordenador.where(course_id: @coordenador.course_id).where.not(id: @coordenador.id).update(titular:false)
+          lista = Coordenador.where(course_id: @coordenador.course_id).where.not(id: @coordenador.id)
+        end
+        if lista
+          lista.each do |l|
+            l.update(titular:false)
+          end
         end
       end
     end
