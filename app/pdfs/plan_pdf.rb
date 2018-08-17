@@ -159,7 +159,7 @@ class PlanPdf < PdfReport
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
         )
         display_event_table(
-          table_data([['Interdisciplinariedade']], [@plano.decorate.interdisc(true)]),
+          table_data([['Interdisciplinaridade']], [@plano.decorate.interdisc(true)]),
           [TABLE_WIDTHS_2],
           { header:true },
           { borders: [:top, :bottom, :left, :right], borders_length: 0 }
