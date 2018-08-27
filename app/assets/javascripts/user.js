@@ -23,7 +23,14 @@ $(document).on('click', 'a.btn-change-password', function(){
   return false;
 });
 
+$(document).on('click', 'a#user_token_action', function(){
+  $("span#user_token").show();
+  $(this).hide();
+  return false;
+});
 
+
+// DATATABLE >>>>>
 var dataTable = null;
 
 document.addEventListener("turbolinks:before-cache", function() {

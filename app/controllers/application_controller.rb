@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :prepare_exception_notifier
   before_action :dont_allow_user_self_registration
+  
+  # acts_as_token_authentication_handler_for User
+  acts_as_token_authentication_handler_for User, fallback_to_devise: false
 
   # load_and_authorize_resource unless: :devise_controller?
   before_action do fix_carrega_permissoes end
@@ -19,7 +22,10 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
-      format.json { head :forbidden, content_type: 'text/html' }
+      # format.json { head :forbidden, content_type: 'text/json' }
+      format.json {
+        render :json => {:error => exception.message}, :status => :forbidden, content_type: 'text/json', head: :forbidden
+      }
       format.html { redirect_to main_app.root_url, alert: exception.message }
       format.js   { head :forbidden, content_type: 'text/html' }
     end
@@ -107,6 +113,10 @@ class ApplicationController < ActionController::Base
 
   def is_professor?
     user_signed_in? && (current_user.try(:teacher?) || current_user.perfils.pluck('UPPER(name)').include?('PROFESSOR') )
+  end
+
+  def after_sign_in_path_for(resource)
+    resource.authentication_token = nil
   end
 
 end

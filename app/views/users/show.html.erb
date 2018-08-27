@@ -37,6 +37,18 @@
           </p>
         <% end %>
 
+        <% if @user.authentication_token %>
+          <p class="row">
+            <strong class="col-md-2">Token: </strong>
+            <span class="col-md-10">
+              <a href='#' id= 'user_token_action'>Ver Token</a>
+              <span id='user_token' style='display:none;'>
+                <%= @user.authentication_token %>
+              </span>
+            </span>
+          </p>
+        <% end %>
+
         <% unless @user.perfils.empty? %>
         <p class="row">
           <strong class="col-md-2"><%= model_class.human_attribute_name(:perfis) %>: </strong>

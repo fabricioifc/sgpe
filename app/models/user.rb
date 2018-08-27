@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  acts_as_token_authenticatable
   # rolify
   has_and_belongs_to_many :perfils, :join_table => :users_perfils
   has_many :plans, :class_name => 'Plan'

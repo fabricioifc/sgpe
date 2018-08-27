@@ -14,13 +14,19 @@ class OffersController < ApplicationController
 
   # GET /offers
   # GET /offers.json
-  def index
+  def index    
     # @offers = Offer.all
     respond_to do |format|
       format.html
-      format.json { render json: OfferDatatable.new(view_context) }
+      format.json { 
+        if params[:draw]
+          render json: OfferDatatable.new(view_context) 
+        else
+          render json: Offer.all.includes(:offer_disciplines => :grid_discipline)
+        end
+      }
     end
-  end
+  end  
 
   # GET /offers/1
   # GET /offers/1.json
@@ -316,12 +322,15 @@ class OffersController < ApplicationController
       @offer = Offer.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def offer_params
-      params.require(:offer).permit(:year, :semestre, :type_offer, :grid_id, :turma, :active, :dtprevisao_entrega_plano,
+      params.permit(:year, :semestre, :type_offer, :grid_id, :turma, :active, :dtprevisao_entrega_plano,
         offer_disciplines_attributes: [:id, :grid_discipline_id, :user_id, :second_user_id, :active, :offer_id, :ead_percentual_maximo, :carga_horaria, :_destroy
         ]
       )
+      # params.require(:offer).permit(:year, :semestre, :type_offer, :grid_id, :turma, :active, :dtprevisao_entrega_plano,
+      #   offer_disciplines_attributes: [:id, :grid_discipline_id, :user_id, :second_user_id, :active, :offer_id, :ead_percentual_maximo, :carga_horaria, :_destroy
+      #   ]
+      # )
     end
     # {turmas_id: []}, {offer_discipline_turmas_attributes: [:id, :offer_discipline_id, :turma_id]},
 

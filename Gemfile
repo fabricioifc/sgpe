@@ -24,6 +24,7 @@ gem 'devise_invitable', '~> 1.7.0'
 # gem "devise-async", :group => [:production, :staging]
 gem "devise-async", :group => [:production]
 gem 'devise-i18n'
+gem 'simple_token_authentication', '~> 1.0' # see semver.org
 gem 'high_voltage'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
