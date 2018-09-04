@@ -81,6 +81,6 @@ private
 
   # The columns needs to be the same list of searchable items and IN ORDER that they will appear in Data.
   def columns
-    %w(grids.year courses.name disciplines.sigla disciplines.title offers.year offers.turma)
+    %w(grids.year courses.name courses.sigla disciplines.sigla disciplines.title offers.year offers.turma)
   end
 end
