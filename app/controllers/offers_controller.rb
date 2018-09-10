@@ -2,8 +2,8 @@ class OffersController < ApplicationController
   include PlansHelper
 
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
-  load_and_authorize_resource
+  before_action :authenticate_user!, except: [:index, :show]
+  load_and_authorize_resource :except => [:index, :show]
   responders :flash
 
   # add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :offers_path, :except => %w(pesquisar)
