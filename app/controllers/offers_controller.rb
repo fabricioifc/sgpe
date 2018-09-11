@@ -2,8 +2,8 @@ class OffersController < ApplicationController
   include PlansHelper
 
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
-  load_and_authorize_resource :except => [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :ptd_index]
+  load_and_authorize_resource :except => [:index, :show, :ptd_index]
   responders :flash
 
   # add_breadcrumb (I18n.t "helpers.links.pages.#{controller_name}", default: controller_name), :offers_path, :except => %w(pesquisar)
@@ -22,11 +22,28 @@ class OffersController < ApplicationController
         if params[:draw]
           render json: OfferDatatable.new(view_context) 
         else
-          render json: Offer.all.includes(:offer_disciplines => :grid_discipline)
+          @ofertas = Offer.all.includes(:offer_disciplines => :grid_discipline)
+          render :partial => "offers/ofertas.json"
+          # render json: Offer.all.includes(:offer_disciplines => :grid_discipline)
         end
       }
     end
-  end  
+  end
+
+  # Exemplo: http://localhost:3000/offers/ptd_index.json?year=2018
+  def ptd_index
+    year = params['0'] # Primeiro parâmetro recebido
+
+    if year.nil?
+      @ofertas = Offer.all
+    else
+      @ofertas = Offer.where(year: params[:year].to_i)
+    end
+
+    @ofertas.includes(:offer_disciplines => :grid_discipline)
+    render :partial => "offers/ofertas.json"
+  end
+  
 
   # GET /offers/1
   # GET /offers/1.json
@@ -323,14 +340,14 @@ class OffersController < ApplicationController
     end
 
     def offer_params
-      params.permit(:year, :semestre, :type_offer, :grid_id, :turma, :active, :dtprevisao_entrega_plano,
-        offer_disciplines_attributes: [:id, :grid_discipline_id, :user_id, :second_user_id, :active, :offer_id, :ead_percentual_maximo, :carga_horaria, :_destroy
-        ]
-      )
-      # params.require(:offer).permit(:year, :semestre, :type_offer, :grid_id, :turma, :active, :dtprevisao_entrega_plano,
+      # params.permit(:year, :semestre, :type_offer, :grid_id, :turma, :active, :dtprevisao_entrega_plano,
       #   offer_disciplines_attributes: [:id, :grid_discipline_id, :user_id, :second_user_id, :active, :offer_id, :ead_percentual_maximo, :carga_horaria, :_destroy
       #   ]
       # )
+      params.require(:offer).permit(:year, :semestre, :type_offer, :grid_id, :turma, :active, :dtprevisao_entrega_plano,
+        offer_disciplines_attributes: [:id, :grid_discipline_id, :user_id, :second_user_id, :active, :offer_id, :ead_percentual_maximo, :carga_horaria, :_destroy
+        ]
+      )
     end
     # {turmas_id: []}, {offer_discipline_turmas_attributes: [:id, :offer_discipline_id, :turma_id]},
 

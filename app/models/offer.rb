@@ -23,15 +23,16 @@ class Offer < ApplicationRecord
     }
 
   validates :offer_disciplines, presence:true#, on: [:update]
-  validates :turma, :dtprevisao_entrega_plano, presence:true
+  
   validates :grid_id,
     uniqueness: {
       scope: [:turma, :year, :semestre, :grid_id, :type_offer],
       conditions: -> { where(active: true) },
       message: lambda { |x, y| "Já existe grade ofertada para esta turma, ano e semestre." }
     }
-
-  validates :dtprevisao_entrega_plano, date: true
+  
+    # validates :turma, :dtprevisao_entrega_plano, presence:false
+  validates :dtprevisao_entrega_plano, date: { if: -> { !dtprevisao_entrega_plano.blank? } }
 
   # accepts_nested_attributes_for :grid_disciplines, :allow_destroy => true
 

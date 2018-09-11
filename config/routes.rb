@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :offers do
     collection do
       patch :load_grid
+      get :ptd_index, constraints: lambda { |req| req.format == :json }
       # get '/course_plans/:user_id', to: 'plans#course_plans'
       # patch :load_grid_disciplines
     end
