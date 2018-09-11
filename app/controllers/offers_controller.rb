@@ -32,12 +32,17 @@ class OffersController < ApplicationController
 
   # Exemplo: http://localhost:3000/offers/ptd_index.json?year=2018
   def ptd_index
-    year = params['0'] # Primeiro parâmetro recebido
+    year = params[:year]
+    semestre = params[:semestre]
 
     if year.nil?
       @ofertas = Offer.all
     else
-      @ofertas = Offer.where(year: params[:year].to_i)
+      if !year.nil? && !semestre.nil?
+        @ofertas = Offer.where(year: params[:year].to_i, semestre: params[:semestre].to_i)
+      else
+        @ofertas = Offer.where(year: params[:year].to_i)
+      end
     end
 
     @ofertas.includes(:offer_disciplines => :grid_discipline)
