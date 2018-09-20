@@ -99,7 +99,7 @@ Rails.application.routes.draw do
 
   # Interface para acessar as tarefas em background através do sidekiq
   authenticate :user, lambda { |u| u.admin? } do
-    mount Sidekiq::Web => '/sidekiq' if Rails.env.production? || Rails.env.staging?
+    mount Sidekiq::Web => '/sidekiq' if Rails.env.production? #|| Rails.env.staging?
   end
 
   # endereço para ver os e-mails no ambiente de aprovação (staging)
