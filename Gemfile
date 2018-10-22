@@ -106,7 +106,7 @@ gem 'tinymce-rails' #html editor
 gem 'tinymce-rails-langs'
 
 gem 'cocoon'
-gem 'summernote-rails'
+# gem 'summernote-rails'
 gem 'page_title_helper'
 gem 'amoeba', '~> 3.1.0' # para duplicar registros e seus filhos
 gem "breadcrumbs_on_rails", '~> 3.0.1' # breadcrumb
