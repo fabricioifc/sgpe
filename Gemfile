@@ -30,6 +30,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery_mask_rails', '~> 0.1.0'
 gem 'pg'
+gem 'sprockets', '~>3.7.2'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
