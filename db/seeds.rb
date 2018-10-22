@@ -1,14 +1,14 @@
-# user = CreateAdminService.new.call
-# puts 'CREATED ADMIN USER: ' << user.email
+user = CreateAdminService.new.call
+puts 'CREATED ADMIN USER: ' << user.email
 
-# Criar os modalidades, formatos e cursos
-# CreateCourseService.new.call
-# Criar disciplinas
-# CreateDisciplineService.new.call
-# Criar perfis
-# CreatePerfilService.new.call
-# Criar usuários padrão
-# CreateUsersService.new.call
+puts 'Criar os modalidades, formatos e cursos'
+CreateCourseService.new.call
+puts 'Criar disciplinas'
+CreateDisciplineService.new.call
+puts 'Criar perfis'
+CreatePerfilService.new.call
+puts 'Criar usuários padrão'
+CreateUsersService.new.call
 
-# Cadastrar usuários através de convite
+#puts 'Cadastrar usuários através de convite'
 # InviteUsersService.new.call if Rails.env.production?
