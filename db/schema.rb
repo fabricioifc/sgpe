@@ -187,6 +187,12 @@ ActiveRecord::Schema.define(version: 2018_08_27_152656) do
     t.index ["user_parecer_id"], name: "index_plans_on_user_parecer_id"
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name", limit: 45, null: false
     t.string "resource_type", limit: 100
@@ -195,6 +201,14 @@ ActiveRecord::Schema.define(version: 2018_08_27_152656) do
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["name"], name: "index_roles_on_name"
+  end
+
+  create_table "tests", force: :cascade do |t|
+    t.string "title"
+    t.string "body"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "turmas", force: :cascade do |t|
