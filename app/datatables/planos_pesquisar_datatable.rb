@@ -16,14 +16,14 @@ private
         column << plano.offer_discipline.offer.decorate.ano_semestre
         # column << plano.offer_discipline.offer.turma
         column << "#{plano.offer_discipline.grid_discipline.discipline.sigla} - #{plano.offer_discipline.grid_discipline.discipline.title}"
-
-        # links = []
-        column << link_to("<i class='fa fa-info-circle'></i> <span>#{I18n.t 'helpers.links.show'}</span>".html_safe,
-            offer_offer_discipline_plan_path(
-                offer_discipline_id: plano.offer_discipline_id,
-                offer_id: plano.offer_discipline.offer_id,
-                id: plano.id), class: "btn btn-xs btn-info btn-block")
-       column << plano.decorate.link_pdf('btn-xs btn-block')
+        column << "#{plano.offer_discipline.user.name}" #Professor
+        
+        # column << link_to("<i class='fa fa-info-circle'></i> <span>#{I18n.t 'helpers.links.show'}</span>".html_safe,
+        #     offer_offer_discipline_plan_path(
+        #         offer_discipline_id: plano.offer_discipline_id,
+        #         offer_id: plano.offer_discipline.offer_id,
+        #         id: plano.id), class: "btn btn-xs btn-info btn-block")
+       column << plano.decorate.link_pdf('btn-xs btn-block btn-primary')
 
         # column << link_to("<i class='fa fa-pencil-square-o fa-2 text-warning'></i>".html_safe, edit_plano_path(plano))
         # column << link_to("<i class='fa fa-trash-o fa-2 text-danger'></i>".html_safe, plano, method: :delete, data: { confirm: 'Tem certeza?' })
@@ -72,6 +72,7 @@ private
     planos = Plan.joins(:offer_discipline => {:grid_discipline => {:grid => :course}}).
       joins(:offer_discipline => {:grid_discipline => :discipline}).
       joins(:offer_discipline => :offer).
+      joins(:offer_discipline => :user).
       where(id: offer_discipline_ids.map(&:idplano)).order("#{sort_column} #{sort_direction}")
 
       planos = planos.page(page).per(per_page)
@@ -81,6 +82,6 @@ private
 
   # The columns needs to be the same list of searchable items and IN ORDER that they will appear in Data.
   def columns
-    %w(grids.year courses.name courses.sigla disciplines.sigla disciplines.title offers.year offers.turma)
+    %w(grids.year courses.name courses.sigla disciplines.sigla disciplines.title offers.year offers.turma users.name)
   end
 end

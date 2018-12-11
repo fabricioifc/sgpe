@@ -390,7 +390,7 @@ pt-BR:
       home: 'Página inicial'
       users: 'Usuários'
       admin: 'Administração'
-      pdf: 'Gerar PDF'
+      pdf: 'PDF'
       duplicate: Duplicar %{model}
       perfis: Perfis
       roles: Papéis
