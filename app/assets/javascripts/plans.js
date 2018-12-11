@@ -1,7 +1,7 @@
 $(document).on('turbolinks:before-visit', function(e) {
   if ($('form#plans_form').length > 0) {
     if ($('form#plans_form').serialize() != $('form#plans_form').data('serialize')) {
-      console.log(e);
+      // console.log(e);
       var message = "Existem alterações não salvas nesta página."
       if (!confirm(message)) {
         return e.preventDefault();
@@ -13,7 +13,7 @@ $(document).on('turbolinks:before-visit', function(e) {
 document.addEventListener("turbolinks:load", function(e) {
   if ($('form#plans_form').length > 0) {
     $('form#plans_form').data('serialize', $('form#plans_form').serialize());
-    console.log($('form#plans_form').data('serialize'));
+    // console.log($('form#plans_form').data('serialize'));
   } else {
     $('form#plans_form').data('serialize', null);
   }
@@ -91,9 +91,9 @@ $.checarPaineis = function(){
     }
   });
 
-  if (existe_planos_ano_atual == false) {
-    $.abrirPainel($("#accordion").find('a.trigger:first'));
-  }
+  // if (existe_planos_ano_atual == false) {
+  //   $.abrirPainel($("#accordion").find('a.trigger:first'));
+  // }
 
   $('.panel-collapse').on('show.bs.collapse', function () {
     $(this).siblings('li.list-group-item').find('span > i').removeClass('fa-arrow-right fa-arrow-down');
