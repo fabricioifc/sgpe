@@ -85,15 +85,16 @@ $.checarPaineis = function(){
   var existe_planos_ano_atual = false;
   $("#accordion").find('a.trigger').each(function(){
     if ($(this).data('abrir') == true) {
-      existe_planos_ano_atual = true;
+      existe_planos_ano_atual = false;
+      // existe_planos_ano_atual = true;
       $.abrirPainel(this);
       return false;
     }
   });
 
-  // if (existe_planos_ano_atual == false) {
-  //   $.abrirPainel($("#accordion").find('a.trigger:first'));
-  // }
+  if (existe_planos_ano_atual == false) {
+    $.abrirPainel($("#accordion").find('a.trigger:first'));
+  }
 
   $('.panel-collapse').on('show.bs.collapse', function () {
     $(this).siblings('li.list-group-item').find('span > i').removeClass('fa-arrow-right fa-arrow-down');
