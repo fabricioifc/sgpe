@@ -87,7 +87,7 @@ $.checarPaineis = function(){
     if ($(this).data('abrir') == true) {
       existe_planos_ano_atual = false;
       // existe_planos_ano_atual = true;
-      $.abrirPainel(this);
+      // $.abrirPainel(this);
       return false;
     }
   });
