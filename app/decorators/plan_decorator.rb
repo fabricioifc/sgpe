@@ -104,7 +104,7 @@ class PlanDecorator < ApplicationDecorator
     end
   end
 
-  def link_pdf classes = 'btn-xs'
+  def link_pdf classes = 'btn-xs', show_text = true
     if !component.id.nil?
       h.link_to h.offer_offer_discipline_plan_path(id: component.id,
                                                  offer_discipline_id: component.offer_discipline_id,
@@ -112,7 +112,7 @@ class PlanDecorator < ApplicationDecorator
                                                  format: :pdf),
       class: "btn btn-pdf #{classes}", target:'' do
         h.content_tag :i, nil, class: 'fa fa-file-pdf-o' do
-          h.content_tag :span, " #{I18n.t 'helpers.links.pdf'}"
+          h.content_tag :span,  show_text ? " #{I18n.t 'helpers.links.pdf'}" : ''
         end
       end
     end

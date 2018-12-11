@@ -44,9 +44,19 @@ body.bg {
   padding: 4.5px 5px;
 }
 
+.navbar-form {
+  padding-top: 8px;
+}
+
 @media (min-width: 767px) {
   .nav > li > a {
     padding: 10px 7px;
+  }
+}
+
+@media (max-width: 1100px) {
+  li.dropdown > a.dropdown-toggle {
+    display: none;
   }
 }
 
