@@ -1,5 +1,5 @@
 GEM
-  remote: https://rubygems.org/
+  remote: http://www.rubygems.org/
   remote: https://rails-assets.org/
   specs:
     actioncable (5.2.0)
@@ -516,7 +516,7 @@ DEPENDENCIES
   yard (~> 0.9.12)
 
 RUBY VERSION
-   ruby 2.4.1p111
+   ruby 2.5.3p105
 
 BUNDLED WITH
-   1.16.2
+   1.17.2
