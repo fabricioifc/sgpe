@@ -121,3 +121,6 @@ gem 'date_validator'
 gem 'nokogiri', '~> 1.8.2'
 gem 'loofah', '~> 2.2.2'
 gem 'premailer-rails'
+
+#security update
+gem "rubyzip", ">= 1.2.2"
