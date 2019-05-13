@@ -48,8 +48,10 @@ module PdeIF
     # Access-Control-Allow-Origin
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins 'localhost:8080', 'localhost:3000', /https*:\/\/.*?bloopist\.com/
-        resource '*', :headers => :any, :methods => :any
+        origins '*'
+        resource '/*', :headers => :any, :methods => :patch
+        # origins 'localhost:8080', 'localhost:3000', /https*:\/\/.*?bloopist\.com/
+        # resource '*', :headers => :any, :methods => :any
       end
     end
   end
