@@ -45,10 +45,11 @@ module PdeIF
       :enable_starttls_auto => true
     }
 
-    config.middleware.use Rack::Cors do
+    # Access-Control-Allow-Origin
+    config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins '*'
-        resource '/*', :headers => :any, :methods => :patch
+        origins 'localhost:3000', /https*:\/\/.*?bloopist\.com/
+        resource '*', :headers => :any, :methods => :any
       end
     end
   end

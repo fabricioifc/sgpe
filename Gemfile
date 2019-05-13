@@ -7,6 +7,7 @@ end
 
 ruby '2.6.0'
 gem 'rails', '~> 5.2.2'
+gem 'rack-cors', :require => 'rack/cors'
 
 gem 'yard', '~> 0.9.12'
 gem 'puma', '~> 3.7'
