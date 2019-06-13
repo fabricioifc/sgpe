@@ -19,6 +19,7 @@
     <% if plan.offer_discipline.offer.semestre %>
       <span class="badge"><%= "Semestre: #{plan.offer_discipline.offer.semestre}" %></span>
     <% end %>
+    <span class="badge"><%= "#{plan.offer_discipline.offer.decorate.type_offer}" %></span>
   </p>
 </li>
 
