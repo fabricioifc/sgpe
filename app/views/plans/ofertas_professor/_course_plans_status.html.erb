@@ -5,9 +5,12 @@
       :offer_discipline_id => k.id), class: 'btn btn-default btn-block', style: 'text-align: left;' do %>
         <i class="fa fa-arrow-right" aria-hidden="true"></i>
         <%= "#{k.offer.turma} - #{k.grid_discipline.discipline.title}" %>
-        <span class="pull-right"><%= get_ultimo_plano_disciplina(k.id).decorate.situacao unless get_ultimo_plano_disciplina(k.id).nil? %></span>
+        <br />
+        <span class="badge"><%= "Tipo: #{k.offer.decorate.type_offer}" %></span>
+        <span class="badge"><%= "Turma: #{k.offer.turma}" %></span>
+        <span class="pull-right">
+          <%= get_ultimo_plano_disciplina(k.id).decorate.situacao unless get_ultimo_plano_disciplina(k.id).nil? %>
+        </span>
       <% end %>
-
-    <!-- <span class="badge pull-right"><= "Turma - #{k.offer.turma}" %></span> -->
   </li>
 </ul>
