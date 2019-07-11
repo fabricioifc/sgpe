@@ -1,13 +1,25 @@
 <%= hidden_field_tag :grid_id_selected, params[:grid_id] %>
 
 <% if !@grade_semestres.nil? && !@grade_semestres.empty? %>
-  <%= label_tag :grid_semestre, 'Fase' %>
-  <%= select_tag :grid_semestre, options_for_select(@grade_semestres.collect { |c| [c, c ]}, params[:grid_semestre]),
-    data: { remote: true, url: load_grid_offers_path(grid_id: params[:grid_id]), method: :patch },
-    id: :grid_semestre, class: 'form-control', prompt:'Selecione o semestre', required:true %>
+  <div class="form-group col-md-2">
+    <%= label_tag :grid_semestre, 'Fase' %>
+    <%= select_tag :grid_semestre, options_for_select(@grade_semestres.collect { |c| [c, c ]}, params[:grid_semestre]),
+      data: { remote: true, url: load_grid_offers_path(grid_id: params[:grid_id]), method: :patch },
+      id: :grid_semestre, class: 'form-control', prompt:'Selecione o semestre', required:true %>
+  </div>
+  <div class="form-group col-md-2">
+    <%= label_tag 'Minutos/Aula' %>
+    <%= number_field_tag :minutos_aula, params[:minutos_aula], id: :offer_minutos_aula, class: 'form-control' %>
+  </div>
 <% elsif !@grade_anos.nil? && !@grade_anos.empty? %>
-<%= label_tag :grid_year, 'Ano' %>
-<%= select_tag :grid_year, options_for_select(@grade_anos.collect { |c| [c, c ]}, params[:grid_year]),
-  data: { remote: true, url: load_grid_offers_path(grid_id: params[:grid_id]), method: :patch },
-  id: :grid_year, class: 'form-control', prompt:'Selecione o ano', required:true %>
+  <div class="form-group col-md-2">
+    <%= label_tag :grid_year, 'Ano' %>
+    <%= select_tag :grid_year, options_for_select(@grade_anos.collect { |c| [c, c ]}, params[:grid_year]),
+      data: { remote: true, url: load_grid_offers_path(grid_id: params[:grid_id]), method: :patch },
+      id: :grid_year, class: 'form-control', prompt:'Selecione o ano', required:true %>
+  </div>
+  <div class="form-group col-md-2">
+    <%= label_tag 'Minutos/Aula' %>
+    <%= number_field_tag :minutos_aula, params[:minutos_aula], id: :offer_minutos_aula, class: 'form-control' %>
+  </div>
 <% end %>

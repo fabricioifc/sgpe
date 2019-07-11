@@ -48,16 +48,16 @@ class GridDisciplineDecorator < ApplicationDecorator
     component.semestre.to_s << '°' unless component.semestre.nil?
   end
 
-  def carga_horaria_hora_text
-    component.carga_horaria.to_s << ' H'
-  end
+  # def carga_horaria_hora_text
+  #   component.carga_horaria.to_s << ' H'
+  # end
 
-  def carga_horaria_aula
-    carga_horaria_aula_generic(component.grid.course.course_format.minutos_aula, component.carga_horaria)
-  end
+  # def carga_horaria_aula
+  #   carga_horaria_aula_generic(component.grid.course.course_format.minutos_aula, component.carga_horaria)
+  # end
 
-  def carga_horaria_aula_text
-    carga_horaria_aula.to_s << ' H/A'
-  end
+  # def carga_horaria_aula_text
+  #   carga_horaria_aula.to_s << ' H/A'
+  # end
 
 end

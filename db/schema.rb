@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_27_152656) do
+ActiveRecord::Schema.define(version: 2019_07_11_173004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 2018_08_27_152656) do
     t.integer "semestre_base"
     t.string "turma"
     t.date "dtprevisao_entrega_plano"
+    t.integer "minutos_aula"
     t.index ["grid_id"], name: "index_offers_on_grid_id"
   end
 

@@ -19,7 +19,8 @@ class PlanDecorator < ApplicationDecorator
         horarios[:presencial] = (carga_horaria - horarios[:distancia]).round(2)
       end
 
-      minutos_aula = component.offer_discipline.grid_discipline.grid.course.course_format.minutos_aula
+      # minutos_aula = component.offer_discipline.grid_discipline.grid.course.course_format.minutos_aula
+      minutos_aula = component.offer_discipline.offer.minutos_aula.nil? ? component.grid_discipline.grid.course.course_format.minutos_aula : component.offer_discipline.offer.minutos_aula
 
       # carga horária aula total
       caraga_horaria_aula_total = carga_horaria_aula_generic(minutos_aula, carga_horaria)

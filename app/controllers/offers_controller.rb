@@ -65,6 +65,7 @@ class OffersController < ApplicationController
     params[:grid_id] = @offer.grid_id
     params[:grid_year] = @offer.year_base
     params[:grid_semestre] = @offer.semestre_base
+    params[:minutos_aula] = @offer.minutos_aula
     # parâmetro utilizado para mostrar ou não o segundo professor ao editar
     params[:has_second_user] = @offer.offer_disciplines.where.not(second_user:nil).count > 0
 
@@ -79,6 +80,7 @@ class OffersController < ApplicationController
     @offer.grid_id = params[:grid_id]
     @offer.year_base = params[:grid_year]
     @offer.semestre_base = params[:grid_semestre]
+    @offer.minutos_aula = params[:minutos_aula]
 
     @grade_anos = load_grade_anos(params[:grid_id])
     @grade_semestres = load_grade_semestres(params[:grid_id])
@@ -111,6 +113,7 @@ class OffersController < ApplicationController
       @offer.grid_id = params[:grid_id]
       @offer.year_base = params[:grid_year]
       @offer.semestre_base = params[:grid_semestre]
+      @offer.minutos_aula = params[:minutos_aula]
       
       @grade_anos = load_grade_anos(params[:grid_id])
       @grade_semestres = load_grade_semestres(params[:grid_id])
@@ -182,7 +185,10 @@ class OffersController < ApplicationController
 
   def load_grid
     if !params[:grid_id].nil? && !params[:grid_id].blank?
-      params[:tipo_oferta] = Grid.find(params[:grid_id]).course.course_offer.description
+      grid = Grid.find(params[:grid_id])
+      params[:tipo_oferta] = grid.course.course_offer.description
+      # binding.pry
+      # params[:minutos_aula] = grid.course.course_format.minutos_aula
 
       if params[:grid_year].nil? && params[:grid_semestre].nil?
         @grade_anos = load_grade_anos(params[:grid_id])
@@ -349,7 +355,7 @@ class OffersController < ApplicationController
       #   offer_disciplines_attributes: [:id, :grid_discipline_id, :user_id, :second_user_id, :active, :offer_id, :ead_percentual_maximo, :carga_horaria, :_destroy
       #   ]
       # )
-      params.require(:offer).permit(:year, :semestre, :type_offer, :grid_id, :turma, :active, :dtprevisao_entrega_plano,
+      params.require(:offer).permit(:year, :semestre, :type_offer, :grid_id, :turma, :active, :dtprevisao_entrega_plano, :minutos_aula,
         offer_disciplines_attributes: [:id, :grid_discipline_id, :user_id, :second_user_id, :active, :offer_id, :ead_percentual_maximo, :carga_horaria, :_destroy
         ]
       )
