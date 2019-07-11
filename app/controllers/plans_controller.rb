@@ -13,7 +13,7 @@ class PlansController < ApplicationController
   before_action :pode_editar?, only: [:edit, :update]
   before_action :pode_excluir?, only: [:destroy]
 
-  before_action :checar_professor_plano, except: [:show, :get_planos_aprovar, :aprovar]
+  before_action :checar_professor_plano, except: [:show, :get_planos_aprovar, :aprovar, :copy_outra_oferta]
   # before_action :get_planos_aprovar_search, only: [:get_planos_aprovar]
   before_action :set_public_index
 
@@ -536,7 +536,9 @@ class PlansController < ApplicationController
     def checar_professor_plano
       if !params[:offer_discipline_id].nil?
         @offer_discipline = OfferDiscipline.find(params[:offer_discipline_id])
-        raise CanCan::AccessDenied if @offer_discipline.user != current_user && @offer_discipline.second_user != current_user
+        plano_outro_professor = @offer_discipline.user != current_user && @offer_discipline.second_user != current_user
+        # binding.pry
+        raise CanCan::AccessDenied if plano_outro_professor
       end
     end
 

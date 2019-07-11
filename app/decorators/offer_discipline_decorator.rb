@@ -15,9 +15,7 @@ class OfferDisciplineDecorator < ApplicationDecorator
   def carga_horaria_aula
     value = component.carga_horaria || component.grid_discipline.carga_horaria
     minutos_aula = component.offer.minutos_aula.nil? ? component.grid_discipline.grid.course.course_format.minutos_aula : component.offer.minutos_aula
-
     # binding.pry
-
     carga_horaria_aula_generic(minutos_aula, value)
   end
 
