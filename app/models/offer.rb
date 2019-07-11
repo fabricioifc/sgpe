@@ -10,9 +10,9 @@ class Offer < ApplicationRecord
     reoferta: 'Reoferta', dependencia: 'Dependência'
   }
 
-  validates :type_offer, :grid_id, presence:true
+  validates :type_offer, :grid_id, :minutos_aula, presence:true
   validates :semestre, presence: { if: -> { self.grid.course.course_offer.description.eql?("semestral") } }
-  validates :course_format, presence: true
+  validates :minutos_aula, :numericality => { :greater_than => 0 }
 
   validates :year, presence: { if: -> { semestre.blank? } },
     format: {
