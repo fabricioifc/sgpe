@@ -189,7 +189,7 @@ class OffersController < ApplicationController
       grid = Grid.find(params[:grid_id])
       params[:tipo_oferta] = grid.course.course_offer.description
       # binding.pry
-      # params[:minutos_aula] = grid.course.course_format.minutos_aula
+      params[:minutos_aula] = grid.course.course_format.minutos_aula
 
       if params[:grid_year].nil? && params[:grid_semestre].nil?
         @grade_anos = load_grade_anos(params[:grid_id])

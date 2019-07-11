@@ -1,6 +1,5 @@
 class Offer < ApplicationRecord
   belongs_to :grid
-  belongs_to :course_format
   # belongs_to :turma
   has_many :offer_disciplines, dependent: :destroy
   accepts_nested_attributes_for :offer_disciplines

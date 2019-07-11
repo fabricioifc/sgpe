@@ -32,22 +32,14 @@
 
     <div class="row">
 
-      <div class="col-md-4">
+      <div class="col-md-3">
         <%= f.select :type_offer, Offer.offer_types.collect { |c| [c.last, c.first] }, {id: :type_offer, prompt: true} %>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
         <%= f.text_field :turma, id: :offer_turma, placeholder: 'Ex: 2018.A', label: "<span title='Ex: 2018.A'>Turma <i class='fa fa-info-circle'></i></span>".html_safe %>
         <!-- <= f.select :turma_id, Turma.where(active:true).collect { |c| ["#{c.year} - #{c.name}", c.id] },
           { prompt:true, id: :offer_turma_id },{ class: '' } %> -->
       </div>
-      <div class="col-md-4">
-        <%= f.select :course_format_id, 
-          @formatos.collect { |c| ["#{c.name} - #{c.minutos_aula} min", c.id] }, 
-          id: :offer_course_format, prompt: true %>
-      </div>
-    </div>
-
-    <div class="row">      
       <div class="col-md-3">
         <%= f.number_field :year, id: :offer_year, placeholder:true %>
       </div>
