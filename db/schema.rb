@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_11_001138) do
+ActiveRecord::Schema.define(version: 2018_08_27_152656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,8 +138,6 @@ ActiveRecord::Schema.define(version: 2019_07_11_001138) do
     t.integer "semestre_base"
     t.string "turma"
     t.date "dtprevisao_entrega_plano"
-    t.bigint "course_format_id"
-    t.index ["course_format_id"], name: "index_offers_on_course_format_id"
     t.index ["grid_id"], name: "index_offers_on_grid_id"
   end
 
@@ -288,7 +286,6 @@ ActiveRecord::Schema.define(version: 2019_07_11_001138) do
   add_foreign_key "offer_disciplines", "offers"
   add_foreign_key "offer_disciplines", "users"
   add_foreign_key "offer_disciplines", "users", column: "second_user_id"
-  add_foreign_key "offers", "course_formats"
   add_foreign_key "offers", "grids"
   add_foreign_key "perfil_roles", "perfils"
   add_foreign_key "perfil_roles", "roles"
