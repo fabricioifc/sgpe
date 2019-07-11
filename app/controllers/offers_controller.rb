@@ -11,6 +11,7 @@ class OffersController < ApplicationController
   before_action :load_cursos
   before_action :load_professores
   before_action :load_grades
+  before_action :load_formatos
 
   # GET /offers
   # GET /offers.json
@@ -79,6 +80,7 @@ class OffersController < ApplicationController
     @offer.grid_id = params[:grid_id]
     @offer.year_base = params[:grid_year]
     @offer.semestre_base = params[:grid_semestre]
+    @offer.course_format_id = offer_params[:course_format_id]
 
     @grade_anos = load_grade_anos(params[:grid_id])
     @grade_semestres = load_grade_semestres(params[:grid_id])
@@ -349,7 +351,7 @@ class OffersController < ApplicationController
       #   offer_disciplines_attributes: [:id, :grid_discipline_id, :user_id, :second_user_id, :active, :offer_id, :ead_percentual_maximo, :carga_horaria, :_destroy
       #   ]
       # )
-      params.require(:offer).permit(:year, :semestre, :type_offer, :grid_id, :turma, :active, :dtprevisao_entrega_plano,
+      params.require(:offer).permit(:year, :semestre, :type_offer, :grid_id, :turma, :active, :dtprevisao_entrega_plano, :course_format_id,
         offer_disciplines_attributes: [:id, :grid_discipline_id, :user_id, :second_user_id, :active, :offer_id, :ead_percentual_maximo, :carga_horaria, :_destroy
         ]
       )
@@ -423,6 +425,10 @@ class OffersController < ApplicationController
           order('grid_disciplines.semestre').
           pluck('grid_disciplines.semestre').uniq
       end
+    end
+
+    def load_formatos
+      @formatos = CourseFormat.all
     end
 
 end

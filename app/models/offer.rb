@@ -1,5 +1,6 @@
 class Offer < ApplicationRecord
   belongs_to :grid
+  belongs_to :course_format
   # belongs_to :turma
   has_many :offer_disciplines, dependent: :destroy
   accepts_nested_attributes_for :offer_disciplines
@@ -11,6 +12,7 @@ class Offer < ApplicationRecord
 
   validates :type_offer, :grid_id, presence:true
   validates :semestre, presence: { if: -> { self.grid.course.course_offer.description.eql?("semestral") } }
+  validates :course_format, presence: true
 
   validates :year, presence: { if: -> { semestre.blank? } },
     format: {

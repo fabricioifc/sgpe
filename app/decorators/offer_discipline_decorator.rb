@@ -14,7 +14,9 @@ class OfferDisciplineDecorator < ApplicationDecorator
 
   def carga_horaria_aula
     value = component.carga_horaria || component.grid_discipline.carga_horaria
-    carga_horaria_aula_generic(component.grid_discipline.grid.course.course_format.minutos_aula, value)
+    carga_horaria_aula_generic(
+      component.offer.course_format.nil? ? component.grid_discipline.grid.course.course_format.minutos_aula : component.offer.course_format.minutos_aula, 
+      value)
   end
 
   def carga_horaria_aula_text

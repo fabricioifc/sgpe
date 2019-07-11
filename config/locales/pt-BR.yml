@@ -97,6 +97,7 @@ pt-BR:
         turma: Turma
         type_offer: Tipo
         dtprevisao_entrega_plano: Previsão Entrega Plano
+        course_format_id: Formato
       offer_discipline:
         user: Professor
         user_id: Professor
