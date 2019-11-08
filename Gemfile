@@ -120,7 +120,7 @@ gem 'date_validator'
 
 # Email template custom
 gem 'nokogiri', '~> 1.8.2'
-gem 'loofah', '~> 2.2.2'
+gem 'loofah', '~> 2.3.1'
 gem 'premailer-rails'
 
 #security update
