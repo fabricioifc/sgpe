@@ -7,9 +7,9 @@ end
 
 ruby '2.6.0'
 gem 'rails', '~> 5.2.2'
-gem 'rack-cors', :require => 'rack/cors'
+gem 'rack-cors', ">= 1.0.4", :require => 'rack/cors'
 
-gem 'yard', '~> 0.9.12'
+gem 'yard', '>= 0.9.20'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -17,10 +17,10 @@ gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'bootstrap-sass', '~> 3.3.7'
+gem 'bootstrap-sass', '>= 3.4.1'
 gem 'bootstrap-modal-rails', '~> 2.2.5'
 gem 'bootstrap-multiselect-rails', '~> 0.9.9'
-gem 'devise'
+gem 'devise', '>= 4.7.1'
 gem 'devise_invitable', '~> 1.7.0'
 # gem "devise-async", :group => [:production, :staging]
 gem "devise-async", :group => [:production]
@@ -43,7 +43,7 @@ end
 # Adicionadas depois
 gem 'bootswatch-rails', '~> 3.3.5'
 gem 'carrierwave'
-gem 'mini_magick'; #precisa do RMagick instalado
+gem 'mini_magick', '>= 4.9.4'; #precisa do RMagick instalado
 gem 'cloudinary'
 gem 'rails_admin', '~> 1.3' # Painel de administração do sistema
 gem 'rails_admin-i18n' # Painel de administração do sistema
@@ -119,9 +119,9 @@ gem 'roo' # Importar arquivos CSV
 gem 'date_validator'
 
 # Email template custom
-gem 'nokogiri', '~> 1.8.2'
-gem 'loofah', '~> 2.2.2'
+gem 'nokogiri', '>= 1.10.4'
+gem 'loofah', '>= 2.3.1'
 gem 'premailer-rails'
 
 #security update
-gem "rubyzip", ">= 1.2.2"
+gem "rubyzip", ">= 1.3.0"
