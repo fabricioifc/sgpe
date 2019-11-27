@@ -6,6 +6,7 @@
   <p>
     <span class="badge"><%= "#{plan.offer_discipline.grid_discipline.grid.course.course_format.name}" %></span>
     <span class="badge"><%= "#{plan.offer_discipline.grid_discipline.grid.course.course_modality.description}" %></span>
+    <span class="badge"><%= "#{plan.offer_discipline.offer.decorate.type_offer}" %></span>
   </p>
 </li>
 <li class="list-group-item list-group-item-info">
@@ -19,7 +20,6 @@
     <% if plan.offer_discipline.offer.semestre %>
       <span class="badge"><%= "Semestre: #{plan.offer_discipline.offer.semestre}" %></span>
     <% end %>
-    <span class="badge"><%= "#{plan.offer_discipline.offer.decorate.type_offer}" %></span>
   </p>
 </li>
 
