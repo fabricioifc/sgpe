@@ -124,6 +124,7 @@
       <%# Se for atividade remota então não deve aparecer para o professor selecionar %>
       <% if !@plan.offer_discipline.ead_percentual_maximo.nil? && @plan.offer_discipline.ead_percentual_maximo > 0 %>
         <% ead_definido = @plan.ead_percentual_definido.nil? ? nil : "#{@plan.ead_percentual_definido} %" %>
+        
         <ul class=<%= (('remotas').eql? @plan.offer_discipline.offer.type_offer) ? 'list-group hidden' : 'list-group' %>>
           <li class="list-group-item list-group-item-info" title="Atividade Não Presencial">(%) ANP</li>
           <li class="list-group-item">
