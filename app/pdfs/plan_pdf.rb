@@ -10,7 +10,7 @@ class PlanPdf < PdfReport
     @plano = plan
     super({
       id: @plano.id,
-      title: 'Plano de Ensino',
+      title: "Plano de Ensino\n (Atividades de Ensino Remotas)",
       user: user,
       company: {
         name:   Rails.application.secrets.sistema_apelido,
@@ -258,7 +258,8 @@ class PlanPdf < PdfReport
 
         # Buscando o coordenador do curso
         course_id = @plano.offer_discipline.grid_discipline.grid.course_id
-        coordenador = Coordenador.por_curso(course_id).last
+        coordenador = Coordenador.por_curso(course_id, @plano.created_at.to_date).last
+        # binding.pry
         
         professor = @plano.offer_discipline.user.nil? ? nil : ("Professor(a)\n#{@plano.offer_discipline.user.nil? ? "" : @plano.offer_discipline.user.name}\nSiape: #{@plano.offer_discipline.user.nil? ? "" : @plano.offer_discipline.user.siape}")
         # Segundo professor, caso exista

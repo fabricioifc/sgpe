@@ -28,12 +28,12 @@ class Coordenador < ApplicationRecord
   end
 
   # Buscar os coordenadores por curso e com data atual entre datas de inicio e fim
-  scope :por_curso, -> (course_id) {
+  scope :por_curso, -> (course_id, data_plano) {
     where(responsavel:true, course_id: course_id).
-                    where(
-                      Coordenador.arel_table[:dtinicio].lteq(Date.today).
-                      and(Coordenador.arel_table[:dtfim].gteq(Date.today))
-                    )
+      where(
+        Coordenador.arel_table[:dtinicio].lteq(data_plano).
+        and(Coordenador.arel_table[:dtfim].gteq(data_plano))
+      )
   }
 
   private
