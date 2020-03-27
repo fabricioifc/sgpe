@@ -123,17 +123,21 @@
     <div class="col-md-3 col-ld-3">
       <%# Se for atividade remota então não deve aparecer para o professor selecionar %>
       <% if !@plan.offer_discipline.ead_percentual_maximo.nil? && @plan.offer_discipline.ead_percentual_maximo > 0 %>
-        <% ead_definido = @plan.ead_percentual_definido.nil? ? @plan.offer_discipline.ead_percentual_maximo : "#{@plan.ead_percentual_definido} %" %>
-        <ul class="list-group">
+        <% ead_definido = @plan.ead_percentual_definido.nil? ? nil : "#{@plan.ead_percentual_definido} %" %>
+        <ul class=<%= (('remotas').eql? @plan.offer_discipline.offer.type_offer) ? 'list-group hidden' : 'list-group' %>>
           <li class="list-group-item list-group-item-info" title="Atividade Não Presencial">(%) ANP</li>
           <li class="list-group-item">
+            <% if !('remotas').eql? @plan.offer_discipline.offer.type_offer %>
+              <%= f.select :ead_percentual_definido,
+                  options_for_select((0..@plan.offer_discipline.ead_percentual_maximo).step(5).collect {|a| "#{a} %"}, "#{ead_definido} %" ),
+                  { hide_label:true, include_blank: 'Percentual de C.H à distância' },
+                  { class: 'form-control input-sm', wrapper: { style: 'margin-bottom: 0;'}} %>
+            <%else%>
             <%= f.select :ead_percentual_definido,
-                options_for_select((0..@plan.offer_discipline.ead_percentual_maximo).step(5).collect {|a| "#{a} %"}, "#{ead_definido} %" ),
-                { hide_label:true, include_blank: 'Percentual de C.H à distância' },
-                { class: 'form-control input-sm', wrapper: { style: 'margin-bottom: 0;'}, 
-                  disabled: (('remotas').eql? @plan.offer_discipline.offer.type_offer)
-                } 
-            %>
+                  options_for_select((0..@plan.offer_discipline.ead_percentual_maximo).step(5).collect {|a| "#{a} %"}, "#{@plan.offer_discipline.ead_percentual_maximo} %" ),
+                  { hide_label:true, include_blank: 'Percentual de C.H à distância' },
+                  { class: 'form-control input-sm', wrapper: { style: 'margin-bottom: 0;'}} %>
+            <% end %>
           </li>
         </ul>
       <% end %>
