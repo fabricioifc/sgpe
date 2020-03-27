@@ -6,7 +6,7 @@ class Offer < ApplicationRecord
 
   enum offer_types: {
     regular: 'Regular', domiciliar: 'Exercício domiciliar', distancia: 'Atividades Não Presenciais',
-    reoferta: 'Reoferta', dependencia: 'Dependência'
+    reoferta: 'Reoferta', dependencia: 'Dependência', remotas: 'Atividades Remotas'
   }
 
   validates :type_offer, :grid_id, :minutos_aula, presence:true
