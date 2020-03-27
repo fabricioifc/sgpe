@@ -357,7 +357,7 @@ class OffersController < ApplicationController
       #   ]
       # )
       params.require(:offer).permit(:year, :semestre, :type_offer, :grid_id, :turma, :active, :dtprevisao_entrega_plano, :minutos_aula,
-        offer_disciplines_attributes: [:id, :grid_discipline_id, :user_id, :second_user_id, :active, :offer_id, :ead_percentual_maximo, :carga_horaria, :_destroy
+        offer_disciplines_attributes: [:id, :grid_discipline_id, :user_id, :second_user_id, :ead_percentual_maximo, :carga_horaria, :active, :offer_id, :_destroy
         ]
       )
     end

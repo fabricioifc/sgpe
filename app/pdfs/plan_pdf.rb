@@ -107,13 +107,15 @@ class PlanPdf < PdfReport
 
         if distancia
           horarios = @plano.decorate.carga_horaria_presencial_distancia
+          texto_presencial = "Presencial"
+          texto_nao_presencial = (('remotas').eql? @plano.offer_discipline.offer.type_offer) ? "Atividades Remotas" : "À Distância"
 
           display_event_table(
             table_data(
               [['Carga Horária (Hora)', 'Carga Horária (Hora/Aula)']],
               [
-                "Presencial: #{horarios[:presencial]} - À distância: #{horarios[:distancia]}",
-                "Presencial: #{horarios[:presencial_aula]} - À distância: #{horarios[:distancia_aula]}"
+                "#{texto_presencial}: #{horarios[:presencial]} - #{texto_nao_presencial}: #{horarios[:distancia]}",
+                "#{texto_presencial}: #{horarios[:presencial_aula]} - #{texto_nao_presencial}: #{horarios[:distancia_aula]}"
               ]
             ),
             [270, 270],
