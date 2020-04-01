@@ -207,7 +207,7 @@ class OffersController < ApplicationController
   def pesquisar
     # @cursos_coordenador = Coordenador.where(user: current_user).pluck(:course_id) if !current_user.admin?
     # @cursos_coordenador = Offer.joins(:grid => :course).pluck('courses.id').uniq if current_user.admin?
-    binding.pry
+    # binding.pry
 
     # Se o usuário for admin então mostra todos os cursos
     if current_user.admin?
