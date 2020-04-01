@@ -36,6 +36,14 @@ class Coordenador < ApplicationRecord
       )
   }
 
+  scope :is_coordenador, -> (loggedin_user) {
+    where(user: loggedin_user).
+      where(
+        Coordenador.arel_table[:dtinicio].lteq(Date.today).
+        and(Coordenador.arel_table[:dtfim].gteq(Date.today))
+      )
+  }
+
   private
 
   # def verificar_titular
