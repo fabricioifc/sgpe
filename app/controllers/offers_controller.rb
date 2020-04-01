@@ -214,7 +214,7 @@ class OffersController < ApplicationController
       @cursos_coordenador = Offer.joins(:grid => :course).pluck('courses.id').uniq
     else
       # Se o usuário for um coordenador então mostra apenas os seus cursos
-      @cursos_coordenador = Coordenador.is_coordenador(current_user).pluck(:course_id)
+      @cursos_coordenador = Coordenador.is_coordenador(current_user).pluck(:course_id).uniq
     end
     if !@cursos_coordenador.empty?
 
