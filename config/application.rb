@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module PdeIF
   class Application < Rails::Application
 
-    config.web_console.whitelisted_ips = '192.168.1.105'
+    # config.web_console.whitelisted_ips = '192.168.1.105'
 
     config.generators do |g|
       g.javascript_engine :js
