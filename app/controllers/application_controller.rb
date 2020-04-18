@@ -66,14 +66,12 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def authenticate_user
+  def authenticate_user!
     if request.headers['Authorization'].present?
       authenticate_or_request_with_http_token do |token|
         begin
-          # jwt_payload = JWT.decode(token, Rails.application.secrets.secret_key_base).first
-
-          # @current_user_id = jwt_payload['id']
-          @current_user  ||= User.find_by(authentication_token: token)
+          # login = request.headers['X-User-Email']
+          @current_user = User.find_by(authentication_token: token)
         rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
           head :unauthorized
         end
@@ -132,47 +130,9 @@ class ApplicationController < ActionController::Base
     user_signed_in? && (current_user.try(:teacher?) || current_user.perfils.pluck('UPPER(name)').include?('PROFESSOR') )
   end
 
-  def after_sign_in_path_for(resource)
-    resource.authentication_token = nil
-    signed_in_root_path(resource)
-  end
-
-  # def authenticate_token
-  #   auth = ActionController::HttpAuthentication::Token.encode_credentials(@current_user.token)
-  #   request.headers['Authorization'] = auth
-  #   # request['authorization'] = "Token token=HrcLNGkq8T7Hc4Kxs8bYQw1z"
-
-  #   authenticate_or_request_with_http_token do |token, options|
-  #     Rails.logger.info '------------token---------'
-  #     Rails.logger.info token
-  #     Rails.logger.info '------------token---------'
-  #     if user = User.find_by(token: token)
-  #       ActiveSupport::SecurityUtils.secure_compare(token, user.token)
-  #     end
-  #   end
-  # end
-
-  # def after_successful_token_authentication
-  #   # Make the authentication token to be disposable - for example
-  #   renew_authentication_token!
-  # end
-
-  # def authenticate_user!
-  #   authenticate_or_request_with_http_token do |token, _options|
-  #     @current_user  ||= User.find_by(authentication_token: token)
-  #   end
-  # end
-
-  # def authenticate_user!(options = {})
-  #   head :unauthorized unless signed_in?
-  # end
-
-  # def current_user
-  #   @current_user ||= super
-  # end
-
-  # def signed_in?
-  #   @current_user.present?
+  # def after_sign_in_path_for(resource)
+  #   # resource.authentication_token = nil
+  #   signed_in_root_path(resource)
   # end
 
 end

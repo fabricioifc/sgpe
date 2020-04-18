@@ -1,5 +1,6 @@
 class Api::SessionsController < Api::BaseController
-
+  
+  before_action :require_login!, except: :create
   before_action :sign_in_params, only: :create
   # skip_before_action :authenticate_entity_from_token!, only: [:create]
   skip_before_action :authenticate_user, only: [:create], raise: false
@@ -13,6 +14,7 @@ class Api::SessionsController < Api::BaseController
     return invalid_login_attempt unless resource
 
     if resource.valid_password?(params[:sign_in_params][:password])
+      resource.generate_auth_token
       sign_in("user", resource)
       render :json=> {
         :success=>true, 
@@ -32,12 +34,9 @@ class Api::SessionsController < Api::BaseController
 
   # DELETE /users/sign_out
   def destroy
-    warden.authenticate!
-    reset_token current_user
-    # render :json=> {:success=>true}
-    respond_to do |format|
-      format.json { head :no_content }
-    end
+    resource = current_user
+    resource.invalidate_auth_token
+    head :ok
   end
 
   protected
@@ -57,6 +56,9 @@ class Api::SessionsController < Api::BaseController
   end
 
   private
+  def invalid_login_attempt
+    render json: { errors: [ { detail:"Error with your login or password" }]}, status: 401
+  end
 
   def sign_in_params
     params.fetch(:sign_in_params).permit([:password, :login])
