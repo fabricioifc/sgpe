@@ -77,6 +77,7 @@ class ApplicationController < ActionController::Base
         end
       end
     end
+    super
   end
 
   # def after_sign_in_path_for(resource)

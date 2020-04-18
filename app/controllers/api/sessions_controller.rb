@@ -3,7 +3,7 @@ class Api::SessionsController < Api::BaseController
   before_action :require_login!, except: :create
   before_action :sign_in_params, only: :create
   # skip_before_action :authenticate_entity_from_token!, only: [:create]
-  skip_before_action :authenticate_user, only: [:create], raise: false
+  skip_before_action :authenticate_user!, only: [:create], raise: false
   # skip_before_action :authenticate_entity!, only: [:create]
   # skip_before_action :verify_authenticity_token
   # before_action :ensure_params_exist
