@@ -25,7 +25,7 @@ class Api::SessionsController < Api::BaseController
         name: resource.name,
         role: resource.perfils.pluck(:name),
         admin: resource.admin,
-        avatar: resource.avatar_url
+        avatar: rails_blob_path(resource.avatar)
       }
       return
     end
