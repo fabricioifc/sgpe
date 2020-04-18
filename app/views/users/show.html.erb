@@ -71,6 +71,7 @@
 
       </div>
       <div class="col-md-4">
+        <%# <= rails_blob_path(@user.avatar, only_path:true) %> %>
         <%= image_tag @user.avatar.variant(resize:"300x300"), 
           class: 'img-thumbnail border border-primary pull-right' if @user.avatar.attached? %>
       </div>
