@@ -14,9 +14,16 @@ class CoursesController < ApplicationController
   # GET /courses.json
   def index
     # @courses = Course.all
-    respond_to do |format|
-      format.html
-      format.json { render json: CourseDatatable.new(view_context) }
+    if params.has_key?(:draw)
+      respond_to do |format|
+        format.html
+        format.json { render json: CourseDatatable.new(view_context) }
+      end
+    else
+      respond_to do |format|
+        format.html
+        format.json { render json: Course.all }
+      end
     end
   end
 
@@ -83,7 +90,7 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :sigla, :active, :course_modality_id, :course_format_id, :course_offer_id, :user_id)
+      params.permit(:name, :sigla, :active, :course_modality_id, :course_format_id, :course_offer_id, :user_id)
     end
 
     def load_modalidades
