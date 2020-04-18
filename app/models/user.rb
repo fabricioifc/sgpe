@@ -43,7 +43,17 @@ class User < ApplicationRecord
     @user ||= UserDecorator.new self
   end
 
-protected
+  def generate_auth_token
+    token = SecureRandom.hex
+    self.update_columns(authentication_token: token)
+    token
+  end
+
+  def invalidate_auth_token
+    self.update_columns(authentication_token: nil)
+  end
+
+  protected
 
   def self.find_for_database_authentication warden_conditions
     conditions = warden_conditions.dup
@@ -51,9 +61,6 @@ protected
     where(conditions).where(["lower(username) = :value OR lower(email) = :value", {value: login.strip.downcase}]).first
   end
 
-  # Attempt to find a user by it's email. If a record is found, send new
-  # password instructions to it. If not user is found, returns a new user
-  # with an email not found error.
   def self.send_reset_password_instructions attributes = {}
     recoverable = find_recoverable_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
     recoverable.send_reset_password_instructions if recoverable.persisted?

@@ -2,6 +2,14 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
 
+  namespace :api, :defaults => {:format => 'json'} do
+    devise_for :users
+    # get "courses" => 'courses#index'
+    # devise_for :users do 
+    #   delete 'api/users/sign_out', to: 'api/sessions#destroy'
+    # end
+  end
+
   resources :coordenadors, path: :coordenadores
   resources :offers do
     collection do

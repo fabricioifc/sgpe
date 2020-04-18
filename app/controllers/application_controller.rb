@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
+  # respond_to :json
   protect_from_forgery unless: -> { request.format.json? }
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :prepare_exception_notifier
@@ -65,6 +66,19 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def authenticate_user!
+    if request.headers['Authorization'].present?
+      authenticate_or_request_with_http_token do |token|
+        begin
+          # login = request.headers['X-User-Email']
+          @current_user = User.find_by(authentication_token: token)
+        rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
+          head :unauthorized
+        end
+      end
+    end
+  end
+
   # def after_sign_in_path_for(resource)
   #   # request.env['omniauth.origin'] || stored_location_for(resource) || root_path
   #   # if is_professor?
@@ -116,9 +130,9 @@ class ApplicationController < ActionController::Base
     user_signed_in? && (current_user.try(:teacher?) || current_user.perfils.pluck('UPPER(name)').include?('PROFESSOR') )
   end
 
-  def after_sign_in_path_for(resource)
-    resource.authentication_token = nil
-    signed_in_root_path(resource)
-  end
+  # def after_sign_in_path_for(resource)
+  #   # resource.authentication_token = nil
+  #   signed_in_root_path(resource)
+  # end
 
 end
