@@ -25,7 +25,7 @@ class Api::SessionsController < Api::BaseController
         name: resource.name,
         role: resource.perfils.pluck(:name),
         admin: resource.admin,
-        avatar: rails_blob_path(resource.avatar)
+        avatar: rails_blob_path(resource.avatar) if resource.avatar.attached?
       }
       return
     end
