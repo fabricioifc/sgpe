@@ -21,6 +21,6 @@ class InvitationsController < Devise::InvitationsController
   protected
 
   def update_sanitized_params
-    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:username, :email, :name, :password, :password_confirmation, :invitation_token, :avatar, :avatar_cache, :perfils, :perfil_ids => []])
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:username, :email, :name, :password, :password_confirmation, :invitation_token, :avatar, :perfils, :perfil_ids => []])
   end
 end

@@ -6,10 +6,10 @@
   </div>
   <div class="panel-body">
     <div class="avatar_toggle">
-      <%= image_tag resource.avatar_url(:avatar), class: 'img-responsive img-thumbnail center-block' if resource.avatar.url.present? %>
+      <%= image_tag resource.avatar.variant(resize: '300x300'), class: 'img-responsive img-thumbnail center-block' if resource.avatar.attached? %>
       <!-- <= gravatar_url resource.email, 140, 'img-responsive img-thumbnail center-block' if !resource.avatar.url.present? %> -->
       <hr>
-      <%= f.hidden_field :avatar_cache %>
+      <%= f.hidden_field :avatar %>
       <%= f.file_field :avatar, :class => 'form-control' %>
     </div>
     <div class="form-group">

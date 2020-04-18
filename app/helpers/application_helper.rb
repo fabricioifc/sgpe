@@ -14,8 +14,8 @@ module ApplicationHelper
 
   def avatar_navbar_image(classe = ['special-img'])
     if user_signed_in?
-      if current_user.avatar.present?
-        image_tag current_user.avatar.url(:icon), class: classe
+      if current_user.avatar.attached?
+        image_tag current_user.avatar.variant(resize: '40x40'), class: classe
       else
         self.gravatar_url(current_user.email, 36, classe)
       end
@@ -31,8 +31,8 @@ module ApplicationHelper
 
   def show_profile_image
     if user_signed_in?
-      if current_user.avatar.present?
-        image_tag(current_user.avatar.url(:thumb), class: 'img-rounded img-responsive img-thumbnail center-block').html_safe
+      if current_user.avatar.attached?
+        image_tag(current_user.avatar, class: 'img-rounded img-responsive img-thumbnail center-block').html_safe
       end
     end
   end

@@ -24,8 +24,8 @@ class User < ApplicationRecord
             :authentication_keys => [:login]
    end
 
-  # mount_uploader :avatar, PictureUploader
-  mount_uploader :avatar, AvatarUploader
+  has_one_attached :avatar
+  # mount_uploader :avatar, AvatarUploader
 
   # Permitir o atributo login, que poderá ser username ou email
   attr_accessor :login

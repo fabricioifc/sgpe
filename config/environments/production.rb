@@ -113,4 +113,7 @@ Rails.application.configure do
       :sender_address => %{"#{Rails.application.secrets.sistema_apelido} ADMIN" <#{Rails.application.secrets.admin_email}>},
       :exception_recipients => %{#{Rails.application.secrets.admin_email}, #{Rails.application.secrets.email_provider_username}}
   }
+
+  # Active Storage - Para fazer upload de arquivos
+  config.active_storage.service = :local
 end

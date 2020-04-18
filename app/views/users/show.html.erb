@@ -71,7 +71,8 @@
 
       </div>
       <div class="col-md-4">
-        <%= image_tag @user.avatar.url(:thumb), class: 'img-thumbnail border border-primary pull-right' %>
+        <%= image_tag @user.avatar.variant(resize:"300x300"), 
+          class: 'img-thumbnail border border-primary pull-right' if @user.avatar.attached? %>
       </div>
 
     </div>
