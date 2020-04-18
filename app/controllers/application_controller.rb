@@ -64,9 +64,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  protected
-
-  def authenticate_user!
+  def authenticate_user!(resource_name = {:force=>true})
     if request.headers['Authorization'].present?
       authenticate_or_request_with_http_token do |token|
         begin
@@ -80,6 +78,8 @@ class ApplicationController < ActionController::Base
       super
     end
   end
+
+  protected
 
   # def after_sign_in_path_for(resource)
   #   # request.env['omniauth.origin'] || stored_location_for(resource) || root_path
