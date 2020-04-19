@@ -16,6 +16,7 @@ class Api::SessionsController < Api::BaseController
     if resource.valid_password?(params[:sign_in_params][:password])
       resource.generate_auth_token
       sign_in("user", resource)
+
       render :json=> {
         :success=>true, 
         :auth_token=>resource.authentication_token, 
@@ -25,7 +26,7 @@ class Api::SessionsController < Api::BaseController
         name: resource.name,
         role: resource.perfils.pluck(:name),
         admin: resource.admin,
-        avatar: (rails_blob_path(resource.avatar) if resource.avatar.attached?)
+        avatar: (rails_blob_url(resource.avatar) if resource.avatar.attached?)
       }
       return
     end
