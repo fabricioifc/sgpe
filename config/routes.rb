@@ -87,7 +87,9 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   # Configurar para que a tela inicial seja a tela de login, caso não esteja autenticado
-  devise_for :users, skip: [:sessions]
+  devise_for :users, 
+    :controllers => {:registrations => "registrations" },
+    skip: [:sessions]
     as :user do
       get 'login', to: 'devise/sessions#new', as: :new_user_session
       post 'login', to: 'devise/sessions#create', as: :user_session

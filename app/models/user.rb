@@ -25,6 +25,7 @@ class User < ApplicationRecord
    end
 
   has_one_attached :avatar
+  attribute :remove_avatar
   # mount_uploader :avatar, AvatarUploader
 
   # Permitir o atributo login, que poderá ser username ou email

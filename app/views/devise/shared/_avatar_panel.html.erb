@@ -9,7 +9,7 @@
       <% if resource.avatar.attached? %>
         <%= image_tag resource.avatar.variant(resize: '300x300'), class: 'img-responsive img-thumbnail center-block' %>
       <% else %>
-        <%= gravatar_url resource.email, 140, 'img-responsive img-thumbnail center-block' %>
+        <%= gravatar_url resource.email, 140, 'center-block' %>
       <% end %>
       <hr>
       <%# < f.hidden_field :avatar %>
