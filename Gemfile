@@ -6,7 +6,8 @@ git_source(:github) do |repo_name|
 end
 
 ruby '2.6.0'
-gem 'rails', '~> 5.2.2'
+gem 'rails', '~> 5.2.3'
+# gem 'rails', '~> 6.0'
 gem 'rack-cors', ">= 1.0.4", :require => 'rack/cors'
 
 gem 'yard', '>= 0.9.20'
