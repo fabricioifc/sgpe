@@ -108,3 +108,4 @@ bin/*
 ubuntu-*.log
 
 /storage/*
+storage/*
