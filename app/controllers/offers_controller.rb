@@ -232,40 +232,40 @@ class OffersController < ApplicationController
       if !params[:curso].nil? && !params[:curso].blank?
         if !params[:ano].blank? && !params[:semestre].blank? && !params[:turma].blank?
           @resultado = Offer.joins(:grid).includes(:offer_disciplines => :plans).
-          where('grids.course_id = ? AND offers.year = ? AND offers.semestre = ? and offers.turma = ?',
+          where('offers.active is true AND grids.course_id = ? AND offers.year = ? AND offers.semestre = ? and offers.turma = ?',
             params[:curso], params[:ano].to_i, params[:semestre].to_i, params[:turma].to_s
           ).order(semestre: :desc)
         elsif !params[:ano].blank? && params[:semestre].blank? && params[:turma].blank?
           @resultado = Offer.joins(:grid).includes(:offer_disciplines => :plans).
-          where('grids.course_id = ? AND offers.year = ?',
+          where('offers.active is true AND grids.course_id = ? AND offers.year = ?',
             params[:curso], params[:ano].to_i
           ).order(semestre: :desc)
         elsif params[:ano].blank? && !params[:semestre].blank? && params[:turma].blank?
           @resultado = Offer.joins(:grid).includes(:offer_disciplines => :plans).
-          where('grids.course_id = ? AND offers.semestre = ?',
+          where('offers.active is true AND grids.course_id = ? AND offers.semestre = ?',
             params[:curso], params[:semestre].to_i
           ).order(semestre: :desc)
 
         elsif !params[:ano].blank? && params[:semestre].blank? && !params[:turma].blank?
           @resultado = Offer.joins(:grid).includes(:offer_disciplines => :plans).
-          where('grids.course_id = ? AND offers.year = ? AND offers.turma = ?',
+          where('offers.active is true AND grids.course_id = ? AND offers.year = ? AND offers.turma = ?',
             params[:curso], params[:ano].to_i, params[:turma].to_s
           ).order(semestre: :desc)
 
         elsif params[:ano].blank? && !params[:semestre].blank? && !params[:turma].blank?
           @resultado = Offer.joins(:grid).includes(:offer_disciplines => :plans).
-          where('grids.course_id = ? AND offers.semestre = ? AND offers.turma = ?',
+          where('offers.active is true AND grids.course_id = ? AND offers.semestre = ? AND offers.turma = ?',
             params[:curso], params[:semestre].to_i, params[:turma].to_s
           ).order(semestre: :desc)
 
         elsif params[:ano].blank? && params[:semestre].blank? && !params[:turma].blank?
           @resultado = Offer.joins(:grid).includes(:offer_disciplines => :plans).
-          where('grids.course_id = ? AND offers.turma = ?',
+          where('offers.active is true AND grids.course_id = ? AND offers.turma = ?',
             params[:curso], params[:turma].to_s
           ).order(semestre: :desc)
         else
           @resultado = Offer.joins(:grid).includes(:offer_disciplines => :plans).
-          where('grids.course_id = ?', params[:curso]
+          where('offers.active is true AND grids.course_id = ?', params[:curso]
           ).order(semestre: :desc)
         end
       end
