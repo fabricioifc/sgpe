@@ -14,7 +14,7 @@ gem 'yard', '>= 0.9.20'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-# gem 'coffee-rails', '~> 4.2'
+gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
@@ -46,7 +46,7 @@ gem 'bootswatch-rails', '~> 3.3.5'
 gem 'carrierwave'
 gem 'mini_magick', '>= 4.9.4'; #precisa do RMagick instalado
 gem 'cloudinary'
-gem 'rails_admin', '~> 1.3' # Painel de administração do sistema
+gem 'rails_admin', '~> 2.1.1' # Painel de administração do sistema
 gem 'rails_admin-i18n' # Painel de administração do sistema
 gem 'rails_admin_rollincode', '~> 1.0' # Painel de administração do sistema
 gem 'cancancan', '~> 2.0'# controle de permissões
@@ -126,3 +126,7 @@ gem 'premailer-rails'
 
 #security update
 gem "rubyzip", ">= 1.3.0"
+
+# Para Rails 6.0
+# gem 'activesupport', '~> 6.0'
+# gem 'actionmailer', '~> 6.1.3'
