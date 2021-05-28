@@ -274,7 +274,7 @@ ActiveRecord::Schema.define(version: 2021_05_28_005214) do
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
     t.string "siape"
-    t.string "authentication_token", limit: 30
+    t.string "authentication_token", limit: 100
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true

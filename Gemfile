@@ -6,14 +6,15 @@ git_source(:github) do |repo_name|
 end
 
 ruby '2.6.0'
-gem 'rails', '~> 5.2.2'
+gem 'rails', '~> 5.2.3'
+# gem 'rails', '~> 6.0'
 gem 'rack-cors', ">= 1.0.4", :require => 'rack/cors'
 
 gem 'yard', '>= 0.9.20'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-# gem 'coffee-rails', '~> 4.2'
+gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
@@ -21,7 +22,7 @@ gem 'bootstrap-sass', '>= 3.4.1'
 gem 'bootstrap-modal-rails', '~> 2.2.5'
 gem 'bootstrap-multiselect-rails', '~> 0.9.9'
 gem 'devise', '>= 4.7.1'
-gem 'devise_invitable', '2.0.5'
+gem 'devise_invitable', '~> 2.0.5'
 # gem "devise-async", :group => [:production, :staging]
 gem "devise-async", :group => [:production]
 gem 'devise-i18n'
@@ -45,7 +46,7 @@ gem 'bootswatch-rails', '~> 3.3.5'
 gem 'carrierwave'
 gem 'mini_magick', '>= 4.9.4'; #precisa do RMagick instalado
 gem 'cloudinary'
-gem 'rails_admin', '~> 1.3' # Painel de administração do sistema
+gem 'rails_admin', '~> 2.1.1' # Painel de administração do sistema
 gem 'rails_admin-i18n' # Painel de administração do sistema
 gem 'rails_admin_rollincode', '~> 1.0' # Painel de administração do sistema
 gem 'cancancan', '~> 2.0'# controle de permissões

@@ -107,4 +107,9 @@ bin/*
 .bundle/*
 ubuntu-*.log
 
+/storage/*
 storage/*
+
+node_modules/
+public/assets/
+yarn.lock

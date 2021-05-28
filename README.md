@@ -13,10 +13,10 @@ Com o plano de ensino pronto e aprovado, o mesmo estará visível de forma públ
 Tecnologias utilizadas
 ================
 <ul>
-  <li>Linguagem de programação: Ruby 2.4.1</li>
-  <li>Framework MVC: Rails 5.1.3</li>
+  <li>Linguagem de programação: Ruby 2.6.0</li>
+  <li>Framework MVC: Rails 5.2.3</li>
   <li>Banco de Dados: Postgresql 9.6</li>
-  <li>IDE: Atom</li>
+  <li>IDE: VsCode</li>
   <li>Controle de versão: GIT/GITHUB</li>
 </ul>
 
@@ -42,6 +42,19 @@ O deploy da aplicação é feita de forma automatizada, através da gem MINA em 
 Resumindo. basta digitar os comanso abaixo (com tudo já configurado).
 - mina production deploy
 - mina staging deploy
+
+Caso o servidor Puma não inicie, mesmo após o deploy:
+
+- mina production puma:{status,stop,start}
+- mina staging puma:{status,stop,start}
+
+-----------
+Logs
+================
+
+Para visializar logs:
+ - tail -f ${HOME}/sgpe_production/shared/log/production.log
+ - tail -f ${HOME}/sgpe_staging/shared/log/staging.log
 
 -----------
 Manutenções
