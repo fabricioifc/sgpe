@@ -6,6 +6,8 @@ local:
   service: Disk
   root: <%= Rails.root.join('storage') %>
 
+# pasta que armazena as imagens feitas por upload
+# /home/deploy/sgpe_production/shared/storage
 production:
   service: Disk
-  root: <%= File.expand_path("../../shared/storage", __FILE__) %>
+  root: <%= File.expand_path("../../../shared/storage", __FILE__) %>
