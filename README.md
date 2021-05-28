@@ -16,7 +16,7 @@ Tecnologias utilizadas
   <li>Linguagem de programação: Ruby 2.6.0</li>
   <li>Framework MVC: Rails 5.2.3</li>
   <li>Banco de Dados: Postgresql 9.6</li>
-  <li>IDE: VsCode</li>
+  <li>IDE: Visual Studio Code</li>
   <li>Controle de versão: GIT/GITHUB</li>
 </ul>
 
