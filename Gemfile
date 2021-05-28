@@ -126,7 +126,3 @@ gem 'premailer-rails'
 
 #security update
 gem "rubyzip", ">= 1.3.0"
-
-# Para Rails 6.0
-# gem 'activesupport', '~> 6.0'
-# gem 'actionmailer', '~> 6.1.3'
