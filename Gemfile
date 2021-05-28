@@ -45,7 +45,7 @@ gem 'bootswatch-rails', '~> 3.3.5'
 gem 'carrierwave'
 gem 'mini_magick', '>= 4.9.4'; #precisa do RMagick instalado
 gem 'cloudinary'
-gem 'rails_admin', '~> 1.3' # Painel de administração do sistema
+gem 'rails_admin', '~> 1.4' # Painel de administração do sistema
 gem 'rails_admin-i18n' # Painel de administração do sistema
 gem 'rails_admin_rollincode', '~> 1.0' # Painel de administração do sistema
 gem 'cancancan', '~> 2.0'# controle de permissões
