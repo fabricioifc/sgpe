@@ -22,7 +22,7 @@ gem 'bootstrap-sass', '>= 3.4.1'
 gem 'bootstrap-modal-rails', '~> 2.2.5'
 gem 'bootstrap-multiselect-rails', '~> 0.9.9'
 gem 'devise', '>= 4.7.1'
-gem 'devise_invitable', '~> 1.7.0'
+gem 'devise_invitable', '~> 2.0.5'
 # gem "devise-async", :group => [:production, :staging]
 gem "devise-async", :group => [:production]
 gem 'devise-i18n'
