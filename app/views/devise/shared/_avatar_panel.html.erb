@@ -6,16 +6,20 @@
   </div>
   <div class="panel-body">
     <div class="avatar_toggle">
-      <%= image_tag resource.avatar.variant(resize: '300x300'), class: 'img-responsive img-thumbnail center-block' if resource.avatar.attached? %>
-      <!-- <= gravatar_url resource.email, 140, 'img-responsive img-thumbnail center-block' if !resource.avatar.url.present? %> -->
+      <% if resource.avatar.attached? %>
+        <%= image_tag resource.avatar.variant(resize: '300x300'), class: 'img-responsive img-thumbnail center-block' %>
+      <% else %>
+        <%= gravatar_url resource.email, 140, 'center-block' %>
+      <% end %>
       <hr>
-      <%# <= f.hidden_field :avatar %>
+      <%# < f.hidden_field :avatar %>
       <%= f.file_field :avatar, :class => 'form-control' %>
     </div>
     <div class="form-group">
       <input style="display: none;" type="checkbox" value="1" name="user[remove_avatar]" id="user_remove_avatar">
     </div>
   </div>
+
   <div class="panel-footer">
     <a class="btn btn-danger btn-xs btn-remove-image" data-toggle="button" href="#" role="button">
       <i class="fa fa-trash-o fa-2"></i>
