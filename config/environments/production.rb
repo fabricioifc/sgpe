@@ -115,5 +115,5 @@ Rails.application.configure do
   }
 
   # Active Storage - Para fazer upload de arquivos
-  config.active_storage.service = :local
+  config.active_storage.service = :production
 end
