@@ -20,6 +20,7 @@ if ['production','staging'].include? ENV['RAILS_ENV']
   state_path "#{shared_dir}/pids/puma.state"
   # state_path "/home/deploy/sgpe/shared/tmp/sockets/puma.state"
   activate_control_app "unix://#{shared_dir}/sockets/pumactl.sock"
+#  stdout_redirect "#{shared_dir}/shared/log/stdout", "#{shared_dir}/shared/log/stderr"
 else
   threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
   threads threads_count, threads_count
