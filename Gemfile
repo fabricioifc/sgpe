@@ -88,7 +88,7 @@ group :development, :test do
   gem 'byebug', '~> 10.0.2', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
-  gem 'better_errors', '~> 2.4.0'
+  gem 'better_errors', '~> 2.8.0'
   gem 'foreman'
   gem 'pry-rails'
   gem 'faker'
