@@ -96,7 +96,7 @@ end
 # Notificar admin caso ocorra algum erro na aplicação
 gem 'exception_notification'
 gem 'slack-notifier'
-gem 'sidekiq', '~> 5.1.3', group: :production
+gem 'sidekiq', '~> 6.4.0', group: :production
 group :development, :staging do
   # gem 'letter_opener_web', '~> 1.0'
   gem 'letter_opener'
