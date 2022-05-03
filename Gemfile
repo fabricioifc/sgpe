@@ -102,7 +102,7 @@ group :development, :staging do
   gem 'letter_opener'
 end
 # gem 'sinatra', '>= 2.0.1', :require => nil
-gem 'sinatra', '~> 2.0', '>= 2.0.2'
+gem 'sinatra', '~> 2.2'
 gem 'redis-rails'
 gem 'tinymce-rails' #html editor
 gem 'tinymce-rails-langs'
