@@ -46,7 +46,6 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
     @course.user = current_user
-    binding.pry
 
     respond_to do |format|
       if @course.save
