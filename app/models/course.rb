@@ -6,9 +6,9 @@ class Course < ApplicationRecord
   has_many :grids
   has_many :coordenadors
 
-  validates :sigla, :name, :active, :course_modality_id, :course_format_id, :course_offer_id, presence:true
-  validates :sigla, :name, :active, :course_modality_id, :course_format_id, :course_offer_id,
-    uniqueness: {scope: [:sigla, :name, :active, :course_modality_id, :course_format_id, :course_offer_id]}
+  validates :sigla, :name, :active, :course_modality, :course_format, :course_offer, presence:true
+  validates :sigla, :name, :active, :course_modality, :course_format, :course_offer,
+    uniqueness: {scope: [:sigla, :name, :active, :course_modality, :course_format, :course_offer]}
   validates :sigla, length: { in: 3..10}
 
   def decorate
