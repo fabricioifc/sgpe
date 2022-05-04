@@ -46,6 +46,7 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
     @course.user = current_user
+    binding.pry
 
     respond_to do |format|
       if @course.save
@@ -90,7 +91,7 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.permit(:name, :sigla, :active, :course_modality_id, :course_format_id, :course_offer_id, :user_id)
+      params.require(:course).permit(:name, :sigla, :active, :course_modality_id, :course_format_id, :course_offer_id, :user_id)
     end
 
     def load_modalidades

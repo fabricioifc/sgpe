@@ -1,4 +1,4 @@
-# user = CreateAdminService.new.call
+#user = CreateAdminService.new.call
 #puts 'CREATED ADMIN USER: ' << user.email
 
 #puts 'Criar os modalidades, formatos e cursos'
