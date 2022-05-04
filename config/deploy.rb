@@ -16,23 +16,23 @@ set :repository, 'git@github.com:fabricioifc/sgpe.git'
 # Server Production
 task :production => :remote_environment do
   set :rails_env, 'production'
-  set :user, 'deploy'
-  set :domain, '200.135.61.15'
+  set :user, 'fabricio'
+  set :domain, 'fabriciobizotto.ddns.net'
   set :port, '50235'
-  set :deploy_to, '/home/deploy/sgpe_production'
-  set :branch, 'master'
+  set :deploy_to, '/home/fabricio/sgpe_production'
+  set :branch, 'videira'
   # set :whenever_name, 'production'
 end
 
-# Server Staging
-task :staging => :remote_environment do
-  set :rails_env, 'staging'
-  set :user, 'deploy'
-  set :domain, '200.135.61.15'
-  set :port, '50235'
-  set :deploy_to, '/home/deploy/sgpe_staging'
-  set :branch, 'staging'
-end
+# # Server Staging
+# task :staging => :remote_environment do
+#   set :rails_env, 'staging'
+#   set :user, 'deploy'
+#   set :domain, '200.135.61.15'
+#   set :port, '50235'
+#   set :deploy_to, '/home/deploy/sgpe_staging'
+#   set :branch, 'staging'
+# end
 
 # Fix
 set :term_mode, nil

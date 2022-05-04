@@ -1,13 +1,13 @@
 # user = CreateAdminService.new.call
 #puts 'CREATED ADMIN USER: ' << user.email
 
-puts 'Criar os modalidades, formatos e cursos'
+#puts 'Criar os modalidades, formatos e cursos'
 # CreateCourseService.new.call
-puts 'Criar disciplinas'
+#puts 'Criar disciplinas'
 # CreateDisciplineService.new.call
-puts 'Criar perfis'
+#puts 'Criar perfis'
 # CreatePerfilService.new.call
-puts 'Criar usuários padrão'
+#puts 'Criar usuários padrão'
 # CreateUsersService.new.call
 
 #puts 'Cadastrar usuários através de convite'
