@@ -1,4 +1,4 @@
-require 'sidekiq/web'
+# require 'sidekiq/web'
 
 Rails.application.routes.draw do
 
@@ -108,9 +108,9 @@ Rails.application.routes.draw do
   end
 
   # Interface para acessar as tarefas em background através do sidekiq
-  authenticate :user, lambda { |u| u.admin? } do
-    mount Sidekiq::Web => '/sidekiq' if Rails.env.production? #|| Rails.env.staging?
-  end
+  # authenticate :user, lambda { |u| u.admin? } do
+  #   mount Sidekiq::Web => '/sidekiq' if Rails.env.production? #|| Rails.env.staging?
+  # end
 
   # endereço para ver os e-mails no ambiente de aprovação (staging)
   # mount LetterOpenerWeb::Engine, at: "/mails" if Rails.env.staging? || Rails.env.development?
