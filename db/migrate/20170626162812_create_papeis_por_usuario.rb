@@ -9,7 +9,7 @@ class CreatePapeisPorUsuario < ActiveRecord::Migration[5.1]
     end
 
     create_table :roles do |t|
-      t.string :name, index:true, unique:true, limit:45, null:false
+      t.string :name, index:true, unique:true, limit:145, null:false
       t.string :resource_type, limit:100
       t.string :resource_id, limit:100
 

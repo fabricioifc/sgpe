@@ -10,7 +10,7 @@ class PlanPdf < PdfReport
     @plano = plan
     super({
       id: @plano.id,
-      title: "Plano de Ensino\n (Atividades de Ensino Remotas)",
+      title: "Plano de Ensino\n",
       user: user,
       company: {
         name:   Rails.application.secrets.sistema_apelido,
@@ -303,7 +303,7 @@ class PlanPdf < PdfReport
         unless parecer_user.nil?
           move_down 10
           simple_table [
-            "\n\n\n#{"_"*95}\nResponsável pela Conferência - Núcleo Pedagógico (NUPE)\n#{parecer_user}",
+            "\n\n\n#{"_"*95}\nResponsável pela Conferência\n#{parecer_user}",
           ], [540]
         end
 

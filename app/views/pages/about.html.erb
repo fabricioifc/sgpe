@@ -1,6 +1,8 @@
 <% content_for :title do %><%= t('helpers.links.pages.about') %><% end %>
 
-<div class="panel panel-primary">
+<%
+=begin%>
+ <div class="panel panel-primary">
   <div class="panel-heading">
     <h3 class="panel-title">
       <strong>Nosso time</strong>
@@ -8,7 +10,7 @@
   </div>
   <div class="panel-body">
     <div class="col-lg-4 col-md-4 col-sm-4 text-center">
-      <%= image_tag 'members/tiago.jpg', class: 'img-circle img-responsive img-center', width: '200' %>
+      <= image_tag 'members/tiago.jpg', class: 'img-circle img-responsive img-center', width: '200' %>
       <h3>Tiago Lopes Gonçalves
         <p>
           <small>Gerente de projeto</small> <br />
@@ -17,7 +19,7 @@
       </h3>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-4 text-center">
-      <%= image_tag 'members/bizotto.jpg', class: 'img-circle img-responsive img-center', width: '200' %>
+      <= image_tag 'members/bizotto.jpg', class: 'img-circle img-responsive img-center', width: '200' %>
       <h3>Fabricio Bizotto
         <p>
           <small>Gerente de projeto | Desenvolvedor</small> <br />
@@ -26,7 +28,7 @@
       </h3>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-4 text-center">
-      <%= image_tag 'members/none.jpg', class: 'img-circle img-responsive img-center', width: '200' %>
+      <= image_tag 'members/none.jpg', class: 'img-circle img-responsive img-center', width: '200' %>
       <h3>João Vitor Borges Matias
         <p>
           <small>Desenvolvedor | Suporte</small> <br />
@@ -35,7 +37,9 @@
       </h3>
     </div>
   </div>
-</div>
+</div> 
+<%
+=end%>
 
 <div class="panel panel-primary">
   <div class="panel-heading">
