@@ -415,6 +415,7 @@ pt-BR:
         roles: Papéis
         perfil_roles: Papéis por perfil
         users: Usuários
+        profile: Conta
     titles:
       edit: "Editar %{model}"
       save: "Salvar %{model}"
